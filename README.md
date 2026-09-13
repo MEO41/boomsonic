@@ -51,7 +51,7 @@ uv venv --python 3.12 .venv-np1  ; $env:VIRTUAL_ENV="$PWD\.venv-np1"; uv pip ins
 ## Phase 2 (airframe sizing)
 
 ```powershell
-python scripts\phase2_airframeun_phase2.py     # regenerates every Phase 2 table and plot (both venvs)
+python scripts/phase2_airframe/run_phase2.py     # regenerates every Phase 2 table and plot (both venvs)
 ```
 
 Report: `docs/phase2_airframe.md`. Key plots: `plots/phase2_constraint_diagram.png`,
