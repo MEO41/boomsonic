@@ -30,9 +30,12 @@ K2R = 1.8
 class Turbojet(pyc.Cycle):
     def initialize(self):
         super().initialize()
-        self.options.declare('od_mode', default='T4', values=['T4', 'N'])
+        self.options.declare('od_mode', default='T4', values=['T4', 'N', 'NT4'])   # NT4: speed AND T4 imposed, shaft power left unbalanced (transient excess power)
         self.options.declare('design_W', default='Fn', values=['Fn', 'fixed'])
         self.options.declare('nozz_type', default='CV', values=['CV', 'CD'])
+        self.options.declare('comp_map', default=None)      # Phase 4: real maps (None = placeholder AXI5 / LPT2269)
+        self.options.declare('turb_map', default=None)
+        self.options.declare('comp_bleed', default=False)   # Phase 4: one overboard compressor bleed port 'sb' (start / handling bleed)
 
     def setup(self):
         self.options['thermo_method'] = 'TABULAR'
@@ -41,9 +44,10 @@ class Turbojet(pyc.Cycle):
         self.add_subsystem('fc', pyc.FlightConditions())
         self.add_subsystem('inlet', pyc.Inlet())
         self.add_subsystem('duct', pyc.Duct())
-        self.add_subsystem('comp', pyc.Compressor(map_data=pyc.AXI5, map_extrap=True), promotes_inputs=['Nmech'])
+        self.add_subsystem('comp', pyc.Compressor(map_data=self.options['comp_map'] or pyc.AXI5, map_extrap=True,
+                                                  bleed_names=['sb'] if self.options['comp_bleed'] else []), promotes_inputs=['Nmech'])
         self.add_subsystem('burner', pyc.Combustor(fuel_type='FAR'))
-        self.add_subsystem('turb', pyc.Turbine(map_data=pyc.LPT2269, map_extrap=True), promotes_inputs=['Nmech'])
+        self.add_subsystem('turb', pyc.Turbine(map_data=self.options['turb_map'] or pyc.LPT2269, map_extrap=True), promotes_inputs=['Nmech'])
         self.add_subsystem('nozz', pyc.Nozzle(nozzType=self.options['nozz_type'], lossCoef='Cv'))
         self.add_subsystem('shaft', pyc.Shaft(num_ports=2), promotes_inputs=['Nmech'])
         self.add_subsystem('perf', pyc.Performance(num_nozzles=1, num_burners=1))
@@ -76,7 +80,11 @@ class Turbojet(pyc.Cycle):
             self.connect('balance.turb_PR', 'turb.PR')
             self.connect('shaft.pwr_net', 'balance.lhs:turb_PR')
         else:
-            if self.options['od_mode'] == 'T4':
+            if self.options['od_mode'] == 'NT4':
+                bal.add_balance('FAR', eq_units='degR', lower=1e-4, val=.017, rhs_name='T4_target')
+                self.connect('balance.FAR', 'burner.Fl_I:FAR')
+                self.connect('burner.Fl_O:tot:T', 'balance.lhs:FAR')
+            elif self.options['od_mode'] == 'T4':
                 bal.add_balance('FAR', eq_units='degR', lower=1e-4, val=.017, rhs_name='T4_target')
                 self.connect('balance.FAR', 'burner.Fl_I:FAR')
                 self.connect('burner.Fl_O:tot:T', 'balance.lhs:FAR')
@@ -89,7 +97,10 @@ class Turbojet(pyc.Cycle):
                 self.connect('shaft.pwr_net', 'balance.lhs:FAR')
             bal.add_balance('W', val=2.0, units='lbm/s', eq_units='inch**2', lower=0.05)
             self.connect('balance.W', 'inlet.Fl_I:stat:W')
-            self.connect('nozz.Throat:stat:area', 'balance.lhs:W')
+            # Phase 4: nozzle throat area scale (variable-area nozzle); A8 = A8_scale x design area (default 1)
+            self.add_subsystem('a8s', om.ExecComp('A_eq = A / A8_scale', A_eq={'units': 'inch**2'}, A={'units': 'inch**2'}, A8_scale={'val': 1.0}))
+            self.connect('nozz.Throat:stat:area', 'a8s.A')
+            self.connect('a8s.A_eq', 'balance.lhs:W')
 
         newton = self.nonlinear_solver = om.NewtonSolver()
         for k, v in dict(atol=1e-7, rtol=1e-7, iprint=-1, maxiter=40, solve_subsystems=True, max_sub_solves=100,
@@ -108,10 +119,13 @@ class MPTurbojet(pyc.MPCycle):
         self.options.declare('od_mode', default='N')
         self.options.declare('design_W', default='Fn')
         self.options.declare('nozz_type', default='CV')
+        self.options.declare('comp_map', default=None)
+        self.options.declare('turb_map', default=None)
+        self.options.declare('comp_bleed', default=False)
 
     def setup(self):
         o = self.options
-        self.pyc_add_pnt('DESIGN', Turbojet(design_W=o['design_W'], nozz_type=o['nozz_type']))
+        self.pyc_add_pnt('DESIGN', Turbojet(design_W=o['design_W'], nozz_type=o['nozz_type'], comp_map=o['comp_map'], turb_map=o['turb_map'], comp_bleed=o['comp_bleed']))
         self.set_input_defaults('DESIGN.Nmech', 1e5, units='rpm')
         if o['design_W'] == 'fixed':
             self.set_input_defaults('DESIGN.inlet.Fl_I:stat:W', 1.0, units='kg/s')
@@ -127,10 +141,10 @@ class MPTurbojet(pyc.MPCycle):
         self.od_names = []
         for i, (mn, alt) in enumerate(o['od_points']):
             pt = f'OD{i}'; self.od_names.append(pt)
-            self.pyc_add_pnt(pt, Turbojet(design=False, od_mode=o['od_mode'], nozz_type=o['nozz_type']))
+            self.pyc_add_pnt(pt, Turbojet(design=False, od_mode=o['od_mode'], nozz_type=o['nozz_type'], comp_map=o['comp_map'], turb_map=o['turb_map'], comp_bleed=o['comp_bleed']))
             self.set_input_defaults(pt + '.fc.MN', val=max(mn, 1e-6))
             self.set_input_defaults(pt + '.fc.alt', alt, units='m')
-            if o['od_mode'] == 'N':
+            if o['od_mode'] in ('N', 'NT4'):
                 self.set_input_defaults(pt + '.Nmech', 1e5, units='rpm')
         if self.od_names:
             self.pyc_use_default_des_od_conns()
@@ -138,9 +152,10 @@ class MPTurbojet(pyc.MPCycle):
         super().setup()
 
 
-def build(od_points=(), od_mode='N', design_W='Fn', nozz_type='CV'):
+def build(od_points=(), od_mode='N', design_W='Fn', nozz_type='CV', comp_map=None, turb_map=None, comp_bleed=False):
     prob = om.Problem()
-    mp = prob.model = MPTurbojet(od_points=list(od_points), od_mode=od_mode, design_W=design_W, nozz_type=nozz_type)
+    mp = prob.model = MPTurbojet(od_points=list(od_points), od_mode=od_mode, design_W=design_W, nozz_type=nozz_type, comp_map=comp_map, turb_map=turb_map,
+                                 comp_bleed=comp_bleed)
     prob.setup(check=False)
     return prob, mp
 
@@ -165,6 +180,8 @@ def set_design(prob, MN, alt_m, OPR, T4_K, eta_c, eta_t, Fn_N=None, W_kgps=None,
         prob[pt + '.fc.balance.Pt'] = 14.696; prob[pt + '.fc.balance.Tt'] = 518.67
         if od_mode == 'T4':
             prob.set_val(pt + '.balance.T4_target', (T4_od_K or T4_K) * K2R, units='degR'); prob[pt + '.balance.Nmech'] = 1e5
+        elif od_mode == 'NT4':
+            prob.set_val(pt + '.balance.T4_target', (T4_od_K or T4_K) * K2R, units='degR')
 
 
 def read(prob, pt, eta_b=1.0):

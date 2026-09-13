@@ -79,3 +79,22 @@ hub, but the 30 deg backswept exducer blade root fails at 537 m/s. Phase 4 proce
 .venv\Scripts\python scripts\phase4_turbomachinery\impeller_stress_gate.py   # hub sweep, burst, blade root (~7 s)
 .venv\Scripts\python scripts\phase4_turbomachinery\impeller_gate_extras.py   # thermal gradient, backsweep sensitivity
 ```
+
+## Phase 4 (axial engine: Phase 3 correction, operability, rotor dynamics)
+
+**Reports:**
+* `docs/phase3_engine.md` section 14: erratum, with corrected axial numbers;
+* `docs/phase4_operability.md`;
+* `docs/phase4_rotordynamics.md`.
+
+```powershell
+.venv\Scripts\python scripts\phase4_turbomachinery\check_turbodesigner_blockage.py        # evidence for the Phase 3 blockage error
+$env:P3_OPR=5; $env:P3_CASES="axial:0"; $env:P3_TURB_CAP=1; $env:P3_CC_REF=0.794; $env:P3_TAG_SUFFIX="_blk"; .venv\Scripts\python scripts\phase3_cycle\arch_trade.py
+bash scripts/phase4_turbomachinery/run_turbine_map.sh ax0_opr5_t1150_cap_blk                 # TurboFlow turbine map (.venv-np1)
+.venv\Scripts\python scripts\phase4_turbomachinery\operability.py ax0_opr5_t1150_cap_blk      # stacking map, running lines, variable IGV
+.venv\Scripts\python scripts\phase4_turbomachinery\nozzle_sweep.py ax0_opr5_t1150_cap_blk 1.3,1.6,2.0
+.venv\Scripts\python scripts\phase4_turbomachinery\bleed_sweep.py ax0_opr5_t1150_cap_blk 0.1,0.2,0.3
+.venv\Scripts\python scripts\phase4_turbomachinery\running_line_axi5.py                      # bracket with the NPSS AXI5 map
+.venv\Scripts\python scripts\phase4_turbomachinery\plot_operability.py
+.venv\Scripts\python scripts\phase4_turbomachinery\rotordynamics_verify.py; .venv\Scripts\python scripts\phase4_turbomachinery\rotordynamics.py
+```

@@ -33,9 +33,10 @@ def turb_pout(cyc):
     g = cyc.get("t_out_gamma", 1.325); M = 0.45
     return cyc["Pt5_kPa"] * 1e3 / (1 + 0.5 * (g - 1) * M * M) ** (g / (g - 1))
 
-def best_axial(cyc):
+def best_axial(cyc, rpm_fixed=None):
     best = None
-    for rpm in (40000, 45000, 50000, 55000, 60000, 65000):
+    rpms = (rpm_fixed,) if rpm_fixed else (40000, 45000, 50000, 55000, 60000, 65000, 70000, 75000, 80000, 85000, 90000)   # 70-90k added in Phase 4 (blockage fix)
+    for rpm in rpms:
         for N in (4, 5, 6, 7):
             for ht in (0.40, 0.45, 0.50, 0.55):
                 for Cx in (170, 185, 200):
@@ -53,6 +54,7 @@ def best_axial(cyc):
                           and st[-1]["stator"]["h"] >= 0.010 and np.isfinite(r["eta_is"]))
                     if ok and (best is None or r["eta_is"] > best[1]["eta_is"]):
                         best = (p, r)
+    if best is None: raise RuntimeError(f"no feasible axial design in the grid at rpm {rpms}")
     p, r = best
     r.update(input=p, D_casing_mm=2e3 * (r["r_tip_max"] + 0.25e-3 + 0.0025))
     return p["rpm"], r
@@ -69,6 +71,7 @@ def envelope_cap(kind, comp, cyc):
 
 def design_case(kind, rpm=None, tag="x", n_ax=None, pi_a=None):
     eta_c, eta_t = 0.78, 0.88
+    rpm_fixed = rpm if kind == "axial" and rpm else None       # axial: 0 = best compressor efficiency over the rpm grid, else fixed rpm
     hist = []
     for it in range(4):
         cyc, _ = dc.design(OPR, T4, eta_c, eta_t)
@@ -81,7 +84,7 @@ def design_case(kind, rpm=None, tag="x", n_ax=None, pi_a=None):
             if comp is None: raise RuntimeError("no feasible axial front stage(s)")
             eta_c_new = comp["eta_overall"]
         else:
-            rpm, comp = best_axial(cyc); eta_c_new = comp["eta_is"]
+            rpm, comp = best_axial(cyc, rpm_fixed=rpm_fixed); eta_c_new = comp["eta_is"]
         tin = dict(T04=cyc["Tt4_K"], P04=cyc["Pt4_kPa"] * 1e3, p_out=turb_pout(cyc), rpm=rpm, mdot=cyc["W_kgps"] + cyc["Wf_kgps"] * dc.ETA_B, tip_clearance=0.30e-3)
         if CAP: tin["r_tip_cap"] = envelope_cap(kind, comp, cyc)
         turb = run_np1("turbine_design.py", tin, f"{tag}_tt")
@@ -157,8 +160,8 @@ if __name__ == "__main__":
     for spec in cases_spec:
         kind, rpm = spec[0], spec[1]
         n_ax = int(spec[2]) if len(spec) > 2 else None; pi_a = float(spec[3]) if len(spec) > 3 else None
-        tag = f"{kind[:2]}{rpm}_opr{OPR:g}_t{T4:g}" + (f"_ax{n_ax}_pa{pi_a:g}" if n_ax else "") + ("_cap" if CAP else "")
-        case = design_case(kind, int(rpm) if kind in ("centrifugal", "axicentrifugal") else None, tag, n_ax=n_ax, pi_a=pi_a)
+        tag = f"{kind[:2]}{rpm}_opr{OPR:g}_t{T4:g}" + (f"_ax{n_ax}_pa{pi_a:g}" if n_ax else "") + ("_cap" if CAP else "") + os.environ.get("P3_TAG_SUFFIX", "")
+        case = design_case(kind, int(rpm) if kind in ("centrifugal", "axicentrifugal") or int(rpm) > 0 else None, tag, n_ax=n_ax, pi_a=pi_a)
         if kind == "centrifugal" and cc_ref is None: cc_ref = case["eta_c"]
         case["eta_c_centrifugal_ref"] = cc_ref if cc_ref else case["eta_c"]
         for level in ("tool", "fielded"):

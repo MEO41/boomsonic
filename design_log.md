@@ -445,3 +445,238 @@ aero design, cycle point and a 3D FE check, which is outside this gate and is th
 **Open risk carried forward (R4.1):** the axial-stage efficiency comes from the Howell cascade
 method, which has been checked only at conventional scale. Revisit it with a micro-axial validation
 source if one becomes available, for example published micro-axial compressor test data.
+
+---
+
+## Phase 4 — axial compressor input error found and corrected (2026-09-13)
+
+### F4.2 Phase 3 error: TurboDesigner blockage input doubled every axial annulus area
+**The error.** `axial_design.build` passed `inlet_blockage=0.98 / outlet_blockage=0.96`, intended
+as effective/physical area ratios. TurboDesigner 2.0.0 computes
+`physical_area = flow_area * (1 + blockage)` (`flow_station.py`), and its README example uses 0.0.
+So the Phase 3 axial annuli were 1.96-1.98 x too large.
+
+**How it was found.** The Phase 4 stage-stacking model needed effective/geometric area 0.52 to
+reproduce the design axial velocity. Evidence: `check_turbodesigner_blockage.py` (inlet tip radius
+63.8 mm with the old input vs 45.8 mm with the corrected one).
+
+**Effect.** The velocity triangles and loss-model efficiency were consistent. Radii, blade heights,
+the turbine envelope cap, spool-speed feasibility and masses were not. The pure axial and the
+axial stages of the axial-centrifugal are affected; the centrifugal and the impeller gate are not.
+
+### D4.2 Correction and re-run
+**Fix.** Blockage input set to 0.02 / 0.04 (the intended 2 % / 4 %).
+
+**Re-run.** The trade was re-run with unchanged method, limits and calibrations:
+* the rpm grid was extended to 90k;
+* fixed-rpm cases were added (75k / 80k / 85k), because compressor efficiency is flat in rpm;
+* 60k and 70k turned out infeasible (last blade height / DF).
+
+**Corrected results, fielded, calibrated:**
+
+| case | OD | length | dry mass | margin nom / pess |
+|---|---|---|---|---|
+| **axial OPR 5, 6 stages, 80k (new baseline)** | 142 mm, combustor-set | 611 mm | 5.74 kg | +104 / +89 % (worst corner +71 %) |
+| was: 5 stages, 65k | 151 mm | 663 mm | 7.28 kg | +98 / +77 % (worst +61 %) |
+| axial OPR 4 | 169 mm | 689 mm | 6.99 kg | +76 / +52 % |
+| axial OPR 6 | infeasible with <= 7 stages | | | |
+| AC 2 axial + cc, 90k | 170 mm | 610 mm | 6.11 kg | +75 / +50 % |
+| AC 1 axial + cc, 90k | 170 mm | 564 mm | 6.14 kg | +75 / +50 % |
+
+The AC front-stage speed limit is now 95-100k, not ~70k. The Phase 3b mechanism was an artifact.
+
+**Decision.** The Phase 3 recommendation (pure axial, OPR 5) stands and is strengthened; the
+baseline becomes 6 stages at 80 000 rpm. The fallback order becomes AC (90k), then the pure
+centrifugal (not qualified as designed). Written up in `docs/phase3_engine.md` section 14, with a
+banner at the top of that doc.
+
+**Tool defect logged (TurboFlow 0.1.18, performance analysis):**
+* With `stop_on_failure=False`, a failed point leaves None in the timing list and
+  `print_simulation_summary` crashes; worked around by disabling that summary.
+* After a failed point, every later point in the same call fails ("'list' object has no attribute
+  'keys'", because the failed solution is used as the next initial guess). Worked around by sweeping
+  each speed line outward from the design pressure ratio in two calls.
+
+---
+
+## Phase 4 — low-speed operability and stall of the pure axial (2026-09-14)
+
+Write-up: `docs/phase4_operability.md`. Plot: `plots/phase4_operability.png`.
+
+### D4.3 Tools and models (no approved tool gives axial maps)
+
+**Compressor map:** own mean-line stage-stacking model, `axial_offdesign.py`. It extends the Phase 3
+Howell design model:
+* frozen geometry, constant deviation, fixed IGV (implied by the 50 %-reaction design);
+* loss parabola calibrated to the Phase 3 stage efficiencies;
+* stall at Howell's stalling deflection eps_s = eps*/0.8, with nominal
+  tan(in*) - tan(out*) = 1.55/(1 + 1.5 s/c) (*Gas Turbine Theory*, ch. 5);
+* surge surrogate = the peak of each speed line.
+
+Verified: design point reproduced (PR 5.031 vs 5.000, eta 0.831 vs 0.828). Not validated
+(open risk R4.1).
+
+**Turbine map:** TurboFlow performance analysis of the Phase 3 turbine geometry (`turbine_map.py`).
+The design point is reproduced exactly (1.077 kg/s, eta_tt 0.9306). Two TurboFlow defects were
+worked around (F4.2).
+
+**Engine match:** pyCycle with both maps (`operability.py`). Added to `cycle_model.py`, all default
+off, with Phase 3 results re-checked unchanged (centrifugal dash W 1.32575 kg/s, TSFC 0.16416):
+* map options;
+* nozzle-area scale;
+* overboard bleed port;
+* transient mode NT4.
+
+**Surge-margin criterion:** about 20 % for an HP compressor and 15 % for an LP one, up to half of it
+for transients, defined as dR/R (Rolls-Royce patent CN112081683A).
+
+**Bracket:** the same match with pyCycle's NPSS AXI5 map (5-stage PR 5.2 axial; provenance
+undocumented).
+
+### F4.3 Results (fixed geometry, dash-sized convergent nozzle)
+* **Design point (dash):** surge margin 14 % at constant speed (18 % at constant flow), short of
+  about 20 %. At the dash the nozzle stays choked and SMN stays at 13-15 % down to 70 % speed, but
+  the first rotor passes its Howell stalling deflection below about 87 % corrected speed.
+* **SLS:** the nozzle is unchoked (NPR at or below 1.65). SMN falls from 12 % at 100 % to 2.5 % at
+  85 %, and the running line meets the peak line at about 83 %, below which there is no steady
+  match. The first rotor is stalled from about 87 %. At 100 % SLS, T4 is 1163 K, so the speed limit
+  sits at about 99 % for about 680 N.
+* **AXI5 bracket:** stall-free to about 55 % (SMN 20-27 % over 70-95 %), meeting the stall line at
+  about 52 %.
+* **Remedies on the stacking map, singly:**
+
+  | remedy | lowest steady speed | penalty |
+  |---|---|---|
+  | variable IGV (21 -> 49 deg) | about 80 % | stator 1 stalls |
+  | nozzle x1.3 to x2 | about 80 % | costs 220-410 N of SLS thrust if left open |
+  | 20 % bleed after stage 3 | about 70 % | - |
+  | 30 % bleed | about 65 % | T4 up to 1250 K, over the limit |
+
+* **No configuration reaches a conventional 30-35 % idle.** Acceleration time was not computed:
+  there is no idle, and the steady SLS margin at 85-95 % is below the roughly 10 % transient
+  allowance.
+
+### D4.4 Verdict and decision point (not taken autonomously)
+The Phase 3 "operability not quantified" risk of the pure axial is real. A workable pure axial would
+need combined variable geometry and bleed (VIGV + start bleed + probably a variable nozzle), and
+still idles at or above about 55-65 %.
+
+Recommendation to the user: before more Phase 4 work on the pure axial, run the same two cheap checks
+on the corrected axial-centrifugal (1-2 axial stages + cc, 90 000 rpm; 6.1 kg, +75 / +50 %):
+1. impeller exducer blade root at 409-471 m/s;
+2. operability with the TurboFlow centrifugal map.
+
+Options A (pure axial with variable geometry), B (AC) and C (redesigned centrifugal) are laid out in
+`docs/phase4_operability.md` section 3. Phase 4 mechanical design and CAD have not been started.
+
+**Open risk R4.1 (carried, as instructed):** axial-stage efficiency and off-design loss/stall
+correlations are checked only at conventional scale. Revisit them with published micro-axial
+compressor test data. The AXI5 bracket shows the low-speed answer is map-sensitive.
+
+---
+
+## Phase 4 — rotor dynamics of the pure axial (2026-09-14)
+
+Write-up: `docs/phase4_rotordynamics.md`. Done by a parallel sub-task on the corrected geometry.
+Its assumed idle (35 %) is superseded by the operability result: idle at or above 55-65 %, which
+means the damped 36 krpm mode is crossed only during start and shut-down.
+
+
+### D4.R1 Tool: ROSS 2.3.0 (ross-rotordynamics, PyPI, added to `.venv`), verified before use
+It was installed with uv. It added packages only; no existing package changed version. The new
+packages include ross-rotordynamics 2.3.0, numba 0.67.0, ccp-performance 0.4.1, pint, control and
+scikit-learn; refreeze `requirements-np2.txt`.
+
+Two import work-arounds are in `scripts/phase4_turbomachinery/ross_shim.py`. Neither affects the
+FE matrices:
+* plotly 7 removed the `scattermapbox` template key, so the ROSS theme is created with skip_invalid;
+* numba 0.67 cannot type ROSS's orbit helper, so it runs with `NUMBA_DISABLE_JIT=1`.
+
+Verification (`rotordynamics_verify.py`) against closed forms:
+
+| case | error |
+|---|---|
+| simply supported shaft, Euler-Bernoulli | -0.0001 % (Timoshenko -0.30 %) |
+| Jeffcott rotor | -0.0001 % |
+| overhung disc with gyroscopics, 0-60 krpm, forward and backward whirl | -0.13 to -0.20 % |
+| project lateral eigen-solver vs ROSS run_modal | 0.000 %, same whirl labels |
+| forward synchronous critical | -0.19 % |
+| damped solver vs single-DOF k-c | +0.003 % frequency, -0.006 % damping ratio |
+
+Mesh convergence: 10 mm → 5 mm changes the criticals by at most 0.04 %.
+
+### Inputs (sourced)
+* **Geometry and masses** from the corrected trade
+  `data/phase3/trade_ax0_opr5_t1150_cap_blk_fielded.json` (6 stages, 80 000 rpm), through
+  `arch_trade.scaled_comp` + `engine_mass`. The model reproduces the engine_mass disc and blade
+  masses exactly (`rotor_model.py`). An earlier scratch run on the superseded pre-blockage-fix
+  geometry was discarded.
+* **Bearing and support stiffness:**
+  * 1.9e7 N/m: 10 x 26 mm angular-contact ball bearing at 63 krpm (Wang, Lv & Luo, *Sensors* 2023);
+  * 4.4e7 N/m: ball bearing on rigid supports (Gunter 2023);
+  * 1.75e6 N/m and 876 N s/m: optimum damper cartridge of a ball-bearing turbocharger (Gunter 2023);
+  * 6e5 N/m: micro gas turbine bearing suspension (ASME JEGTP 146(10) 101002, 2024).
+* **Criteria:** API 684 (2003) statement of the API 617 AF-dependent separation margins (AF < 2.5
+  none; 2.5-3.55: 15 % / 5 %; > 3.55: formulas capped at 26 % above MCS and 16 % below minimum
+  speed). MCS = 105 % = 84 000 rpm; idle 35 % = 28 000 rpm.
+* **Support damping in jet engines:** San Andrés, TAMU Notes 13 (2010), squeeze-film dampers with
+  rolling bearings.
+
+### F4.R1 The rotor as mass-sized in Phase 3 is not dynamically acceptable
+The Phase 3 rotor has a 16/8 mm shaft and a 0.32 mm drum (the tie allowance). Layout A is the
+front bearing at the compressor inlet hub and the rear bearing under the NGV, span 409 mm, turbine
+overhang 20 mm. Its forward criticals:
+
+| support stiffness | criticals |
+|---|---|
+| 1.9e7 N/m | 11.9 / 40.0 / 57.0 / 99.8 krpm |
+| 1.75e6 N/m | 10.7 / 14.1 / 35.4 / 76.4 krpm |
+
+Bending modes fall inside 28-84 krpm at every stiffness from 6e5 to 1e9 N/m, and in the damped
+check at every damping level up to 2000 N s/m. Layout B (both bearings in the tunnel, 181 mm
+compressor overhang) is similar or worse.
+
+### F4.R2 Neither hard bearings nor a stiffer rotor alone can fix it
+* **Hard bearings (1.9e7 N/m):** a bearing-dominated mode sits at 40-41 krpm for any shaft of
+  16-32 mm OD and any drum of 0.3-3 mm.
+* **Soft supports:** the free-free bending mode of the 0.43 m rotor stays at 23-53 krpm, against the
+  106 krpm (MCS + 26 %) target. The shaft OD is capped at about 24 mm by the 14 mm-radius tunnel
+  inside the combustor hub (Ri 17.4 mm).
+
+### F4.R3 Soft, damped supports plus a stiffened rotor pass the API AF rules
+Configuration: layout A, 2 mm Ti drum, 24/12 mm shaft with 16 mm journals, k 1.75e6 N/m,
+c 876 N s/m. Damped criticals:
+
+| critical | AF | where |
+|---|---|---|
+| 11.1 krpm | 1.9 | below idle |
+| 17.9 krpm | 1.8 | below idle |
+| 35.6 krpm | 1.1 | inside the range, critically damped |
+| 120.0 krpm | 6.2 | 43 % above MCS |
+
+It passes over k 0.6-5e6 N/m with c 876-2000 N s/m. Layout B passes only at c 2000 N s/m.
+
+### D4.R2 Rotor-dynamic recommendation (screening)
+* Layout A.
+* Squeeze-film or O-ring damper cartridges at both ball bearings, k about 1-2e6 N/m and c about
+  900-2000 N s/m. Hard-mounted bearings are ruled out.
+* Stiffen the rotor beyond the Phase 3 mass sizing: 2 mm drum, 24/12 mm shaft, 16 mm journals.
+  This costs **+0.53 kg of rotor mass (uncalibrated)**, taking the rotor from 1.39 to 1.91 kg.
+
+Numbers for the transient work:
+
+| quantity | value |
+|---|---|
+| **Ip** | **1.12e-3 kg m²** (9.31e-4 kg m² as mass-sized) |
+| static bearing loads, 1 g | 6.2 / 12.5 N |
+| gyroscopic bearing load | 23 N per rad/s of pitch or yaw rate (38-46 N per rad/s in layout B) |
+
+### Open rotor-dynamic risks
+* **R4.R1 Damper dependence.** The design relies on the dampers to make the free-free bending mode
+  at about 36 krpm (45 % speed) critically damped. Damper realisation, temperature and nonlinearity
+  are not modelled; neither are the damped unbalance response and the aero cross-coupling stability.
+* **R4.R2 Bearing speed.** 16 mm journals at 80 krpm give DN 1.28e6, above the references (micro
+  gas turbine DN 1e6; Wang bearing about 0.7e6).
+* **R4.R3 Drum stiffness.** The drum is modelled as a continuous shell; joint flexibility
+  (tie-bolt or curvic) is ignored, which is optimistic.
+* The 85 000 rpm variant was not analysed.

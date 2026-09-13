@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\scripts\phase3_cycle\arch_trade.py", line 161, in <module>
+    case = design_case(kind, int(rpm) if kind in ("centrifugal", "axicentrifugal") else None, tag, n_ax=n_ax, pi_a=pi_a)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\scripts\phase3_cycle\arch_trade.py", line 84, in design_case
+    rpm, comp = best_axial(cyc); eta_c_new = comp["eta_is"]
+                ^^^^^^^^^^^^^^^
+  File "C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\scripts\phase3_cycle\arch_trade.py", line 56, in best_axial
+    p, r = best
+    ^^^^
+TypeError: cannot unpack non-iterable NoneType object

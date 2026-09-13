@@ -16,6 +16,16 @@ of its four variants fail the 25 % pessimistic target. It relocates the risk rat
 it. The recommendation is unchanged; the best AC variant becomes the second choice, ahead of the
 pure centrifugal unless the impeller is qualified at ~530 MPa.
 
+> **ERRATUM (Phase 4, 2026-09-13), read section 14 first.** Every axial-compressor number in
+> sections 6-8 and 13 was computed with a wrong TurboDesigner blockage input. That input nearly
+> doubled every axial annulus area.
+> * **Corrected axial:** OPR 5, 6 stages, 80 000 rpm; 142 mm / 611 mm / 5.74 kg; margin
+>   +104 % / +89 % (was 5 stages, 65 000 rpm, 151 mm / 663 mm / 7.28 kg, +98 % / +77 %).
+> * **Recommendation (pure axial at OPR 5):** unchanged, and stronger.
+> * **Phase 3b:** the "front stage caps the shaft at ~70 000 rpm" finding was an artifact of the
+>   error. The corrected axial-centrifugal is 6.1 kg and 564-610 mm long.
+> * **Pure centrifugal:** unaffected.
+
 ## 1. Tools: what was used for what, and what did not work
 
 | Job | Tool | Why this tool | Verification / finding |
@@ -378,3 +388,96 @@ keeps +51 % pessimistic margin with a 1.58 stress factor. The recommended order 
 axial OPR 5; (2) axial-centrifugal 2 axial + cc, OPR 4, if the pure axial's operability or
 manufacturing is judged unacceptable and the impeller is not qualified; (3) pure centrifugal OPR 4
 if its impeller clears ~530 MPa (lightest and shortest by 160-230 mm).
+
+## 14. Erratum (found in Phase 4): TurboDesigner blockage input, axial numbers corrected
+
+### 14.1 The error
+
+**What was wrong.** `axial_design.build` passed `inlet_blockage=0.98, outlet_blockage=0.96` to
+TurboDesigner, meaning 2 % and 4 % blockage (effective/physical area ratios). TurboDesigner's
+convention is different: `FlowStation.physical_area = flow_area * (1 + blockage)` in
+`flow_station.py`, and its README example uses `0.0`. So every axial annulus was built with 1.96-1.98
+times the area needed for its own velocity triangles.
+
+**How it was caught.** The Phase 4 stage-stacking model could not reproduce the design axial
+velocity with the geometric annulus. The effective/physical area ratio came out as 0.52.
+`scripts/phase4_turbomachinery/check_turbodesigner_blockage.py` shows the old and the corrected
+input side by side:
+* old input (0.98 / 0.96): inlet tip radius 63.8 mm, annulus 107 cm2, versus 56 cm2 needed at
+  Cx 200 m/s;
+* corrected input (0.02 / 0.04): inlet tip radius 45.8 mm, annulus 55 cm2.
+
+The velocity triangles, blade loading and loss-model efficiency were internally consistent. The
+physical radii, and everything derived from them, were not:
+* compressor diameter and blade heights;
+* the turbine envelope cap;
+* the spool-speed feasibility (tip relative Mach, last-blade height);
+* disc and blade masses.
+
+**Scope.** The pure axial (sections 6-8) and the axial stages of the axial-centrifugal (section 13)
+are affected. The pure centrifugal (TurboFlow) and the Phase 4 impeller gate are not.
+
+### 14.2 How the axial was re-run
+
+Fix: the blockage input is now 0.02 / 0.04. The same trade (`arch_trade.py`, fielded level, same
+calibrations) was re-run, with these changes:
+* **Spool-speed grid** extended from 40-65k to 40-90k rpm. The 65k upper bound was set by the
+  inflated geometry.
+* **Unchanged limits:** hub/tip >= 0.40, DF <= 0.50, de Haller >= 0.72, tip relative Mach <= 1.35,
+  last blade height >= 10 mm, 4-7 stages.
+* **Fixed-rpm cases** added (`axial:<rpm>`), because the compressor-efficiency-only selection is
+  flat in rpm (0.826-0.830 from 75k to 85k). The 40k design it picked in the first iteration had a
+  poor turbine (eta_t 0.83-0.85).
+
+### 14.3 Corrected results (fielded level, calibrated mass x1.24 and length x1.22)
+
+| | **Axial OPR 5, 6 st, 80k (new baseline)** | Axial OPR 5, 6 st, 85k | Axial OPR 5, 7 st, 75k | Axial OPR 4, 6 st, 70k | AC 2 ax + cc, OPR 4, 90k | AC 1 ax + cc, OPR 4, 90k | Centrifugal OPR 4, 85k (unchanged) | *old axial OPR 5, 5 st, 65k* |
+|---|---|---|---|---|---|---|---|---|
+| tool eta_c / eta_t | 0.828 / 0.931 | 0.826 / 0.930 | 0.828 / 0.931 | 0.837 / 0.936 | 0.801 / 0.909 | 0.795 / 0.912 | 0.794 / 0.935 | *0.841 / 0.925* |
+| fielded eta_c | 0.730 | 0.728 | 0.730 | 0.738 | 0.695 | 0.692 | 0.700 | *0.741* |
+| engine OD (set by) | **142 mm** (combustor) | 142 (combustor) | 142 (combustor) | 169 (combustor) | 170 (combustor) | 170 (combustor) | 175 (diffuser) | *151 (turbine)* |
+| compressor / turbine OD | 111 / 132 mm | 112 / 125 | 115 / 141 | 112 / 148 | 126 (diffuser) / 117 | 145 (diffuser) / 118 | 175 / 124 | *148 / 151* |
+| length, calibrated | **611 mm** | 609 | 669 | 689 | 610 | **564** | **474** | *663* |
+| dry mass, calibrated | **5.74 kg** | 5.60 | 6.49 | 6.99 | 6.11 | 6.14 | 6.57 | *7.28* |
+| dash drag nom / pess | 245 / 264 N | 245 / 264 | 245 / 264 | 284 / 330 | 286 / 332 | 286 / 333 | 296 / 348 | *253 / 282* |
+| **margin nom / pess** | **+104 % / +89 %** | +104 / +89 | +104 / +89 | +76 / +52 | +75 / +50 | +75 / +50 | +69 / +44 | *+98 / +77* |
+| worst corner (eta_c 0.66, comb. +1 sigma, E_WD 3) | **+71 %** | - | - | - | - | - | +32 % | *+61 %* |
+| impeller U2 fielded / solid-disc stress factor | - | - | - | - | 409 m/s / 1.47 | 471 m/s / 1.11 | 537 m/s / 0.86 | - |
+| TOGW, calibrated | 17.3 kg | 17.2 | 17.9 | 18.9 | 18.1 | 18.1 | 18.6 | *18.9* |
+
+Stage details of the new baseline: 6 stages, hub/tip 0.40, Cx 185 m/s, stage PRs 1.40 / 1.35 /
+1.32 / 1.29 / 1.26 / 1.24, first-rotor tip relative Mach 1.15, rotor blade heights 28.9 down to
+10.7 mm, chords 19.3 down to 7.1 mm, 148 rotor + 152 stator blades. The equal-efficiency
+sensitivity is in `data/phase3_efficiency_sensitivity_blk.csv`: pessimistic margin
++86 / +88 / +89 % at eta_c 0.66 / 0.70 / 0.74 with the mean combustor, and +71 / +73 / +75 % with
+the +1 sigma combustor.
+
+**OPR 6 axial:** no feasible design within the limits above with 7 stages or fewer. The
+last-blade height and DF limits bind.
+
+### 14.4 What changes in the conclusions
+
+1. **Recommendation (D3.3): still the pure axial at OPR 5, now 6 stages at 80 000 rpm, and more
+   clearly ahead.**
+   * The engine diameter drops from 151 to 142 mm. The combustor now sets it; the turbine and
+     compressor fit inside.
+   * Mass drops 1.5 kg (5.74 vs 7.28 kg) and length drops 50 mm (611 vs 663 mm).
+   * Margin rises to +104 / +89 % (worst corner +71 %).
+   * The 85 000 rpm variant is equivalent (5.60 kg, same margin). It is kept as the alternative if
+     rotordynamics or the turbine favour it.
+2. **Section 13 (axial-centrifugal) is superseded.**
+   * With the correct annulus the front axial stage stays inside tip relative Mach 1.35 up to
+     95 000 rpm (infeasible at 100 000). The "~70 000 rpm cap" was an artifact.
+   * At 90 000 rpm the AC is 6.1 kg (not 8.7-9.5 kg). The 1-stage variant is shorter than the
+     corrected axial (564 vs 611 mm); the 2-stage variant is equal (610 mm).
+   * Its margin (+75 / +50 %) is still well below the axial's (+104 / +89 %), because its larger
+     diffuser and lower OPR-4 pressure ratio need a bigger combustor (170 mm).
+   * It is the stress-safer centrifugal route: impeller at 409-471 m/s instead of 537 m/s. But the
+     Phase 4 gate showed that exducer blade-root bending, not the disc, limits a backswept
+     impeller, and that has not been checked at these tip speeds.
+   * New order: (1) axial OPR 5, 6 stages, 80k; (2) AC 1-2 axial + cc at 90k; (3) pure centrifugal
+     (not qualified as designed, Phase 4 gate).
+3. **Pure centrifugal:** unchanged.
+
+The superseded Phase 3 files are kept for traceability (`trade_ax0_opr5_t1150_cap_*`,
+`trade_ax68000_*`). The corrected ones carry the suffix `_blk`.

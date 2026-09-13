@@ -35,7 +35,9 @@ def normal_shock_pt_ratio(M, g=1.4):
 def build(p, eta):
     return Turbomachinery(gamma=1.4, axial_velocity=p["Cx"], rpm=p["rpm"], gas_constant=R_AIR, mass_flow_rate=p["mdot"],
         pressure_ratio=p["PR"], inlet_total_pressure=p["P01"], inlet_total_temperature=p["T01"], isentropic_efficiency=eta,
-        num_stages=p["N"], inlet_blockage=0.98, outlet_blockage=0.96, hub_to_tip_ratio=p["hub_tip"], num_streams=3,
+        # TurboDesigner convention: physical area = flow area x (1 + blockage) -> 2 % / 4 % blockage = 0.02 / 0.04.
+        # (Phase 3 as committed in 5008a95/b40812b passed 0.98 / 0.96 here, which doubled every annulus area; corrected in Phase 4.)
+        num_stages=p["N"], inlet_blockage=p.get("blk_in", 0.02), outlet_blockage=p.get("blk_out", 0.04), hub_to_tip_ratio=p["hub_tip"], num_streams=3,
         stage_temperature_rise="equal", stage_reaction=0.5, row_gap_to_chord=0.25, stage_gap_to_chord=0.25,
         aspect_ratio=StageBladeProperty(rotor=p.get("AR", 1.5), stator=p.get("AR", 1.5)),
         spacing_to_chord=StageBladeProperty(rotor=p.get("s_c", 0.8), stator=p.get("s_c", 0.8)),
