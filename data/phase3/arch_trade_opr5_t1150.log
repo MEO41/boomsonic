@@ -1,0 +1,92 @@
+  [ax0_opr5_t1150] it0: W 1.1197  eta_c 0.780->0.844  eta_t 0.880->0.925  rpm 50000
+  [ax0_opr5_t1150] it1: W 1.0500  eta_c 0.844->0.841  eta_t 0.925->0.934  rpm 65000
+  [ax0_opr5_t1150] it2: W 1.0488  eta_c 0.841->0.841  eta_t 0.934->0.934  rpm 65000
+{'case': 'ax0_opr5_t1150', 'arch': 'axial', 'rpm': 65000, 'level': 'tool', 'eta_c': 0.841, 'eta_t': 0.934, 'W': 1.049, 'TSFC_dash': 0.13, 'Fn': 500.0, 'D_engine_mm': 145.653, 'D_comp': 133.907, 'D_comb': np.float64(136.298), 'D_turb': 145.653, 'D_engine_comb_hi_mm': 146.433, 'L_engine_mm': 505.79, 'dry_mass_kg': 5.115, 'dry_mass_comb_hi_kg': 5.233, 'CDS_nom': np.float64(63.248), 'CDS_hi': np.float64(68.865), 'drag_nom': np.float64(249.499), 'drag_hi': np.float64(271.594), 'margin_nom': np.float64(1.004), 'margin_hi': np.float64(0.841), 'TOGW': np.float64(16.442), 'fuel': 1.5}
+{'case': 'ax0_opr5_t1150', 'arch': 'axial', 'rpm': 65000, 'level': 'fielded', 'eta_c': 0.741, 'eta_t': 0.75, 'W': 1.293, 'TSFC_dash': 0.153, 'Fn': 500.0, 'D_engine_mm': 161.224, 'D_comp': np.float64(148.082), 'D_comb': np.float64(141.749), 'D_turb': 161.224, 'D_engine_comb_hi_mm': 161.224, 'L_engine_mm': 546.327, 'dry_mass_kg': 6.494, 'dry_mass_comb_hi_kg': 6.62, 'CDS_nom': np.float64(68.415), 'CDS_hi': np.float64(78.022), 'drag_nom': np.float64(269.977), 'drag_hi': np.float64(307.772), 'margin_nom': np.float64(0.852), 'margin_hi': np.float64(0.625), 'TOGW': np.float64(18.253), 'fuel': 1.772}
+  [ce85000_opr5_t1150] it0: W 1.1197  eta_c 0.780->0.804  eta_t 0.880->0.926  rpm 85000
+  [ce85000_opr5_t1150] it1: W 1.0780  eta_c 0.804->0.806  eta_t 0.926->0.929  rpm 85000
+{'case': 'ce85000_opr5_t1150', 'arch': 'centrifugal', 'rpm': 85000, 'level': 'tool', 'eta_c': 0.806, 'eta_t': 0.929, 'W': 1.075, 'TSFC_dash': 0.131, 'Fn': 500.0, 'D_engine_mm': 172.146, 'D_comp': 172.146, 'D_comb': np.float64(136.016), 'D_turb': 112.464, 'D_engine_comb_hi_mm': 172.146, 'L_engine_mm': 337.783, 'dry_mass_kg': 4.471, 'dry_mass_comb_hi_kg': 4.592, 'CDS_nom': np.float64(73.625), 'CDS_hi': np.float64(85.937), 'drag_nom': np.float64(290.293), 'drag_hi': np.float64(338.728), 'margin_nom': np.float64(0.722), 'margin_hi': np.float64(0.476), 'TOGW': np.float64(16.088), 'fuel': 1.517}
+  Vsonic = (i['gamma']*i['R']*i['Ts'])**0.5
+
+DESIGN.turb.out_stat.ps_resid [-2.00009815] [286.88643488] [2500.]
+DESIGN.nozz.staticMN.ps_resid [-2.2948487] [286.94533011] [2500.]
+  Vsonic = (i['gamma']*i['R']*i['Ts'])**0.5
+  Vsonic = (i['gamma']*i['R']*i['Ts'])**0.5
+
+DESIGN.turb.out_stat.ps_resid [-2.00009815] [286.88643488] [2500.]
+DESIGN.nozz.staticMN.ps_resid [-2.2948487] [286.94533011] [2500.]
+  Vsonic = (i['gamma']*i['R']*i['Ts'])**0.5
+
+DESIGN.turb.out_stat.ps_resid [-9.7102459] [286.55740334] [2500.]
+DESIGN.nozz.staticMN.ps_resid [-10.71149749] [286.75260194] [2500.]
+  Vsonic = (i['gamma']*i['R']*i['Ts'])**0.5
+  Vsonic = (i['gamma']*i['R']*i['Ts'])**0.5
+DESIGN.nozz.staticPs.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+
+  Val: [146.86673623]
+  Lower: [150.]
+
+DESIGN.nozz.ideal_flow.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+
+  Val: [146.86673623]
+  Lower: [150.]
+
+
+DESIGN.turb.out_stat.ps_resid [-9.7102459] [286.55740334] [2500.]
+DESIGN.nozz.staticMN.ps_resid [-10.71149749] [286.75260194] [2500.]
+  Vsonic = (i['gamma']*i['R']*i['Ts'])**0.5
+  Vsonic = (i['gamma']*i['R']*i['Ts'])**0.5
+  Vsonic = (i['gamma']*i['R']*i['Ts'])**0.5
+
+DESIGN.turb.out_stat.ps_resid [-10.07561741] [286.54181107] [2500.]
+DESIGN.nozz.staticMN.ps_resid [-11.11034895] [286.74346886] [2500.]
+DESIGN.turb.out_stat.ps_resid [-10.07561741] [286.54181107] [2500.]
+DESIGN.turb.out_stat.ps_resid [-0.0274822] [349.82272759] [150.]
+DESIGN.turb.out_stat.ps_resid [-0.0274822] [349.82272759] [150.]
+  Vsonic = (i['gamma']*i['R']*i['Ts'])**0.5
+DESIGN.nozz.staticPs.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+
+  Val: [145.36953916]
+  Lower: [150.]
+
+DESIGN.nozz.ideal_flow.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+
+  Val: [145.36953916]
+  Lower: [150.]
+
+
+DESIGN.nozz.staticMN.ps_resid [-11.11034895] [286.74346886] [2500.]
+  Vsonic = (i['gamma']*i['R']*i['Ts'])**0.5
+  Vsonic = (i['gamma']*i['R']*i['Ts'])**0.5
+  Vsonic = (i['gamma']*i['R']*i['Ts'])**0.5
+
+DESIGN.turb.out_stat.ps_resid [-10.08040131] [286.54160692] [2500.]
+DESIGN.nozz.staticMN.ps_resid [-11.11557123] [286.74334928] [2500.]
+DESIGN.turb.out_stat.ps_resid [-10.08040131] [286.54160692] [2500.]
+DESIGN.turb.out_stat.ps_resid [-0.02934501] [349.9117493] [150.]
+DESIGN.turb.out_stat.ps_resid [-0.02934501] [349.9117493] [150.]
+  Vsonic = (i['gamma']*i['R']*i['Ts'])**0.5
+DESIGN.nozz.staticPs.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+
+  Val: [145.3501767]
+  Lower: [150.]
+
+DESIGN.nozz.ideal_flow.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+
+  Val: [145.3501767]
+  Lower: [150.]
+
+
+DESIGN.nozz.staticMN.ps_resid [-11.11557123] [286.74334928] [2500.]
+{'case': 'ce85000_opr5_t1150', 'arch': 'centrifugal', 'rpm': 85000, 'level': 'fielded', 'eta_c': 0.7, 'eta_t': 0.75, 'W': 0.39, 'TSFC_dash': 0.082, 'Fn': 276.997, 'D_engine_mm': 106.015, 'D_comp': np.float64(106.015), 'D_comb': np.float64(91.495), 'D_turb': 69.532, 'D_engine_comb_hi_mm': 106.015, 'L_engine_mm': 218.213, 'dry_mass_kg': 2.072, 'dry_mass_comb_hi_kg': 2.13, 'CDS_nom': np.float64(56.331), 'CDS_hi': np.float64(56.331), 'drag_nom': np.float64(221.983), 'drag_hi': np.float64(221.983), 'margin_nom': np.float64(0.248), 'margin_hi': np.float64(0.248), 'TOGW': np.float64(12.023), 'fuel': 0.522}
+              case        arch   rpm   level  eta_c  eta_t     W  TSFC_dash      Fn  D_engine_mm  D_comp  D_comb  D_turb  D_engine_comb_hi_mm  L_engine_mm  dry_mass_kg  dry_mass_comb_hi_kg  CDS_nom  CDS_hi  drag_nom  drag_hi  margin_nom  margin_hi   TOGW  fuel
+    ax0_opr5_t1150       axial 65000    tool  0.841  0.934 1.049      0.130 500.000      145.653 133.907 136.298 145.653              146.433      505.790        5.115                5.233   63.248  68.865   249.499  271.594       1.004      0.841 16.442 1.500
+    ax0_opr5_t1150       axial 65000 fielded  0.741  0.750 1.293      0.153 500.000      161.224 148.082 141.749 161.224              161.224      546.327        6.494                6.620   68.415  78.022   269.977  307.772       0.852      0.625 18.253 1.772
+ce85000_opr5_t1150 centrifugal 85000    tool  0.806  0.929 1.075      0.131 500.000      172.146 172.146 136.016 112.464              172.146      337.783        4.471                4.592   73.625  85.937   290.293  338.728       0.722      0.476 16.088 1.517
+ce85000_opr5_t1150 centrifugal 85000 fielded  0.700  0.750 0.390      0.082 276.997      106.015 106.015  91.495  69.532              106.015      218.213        2.072                2.130   56.331  56.331   221.983  221.983       0.248      0.248 12.023 0.522

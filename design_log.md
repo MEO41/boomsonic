@@ -238,3 +238,95 @@ The background data-collection agent wrote an early 8-row engine table and a fit
 (12:43) before replacing the table with the final 26-engine version; the orphaned script
 read the old columns and was rewritten (`engine_database_fit.py`). No committed file was
 affected.
+
+---
+
+## Phase 3 — Engine cycle and architecture trade (2026-09-13)
+
+Full write-up: `docs/phase3_engine.md`. User instruction: do not carry the Phase 2 catalog-fit
+engine (6.83 kg / 188 mm); derive mass and diameter from a designed geometry. Done: no Phase 3
+number uses the catalog fit.
+
+### F3.1 Tool findings (ground rule 3)
+- NASA turbo-design cannot predict axial-compressor efficiency: `loss/compressor/lieblein.py` is
+  empty, OTAC classes are zero-returning placeholders, `DiffusionLoss` is an ad-hoc ramp.
+- TurboDesigner: efficiency is an input; its rotor diffusion factor uses absolute velocities
+  (0.03 vs 0.40 for the matched stator) -> recomputed; last stator `next_flow_station` asserts.
+- TurboFlow turbine design optimisation: ignores the operating-point omega (85 000 rpm requested,
+  104 000 returned) -> omega equality constraint added; has no structural constraint (optimum had a
+  688 m/s tip, ~716 MPa blade-root stress) -> 350 MPa blade-root limit added as a tip-radius constraint.
+- TurboFlow and the Howell model both predict component efficiencies far above what fielded
+  engines achieve (next entry) -> two technology levels carried.
+- Next-best method for the axial compressor: Howell cascade method (Saravanamuttoo ch. 5) + Re,
+  tip-clearance and shock penalties on TurboDesigner triangles; verified at 0.90-0.92 row
+  efficiency for conventional-scale cases.
+
+### F3.2 Real-gas and calibration anchors
+- Cantera vs pyCycle at the combustor exit: T4 -3.3 K (0.3 %), gamma +0.0002, cp +0.6 %.
+- Vendor (W, PR, Fn, Wf) sets are inconsistent with vendor EGT limits (need T4 1330-1450 K) ->
+  published airflows treated as nominal. Vendor SLS TSFC 0.145-0.167 kg/(N h) requires
+  eta_c ~0.66-0.70, eta_t ~0.70-0.75. Phase 1 placeholder gave 0.110 (40 % optimistic).
+- Fielded level adopted: eta_c 0.70 (centrifugal), eta_t 0.75, eta_b 0.95 (A3.1).
+
+### D3.1 Dash design-point cycle
+Fn 500 N at M 1.02 / 5 km, T4 1150 K (D1.1), convergent nozzle; intake inside the cycle:
+normal shock 0.99998 + 1.32 m duct 3.3-3.4 % Pt loss (replaces A2.3). Burner dP/P 0.05, eta_b 0.95.
+
+### F3.3 The combustor sets the diameter; pressure ratio shrinks it
+Lefebvre theta scaling from 7 reference engines (theta_ref 7.24e7, log-sigma 0.20): at OPR 4 the
+combustor OD is 163-170 mm, at OPR 5 136-143 mm, at OPR 6 117-125 mm. The architecture decides
+how much pressure ratio is affordable within rotor stress limits.
+
+### D3.2 Convergent nozzle kept
+C-D nozzle gains 2 % (tool) / 0.2 % (fielded) thrust at NPR 2.8-3.7: not worth its mass.
+
+### Architecture trade — both options side by side (dash, Fn 500 N, T4 1150 K)
+
+Engine mass = bottom-up geometry/materials model x 1.24 validation factor (F3.6).
+
+| | Centrifugal, 1 stage, OPR 4, 85 000 rpm | Axial, 5 stages, OPR 5, 65 000 rpm (turbine inside casing) |
+|---|---|---|
+| compressor tool used | TurboFlow (Oh losses) | TurboDesigner geometry + Howell loss model |
+| stage count | 1 compressor stage + 1 turbine stage | 5 compressor stages (253 blades) + 1 turbine stage |
+| compressor efficiency, tool / fielded | 0.794 / 0.70 | 0.841 / 0.741 |
+| turbine efficiency, tool / fielded | 0.935 / 0.75 | 0.925 / 0.75 |
+| airflow, tool / fielded | 1.084 / 1.326 kg/s | 1.052 / 1.293 kg/s |
+| **outer diameter, tool / fielded** | **163 / 175 mm** | **136 / 151 mm** |
+| diameter set by | combustor / compressor diffuser | combustor + turbine / turbine + compressor |
+| length (calibrated), tool / fielded | 444 / 474 mm | 615 / 663 mm |
+| **engine dry mass, calibrated, tool / fielded** | **5.52 / 6.57 kg** (fielded range 6.15-6.94) | **5.96 / 7.28 kg** (fielded range 6.81-7.69) |
+| dash drag nominal / pessimistic (fielded) | 296 / 348 N | 253 / 282 N |
+| **thrust margin nominal / pessimistic, tool** | **+83 % / +60 %** | **+109 % / +97 %** |
+| **thrust margin nominal / pessimistic, fielded** | **+69 % / +44 %** | **+98 % / +77 %** |
+| 25 % target | holds in all four cases | holds in all four cases |
+| worst corner (eta_c 0.66, combustor +1 sigma, E_WD 3) | +32 % | +61 % |
+| TOGW (calibrated), fielded | 18.6 kg | 18.9 kg (19.6 at equal compressor efficiency) |
+| rotor stress | impeller 464 MPa (tool) -> 526 MPa (fielded) vs 450 allowable | within allowables by construction |
+| modelling confidence | chain validated on 2 real centrifugal engines | axial efficiency unvalidated at this scale; operability unquantified |
+
+Also evaluated and rejected: centrifugal 75 000 rpm (fielded pessimistic margin 18 %),
+centrifugal OPR 5 (impeller 548 MPa; fielded pessimistic 19 %), axial OPR 4 at 55 000 rpm
+(turbine-set 183 mm, 7.7 kg raw fielded), axial OPR 6 uncapped (193 mm, pessimistic 21 %),
+axial OPR 6 capped (155 mm, +93 % / +72 %, but 7 stages and 720 mm long).
+
+### F3.4 Centrifugal impeller stress is the conditional in its pass
+Same PR at lower efficiency needs more tip speed: 504 -> 537 m/s. If limited to its tool-level
+tip speed, fielded PR falls to 3.48, the combustor grows to 190 mm and the pessimistic margin
+drops to 24 %.
+
+### F3.5 Transonic acceleration is not binding
+Centrifugal fielded deck (placeholder maps): excess thrust +259 % at M 0.70, +150 % at M 0.95;
+the minimum is the M 1.02 dash point.
+
+### F3.6 Mass-model validation
+JetCat P400-PRO: 3.45 vs 4.01 kg (-14 %), 319 vs 390 mm, 145 vs 148 mm. AMT Nike: 6.98 vs 9.15 kg
+(-24 %), 430 vs 524 mm, 203 vs 201 mm. Calibration x1.24 mass (1.16-1.31), x1.22 length.
+
+### D3.3 Recommendation: axial, 5 stages, OPR 5, 65 000 rpm, turbine inside the casing
+Why, with numbers: fielded margin +98 % / +77 % vs +69 % / +44 %; worst corner +61 % vs +32 %;
+151 vs 175 mm; no stress allowable exceeded (the centrifugal needs its impeller qualified ~17 %
+above the conceptual allowable, otherwise 24 % margin); cost +0.71 kg engine, +0.3 kg TOGW.
+Against it: +190 mm length, 253 blades down to 10 mm chord, unvalidated efficiency model,
+unquantified part-speed stall and start behaviour, no sub-1 kN all-axial precedent.
+Fallback: centrifugal OPR 4 / 85 000 rpm if its impeller clears ~530 MPa in Phase 4 FE.
+Phase 4 not started, as instructed.

@@ -68,3 +68,14 @@ question for Phase 1 and is flagged there rather than resolved here.
 | **AeroSandbox** 4.2.10 (`.venv`, PyPI, MIT) | installed; `approximate_CD_wave`, `critical_mach`, `fuselage_base_drag_coefficient`, `sears_haack_drag_from_volume` verified or traced to cited sources | cited transonic helper models inside our drag build-up. `sears_haack_drag(radius, length)` returns CD on frontal area although documented as drag area (39x off in the test): not used. |
 | **ADRpy** 0.2.6 | two more defects found in use: default quarter-chord sweep has an operator-precedence bug (`constraintanalysis.py:392`, lift slope 1.23 instead of 2.87/rad for our wing); the sustained-turn constraint uses the climb weight fraction | both worked around (explicit `sweep_25_deg`, one concept object per constraint); results cross-checked against DATCOM and our own mission model (dash drag 361.1 vs 361.3 N) |
 | own slender-body wave-drag integral (`scripts/phase2_airframe/aero_utils.py`) | verified: Sears-Haack ratio 1.0007, parabolic-area body 0.9607 = exact analytic | shaping comparisons of the area distribution |
+
+## 6. Phase 3 additions and findings (2026-09-13)
+
+| Tool | Finding in use | Handling |
+|---|---|---|
+| NASA turbo-design (axial compressor) | no usable loss model: `loss/compressor/lieblein.py` is empty, OTAC classes are zero-returning placeholders, `DiffusionLoss` is an ad-hoc ramp | not used for axial efficiency |
+| TurboDesigner 2.0.0 | efficiency is an input; rotor diffusion factor computed with absolute velocities (wrong); last stator `next_flow_station` asserts | used for geometry and triangles only; DF recomputed; own Howell loss model (verified) supplies efficiency |
+| TurboFlow 0.1.18 (turbine design optimisation) | ignores the operating-point omega (derives it from specific speed); no structural constraint (optimum at 688 m/s tip speed) | omega equality constraint + blade-root-stress tip-radius constraint added |
+| TurboFlow 0.1.18 (centrifugal performance) | works; needs its Latin-hypercube heuristic initial guess; the design point can be choked with a 0.5 throat ratio | throat opened until unchoked |
+| pyCycle | TABULAR thermo agrees with Cantera to 0.3 % on T4; fresh-start design solves can fail at high OPR / low efficiency | retry from several initial guesses |
+| pypdf (added to `.venv`) | used only to read the Cranfield combustion lecture PDF for the theta-parameter definition | not part of the design chain |

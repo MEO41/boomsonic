@@ -47,6 +47,7 @@ pydantic==2.13.5
 pydantic-core==2.46.5
 pygments==2.21.0
 pyparsing==3.3.2
+pypdf==6.18.1
 pytest==9.1.1
 python-dateutil==2.9.0.post0
 python-utils==4.0.1

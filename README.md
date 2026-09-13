@@ -57,3 +57,14 @@ python scripts/phase2_airframe/run_phase2.py     # regenerates every Phase 2 tab
 Report: `docs/phase2_airframe.md`. Key plots: `plots/phase2_constraint_diagram.png`,
 `plots/phase2_drag_polar.png`, `plots/phase2_area_distribution.png`,
 `plots/phase2_mass_budget.png`, `plots/phase2_engine_database.png`.
+
+## Phase 3 (engine cycle and architecture trade)
+
+Report: `docs/phase3_engine.md`. Main entry points (run from the repo root with `.venv`; they
+call TurboFlow in `.venv-np1` themselves):
+
+```powershell
+.venv\Scripts\python scripts\phase3_cycle\arch_trade.py            # env: P3_OPR, P3_CASES, P3_TURB_CAP, P3_CC_REF
+.venv\Scripts\python scripts\phase3_cycle\compile_trade.py         # summary table + plots/phase3_arch_trade.png
+.venv\Scripts\python scripts\phase3_cycle\validate_mass_model.py   # P400 / Nike validation of the mass model
+```
