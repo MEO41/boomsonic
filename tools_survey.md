@@ -79,3 +79,11 @@ question for Phase 1 and is flagged there rather than resolved here.
 | TurboFlow 0.1.18 (centrifugal performance) | works; needs its Latin-hypercube heuristic initial guess; the design point can be choked with a 0.5 throat ratio | throat opened until unchoked |
 | pyCycle | TABULAR thermo agrees with Cantera to 0.3 % on T4; fresh-start design solves can fail at high OPR / low efficiency | retry from several initial guesses |
 | pypdf (added to `.venv`) | used only to read the Cranfield combustion lecture PDF for the theta-parameter definition | not part of the design chain |
+
+## 7. Phase 4 additions (2026-09-13)
+
+| Tool | Status | Role |
+|---|---|---|
+| **scikit-fem** 12.0.2 (`.venv`, PyPI, BSD-3) | installed. Own axisymmetric rotating-body FE (`scripts/phase4_turbomachinery/axisym_fe.py`) verified against the Timoshenko & Goodier rotating-disc and thermal-disc solutions to within 0.5 %. Morley plate element verified against cantilever theory (+5 %) | impeller disc stress, burst, blade-root bending (impeller stress gate) |
+| pypdfium2 5.13.0 (`.venv`) | used only to render data-sheet chart pages (ATI Ti-6Al-4V) for reading | not part of the design chain |
+| gap | no approved tool does 3D solid FE of a bladed rotor (rake and lean, blade modes) | out of scope for the gate. Flagged in `docs/phase4_impeller_stress_gate.md` |

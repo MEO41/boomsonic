@@ -68,3 +68,14 @@ call TurboFlow in `.venv-np1` themselves):
 .venv\Scripts\python scripts\phase3_cycle\compile_trade.py         # summary table + plots/phase3_arch_trade.png
 .venv\Scripts\python scripts\phase3_cycle\validate_mass_model.py   # P400 / Nike validation of the mass model
 ```
+
+## Phase 4 entry gate (impeller stress check, pure centrifugal)
+
+Report: `docs/phase4_impeller_stress_gate.md`. Verdict: the disc and burst pass with a boreless
+hub, but the 30 deg backswept exducer blade root fails at 537 m/s. Phase 4 proceeds on the pure axial.
+
+```powershell
+.venv\Scripts\python scripts\phase4_turbomachinery\verify_axisym_fe.py       # FE check vs rotating-disc theory
+.venv\Scripts\python scripts\phase4_turbomachinery\impeller_stress_gate.py   # hub sweep, burst, blade root (~7 s)
+.venv\Scripts\python scripts\phase4_turbomachinery\impeller_gate_extras.py   # thermal gradient, backsweep sensitivity
+```

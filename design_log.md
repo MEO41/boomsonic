@@ -386,3 +386,62 @@ variants fail the 25 % pessimistic target. Mechanism: the front stage limits the
 Recommendation unchanged (pure axial OPR 5). New order of fallbacks: AC 2 axial + cc at OPR 4
 (stress-safe, +51 % margin, 8.9 kg), then the pure centrifugal if its impeller is qualified at
 ~530 MPa (lightest and shortest). Phase 4 not started.
+
+---
+
+## Phase 4 entry gate: impeller stress check, pure centrifugal at 537 m/s (2026-09-13)
+
+User request: a fast, cheap decision gate. Run a detailed stress check of the pure-centrifugal
+impeller (OPR 4, 85 000 rpm, fielded U2 537 m/s), covering the blade root and disc burst, and
+report the real margin at about 530 MPa. If it passes, flag the centrifugal as likely preferred.
+If it fails, proceed with Phase 4 on the pure axial. Write-up: `docs/phase4_impeller_stress_gate.md`.
+
+### D4.0 Tool: scikit-fem 12.0.2 (added to `.venv`), verified before use
+Axisymmetric rotating-body FE (`axisym_fe.py`, P2 triangles, centrifugal + traction + thermal)
+checked against Timoshenko & Goodier closed forms:
+* solid disc: centre +0.00 %, rim +0.35 %
+* bored disc: bore -0.44 %
+* parabolic-temperature disc: centre -0.02 %, rim -0.35 %
+
+Morley-element Kirchhoff plate for the exducer blade: +5 % over cantilever theory (conservative).
+No approved tool does 3D solid FE of a bladed impeller, so 3D effects such as rake and lean are
+out of scope.
+
+### Inputs (sourced)
+* Material: Ti-6Al-4V at about 250 C, from the ATI Grade 5 data sheet typical curves (Fty ~100 ksi,
+  Ftu ~111 ksi at 480 F; E 98 GPa; CTE 9.2e-6 /K), scaled to a minimum basis by the AMS 4928
+  minimum/typical ratios: Fty 620, Ftu 681 MPa.
+* Burst: 14 CFR 33.27 (120 % speed, 5 min, no burst), so N_burst/N >= 1.2 by the Robinson
+  average-hoop criterion with k 0.85.
+* Blade/hub fillet: Kt 1.4 (Peterson).
+* Thermal field: eye 309 K to exit 520 K, from the Phase 3 fielded dash cycle.
+
+### F4.0 Results
+| part | result | status |
+|---|---|---|
+| hub with 12 mm through-bore, best shape (boss A 18 mm, p 2) | 529 MPa (+18 % yield margin); with thermal 580-601 MPa (+3.5 to +7 %) | marginal |
+| hub boreless, same shape | 304 MPa; with thermal 319-326 MPa (+90 %) | pass |
+| burst | N_burst/N 1.71 (bored), 1.92 (boreless), required >= 1.2 | pass |
+| exducer blade root, 30 deg backsweep, Kt 1.4 | 1016 / 656 / 421 MPa at 2.5 / 3.5 / 5 mm root; passes only at >= 5 mm, with 32 % root blockage (5 % assumed in the aero design) | **fail** |
+| inducer blade root tension | 220 MPa | pass |
+
+Blade sensitivity at a 3.5 mm root:
+* backsweep 20 deg: 444 MPa
+* backsweep 10 deg: 224 MPa
+* backsweep starting at 0.85 r2 instead of 0.7 r2: 517 MPa
+
+The aero side of any of these is not evaluated.
+
+### D4.1 Verdict: the impeller as designed FAILS the stress check (blade root, not disc)
+The disc passes if boreless, and burst passes. The backswept exducer blade root fails at every
+aerodynamically acceptable thickness. Per the user's instruction, **Phase 4 proceeds on the pure
+axial (5 stages, OPR 5, 65 000 rpm, capped turbine)**, starting with low-speed operability and
+stall, then shaft dynamics.
+
+The centrifugal is not ruled out in principle. A redesigned exducer (about 20 deg backsweep or
+tip-concentrated backsweep, boreless hub) would likely pass the stress check. But it needs a new
+aero design, cycle point and a 3D FE check, which is outside this gate and is the user's decision.
+
+**Open risk carried forward (R4.1):** the axial-stage efficiency comes from the Howell cascade
+method, which has been checked only at conventional scale. Revisit it with a micro-axial validation
+source if one becomes available, for example published micro-axial compressor test data.

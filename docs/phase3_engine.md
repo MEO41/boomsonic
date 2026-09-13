@@ -249,7 +249,7 @@ set). Both architectures receive the same factor; the axial has no validation en
 3. Turbine material and life (IN-713LC data) and the 350 MPa blade limit.
 4. Real compressor and turbine maps in pyCycle, replacing the placeholder NPSS maps; redo the mission.
 5. CG and packaging of the longer engine in the 2.7 m fuselage.
-6. If the centrifugal fallback is chosen: impeller FE stress at 537 m/s.
+6. If the centrifugal fallback is chosen: impeller FE stress at 537 m/s. **Done as the Phase 4 entry gate (`docs/phase4_impeller_stress_gate.md`): disc and burst pass (boreless hub), the 30 deg backswept exducer blade root fails; the centrifugal is not qualified as designed.**
 
 ## 12. Scripts
 `dash_cycle.py` (cycle + intake), `cantera_check.py`, `vendor_calibration.py`, `tsfc_anchor.py`,
