@@ -19,9 +19,11 @@ scaled to the fielded tip speed, and only the hub back-face shape and the blade 
 
 The disc is not the problem. With a boreless hub it carries the load with large margin. The
 failure is in the backswept exducer blades. At 537 m/s the centrifugal force on a blade that
-leans 30 deg away from radial bends it about its hub root. The root only survives at a thickness
-of 5 mm or more, which blocks 32 % of the exit flow area at the hub (18 % averaged over the span).
-The Phase 3 aero design assumed 5 %.
+leans 30 deg away from radial bends it about its hub root. The root reaches the 620 MPa minimum yield
+only at about 3.7 mm or more, which blocks 23 % of the exit flow area at the hub (about 14 % averaged
+over the span). That has no margin left; 5 mm gives 421 MPa and blocks 32 % / 18 %. The Phase 3 aero
+design assumed 5 %. *(Corrected 2026-09-14: the first version said "5 mm or more", which was simply
+the next computed point; the interpolated threshold is 3.7 mm. The verdict does not change.)*
 
 Per the gate instruction, the programme therefore proceeds on the pure axial (OPR 5), which was
 recommended in Phase 3 and committed in b40812b.

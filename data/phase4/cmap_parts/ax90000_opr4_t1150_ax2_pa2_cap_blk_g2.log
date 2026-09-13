@@ -1,0 +1,6 @@
+DESIGN CHECK: {'N': 1.0, 'mdot': 1.0874627482987749, 'PR': 2.0045140670507693, 'eta': 0.7837318969306843, 'choked': False, 'success': True} | design run PR 2.0045 eta 0.7837
+N 0.95: 21/21 converged; mdot 0.362-1.395, PR max 1.910
+ Error during solving: Inputs in Brent [59.750000,2020.000000] do not bracket the root.  Function values are [2944.108617,68298.621501]
+ Error during solving: Inputs in Brent [59.750000,2020.000000] do not bracket the root.  Function values are [8217.271554,73408.535055]
+ Error during solving: Inputs in Brent [59.750000,2020.000000] do not bracket the root.  Function values are [12931.753112,77934.957402]
+N 0.40: 20/21 converged; mdot 0.174-0.587, PR max 1.135

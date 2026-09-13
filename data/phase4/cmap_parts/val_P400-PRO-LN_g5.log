@@ -1,0 +1,8 @@
+DESIGN CHECK: {'N': 1.0, 'mdot': 0.67, 'PR': 3.812313883204716, 'eta': 0.7975342838942496, 'choked': False, 'success': True} | design run PR 3.8123 eta 0.7975
+ Error during solving: Inputs in Brent [59.750000,2020.000000] do not bracket the root.  Function values are [827.252566,70153.616795]
+ Error during solving: Inputs in Brent [59.750000,2020.000000] do not bracket the root.  Function values are [2412.051830,69163.298936]
+N 0.30: 21/21 converged; mdot 0.070-0.271, PR max 1.168
+ Error during solving: p is not a valid number
+ Error during solving: Inputs in Brent [59.750000,2020.000000] do not bracket the root.  Function values are [1081.811386,70345.179059]
+ Error during solving: Inputs in Brent [59.750000,2020.000000] do not bracket the root.  Function values are [1756.982655,68595.175701]
+N 0.35: 21/21 converged; mdot 0.082-0.317, PR max 1.233

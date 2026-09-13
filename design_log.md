@@ -680,3 +680,69 @@ Numbers for the transient work:
 * **R4.R3 Drum stiffness.** The drum is modelled as a continuous shell; joint flexibility
   (tie-bolt or curvic) is ignored, which is optimistic.
 * The 85 000 rpm variant was not analysed.
+
+---
+
+## Phase 4 — option B checks: axial-centrifugal impeller stress and operability (2026-09-14)
+
+User request: run the two checks proposed for option B. Write-up: `docs/phase4_optionB_checks.md`.
+Plot: `plots/phase4_optionB_operability.png`.
+
+### D4.5 Method (unchanged from options A / C, plus a benchmark)
+**Check 1.** The gate solvers and criteria were applied to both AC impellers (`impeller_check_ac.py`):
+* Phase 3 TurboFlow geometry, scaled to the fielded engine, at 90 000 rpm;
+* tip speed 419 / 486 m/s.
+
+**Check 2.** Combined compressor model (`ac_offdesign.py`):
+* front stage(s) from the stage-stacking model;
+* impeller from a TurboFlow off-design map (`centrifugal_map.py`, 10 x 21 points; design runs reproduced exactly);
+* TurboFlow turbine maps and pyCycle running lines (`ac_operability.py`).
+
+**Method benchmark** (`cc_benchmark.py`): the unchanged chain applied to the Phase 3 model of the JetCat
+P400-PRO-LN, which idles at 30 000 rpm / 31 %, 14 N (database, jetcat.de).
+
+### F4.5 Results
+**Check 1: exducer blade root fails**, worse than the pure centrifugal:
+
+| variant | root stress at 3.5 mm (limit 620) | root needed for Fty | hub blockage at that root |
+|---|---|---|---|
+| 2 ax + cc | 1105 MPa | 5.8 mm | 49 % |
+| 1 ax + cc | 936 MPa | 4.9 mm | 36 % |
+| pure centrifugal (for comparison) | 656 MPa | 3.7 mm | 23 % |
+
+* Cause: tall exit blades, b2/r2 0.43 / 0.30 against 0.19.
+* The disc and burst pass easily: boreless 208-276 MPa with the thermal gradient, burst ratio 2.1-2.4.
+* About 10 deg of backsweep would pass (320-377 MPa); not evaluated aerodynamically.
+
+**Check 2: operability no better than the pure axial.**
+* Design-point SMN 11 %.
+* SLS steady running line meets the surge surrogate at about 90 % speed.
+* At 100 % SLS, T4 is about 1185 K (ECU limit about 97-98 %).
+* Dash: 10-21 % margin over 70-100 %, once the impeller throat is opened (area ratio 0.65 -> 0.80). Phase 3 had
+  sized it "just unchoked", leaving zero choke margin. TurboFlow PR and efficiency are unchanged by it.
+* Robust to doubling the axial loss width.
+* The combined peak is set by the axial stage(s): axial PR peaks 5 % below design flow and collapses 3 % above;
+  the impeller characteristic is flat.
+
+**Benchmark:**
+* the chain predicts the P400 runs steady down to 35 % speed (27 N, EGT 740 C inside the published 480-750 C
+  range), with 38-53 % surge margin, losing the match just below about 34 % (published idle 31 %);
+* the rest of the chain is sound for centrifugal machines, so the decisive, unvalidated element in options A and B
+  is the axial-stage model (R4.1).
+
+**Correction.** The impeller gate said the pure-centrifugal root "survives at 5 mm or more (32 %)". The interpolated
+threshold is 3.7 mm (23 % hub blockage, no margin). The gate doc is corrected; the verdict is unchanged.
+
+### D4.6 Verdict
+**Option B fails both checks as designed.** It does not cure the impeller problem it was meant to cure: the disc
+passes but the blade root is worse. In the same model its operability is no better than the pure axial.
+
+The pure centrifugal (option C) is the only architecture the benchmarked chain supports at low speed, and its only
+failed item is the exducer blade root.
+
+**Suggested next step (awaiting the user):** redesign the pure-centrifugal exducer, with about 10-20 deg backsweep
+or tip-concentrated backsweep, then:
+1. re-run the TurboFlow design, dash cycle and thrust margin;
+2. run the stress gate and this operability chain on it.
+
+Phase 4 mechanical design and CAD have not been started.

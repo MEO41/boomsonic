@@ -98,3 +98,15 @@ bash scripts/phase4_turbomachinery/run_turbine_map.sh ax0_opr5_t1150_cap_blk    
 .venv\Scripts\python scripts\phase4_turbomachinery\plot_operability.py
 .venv\Scripts\python scripts\phase4_turbomachinery\rotordynamics_verify.py; .venv\Scripts\python scripts\phase4_turbomachinery\rotordynamics.py
 ```
+
+### Option B checks (axial-centrifugal) and method benchmark
+
+Report: `docs/phase4_optionB_checks.md`.
+
+```powershell
+.venv\Scripts\python scripts\phase4_turbomachinery\impeller_check_ac.py                 # check 1: impeller stress, both AC variants
+bash scripts/phase4_turbomachinery/run_centrifugal_map.sh ax90000_opr4_t1150_ax2_pa2_cap_blk   # TurboFlow centrifugal map (.venv-np1); CC_ATR=0.80 + suffix for the throat sensitivity
+.venv\Scripts\python scripts\phase4_turbomachinery\ac_operability.py ax90000_opr4_t1150_ax2_pa2_cap_blk [neg_width] [cc map]
+.venv\Scripts\python scripts\phase4_turbomachinery\cc_benchmark.py                      # same chain on the JetCat P400 model (idles at 31 %)
+.venv\Scripts\python scripts\phase4_turbomachinery\plot_optionB.py
+```

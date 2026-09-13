@@ -1,0 +1,51 @@
+combined design check: PR 4.0360 (design 4.0), eta 0.8028 (Phase 3 tool 0.8007); axial PR 2.013, cc PR 2.005 beta 0.72
+  N 0.40: W choke 0.393 peak W 0.366 PR 1.268 | Howell W 0.393 (R1)
+  N 0.50: W choke 0.512 peak W 0.462 PR 1.453 | Howell W 0.512 (R1)
+  N 0.60: W choke 0.641 peak W 0.564 PR 1.718 | Howell W 0.631 (R1)
+  N 0.70: W choke 0.776 peak W 0.672 PR 2.093 | Howell W 0.724 (R1)
+  N 0.75: W choke 0.843 peak W 0.730 PR 2.333 | Howell W 0.768 (R1)
+  N 0.80: W choke 0.908 peak W 0.787 PR 2.615 | Howell W 0.811 (R1)
+  N 0.85: W choke 0.966 peak W 0.849 PR 2.946 | Howell W 0.853 (R1)
+  N 0.90: W choke 1.020 peak W 0.911 PR 3.329 | Howell W 0.893 (R1)
+  N 0.95: W choke 1.074 peak W 0.970 PR 3.763 | Howell W 0.931 (R1)
+  N 1.00: W choke 1.122 peak W 1.028 PR 4.241 | Howell W 0.977 (R2)
+  N 1.05: W choke 1.153 peak W 1.084 PR 4.747 | Howell W 1.064 (S2)
+design-point SMN to peak 11.1 %
+  SLS N 100.0%: conv True Fn   679.3 W 1.372 PR 4.346 T4 1186.6 Rline 2.398 Nc 1.035 stall_idx 0.818 (S2) beta_cc 0.70 SMN +0.100 NPR 1.57
+  SLS N  97.5%: conv True Fn   624.9 W 1.333 PR 4.155 T4 1148.8 Rline 2.133 Nc 1.010 stall_idx 0.828 (S2) beta_cc 0.69 SMN +0.085 NPR 1.52
+  SLS N  95.0%: conv True Fn   575.5 W 1.286 PR 3.975 T4 1127.0 Rline 1.858 Nc 0.984 stall_idx 0.847 (S2) beta_cc 0.69 SMN +0.061 NPR 1.47
+  SLS N  92.5%: conv True Fn   522.4 W 1.234 PR 3.774 T4 1099.8 Rline 1.582 Nc 0.958 stall_idx 0.875 (R1) beta_cc 0.69 SMN +0.039 NPR 1.42
+  SLS N  90.0%: conv True Fn   470.6 W 1.177 PR 3.570 T4 1078.1 Rline 1.254 Nc 0.932 stall_idx 0.924 (R1) beta_cc 0.68 SMN +0.017 NPR 1.37
+  SLS N  87.5%: conv False Fn   418.6 W 1.103 PR 3.353 T4 1075.2 Rline 1.000 Nc 0.906 stall_idx nan (-) beta_cc nan SMN +nan NPR 1.33
+  SLS N  85.0%: conv False Fn   372.5 W 1.037 PR 3.151 T4 1067.3 Rline 1.000 Nc 0.880 stall_idx nan (-) beta_cc nan SMN +nan NPR 1.29
+  SLS N  82.5%: conv False Fn   330.3 W 0.969 PR 2.956 T4 1067.6 Rline 1.000 Nc 0.854 stall_idx nan (-) beta_cc nan SMN +nan NPR 1.26
+  SLS N  80.0%: conv False Fn   293.9 W 0.909 PR 2.782 T4 1063.8 Rline 1.000 Nc 0.828 stall_idx nan (-) beta_cc nan SMN +nan NPR 1.22
+  SLS N  77.5%: conv False Fn   259.5 W 0.845 PR 2.612 T4 1070.1 Rline 1.000 Nc 0.802 stall_idx nan (-) beta_cc nan SMN +nan NPR 1.20
+  SLS N  75.0%: conv False Fn   228.5 W 0.784 PR 2.466 T4 1079.1 Rline 1.000 Nc 0.777 stall_idx nan (-) beta_cc nan SMN +nan NPR 1.17
+  SLS N  72.5%: conv False Fn   199.8 W 0.724 PR 2.322 T4 1090.6 Rline 1.000 Nc 0.751 stall_idx nan (-) beta_cc nan SMN +nan NPR 1.15
+  SLS N  70.0%: conv False Fn   175.0 W 0.667 PR 2.198 T4 1111.6 Rline 1.000 Nc 0.725 stall_idx nan (-) beta_cc nan SMN +nan NPR 1.13
+  SLS N  67.5%: conv False Fn   154.9 W 0.608 PR 2.077 T4 1143.5 Rline 1.000 Nc 0.699 stall_idx nan (-) beta_cc nan SMN +nan NPR 1.12
+  SLS N  65.0%: conv False Fn   136.0 W 0.575 PR 1.981 T4 1136.0 Rline 1.000 Nc 0.673 stall_idx nan (-) beta_cc nan SMN +nan NPR 1.10
+  SLS N  62.5%: conv False Fn   119.7 W 0.530 PR 1.885 T4 1164.3 Rline 1.000 Nc 0.647 stall_idx nan (-) beta_cc nan SMN +nan NPR 1.09
+  SLS N  60.0%: conv False Fn   100.9 W 0.477 PR 1.789 T4 1196.2 Rline 1.000 Nc 0.621 stall_idx nan (-) beta_cc nan SMN +nan NPR 1.07
+  SLS N  57.5%: conv False Fn    85.4 W 0.426 PR 1.698 T4 1236.9 Rline 1.000 Nc 0.595 stall_idx nan (-) beta_cc nan SMN +nan NPR 1.06
+  SLS N  55.0%: conv False Fn    74.1 W 0.386 PR 1.630 T4 1290.5 Rline 1.000 Nc 0.569 stall_idx nan (-) beta_cc nan SMN +nan NPR 1.06
+  SLS N  52.5%: conv False Fn    64.4 W 0.345 PR 1.562 T4 1361.1 Rline 1.000 Nc 0.544 stall_idx nan (-) beta_cc nan SMN +nan NPR 1.05
+  SLS N  50.0%: conv False Fn    53.0 W 0.317 PR 1.494 T4 1366.6 Rline 1.000 Nc 0.518 stall_idx nan (-) beta_cc nan SMN +nan NPR 1.04
+  SLS N  47.5%: conv False Fn    47.2 W 0.288 PR 1.433 T4 1437.7 Rline 1.000 Nc 0.492 stall_idx nan (-) beta_cc nan SMN +nan NPR 1.03
+  SLS N  45.0%: conv False Fn    43.4 W 0.268 PR 1.385 T4 1508.1 Rline 1.000 Nc 0.466 stall_idx nan (-) beta_cc nan SMN +nan NPR 1.03
+  SLS N  42.5%: conv False Fn    40.1 W 0.250 PR 1.338 T4 1585.7 Rline 1.000 Nc 0.440 stall_idx nan (-) beta_cc nan SMN +nan NPR 1.03
+  SLS N  40.0%: conv False Fn    36.0 W 0.230 PR 1.291 T4 1685.4 Rline 1.000 Nc 0.414 stall_idx nan (-) beta_cc nan SMN +nan NPR 1.03
+  dash N 100.0%: conv True Fn   500.0 W 1.336 PR 4.000 T4 1150.0 Rline 2.262 Nc 1.000 stall_idx 0.791 (S2) beta_cc 0.72 SMN +0.111 NPR 2.74
+  dash N  97.5%: conv True Fn   447.4 W 1.298 PR 3.809 T4 1106.0 Rline 2.169 Nc 0.975 stall_idx 0.808 (R1) beta_cc 0.73 SMN +0.102 NPR 2.61
+  dash N  95.0%: conv True Fn   382.5 W 1.264 PR 3.589 T4 1039.2 Rline 2.140 Nc 0.950 stall_idx 0.826 (R1) beta_cc 0.75 SMN +0.104 NPR 2.45
+  dash N  92.5%: conv True Fn   328.9 W 1.226 PR 3.396 T4  990.3 Rline 2.090 Nc 0.925 stall_idx 0.848 (R1) beta_cc 0.76 SMN +0.101 NPR 2.31
+  dash N  90.0%: conv True Fn   274.1 W 1.189 PR 3.198 T4  937.3 Rline 2.044 Nc 0.900 stall_idx 0.868 (R1) beta_cc 0.76 SMN +0.097 NPR 2.17
+  dash N  87.5%: conv True Fn   219.1 W 1.156 PR 3.006 T4  878.0 Rline 2.083 Nc 0.875 stall_idx 0.880 (R1) beta_cc 0.77 SMN +0.110 NPR 2.03
+  dash N  85.0%: conv True Fn   169.6 W 1.120 PR 2.824 T4  827.0 Rline 2.079 Nc 0.850 stall_idx 0.895 (R1) beta_cc 0.78 SMN +0.112 NPR 1.90
+  dash N  82.5%: conv True Fn   120.9 W 1.090 PR 2.648 T4  769.9 Rline 2.172 Nc 0.825 stall_idx 0.901 (R1) beta_cc 0.79 SMN +0.135 NPR 1.78
+  dash N  80.0%: conv True Fn    81.2 W 1.056 PR 2.487 T4  725.1 Rline 2.204 Nc 0.800 stall_idx 0.913 (R1) beta_cc 0.81 SMN +0.141 NPR 1.68
+  dash N  77.5%: conv True Fn    48.5 W 1.024 PR 2.343 T4  685.2 Rline 2.287 Nc 0.775 stall_idx 0.920 (R1) beta_cc 0.84 SMN +0.156 NPR 1.60
+  dash N  75.0%: conv True Fn    16.4 W 0.994 PR 2.197 T4  640.3 Rline 2.403 Nc 0.750 stall_idx 0.924 (R1) beta_cc 0.87 SMN +0.170 NPR 1.53
+  dash N  72.5%: conv True Fn    -7.6 W 0.964 PR 2.073 T4  606.6 Rline 2.539 Nc 0.725 stall_idx 0.927 (R1) beta_cc 0.91 SMN +0.189 NPR 1.47
+  dash N  70.0%: conv True Fn   -31.9 W 0.936 PR 1.947 T4  567.0 Rline 2.720 Nc 0.700 stall_idx 0.927 (R1) beta_cc 0.95 SMN +0.211 NPR 1.41

@@ -1,0 +1,4 @@
+DESIGN CHECK: {'N': 1.0, 'mdot': 0.67, 'PR': 3.812313883204716, 'eta': 0.7975342838942496, 'choked': False, 'success': True} | design run PR 3.8123 eta 0.7975
+N 0.90: 19/21 converged; mdot 0.211-0.754, PR max 3.211
+ Error during solving: Brent's method f(b) is NAN for b = 2020, other input was a = 59.75
+N 0.70: 20/21 converged; mdot 0.164-0.610, PR max 2.140

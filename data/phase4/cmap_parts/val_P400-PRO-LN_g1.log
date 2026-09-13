@@ -1,0 +1,3 @@
+DESIGN CHECK: {'N': 1.0, 'mdot': 0.67, 'PR': 3.812313883204716, 'eta': 0.7975342838942496, 'choked': False, 'success': True} | design run PR 3.8123 eta 0.7975
+N 1.05: 14/21 converged; mdot 0.317-0.774, PR max 4.440
+N 0.50: 21/21 converged; mdot 0.117-0.452, PR max 1.512
