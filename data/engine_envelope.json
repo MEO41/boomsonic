@@ -1,0 +1,10 @@
+{
+ "source": "scripts/phase2_airframe/engine_database_fit.py (statistical, 26 engines)",
+ "F_SLS_N": 665.3,
+ "engine_mass_kg": 6.8296785215795826,
+ "engine_mass_hi_kg": 7.772411545342242,
+ "accessory_frac": 0.33015479206359183,
+ "D_engine_m": 0.18849046559475482,
+ "D_engine_hi_m": 0.19641884482649777,
+ "L_engine_m": 0.45335854429848765
+}

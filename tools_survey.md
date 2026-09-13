@@ -60,3 +60,11 @@ while 500 N on 25 kg is T/W = 2.04. Either the mission is far more demanding
 (high-subsonic dash, steep climb, high altitude, very short launch) or the 500 N reference
 point is not the rating at which the 25 kg airframe is sized. This is the load-bearing
 question for Phase 1 and is flagged there rather than resolved here.
+
+## 5. Phase 2 additions (2026-09-13)
+
+| Tool | Status | Role |
+|---|---|---|
+| **AeroSandbox** 4.2.10 (`.venv`, PyPI, MIT) | installed; `approximate_CD_wave`, `critical_mach`, `fuselage_base_drag_coefficient`, `sears_haack_drag_from_volume` verified or traced to cited sources | cited transonic helper models inside our drag build-up. `sears_haack_drag(radius, length)` returns CD on frontal area although documented as drag area (39x off in the test): not used. |
+| **ADRpy** 0.2.6 | two more defects found in use: default quarter-chord sweep has an operator-precedence bug (`constraintanalysis.py:392`, lift slope 1.23 instead of 2.87/rad for our wing); the sustained-turn constraint uses the climb weight fraction | both worked around (explicit `sweep_25_deg`, one concept object per constraint); results cross-checked against DATCOM and our own mission model (dash drag 361.1 vs 361.3 N) |
+| own slender-body wave-drag integral (`scripts/phase2_airframe/aero_utils.py`) | verified: Sears-Haack ratio 1.0007, parabolic-area body 0.9607 = exact analytic | shaping comparisons of the area distribution |

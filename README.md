@@ -34,7 +34,7 @@ uv venv --python 3.12 .venv-np1  ; $env:VIRTUAL_ENV="$PWD\.venv-np1"; uv pip ins
 
 | env         | packages                                                        | used for                              |
 |-------------|-----------------------------------------------------------------|---------------------------------------|
-| `.venv`     | openmdao, om-pycycle (git), cantera, turbo-design (git), turbodesigner, pyturbo-aero | cycle, combustion, turbomachinery |
+| `.venv`     | openmdao, om-pycycle (git), cantera, turbo-design (git), turbodesigner, pyturbo-aero, aerosandbox | cycle, combustion, turbomachinery, drag build-up |
 | `.venv-np1` | ADRpy, turboflow, CoolProp                                       | airframe constraint sizing, centrifugal/axial meanline cross-check |
 
 ## Phase 0 smoke tests
@@ -47,3 +47,13 @@ uv venv --python 3.12 .venv-np1  ; $env:VIRTUAL_ENV="$PWD\.venv-np1"; uv pip ins
 .venv-np1\Scripts\python scripts\phase0_tools\smoke_adrpy.py      # jet constraint diagram at 25 kg scale
 .venv-np1\Scripts\python scripts\phase0_tools\smoke_turboflow.py  # centrifugal compressor meanline (Oh losses)
 ```
+
+## Phase 2 (airframe sizing)
+
+```powershell
+python scripts\phase2_airframeun_phase2.py     # regenerates every Phase 2 table and plot (both venvs)
+```
+
+Report: `docs/phase2_airframe.md`. Key plots: `plots/phase2_constraint_diagram.png`,
+`plots/phase2_drag_polar.png`, `plots/phase2_area_distribution.png`,
+`plots/phase2_mass_budget.png`, `plots/phase2_engine_database.png`.

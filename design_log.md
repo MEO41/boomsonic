@@ -161,3 +161,80 @@ E1-E7 (engine) and A1-A5 (airframe) in `docs/phase1_requirements.md` section 4. 
 single hardest one: **airframe CD*S <= 132 cm2 (target 99 cm2) at M 1.0 / 5 km**, to be
 demonstrated in Phase 2 with a cited transonic drag build-up, because no surveyed tool
 does transonic drag.
+
+---
+
+## Phase 2 — Constraint sizing, drag, mass budget (2026-09-13)
+
+Full write-up: `docs/phase2_airframe.md`. All outputs regenerate with
+`python scripts/phase2_airframe/run_phase2.py`.
+
+### F2.0 External requirement: the Boom Prize (https://boomsupersonic.com/prize, read 2026-09-13)
+The brief's mission (25 kg incl. fuel, Mach 1 held, two flights in one day, land) matches
+the Boom Prize rules. Additional rules adopted as requirements: Mach 0.8 -> >1 level or
+climbing with no altitude loss; >= 5 s continuous above Mach 1 by true airspeed;
+reciprocal headings; wheeled OR belly landing, reflyable; human pilot with instant abort;
+calibrated pitot-static + TAT + sealed loggers + GPS. No altitude limit is stated, so D1.2
+stands. Eligibility on the page: US citizens / permanent residents, amateur teams.
+
+### D2.0 Tools for Phase 2
+- ADRpy (NumPy-1 env) for the constraint equations; bugs found: default quarter-chord sweep
+  operator precedence (`constraintanalysis.py:392`, lift slope 1.23 vs 2.87/rad), turn uses
+  climb weight fraction. Worked around, documented.
+- AeroSandbox 4.2.10 added (verified helpers only); radius-form Sears-Haack function returns
+  CD on frontal area despite docstring (39x off) -> not used.
+- Own slender-body wave-drag integral, verified to 0.07 % (Sears-Haack) and exactly against
+  an analytic parabolic-area body (0.9607).
+- No surveyed tool does transonic drag -> Raymer build-up + area-rule wave drag, with the
+  E_WD uncertainty carried as a 1.8 / 3.0 bracket.
+
+### D2.1 Drag design point M 1.02 at 5 km
+Holding M >= 1.00 for 5+ s with +-0.02 air-data uncertainty. The drag-rise fairing gives
+0.49 (M 1.00) vs 0.71 (M 1.02) of the fully developed wave drag, so this is not a free
+margin: dash drag at 1.02 is 16 % above M 1.00 (83.1 vs 71.8 cm2).
+
+### D2.2-D2.6 Configuration shaping (numbers at S 0.30 m2, M 1.02 / 5 km)
+- C1: body of revolution, sharp-lip nose pitot inlet, AR 3, taper 0.2, 5 % section,
+  all-moving HT + fin (Raymer tail volume 0.40 / 0.07).
+- Forebody 30 -> 40 % and LE sweep 45 -> 55 deg: 91 -> 73 cm2 (150 mm placeholder engine).
+- D2.3 engine envelope from 26-engine database at 665 N SLS: 6.83 kg, 188 mm, 453 mm ->
+  body 218 mm -> 97.5 cm2 at 2.4 m. D2.4 length 2.7 m, forebody 45 %: 91.6 cm2.
+- D2.6 aft closure 22 -> 28 % + half-wing-area waist: 83.1 cm2 nominal, 100.5 cm2 at
+  E_WD 3.0. A waist alone did nothing nominally (geometric E_WD 1.97 -> 2.84).
+- Rejected: 60 deg sweep (-2 cm2 only, worse low-speed lift); 3.0 m body (-4 cm2 for
+  +0.17 m2 wetted area and mass).
+
+### D2.5 Landing: plain flaps + 0.6 m drag chute, wheeled
+Constraint diagram: dash needs S <= 0.383 m2 (25 % margin, nominal, 25 kg); a 300 m runway
+without a chute needs S >= 0.44 m2 (flaps) -> no overlap. At S 0.30 m2: flaps only 396 m,
+flaps + chute 209 m, no-flap + chute 235 m (mu_brake 0.3). Chute +0.20 kg. Fallbacks:
+>= 500 m runway (flaps, no chute) or belly landing (prize-legal).
+
+### D2.7 Wing area S = 0.30 m2
+S range 0.24-0.38 m2 from the dash margin. 0.30 m2: dash throttle 0.67 nominal / 0.81 at
+E_WD 3 (50 % / 24 % margin), V_LOF 47 m/s at TOGW, landing 209 m with chute. 0.35 m2 drops
+the pessimistic margin to 17 %; 0.25 m2 raises V_LOF to 51 m/s.
+
+### D2.8 Mass budget closes: TOGW 18.7 kg (margin 6.3 kg); 21.4 kg (margin 3.6 kg) high-engine case
+Engine 6.83 + accessories 1.60 + structure 3.84 + gear/chute 1.27 + fuel system 0.40 +
+systems/instrumentation 2.02 + growth 1.13 + fuel 1.58. RC-jet statistics give 6.7 kg for
+airframe + systems vs 7.5 kg bottom-up (8.7 with growth): the bottom-up value is used.
+
+### F2.4 Mission with the drag polar (S 0.30 m2, 18.7 kg)
+Brake release to M 1.02 at 5 km in 26 s; transonic pinch minimum excess thrust 167 N
+nominal / 99 N pessimistic (level flight, prize-compliant); M 1.02 hold needs 328 / 396 N
+of 492 N installed; sortie fuel 1.29 + 0.24 reserve (+3 % unusable) = 1.58 kg.
+
+### F2.5 Engine diameter is a first-order airframe driver
++10 mm engine diameter -> +5.5 / +8 cm2 dash drag area (+20-30 N). 150 mm engine: -23 % /
+-29 % dash drag. Carried into the Phase 3 architecture trade (centrifugal vs axial).
+
+### F2.6 Flutter screening passes
+NACA TN 4197 closed form: minimum V_f / V = 2.5 (wing) with 2+2 ply carbon skins; tails
+3.6-5.9. Screening only; modal analysis in Phase 4/5.
+
+### Process note
+The background data-collection agent wrote an early 8-row engine table and a fit script
+(12:43) before replacing the table with the final 26-engine version; the orphaned script
+read the old columns and was rewritten (`engine_database_fit.py`). No committed file was
+affected.

@@ -1,0 +1,8 @@
+Engine-diameter sensitivity at the design point (S = 0.30 m2, M1.02 / 5 km, L_fus 2.7 m, body = engine + 30 mm)
+ D_engine  D_fus   CDS_nom  CDS_E3   D_nom[N]  D_E3[N]  throttle_nom  throttle_E3  (T_avail installed 492 N)
+  150.0   180.0     63.9    71.2     251.2    280.1     0.510        0.569
+  160.0   190.0     67.9    77.2     267.1    303.8     0.543        0.617
+  170.0   200.0     72.5    84.3     285.4    331.6     0.580        0.674
+  180.0   210.0     77.9    92.5     306.5    363.9     0.623        0.739
+  188.5   218.5     83.1   100.5     326.9    395.3     0.664        0.803
+  196.0   226.0     88.2   108.4     346.9    426.4     0.705        0.866
