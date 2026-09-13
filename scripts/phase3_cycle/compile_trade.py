@@ -16,7 +16,7 @@ K_M, K_M_LO, K_M_HI, K_L = 1.24, 1.16, 1.31, 1.22
 frames = []
 for f in glob.glob(os.path.join(ROOT, "data", "phase3_arch_trade_opr*_t*.csv")):
     import re
-    mm = re.search(r"_opr([\d.]+)_t(\d+)(_cap)?\.csv", os.path.basename(f))
+    mm = re.search(r"_opr([\d.]+)_t(\d+)(_cap)?(_[a-z0-9]+)?\.csv", os.path.basename(f))
     d = pd.read_csv(f); d["OPR"] = float(mm.group(1)); d["T4"] = float(mm.group(2)); d["turbine_cap"] = bool(mm.group(3))
     d = d[d.get("note").isna()] if "note" in d.columns else d
     frames.append(d)
@@ -26,10 +26,16 @@ df["L_engine_cal"] = df.L_engine_mm * K_L
 df["TOGW_cal"] = df.TOGW - df.dry_mass_kg + df.dry_mass_cal
 df["TOGW_cal_hi"] = df.TOGW - df.dry_mass_kg + df.dry_mass_cal_hi
 df["margin_nom_ok"] = df.margin_nom >= 0.25; df["margin_hi_ok"] = df.margin_hi >= 0.25
-df["label"] = df.apply(lambda r: f"{'CENTRIF' if r.arch == 'centrifugal' else 'AXIAL'} OPR {r.OPR:g} {int(r.rpm/1000)}k{' capT' if r.turbine_cap else ''}", axis=1)
+def _lab(r):
+    if r.arch == "axicentrifugal":
+        return f"AXI-CENT {int(r.n_ax)}ax+1cc OPR {r.OPR:g} pa {r.pi_a:g} {int(r.rpm/1000)}k"
+    return f"{'CENTRIF' if r.arch == 'centrifugal' else 'AXIAL'} OPR {r.OPR:g} {int(r.rpm/1000)}k{' capT' if r.turbine_cap else ''}"
+df["label"] = df.apply(_lab, axis=1)
 df = df.sort_values(["level", "arch", "OPR", "rpm", "turbine_cap"])
 cols = ["label", "level", "eta_c", "eta_t", "W", "TSFC_dash", "D_engine_mm", "D_comp", "D_comb", "D_turb", "D_engine_comb_hi_mm", "L_engine_cal",
         "dry_mass_kg", "dry_mass_cal", "dry_mass_cal_hi", "CDS_nom", "CDS_hi", "drag_nom", "drag_hi", "margin_nom", "margin_hi", "TOGW_cal", "TOGW_cal_hi"]
+for extra in ("U2", "stress_MPa", "stress_factor", "pi_c"):
+    if extra in df.columns: cols.append(extra)
 df[cols].to_csv(os.path.join(ROOT, "data", "phase3_arch_trade_summary.csv"), index=False)
 pd.set_option("display.width", 260); pd.set_option("display.max_columns", 40)
 print(df[cols].round(3).to_string(index=False))

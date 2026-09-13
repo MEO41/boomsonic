@@ -8,6 +8,14 @@ a designed geometry and its materials.
 margin holds for both architectures, in both drag cases.** Recommended: the 5-stage axial at
 OPR 5 (section 8). The centrifugal also passes, but its pass is conditional on impeller stress.
 
+**Phase 3b (section 13): axial-centrifugal (1-2 axial stages + 1 centrifugal).** It closes the
+impeller-stress problem (fielded stress factor 1.06-1.58 vs 0.86), but it is not shorter than the
+5-stage axial (632-704 vs 663 mm) and it is the heaviest option (8.7-9.5 kg vs 6.6 / 7.3 kg). Its
+best variant (2 axial stages, OPR 4) gives +75 % / +51 % margin, between the two pure options; two
+of its four variants fail the 25 % pessimistic target. It relocates the risk rather than removing
+it. The recommendation is unchanged; the best AC variant becomes the second choice, ahead of the
+pure centrifugal unless the impeller is qualified at ~530 MPa.
+
 ## 1. Tools: what was used for what, and what did not work
 
 | Job | Tool | Why this tool | Verification / finding |
@@ -249,4 +257,124 @@ set). Both architectures receive the same factor; the axial has no validation en
 `axial_sweep.py`, `turbine_design.py` (TurboFlow, stress- and speed-constrained),
 `combustor_sizing.py`, `engine_mass.py`, `arch_trade.py` (orchestrator; env P3_OPR, P3_CASES,
 P3_TURB_CAP, P3_CC_REF), `reeval_level.py`, `validate_mass_model.py`, `efficiency_sensitivity.py`,
-`engine_deck.py`, `pinch_check.py`, `compile_trade.py`.
+`engine_deck.py`, `pinch_check.py`, `compile_trade.py`; Phase 3b: `axicent_design.py` (screening: `screen W T01 P01 tag n_ax`), `axicent_sensitivity.py`, `arch_trade.py` kind `axicentrifugal:rpm:n_ax:pi_a` (env P3_OUT_SUFFIX).
+
+## 13. Additional option (Phase 3b): axial-centrifugal compressor (1-2 axial stages + 1 centrifugal stage)
+
+Evaluated before Phase 4, with the same tools and assumptions as the two Phase 3 options:
+axial stages from TurboDesigner + the Howell loss model (`axial_design.py`), centrifugal stage
+from TurboFlow with identical settings (Oh losses, Wiesner slip, beta2b -30 deg, Z 12, 0.25 mm
+clearance, R4/R2 1.35), stress-limited and envelope-capped TurboFlow turbine, theta-scaled
+combustor, bottom-up mass x 1.24 (the JetCat P400 / AMT Nike calibration), Phase 2 airframe drag,
+and the same 450 MPa Ti-6Al-4V solid-disc impeller allowable. Single spool: the axial stages and
+the impeller share one speed. Scripts: `axicent_design.py` (screening), `arch_trade.py`
+(kind `axicentrifugal`), `axicent_sensitivity.py`.
+
+**Caveat carried over unchanged:** every axial stage here uses the same textbook Howell cascade
+method as the pure axial, verified only at conventional scale (row efficiency 0.90-0.92) and
+never validated at micro scale. The front stage is the transonic one (tip relative Mach 1.30),
+which is the most loss-sensitive part of any axial compressor. The fielded axial-stage efficiency
+is the same assumed debit (x 0.882, A3.4). The transition duct from the axial exit to the impeller
+eye is not loss-modelled, and the last axial stator is assumed to remove all swirl.
+
+### 13.1 What limits the spool speed, and how much pressure ratio the impeller must carry
+
+The first axial rotor must pass the full inlet flow (~1.06 kg/s). With the same limits as the pure
+axial (tip relative Mach <= 1.35, hub/tip >= 0.40, DF <= 0.50, de Haller >= 0.72), it is feasible
+only up to **70 000 rpm** (tip M_rel 1.33-1.34; infeasible from 72 000 rpm at 1.36). The trade uses
+**68 000 rpm** to keep margin at the first-iteration airflow. So the impeller runs 20 % slower
+than in the pure centrifugal (85 000 rpm).
+
+Screening at W 1.08 kg/s (`data/phase3_axicent_screen_n1.csv`, `_n2.csv`; 65 000 rpm column shown,
+75 000 and 85 000 rpm had no feasible front stage):
+
+| front stages | axial PR | overall OPR | impeller PR | impeller U2 tool / fielded | Ti stress factor tool / fielded |
+|---|---|---|---|---|---|
+| 1 | 1.3 / 1.4 / 1.5 | 4.0 | 3.08 / 2.86 / 2.67 | 446 / 478 ... 421 / 452 m/s | 1.24 / 1.08 ... 1.39 / 1.20 |
+| 1 | 1.5 | 4.5 | 3.00 | 448 / 481 | 1.23 / 1.07 |
+| 1 | 1.3-1.5 | 5.0 | 3.85-3.33 | 494-471 / 529-506 | 1.01-1.11 / **0.88-0.96** |
+| 2 | 1.6 / 1.8 / 2.0 | 4.0 | 2.50 / 2.22 / 2.00 | 410 / 441 ... 364 / 393 | 1.46 / 1.27 ... 1.86 / 1.60 |
+| 2 | 2.0 | 5.0 | 2.50 | 421 / 454 | 1.39 / 1.19 |
+| pure centrifugal (Phase 3) | - | 4.0 | 4.00 | 504 / 537 (85 000 rpm) | 0.97 / **0.86** |
+
+The centrifugal stage has to carry a pressure ratio of 2.0-3.3 instead of 4.0. Its tip speed falls
+by 15-27 %, and the fielded stress factor rises from 0.86 to 1.06-1.60. One front stage clears the
+allowable up to OPR ~4.5; two front stages clear it comfortably at OPR 4 and with 19 % margin at
+OPR 5. **The impeller-stress problem is closed.**
+
+The catch: the impeller now runs at 68 000 rpm instead of 85 000. For a given tip speed its radius
+is 25 % larger, and the vaned diffuser grows with it. In three of the four variants the
+diffuser, not the combustor, becomes the largest diameter.
+
+### 13.2 Full comparison (dash M 1.02 / 5 km, Fn 500 N, T4 1150 K; same method as section 7)
+
+Fielded technology level (the realistic case); tool-level values in `data/phase3_arch_trade_summary.csv`.
+
+| | Centrifugal, OPR 4, 85k (Phase 3) | Axial 5-stage, OPR 5, 65k (Phase 3) | **AC 1 axial + cc, OPR 4, 68k** | AC 1 axial + cc, OPR 4.5, 68k | **AC 2 axial + cc, OPR 4, 68k** | AC 2 axial + cc, OPR 5, 68k |
+|---|---|---|---|---|---|---|
+| axial PR / impeller PR | - / 4.0 | 5.0 / - | 1.5 / 2.67 | 1.5 / 3.0 | 2.0 / 2.0 | 2.0 / 2.5 |
+| overall eta_c (fielded) | 0.700 | 0.741 | 0.725 | 0.728 | 0.721 | 0.726 |
+| airflow | 1.326 kg/s | 1.293 | 1.282 | 1.294 | 1.289 | 1.323 |
+| impeller U2 / Ti stress factor | 537 m/s / **0.86** | none (no impeller) | 454 / 1.20 | 482 / 1.06 | 394 / 1.58 | 456 / 1.19 |
+| diameter set by | diffuser | turbine / compressor | diffuser | diffuser | combustor | diffuser |
+| **engine outer diameter** | **175 mm** | **151 mm** | **182 mm** | 195 mm | **169 mm** | 185 mm |
+| **engine length (calibrated)** | **474 mm** | **663 mm** | **641 mm** | 632 mm | **704 mm** | 680 mm |
+| **engine dry mass, calibrated** (range) | **6.57 kg** (6.15-6.94) | **7.28 kg** (6.81-7.69) | **8.73 kg** (8.17-9.23) | 9.17 kg | **8.90 kg** (8.33-9.40) | 9.51 kg |
+| dash drag nominal / pessimistic | 296 / 348 N | 253 / 282 N | 312 / 373 N | 344 / 422 N | 285 / 331 N | 320 / 385 N |
+| **thrust margin nominal / pessimistic** | **+69 % / +44 %** | **+98 % / +77 %** | **+60 % / +34 %** | +45 % / **+19 %** | **+75 % / +51 %** | +56 % / +30 % |
+| worst corner (eta_c 0.66, combustor +1 sigma, E_WD 3) | +32 % | +61 % | **+23 %** | not run | +32 % | **+15 %** |
+| TOGW (calibrated engine) | 18.6 kg | 18.9 kg | 20.8 kg | 21.3 kg | 20.8 kg | 21.5 kg |
+
+Tool level (same order): margin pessimistic +60 / +97 / +56 / +42 / +59 / +56 %, engine OD 163 /
+136 / 166 / 176 / 163 / 166 mm, calibrated mass 5.52 / 5.96 / 7.19 / 7.40 / 7.37 / 7.42 kg.
+
+Why the axial-centrifugal is the heaviest option: it carries the axial front stages (blades,
+discs, casing) and a full impeller, diffuser and shroud. The turbine at 68 000 rpm needs a larger,
+heavier disc than at 85 000 rpm (0.69 vs 0.36 kg), and the shaft is longer (0.49 vs 0.33 kg). Its
+247 mm compressor section is as long as the 5-stage axial's (249 mm), and the OPR-4 variants
+also carry the longer OPR-4 combustor.
+
+Robustness of the best variant (2 axial + cc, OPR 4), equal fielded compressor efficiency
+(`data/phase3_axicent_sensitivity.csv`): pessimistic margin +49 / +51 / +52 % at eta_c 0.66 / 0.70 /
+0.74 with the mean combustor, and +32 / +34 / +35 % with the +1 sigma combustor. That matches the
+pure centrifugal (+32 / +34 %) because both then have the same combustor-set diameter (182-184 mm).
+The impeller stress factor stays at 1.47-1.65.
+
+A shared limitation of both axial-bearing options: the fielded-level geometry is scaled from the
+tool design by sqrt(airflow ratio) at fixed speed (A3.6). For the axial stages that raises the
+first-rotor tip relative Mach from ~1.30 to ~1.38, above the 1.35 limit. A true fielded redesign
+would need a slightly lower speed (a larger impeller for the AC, a slightly larger compressor
+for the pure axial). The comparison is like-for-like, but both axial-bearing options are slightly
+flattered at the fielded level.
+
+### 13.3 Verdict: it closes the impeller-stress problem, but it relocates the risk rather than removing it
+
+* **Stress: closed.** Every axial-centrifugal variant keeps the Ti impeller inside the allowable at
+  the fielded level (factor 1.06-1.58, against 0.86 for the pure centrifugal).
+* **Length: not shorter than the 5-stage axial.** Calibrated length 632-704 mm against 663 mm for
+  the pure axial and 474 mm for the pure centrifugal. The front axial stage caps the shaft at
+  ~70 000 rpm, so the impeller, diffuser and turbine disc grow, and the OPR-4 combustor is long.
+* **Mass: the heaviest of all options.** 8.7-9.5 kg calibrated engine (+2.2 to +2.9 kg over the
+  pure centrifugal, +1.4 to +2.2 kg over the pure axial). TOGW 20.8-21.5 kg, still 3.5-4.2 kg
+  under 25 kg.
+* **Margin: in between at best.** Only the 2-axial-stage OPR-4 variant beats the pure centrifugal
+  (+75 / +51 % vs +69 / +44 %), and its worst corner (+32 %) equals the centrifugal's. The 1-stage
+  OPR-4.5 and 2-stage OPR-5 variants fail the 25 % pessimistic target (+19 %, +30 % with +15 % in
+  the worst corner) because their diffusers grow to 185-195 mm. None comes close to the pure
+  axial (+98 / +77 %, worst corner +61 %).
+* **Risk moved, not removed:** the impeller-stress risk is traded for (a) the same unvalidated
+  axial-stage efficiency and transonic front-stage risk as the pure axial, only on 1-2 stages,
+  (b) the largest engine mass in the study, and (c) a length no better than the pure axial.
+  Operability should be more benign than a 5-stage fixed-geometry axial (1-2 lightly loaded front
+  stages ahead of a centrifugal is the classic arrangement for exactly that reason). But it is not
+  quantified here, because no approved tool gives axial maps.
+
+**Effect on the Phase 3 recommendation:** unchanged. On the numbers requested here, the
+axial-centrifugal does not beat the pure axial on any metric: diameter, length, mass or margin. It
+beats the pure centrifugal on stress and, in its best variant, on margin, at +2.3 kg of engine and
++230 mm of length. It therefore replaces nothing, but it is a better **fallback** than the pure
+centrifugal if the impeller cannot be qualified at ~530 MPa: the 2-axial-stage OPR-4 variant
+keeps +51 % pessimistic margin with a 1.58 stress factor. The recommended order becomes: (1) pure
+axial OPR 5; (2) axial-centrifugal 2 axial + cc, OPR 4, if the pure axial's operability or
+manufacturing is judged unacceptable and the impeller is not qualified; (3) pure centrifugal OPR 4
+if its impeller clears ~530 MPa (lightest and shortest by 160-230 mm).

@@ -330,3 +330,59 @@ Against it: +190 mm length, 253 blades down to 10 mm chord, unvalidated efficien
 unquantified part-speed stall and start behaviour, no sub-1 kN all-axial precedent.
 Fallback: centrifugal OPR 4 / 85 000 rpm if its impeller clears ~530 MPa in Phase 4 FE.
 Phase 4 not started, as instructed.
+
+---
+
+## Phase 3b — Axial-centrifugal option, evaluated before Phase 4 (2026-09-13)
+
+User request: evaluate 1-2 axial stages + 1 centrifugal stage with the same tools and the same
+stress allowable as the pure centrifugal; state whether it closes the impeller-stress problem
+while staying shorter than the 5-stage axial. Write-up: `docs/phase3_engine.md` section 13.
+
+### Method (unchanged from Phase 3)
+Axial stages: TurboDesigner + Howell loss model. **The Phase 3 caveat applies unchanged:**
+textbook method verified only at conventional scale, not validated at micro scale, with the
+fielded debit assumed (A3.4); the front stage is transonic (tip M_rel ~1.30). Centrifugal stage:
+TurboFlow with identical settings. Turbine: TurboFlow, stress-limited and envelope-capped.
+Combustor: theta-scaled. Mass: bottom-up x 1.24 (P400 / Nike calibration). Impeller allowable:
+450 MPa Ti-6Al-4V solid-disc, as for the pure centrifugal. Not modelled: transition-duct loss,
+residual swirl at the impeller eye.
+
+### F3b.1 The front axial stage caps the spool speed at ~70 000 rpm
+Same limits as the pure axial (tip M_rel <= 1.35, hub/tip >= 0.40): feasible to 70 000 rpm
+(M_rel 1.33-1.34), infeasible from 72 000 rpm (1.36). 68 000 rpm used. No feasible front stage at
+75 000 or 85 000 rpm in the screening.
+
+### F3b.2 Impeller load and stress by split (screening at 65 000 rpm, W 1.08 kg/s)
+| front stages | axial PR | OPR | impeller PR | U2 tool / fielded | Ti stress factor tool / fielded |
+|---|---|---|---|---|---|
+| 1 | 1.5 | 4.0 | 2.67 | 421 / 452 m/s | 1.39 / 1.20 |
+| 1 | 1.5 | 4.5 | 3.00 | 448 / 481 | 1.23 / 1.07 |
+| 1 | 1.3-1.5 | 5.0 | 3.85-3.33 | 494-471 / 529-506 | 1.01-1.11 / 0.88-0.96 (fails fielded) |
+| 2 | 2.0 | 4.0 | 2.00 | 364 / 393 | 1.86 / 1.60 |
+| 2 | 2.0 | 5.0 | 2.50 | 421 / 454 | 1.39 / 1.19 |
+| pure centrifugal | - | 4.0 | 4.00 | 504 / 537 (85k) | 0.97 / 0.86 |
+
+### Comparison (fielded level; tool level in `data/phase3_arch_trade_summary.csv`)
+| | Centrifugal OPR 4 85k | Axial 5-st OPR 5 65k | AC 1ax OPR 4 68k | AC 1ax OPR 4.5 68k | AC 2ax OPR 4 68k | AC 2ax OPR 5 68k |
+|---|---|---|---|---|---|---|
+| OD (set by) | 175 (diffuser) | 151 (turbine) | 182 (diffuser) | 195 (diffuser) | 169 (combustor) | 185 (diffuser) |
+| length, calibrated | 474 mm | 663 | 641 | 632 | 704 | 680 |
+| dry mass, calibrated | 6.57 kg | 7.28 | 8.73 | 9.17 | 8.90 | 9.51 |
+| drag nom / pess | 296 / 348 N | 253 / 282 | 312 / 373 | 344 / 422 | 285 / 331 | 320 / 385 |
+| margin nom / pess | +69 / +44 % | +98 / +77 % | +60 / +34 % | +45 / **+19 %** | +75 / +51 % | +56 / +30 % |
+| worst corner | +32 % | +61 % | +23 % | - | +32 % | +15 % |
+| impeller stress factor | 0.86 | - | 1.20 | 1.06 | 1.58 | 1.19 |
+| TOGW, calibrated | 18.6 kg | 18.9 | 20.8 | 21.3 | 20.8 | 21.5 |
+
+### D3b.1 Verdict
+It closes the impeller-stress problem (every variant >= 1.06 fielded), but it does NOT stay shorter
+than the 5-stage axial (632-704 vs 663 mm), it is the heaviest option (+2.2 to +2.9 kg over the pure
+centrifugal), and only its 2-axial-stage OPR-4 variant improves on the centrifugal's margin
+(+51 % vs +44 % pessimistic; worst corner equal at +32 %). The 1-stage OPR-4.5 and 2-stage OPR-5
+variants fail the 25 % pessimistic target. Mechanism: the front stage limits the shaft to
+~70 000 rpm, so the impeller, diffuser and turbine disc grow, and the diffuser sets the diameter.
+**It relocates the risk (to mass, diameter and the unvalidated axial stages) rather than removing it.**
+Recommendation unchanged (pure axial OPR 5). New order of fallbacks: AC 2 axial + cc at OPR 4
+(stress-safe, +51 % margin, 8.9 kg), then the pure centrifugal if its impeller is qualified at
+~530 MPa (lightest and shortest). Phase 4 not started.

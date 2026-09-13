@@ -1,0 +1,22 @@
+  [ax68000_opr5_t1150_ax2_pa2_cap] it0: W 1.1197  eta_c 0.780->0.835  eta_t 0.880->0.929  rpm 68000
+  [ax68000_opr5_t1150_ax2_pa2_cap] it1: W 1.0549  eta_c 0.835->0.838  eta_t 0.929->0.933  rpm 68000
+  [ax68000_opr5_t1150_ax2_pa2_cap] it2: W 1.0514  eta_c 0.838->0.838  eta_t 0.933->0.933  rpm 68000
+{'case': 'ax68000_opr5_t1150_ax2_pa2_cap', 'arch': 'axicentrifugal', 'rpm': 68000, 'level': 'tool', 'n_ax': 2, 'pi_a': 2.0, 'pi_c': 2.5, 'eta_ax': 0.86, 'eta_cc': 0.849, 'U2': 422.007, 'stress_MPa': 325.437, 'stress_factor': 1.383, 'eta_c': 0.838, 'eta_t': 0.933, 'W': 1.051, 'TSFC_dash': 0.13, 'Fn': 500.0, 'D_engine_mm': 166.01, 'D_comp': 166.01, 'D_comb': np.float64(136.285), 'D_turb': 139.43, 'D_engine_comb_hi_mm': 166.01, 'L_engine_mm': 514.967, 'dry_mass_kg': 5.981, 'dry_mass_comb_hi_kg': 6.101, 'CDS_nom': np.float64(70.598), 'CDS_hi': np.float64(81.326), 'drag_nom': np.float64(278.505), 'drag_hi': np.float64(320.714), 'margin_nom': np.float64(0.795), 'margin_hi': np.float64(0.559), 'TOGW': np.float64(17.519), 'fuel': 1.502}
+DESIGN.turb.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+
+
+  Vsonic = (i['gamma']*i['R']*i['Ts'])**0.5
+  Vsonic = (i['gamma']*i['R']*i['Ts'])**0.5
+  Vsonic = (i['gamma']*i['R']*i['Ts'])**0.5
+
+DESIGN.turb.out_stat.ps_resid [-2.41364265] [286.8695863] [2500.]
+DESIGN.nozz.staticMN.ps_resid [-2.7467852] [286.93522425] [2500.]
+DESIGN.turb.out_stat.ps_resid [-2.41364265] [286.8695863] [2500.]
+DESIGN.nozz.staticMN.ps_resid [-2.7467852] [286.93522425] [2500.]
+  outputs['Vsonic'] = Vsonic = np.sqrt(inputs['gamma'] * inputs['R'] * inputs['Ts'])
+
+{'case': 'ax68000_opr5_t1150_ax2_pa2_cap', 'arch': 'axicentrifugal', 'rpm': 68000, 'level': 'fielded', 'n_ax': 2, 'pi_a': 2.0, 'pi_c': 2.5, 'eta_ax': 0.86, 'eta_cc': 0.849, 'U2': np.float64(455.535), 'stress_MPa': np.float64(379.202), 'stress_factor': np.float64(1.187), 'eta_c': 0.726, 'eta_t': 0.75, 'W': 1.323, 'TSFC_dash': 0.156, 'Fn': 500.0, 'D_engine_mm': 185.492, 'D_comp': np.float64(185.492), 'D_comb': np.float64(142.037), 'D_turb': 155.847, 'D_engine_comb_hi_mm': 185.492, 'L_engine_mm': 557.416, 'dry_mass_kg': 7.67, 'dry_mass_comb_hi_kg': 7.803, 'CDS_nom': np.float64(81.18), 'CDS_hi': np.float64(97.546), 'drag_nom': np.float64(320.338), 'drag_hi': np.float64(384.725), 'margin_nom': np.float64(0.561), 'margin_hi': np.float64(0.3), 'TOGW': np.float64(19.708), 'fuel': 1.799}
+                          case           arch   rpm   level  n_ax  pi_a  pi_c  eta_ax  eta_cc      U2  stress_MPa  stress_factor  eta_c  eta_t     W  TSFC_dash    Fn  D_engine_mm  D_comp  D_comb  D_turb  D_engine_comb_hi_mm  L_engine_mm  dry_mass_kg  dry_mass_comb_hi_kg  CDS_nom  CDS_hi  drag_nom  drag_hi  margin_nom  margin_hi   TOGW  fuel
+ax68000_opr5_t1150_ax2_pa2_cap axicentrifugal 68000    tool     2   2.0   2.5    0.86   0.849 422.007     325.437          1.383  0.838  0.933 1.051      0.130 500.0      166.010 166.010 136.285 139.430              166.010      514.967        5.981                6.101   70.598  81.326   278.505  320.714       0.795      0.559 17.519 1.502
+ax68000_opr5_t1150_ax2_pa2_cap axicentrifugal 68000 fielded     2   2.0   2.5    0.86   0.849 455.535     379.202          1.187  0.726  0.750 1.323      0.156 500.0      185.492 185.492 142.037 155.847              185.492      557.416        7.670                7.803   81.180  97.546   320.338  384.725       0.561      0.300 19.708 1.799

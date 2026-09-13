@@ -16,7 +16,7 @@ Outputs data/phase3/trade_<case>.json and data/phase3_arch_trade.csv
 import os, sys, json, subprocess, copy, numpy as np, pandas as pd
 HERE = os.path.dirname(os.path.abspath(__file__)); ROOT = os.path.abspath(os.path.join(HERE, "..", ".."))
 sys.path.insert(0, HERE); sys.path.insert(0, os.path.join(ROOT, "scripts", "phase2_airframe"))
-import dash_cycle as dc, cycle_model as cm, combustor_sizing as cs, engine_mass as em, axial_design as ad
+import dash_cycle as dc, cycle_model as cm, combustor_sizing as cs, engine_mass as em, axial_design as ad, axicent_design as acd
 NP1 = os.path.join(ROOT, ".venv-np1", "Scripts", "python.exe")
 OUT = os.path.join(ROOT, "data", "phase3")
 OPR, T4 = float(os.environ.get("P3_OPR", 4.0)), float(os.environ.get("P3_T4", 1150.0))
@@ -61,10 +61,13 @@ CAP = os.environ.get("P3_TURB_CAP", "0") == "1"    # cap turbine tip radius at t
 
 def envelope_cap(kind, comp, cyc):
     comb, _ = cs.combustor(cyc["Pt3_kPa"] * 1e3, cyc["Tt3_K"], cyc["W_kgps"])
-    Dc = comp["D_casing_mm"] if kind == "axial" else 2e3 * (comp["geometry"]["vaned_diffuser"]["radius_out"] + 3e-3)
+    if kind == "axicentrifugal":
+        Dc = max(comp["D_axial_mm"], comp["D_diffuser_mm"])
+    else:
+        Dc = comp["D_casing_mm"] if kind == "axial" else 2e3 * (comp["geometry"]["vaned_diffuser"]["radius_out"] + 3e-3)
     return (max(Dc, comb["mean"]["OD_mm"]) / 2e3) - 2.3e-3
 
-def design_case(kind, rpm=None, tag="x"):
+def design_case(kind, rpm=None, tag="x", n_ax=None, pi_a=None):
     eta_c, eta_t = 0.78, 0.88
     hist = []
     for it in range(4):
@@ -73,6 +76,10 @@ def design_case(kind, rpm=None, tag="x"):
             comp = run_np1("centrifugal_design.py", dict(mdot=cyc["W_kgps"], T01=cyc["Tt2_K"], P01=cyc["Pt2_kPa"] * 1e3, PR=OPR, rpm=rpm,
                                                          beta2b_deg=-30, Z=12, tip_clearance=0.25e-3, R4R2=1.35), f"{tag}_cc")
             eta_c_new = comp["turboflow"]["eta"]
+        elif kind == "axicentrifugal":
+            comp = acd.design(cyc["W_kgps"], cyc["Tt2_K"], cyc["Pt2_kPa"] * 1e3, OPR, n_ax, pi_a, rpm, f"{tag}_ac")
+            if comp is None: raise RuntimeError("no feasible axial front stage(s)")
+            eta_c_new = comp["eta_overall"]
         else:
             rpm, comp = best_axial(cyc); eta_c_new = comp["eta_is"]
         tin = dict(T04=cyc["Tt4_K"], P04=cyc["Pt4_kPa"] * 1e3, p_out=turb_pout(cyc), rpm=rpm, mdot=cyc["W_kgps"] + cyc["Wf_kgps"] * dc.ETA_B, tip_clearance=0.30e-3)
@@ -85,9 +92,13 @@ def design_case(kind, rpm=None, tag="x"):
         eta_c, eta_t = eta_c_new, eta_t_new
         if done: break
     cyc, _ = dc.design(OPR, T4, eta_c, eta_t)
-    return dict(kind=kind, rpm=rpm, cycle=cyc, comp=comp, turb=turb, eta_c=eta_c, eta_t=eta_t, hist=hist)
+    return dict(kind=kind, rpm=rpm, cycle=cyc, comp=comp, turb=turb, eta_c=eta_c, eta_t=eta_t, hist=hist, n_ax=n_ax, pi_a=pi_a)
 
 def scaled_comp(kind, comp, s):
+    if kind == "axicentrifugal":
+        c = copy.deepcopy(comp)
+        c["axial"] = scaled_comp("axial", comp["axial"], s); c["centrifugal"] = scaled_comp("centrifugal", comp["centrifugal"], s)
+        return c
     c = copy.deepcopy(comp)
     if kind == "centrifugal":
         for sec in c["geometry"].values():
@@ -107,7 +118,10 @@ def evaluate(case, level):
         eta_c, eta_t = case["eta_c"], case["eta_t"]
     else:
         ref_c = case.get("eta_c_centrifugal_ref", case["eta_c"])
-        eta_c = FIELDED["eta_c_centrifugal"] if kind == "centrifugal" else case["eta_c"] * FIELDED["eta_c_centrifugal"] / ref_c
+        if kind == "axicentrifugal":
+            eta_c = case["comp"]["eta_overall_fielded"]           # every stage debited by 0.70/0.794 (axicent_design.K_F)
+        else:
+            eta_c = FIELDED["eta_c_centrifugal"] if kind == "centrifugal" else case["eta_c"] * FIELDED["eta_c_centrifugal"] / ref_c
         eta_t = FIELDED["eta_t"]
         cyc, _ = dc.design(OPR, T4, eta_c, eta_t)
         if cyc["res"] > 1e-3 or abs(cyc["Fn_N"] - 500.0) > 1.0 or not np.isfinite(cyc["TSFC_kgpNh"]):
@@ -140,9 +154,11 @@ if __name__ == "__main__":
     cases_spec = [c.split(":") for c in os.environ.get("P3_CASES", "centrifugal:85000,centrifugal:75000,axial:0").split(",")]
     rows = []
     cc_ref = float(os.environ["P3_CC_REF"]) if "P3_CC_REF" in os.environ else None   # centrifugal tool eta_c used for the axial fielded debit
-    for kind, rpm in cases_spec:
-        tag = f"{kind[:2]}{rpm}_opr{OPR:g}_t{T4:g}" + ("_cap" if CAP else "")
-        case = design_case(kind, int(rpm) if kind == "centrifugal" else None, tag)
+    for spec in cases_spec:
+        kind, rpm = spec[0], spec[1]
+        n_ax = int(spec[2]) if len(spec) > 2 else None; pi_a = float(spec[3]) if len(spec) > 3 else None
+        tag = f"{kind[:2]}{rpm}_opr{OPR:g}_t{T4:g}" + (f"_ax{n_ax}_pa{pi_a:g}" if n_ax else "") + ("_cap" if CAP else "")
+        case = design_case(kind, int(rpm) if kind in ("centrifugal", "axicentrifugal") else None, tag, n_ax=n_ax, pi_a=pi_a)
         if kind == "centrifugal" and cc_ref is None: cc_ref = case["eta_c"]
         case["eta_c_centrifugal_ref"] = cc_ref if cc_ref else case["eta_c"]
         for level in ("tool", "fielded"):
@@ -152,7 +168,17 @@ if __name__ == "__main__":
                 print(rows[-1], flush=True); continue
             af = airframe(ev)
             e = ev["engine"]
-            row = dict(case=tag, arch=kind, rpm=case["rpm"], level=level, eta_c=ev["eta_c"], eta_t=ev["eta_t"], W=ev["cycle"]["W_kgps"],
+            extra = {}
+            if kind == "axicentrifugal":
+                c = case["comp"]
+                extra = dict(n_ax=n_ax, pi_a=pi_a, pi_c=c["pi_c"], eta_ax=c["eta_ax"], eta_cc=c["eta_cc"], U2=c["U2"] if level == "tool" else c["U2_fielded"],
+                             stress_MPa=c["stress_MPa"] if level == "tool" else c["stress_fielded_MPa"],
+                             stress_factor=c["stress_factor"] if level == "tool" else c["stress_factor_fielded"])
+            elif kind == "centrifugal":
+                U2t = case["comp"]["U2"]; U2 = U2t if level == "tool" else U2t * np.sqrt(case["eta_c"] / FIELDED["eta_c_centrifugal"])
+                st = 3.3 / 8 * 4430 * U2 ** 2
+                extra = dict(U2=U2, stress_MPa=st / 1e6, stress_factor=450e6 / st)
+            row = dict(case=tag, arch=kind, rpm=case["rpm"], level=level, **extra, eta_c=ev["eta_c"], eta_t=ev["eta_t"], W=ev["cycle"]["W_kgps"],
                        TSFC_dash=ev["cycle"]["TSFC_kgpNh"], Fn=ev["cycle"]["Fn_N"], D_engine_mm=e["D_engine_mm"], D_comp=e["D_breakdown"]["compressor"],
                        D_comb=e["D_breakdown"]["combustor"], D_turb=e["D_breakdown"]["turbine"], D_engine_comb_hi_mm=ev["engine_comb_hi"]["D_engine_mm"],
                        L_engine_mm=e["L_engine_mm"], dry_mass_kg=e["dry_mass_kg"], dry_mass_comb_hi_kg=ev["engine_comb_hi"]["dry_mass_kg"],
@@ -161,6 +187,7 @@ if __name__ == "__main__":
             rows.append(row); print({k: (round(v, 3) if isinstance(v, float) else v) for k, v in row.items()}, flush=True)
             json.dump(dict(case=case, eval=ev, airframe=af), open(os.path.join(OUT, f"trade_{tag}_{level}.json"), "w"), indent=1, default=float)
     df = pd.DataFrame(rows)
-    fn = os.path.join(ROOT, "data", f"phase3_arch_trade_opr{OPR:g}_t{T4:g}{'_cap' if CAP else ''}.csv"); df.to_csv(fn, index=False)
+    suffix = os.environ.get("P3_OUT_SUFFIX", "")
+    fn = os.path.join(ROOT, "data", f"phase3_arch_trade_opr{OPR:g}_t{T4:g}{'_cap' if CAP else ''}{suffix}.csv"); df.to_csv(fn, index=False)
     pd.set_option("display.width", 250); pd.set_option("display.max_columns", 40)
     print(df.round(3).to_string(index=False))

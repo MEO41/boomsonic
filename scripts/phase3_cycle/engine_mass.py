@@ -87,6 +87,13 @@ def engine(cycle, comp_kind, comp, turb, comb, rpm, turb_scale=1.0):
     omega = rpm * np.pi / 30
     if comp_kind == "centrifugal":
         mc, gc = centrifugal_compressor_mass(comp, omega)
+    elif comp_kind == "axicentrifugal":
+        mca, gca = axial_compressor_mass(comp["axial"], omega)
+        mcc, gcc = centrifugal_compressor_mass(comp["centrifugal"], omega)
+        mc = {**{"ax_" + k: v for k, v in mca.items()}, **{"cc_" + k: v for k, v in mcc.items()},
+              "transition_duct": RHO["Al"] * 2 * np.pi * comp["axial"]["r_tip_max"] * 0.015 * 1.5e-3}
+        gc = dict(D_mm=max(gca["D_mm"], gcc["D_mm"]), L_mm=gca["L_mm"] + gcc["L_mm"] + 15.0, L_cc_mm=gcc["L_mm"],
+                  U2=gcc["U2"], sigma_disc_MPa=gcc["sigma_disc_MPa"], D_axial_mm=gca["D_mm"], D_diffuser_mm=gcc["D_mm"])
     else:
         mc, gc = axial_compressor_mass(comp, omega)
     mt, gt = turbine_mass(turb, omega, turb_scale)
@@ -98,7 +105,8 @@ def engine(cycle, comp_kind, comp, turb, comb, rpm, turb_scale=1.0):
         + RHO["IN625"] * 8 * np.pi * 4e-3 * 0.6 * Ll * 0.3e-3
     L_total = gc["L_mm"] / 1e3 + Ll * 1.15 + gt["L_mm"] / 1e3 + 0.9 * gt["r_tip"]          # compressor + combustor + turbine + exhaust cone
     L_hot = Ll * 1.15 + gt["L_mm"] / 1e3
-    m_case = RHO["SS"] * 2 * np.pi * R_case * L_hot * 0.6e-3 + RHO["Al"] * 2 * np.pi * R_case * (gc["L_mm"] / 1e3) * 1.0e-3 * (comp_kind == "centrifugal")
+    L_cc_case = gc["L_mm"] if comp_kind == "centrifugal" else gc.get("L_cc_mm", 0.0)          # Al casing around the centrifugal stage
+    m_case = RHO["SS"] * 2 * np.pi * R_case * L_hot * 0.6e-3 + RHO["Al"] * 2 * np.pi * R_case * (L_cc_case / 1e3) * 1.0e-3
     m_nozzle = RHO["SS"] * np.pi * (gt["r_tip"] + np.sqrt(cycle["A8_cm2"] / 1e4 / np.pi)) * np.hypot(0.9 * gt["r_tip"], gt["r_tip"] - np.sqrt(cycle["A8_cm2"] / 1e4 / np.pi)) * 0.5e-3 \
         + RHO["SS"] * np.pi * 0.6 * gt["r_tip"] * 0.9 * gt["r_tip"] * 0.5e-3                                                     # outer cone + inner tail cone
     L_shaft = L_total * 0.72
