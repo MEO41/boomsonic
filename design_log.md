@@ -103,3 +103,61 @@ W/S 150-800 Pa, versus T/W = 2.04 for 500 N on 25 kg. The mission definition in 
 must justify roughly 3-6x more installed thrust than a conventional small jet UAV needs,
 or the thrust rating vs sizing point must be reconciled. Carried into Phase 1 as the one
 possible clarifying question.
+
+---
+
+## Phase 1 — Requirements and mission definition (2026-09-13)
+
+User input resolving F0.4: RC-scale student project; the aircraft must reach and hold
+Mach 1 for 7 s (that is why the thrust is high), take off from the ground from standstill,
+land, and repeat the sortie once the same day. Airframe drag not yet computed by the user.
+Full write-up: `docs/phase1_requirements.md`.
+
+### F1.1 A 500 N *SLS-rated* engine gives only ~310-325 N at Mach 1 below 5 km
+- **Tool:** pyCycle, `scripts/phase1_requirements/prelim_thrust_lapse.py` (placeholder
+  cycle OPR 4 / T4 1150 K / eta_c 0.78 / eta_t 0.85, scaled NPSS maps; continuation sweep,
+  residual-norm convergence check; both RPM-limited and T4-limited max throttle, lower taken).
+- **Numbers:** M1 thrust 309 N (0 km), 325 N (1-5 km), 272 N (8 km), 226 N (10 km). RPM
+  limit binds everywhere below 8 km; holding T4max at M1 / 0 km would need 104.7 % N.
+- **Mechanism:** inlet total temperature 1.2x ambient at M1 -> corrected speed -9.5 % at
+  fixed mechanical speed.
+
+### F1.2 Drag-area budget grows with altitude; sea-level Mach 1 is not credible
+- Allowable CD*S = Fn/q at M1: 44 cm2 (0 km), 52 (1 km), 66 (3 km), 86 (5 km), 122 (10 km)
+  for the SLS-rated engine. A faired 150 mm-diameter body alone is ~35-55 cm2 at M ~ 1
+  (Hoerner ch. 16-17). Hence D1.1 and D1.2.
+
+### D1.1 "500 N" is defined at the Mach 1 dash point, not at SLS
+- **Tool:** pyCycle, `prelim_design_point_options.py`, like-for-like cycle designs at SLS,
+  M1/0 km, M1/3 km, M1/6 km, each re-run at the other points in both limit modes.
+- **Numbers:** design at M1 / 5 km for 500 N -> airflow 1.120 kg/s (vs 0.865 for the SLS
+  design), SLS thrust 665 N (RPM-limited), M1 thrust 551 / 523 / 500 N at 1 / 3 / 5 km.
+- **Why:** the user's thrust is for drag at Mach 1; definition A leaves 65 % of the rating
+  at the mission point. Cost: ~30 % more airflow -> engine mass, to be absorbed in Phase 2/4.
+- Supersedes A0.1.
+
+### D1.2 Mission profile: Mach 1 dash at 5 km ISA (candidate C of four)
+- **Tool:** point-mass energy integration, `prelim_mission_energy.py`, on the D1.1 engine
+  table; drag parameterised as 75 % of the thrust-limited CD*S with drag-rise factor 2
+  (A1.2, A1.3), sensitivity over 0.6-0.9 and 1.5-3.0.
+- **Numbers (1 / 3 / 5 / 10 km):** CD*S budget 88 / 107 / 132 / 156 cm2; q 62.9 / 49.1 /
+  37.8 / 18.5 kPa; time to M1 18 / 24 / 31 / 61 s; sortie 60 / 166 / 273 / 553 s; fuel
+  incl. reserve 0.82 / 1.10 / 1.40 / 2.09 kg; P3 at dash 558 / 475 / 401 / 216 kPa;
+  compressor-inlet Re index 1.36 / 1.12 / 0.92 / 0.53.
+- **Why 5 km:** fuel is never the discriminator (<10 % MTOW everywhere). 5 km gives the
+  largest drag budget (132 cm2) and the lowest structural q (38 kPa) that still keeps the
+  engine out of the low-P3 / low-Re regime of 10 km, with a sortie under 5 min. 3 km is
+  the documented fallback (107 cm2) if a lower ceiling is imposed; the same engine covers it.
+
+### A1.x assumptions registered (see `docs/phase1_requirements.md` section 5)
+ISA day (A1.1); 25 % acceleration margin at the dash (A1.2); drag-rise 2.0 (A1.3); idle
+fuel 10 % (A1.4); 2 min reserve (A1.5); life >= 10 hot cycles / 1 h (A1.6); paved 300 m
+sea-level runway (A1.7); kerosene fuel (A1.8); refuel between sorties (A1.9); ground roll
+deferred to Phase 2 (A1.10). Non-engineering prerequisite noted: airspace authorization
+and telemetry/autopilot for a Mach 1 uncrewed flight at 5 km.
+
+### Derived requirements handed forward
+E1-E7 (engine) and A1-A5 (airframe) in `docs/phase1_requirements.md` section 4. The
+single hardest one: **airframe CD*S <= 132 cm2 (target 99 cm2) at M 1.0 / 5 km**, to be
+demonstrated in Phase 2 with a cited transonic drag build-up, because no surveyed tool
+does transonic drag.
