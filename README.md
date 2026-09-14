@@ -4,6 +4,9 @@ Integrated engine/airframe conceptual sizing study. See `turbojet_500N_mission_b
 for the brief, `tools_survey.md` for the Phase 0 tool survey, `design_log.md` for the
 running decision log, and (at the Phase 5 gate) `design_freeze.md`.
 
+![Alt text](https://github.com/MEO41/boomsonic/blob/main/plots/phase6_engine_cutaway.png?raw=true)
+
+
 ## Repo layout
 
 ```
