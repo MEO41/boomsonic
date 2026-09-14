@@ -58,7 +58,78 @@ Report: `docs/phase2_airframe.md`. Key plots: `plots/phase2_constraint_diagram.p
 `plots/phase2_drag_polar.png`, `plots/phase2_area_distribution.png`,
 `plots/phase2_mass_budget.png`, `plots/phase2_engine_database.png`.
 
-## Phase 3 (engine cycle and architecture trade)
+## Phase 6 (CAD / 3D; started on the user's instruction, freeze decisions still open)
+
+Report: `docs/phase6_cad.md`. Engine, impeller and airframe CAD in STEP (`cad/`), an item-by-item mass check against
+the analysis model, a 3D cyclic-sector FE of the impeller, and the airframe integration checks. Findings:
+* the inducer throat needed a new camber law to keep the 10 % choke margin;
+* the exducer root stays on its limit in 3D;
+* the inducer root runs 1.8 × the 1D estimate (inside the limit);
+* the engine-to-skin gap is 8.7 mm;
+* the jetpipe loses ~0.6 % total pressure.
+
+The freeze's open risks are carried unchanged. Environment: `.venv-cad` (`requirements-cad.txt`).
+
+```powershell
+.venv-cad\Scripts\python scripts\phase6_cad\smoke_cad.py          # CAD toolchain primitives
+.venv\Scripts\python scripts\phase6_cad\make_params.py            # parameter sheet (frozen / derived / provisional)
+.venv-cad\Scripts\python scripts\phase6_cad\impeller_cad.py       # impeller + FE sector (~10 min); IMP_THROAT_ONLY=1 for the camber scan
+.venv-cad\Scripts\python scripts\phase6_cad\engine_cad.py         # engine parts + assembly
+.venv-cad\Scripts\python scripts\phase6_cad\airframe_cad.py       # airframe + integration checks
+.venv-cad\Scripts\python scripts\phase6_cad\fe3d_impeller.py A,B,BT,P,PF   # 3D FE: verifications, production, mesh check
+.venv\Scripts\python scripts\phase6_cad\mass_compare.py           # CAD vs bottom-up mass model
+.venv-cad\Scripts\python scripts\phase6_cad\render_cad.py         # plots/phase6_*.png
+.venv-cad\Scripts\python scripts\phase6_cad\spec_sheet.py         # docs/boomsonic_engine_spec.pdf (engine specification, all numbers from data)
+```
+
+## Phase 5 design freeze (status snapshot)
+
+`docs/design_freeze.md`: the current design with its open risks stated explicitly (surge margin, idle-range transient
+margin, shortened combustor, diffuser-vane/exducer resonance at idle, no hardware validation). Formal sign-off was not
+recorded; Phase 6 started on the user's instruction with the freeze decisions left open.
+
+## Phase 4 on the centrifugal baseline (turbomachinery, rotor, closure)
+
+Report: `docs/phase4r_centrifugal.md`. Engine 6.85 kg / 426 mm / 187 mm; TOGW 20.1 kg; top open risk: compressor surge
+margin (vaned-diffuser stall not modelled; the peak-PR surrogate fails on NASA HECC).
+
+```powershell
+.venv\Scripts\python scripts\phase4_turbomachinery\td_check.py                  # NASA turbo-design check of the impellers
+.venv\Scripts\python scripts\phase4_turbomachinery\hecc_surge_check.py          # surge surrogate vs NASA HECC measured
+.venv\Scripts\python scripts\phase4_turbomachinery\cc_blade_modes.py            # exducer blade modes / Campbell screening
+.venv\Scripts\python scripts\phase4_turbomachinery\cc_rotor.py                  # rotor model, critical-speed map (~7 min)
+.venv\Scripts\python scripts\phase4_turbomachinery\cc_rotor_stiffening.py       # levers on the bending critical (~15 min)
+.venv\Scripts\python scripts\phase4_turbomachinery\cc_rotor_final.py            # chosen rotor: Campbell, API check
+.venv\Scripts\python scripts\phase4_turbomachinery\cc_transient.py ce75000_opr4_t1150_b15_cap 0.00213   # acceleration
+.venv\Scripts\python scripts\phase4_turbomachinery\cc_closure.py                # engine update + Phase 2 <-> 4 mass closure
+```
+
+## Phase 3R (centrifugal-only redesign)
+
+Report: `docs/phase3r_centrifugal.md`. Recommended engine: single-stage centrifugal, OPR 4, 75 000 rpm, 15 deg
+backsweep (187 mm, 6.74 kg, +55 / +29 % dash margin, TOGW 20.0 kg). Outputs in `data/phase3r/` and `data/phase3r_*`.
+TurboFlow's centrifugal slip model is patched at run time (`scripts/phase3_cycle/turboflow_fixes.py`).
+
+```powershell
+.venv-np1\Scripts\python scripts\phase3_cycle\verify_turboflow_slip.py              # evidence for the TurboFlow slip defect + fix
+$env:P3_DATA="phase3r"; $env:P3_CC_OPTS='{"Z": 12, "Z_split": 12, "split_frac": 0.5, "effective_width": true, "choke_margin": 0.10}'; $env:P3_OUT_SUFFIX="_3r"; .venv\Scripts\python scripts\phase3_cycle\validate_mass_model.py
+.venv\Scripts\python scripts\phase3_cycle\inducer_anchor.py                          # fielded inducer relative Mach range
+.venv\Scripts\python scripts\phase3_cycle\impeller_stress.py                         # regression vs the Phase 4 gate
+.venv\Scripts\python scripts\phase3_cycle\cc_screen.py                               # 36-design screen (OPR x rpm x backsweep)
+.venv\Scripts\python scripts\phase3_cycle\cc_trade.py run 4.0:75000:-15              # one full-chain case (run cases in parallel)
+.venv\Scripts\python scripts\phase3_cycle\cc_trade.py reeval                         # re-evaluate saved designs without re-design
+.venv\Scripts\python scripts\phase3_cycle\cc_trade.py compile                        # data/phase3r_cc_trade.csv + plot
+$env:CC_SRC="data/phase3r/ce75000_opr4_t1150_b15_cap_cc_out.json"; $env:MAP_DIR="data/phase3r/maps"; $env:CC_GROUPS="1.0,0.6 1.05,0.5 0.95,0.4 0.9,0.7 0.85,0.8 0.35,0.3"; bash scripts/phase4_turbomachinery/run_centrifugal_map.sh ce75000_opr4_t1150_b15_cap
+$env:TT_SRC="data/phase3r/ce75000_opr4_t1150_b15_cap_tt_out.json"; $env:TMAP_NS="1.0 1.1 0.9 0.8 0.7 0.6 0.5 0.4 0.3 0.25"; bash scripts/phase4_turbomachinery/run_turbine_map.sh ce75000_opr4_t1150_b15_cap
+.venv\Scripts\python scripts\phase3_cycle\cc_mission.py ce75000_opr4_t1150_b15_cap   # running lines, deck, sortie ('lines' = running lines only)
+.venv\Scripts\python scripts\phase3_cycle\cc_sensitivity.py ce75000_opr4_t1150_b15_cap
+.venv\Scripts\python scripts\phase3_cycle\plot_phase3r.py
+```
+
+Map generation is memory-hungry. Running the compressor groups and turbine lines of more than two maps at once on a
+14 GB machine crashed processes with `MemoryError`; re-run failed groups under their original part numbers.
+
+## Phase 3 (engine cycle and architecture trade; superseded by Phase 3R)
 
 Report: `docs/phase3_engine.md`. Main entry points (run from the repo root with `.venv`; they
 call TurboFlow in `.venv-np1` themselves):

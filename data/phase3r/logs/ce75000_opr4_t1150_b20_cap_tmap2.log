@@ -1,0 +1,13 @@
+﻿DESIGN CHECK: {'omega': 7853.9816, 'N_frac': 1.0, 'p_out': 180737.4263, 'PR_ts': 2.1388, 'PR_tt': 1.9587, 'eta_tt': 0.936, 'eta_ts': 0.8354, 'mdot': 1.0854, 'success': True} design-opt mdot 1.0854 eta_tt 0.936
+N 1.1: 23/23 converged; mdot range 0.707-1.091
+DESIGN CHECK: {'omega': 7853.9816, 'N_frac': 1.0, 'p_out': 180737.4263, 'PR_ts': 2.1388, 'PR_tt': 1.9587, 'eta_tt': 0.936, 'eta_ts': 0.8354, 'mdot': 1.0854, 'success': True} design-opt mdot 1.0854 eta_tt 0.936
+N 0.9: 21/23 converged; mdot range 0.666-1.095
+DESIGN CHECK: {'omega': 7853.9816, 'N_frac': 1.0, 'p_out': 180737.4263, 'PR_ts': 2.1388, 'PR_tt': 1.9587, 'eta_tt': 0.936, 'eta_ts': 0.8354, 'mdot': 1.0854, 'success': True} design-opt mdot 1.0854 eta_tt 0.936
+N 0.8: 21/23 converged; mdot range 0.661-1.098
+DESIGN CHECK: {'omega': 7853.9816, 'N_frac': 1.0, 'p_out': 180737.4263, 'PR_ts': 2.1388, 'PR_tt': 1.9587, 'eta_tt': 0.936, 'eta_ts': 0.8354, 'mdot': 1.0854, 'success': True} design-opt mdot 1.0854 eta_tt 0.936
+N 0.7: 21/23 converged; mdot range 0.678-1.101
+DESIGN CHECK: {'omega': 7853.9816, 'N_frac': 1.0, 'p_out': 180737.4263, 'PR_ts': 2.1388, 'PR_tt': 1.9587, 'eta_tt': 0.936, 'eta_ts': 0.8354, 'mdot': 1.0854, 'success': True} design-opt mdot 1.0854 eta_tt 0.936
+N 0.4: 21/23 converged; mdot range 0.715-1.108
+DESIGN CHECK: {'omega': 7853.9816, 'N_frac': 1.0, 'p_out': 180737.4263, 'PR_ts': 2.1388, 'PR_tt': 1.9587, 'eta_tt': 0.936, 'eta_ts': 0.8354, 'mdot': 1.0854, 'success': True} design-opt mdot 1.0854 eta_tt 0.936
+N 0.2: 21/23 converged; mdot range 0.773-1.109
+merged 10 parts, 230 points

@@ -1,0 +1,295 @@
+{
+ "tag": "ce75000_opr4_t1150_b15_cap",
+ "changes": {
+  "liner_factor": 0.8,
+  "shaft_od_mm": 32.0,
+  "shaft_id_mm": 25.6,
+  "tunnel_r_mm": 18.0,
+  "journal_mm": 12.0
+ },
+ "phase3r_engine": {
+  "dry_cal": 6.7363460301604405,
+  "L_cal": 478.37126022143553,
+  "D": 186.62375692584655,
+  "theta": {
+   "theta": 72352975.7078434,
+   "theta_eff": 72352975.70784341,
+   "theta_ref_mean": 72352975.70784342,
+   "log_sigma": 0.2015265494199546,
+   "sigma_units": -1.101813163397741e-15
+  }
+ },
+ "phase4_engine": {
+  "dry_cal": 6.850491155259563,
+  "dry_lo": 6.489654213069163,
+  "dry_hi": 7.211328097449963,
+  "dry_raw": 5.69684882612916,
+  "L_cal": 426.15835590813157,
+  "D": 186.62375692584655,
+  "D_breakdown": {
+   "compressor": 186.62375692584655,
+   "combustor": 183.62375692584655,
+   "turbine": 126.84617532275519
+  },
+  "combustor": {
+   "OD_mm": 183.62375692584655,
+   "Ro_mm": 90.31187846292327,
+   "Ri_mm": 22.57796961573082,
+   "D_ref_mm": 67.73390884719245,
+   "U_ref": 23.640751840379917,
+   "L_liner_mm": 150.2000101421215
+  },
+  "theta": {
+   "theta": 89931492.02846238,
+   "theta_eff": 66474390.96442588,
+   "theta_ref_mean": 72352975.70784342,
+   "log_sigma": 0.2015265494199546,
+   "sigma_units": -0.42048954147133033
+  },
+  "items": {
+   "impeller": 0.9238102234212953,
+   "diffuser_deswirl": 0.3894851207861607,
+   "shroud_inlet": 0.4419591164214865,
+   "ngv_vanes": 0.10156405054591178,
+   "ngv_rings": 0.1383570567382588,
+   "turbine_blades": 0.10590799975384789,
+   "turbine_disc": 0.28036583649661434,
+   "turbine_shroud": 0.2008435346916013,
+   "combustor_liners": 0.5360691434912896,
+   "outer_casing": 0.7256871612399787,
+   "nozzle_cones": 0.10141174307539448,
+   "shaft": 0.5767604340600492,
+   "shaft_tunnel_bearing_housings": 0.34673205757734826,
+   "bearings_2x_hybrid": 0.05,
+   "starter_motor": 0.18,
+   "fuel_manifold_igniter": 0.08,
+   "fasteners_seals_balancing_10pct": 0.5178953478299236
+  },
+  "raw_changes": {
+   "combustor_liners": -0.06203930162118643,
+   "outer_casing": -0.12000599810104084,
+   "shaft": 0.23955986175750488,
+   "shaft_tunnel_bearing_housings": 0.028778855365769684,
+   "fasteners_seals_balancing_10pct": 0.008629341740104768
+  }
+ },
+ "budget": {
+  "engine (Phase 4, calibrated)": 6.850491155259563,
+  "engine accessories (A3.7)": 1.6,
+  "structure": 3.8224105330072344,
+  "landing gear + chute": 1.275,
+  "fuel system": 0.4,
+  "systems + avionics + instrumentation": 2.025,
+  "growth allowance 15 %": 1.128361579951085,
+  "fuel (sortie + reserve + 3 % unusable)": 2.9839782720435353,
+  "TOGW": 20.085245118941717,
+  "margin to 25 kg": 4.914754881058283
+ },
+ "airframe_items": {
+  "fuselage shell (3 carbon plies + 1 glass, +40 % frames/joints/hatches)": 2.584635637724002,
+  "inlet duct (2 glass plies ~0.25 kg/m2, lip ring)": 0.13031885308400218,
+  "engine mounts + heat shield/tailpipe liner": 0.35,
+  "wing (2+2 carbon plies sandwich, spar caps, ribs, +30 %; flaps/ailerons incl.)": 0.5235230863580468,
+  "tails (2+2 plies, +30 %) + all-moving HT pivot/bearings": 0.23393295584118318,
+  "landing gear, tricycle retract + brakes (Raymer Table 15.2 ~4.3 % W0)": 1.075,
+  "drag chute 0.6 m + bag + release": 0.2,
+  "fuel tank + hopper/UAT + lines + fittings": 0.4,
+  "servos (9 x ~75 g HV: 2 ail/elevon, 2 flap, 2 HT, rudder, steering, chute/brake)": 0.6749999999999999,
+  "flight controller + GPS + telemetry + 2 RC receivers": 0.3,
+  "flight batteries (2 x LiFe 2S) + regulators": 0.35,
+  "wiring, connectors, pneumatics": 0.3,
+  "prize instrumentation: calibrated pitot-static, TAT probe, sealed loggers": 0.3,
+  "flight termination / fail-safe": 0.1
+ },
+ "missions": {
+  "nom": {
+   "summary": {
+    "S_wing": 0.3,
+    "E_WD": 1.8,
+    "CDS_dash_cm2": 81.88654027115945,
+    "fuel_used_kg": 2.3548063267248835,
+    "reserve_kg": 0.542259956812529,
+    "fuel_total_kg": 2.897066283537413,
+    "sortie_s": 329.7000000000001,
+    "time_to_dash_s": 27.700000000000124,
+    "V_LOF_mps": 48.56225561133796,
+    "ground_roll_m": 46.23004317813175,
+    "dash_throttle": 0.6462957553826799,
+    "dash_margin": 0.5472792319483628,
+    "m_at_dash": 19.437773048130246,
+    "m_landing": 17.730438792216834,
+    "turn3g_excess_N": 282.9427396855647
+   },
+   "segments": [
+    {
+     "segment": "0 ground roll to V_LOF",
+     "time_s": 1.7000000000000004,
+     "dist_km": 0.04623004317813175,
+     "fuel_kg": 0.040884005036886606,
+     "Treq_max_N": 22.358340587087692,
+     "Tavail_min_N": 595.6192767707898,
+     "excess_min_N": 573.2609361837021,
+     "V_LOF_mps": 48.56225561133796,
+     "CL_rot": 0.5499944707758838
+    },
+    {
+     "segment": "1 level accel 300 m to M0.70",
+     "time_s": 8.09999999999998,
+     "dist_km": 1.2311129459613182,
+     "fuel_kg": 0.20922070020134953,
+     "Treq_max_N": 191.66497610148616,
+     "Tavail_min_N": 546.4879439972256,
+     "excess_min_N": 374.3378979875402
+    },
+    {
+     "segment": "2 climb M0.70 to 5 km",
+     "time_s": 10.70000000000004,
+     "dist_km": 2.46856072390744,
+     "fuel_kg": 0.24804147415398958,
+     "Treq_max_N": 192.58368379014647,
+     "Tavail_min_N": 424.81850495074934,
+     "excess_min_N": 309.97409227876454,
+     "roc_min_mps": 387.3962368568854
+    },
+    {
+     "segment": "3 level accel to M1.02 @ 5 km",
+     "time_s": 7.200000000000102,
+     "dist_km": 2.013197958389138,
+     "fuel_kg": 0.14932589141924524,
+     "Treq_max_N": 322.6543892219528,
+     "Tavail_min_N": 424.3129455306996,
+     "excess_min_N": 177.25653263125588,
+     "acc_min_mps2": 9.118109685944114
+    },
+    {
+     "segment": "4 hold M1.02 7 s",
+     "time_s": 7.0,
+     "dist_km": 2.28858039454368,
+     "fuel_kg": 0.10314855034301473,
+     "Treq_max_N": 323.1478780149569,
+     "Tavail_min_N": 500.0000005007258,
+     "excess_min_N": 176.85212248576886,
+     "throttle_frac": 0.6462957553826799,
+     "D_over_Tmax": 0.6462957553826799
+    },
+    {
+     "segment": "5 turn-back + idle descent",
+     "time_s": 234.99999999999997,
+     "dist_km": 45.19465485023234,
+     "fuel_kg": 1.0619257487578686,
+     "Treq_max_N": 183.90125639054347,
+     "Tavail_min_N": 466.8439960761081,
+     "excess_min_N": 282.9427396855647,
+     "note": "Treq = 3 g sustained turn at M0.90/5 km"
+    },
+    {
+     "segment": "6 pattern + landing",
+     "time_s": 60.0,
+     "dist_km": 0.0,
+     "fuel_kg": 0.5422599568125293,
+     "Treq_max_N": NaN,
+     "Tavail_min_N": NaN,
+     "excess_min_N": NaN
+    }
+   ]
+  },
+  "hi": {
+   "summary": {
+    "S_wing": 0.3,
+    "E_WD": 3.0,
+    "CDS_dash_cm2": 98.63811945976319,
+    "fuel_used_kg": 2.3803381790776648,
+    "reserve_kg": 0.542259956812529,
+    "fuel_total_kg": 2.922598135890194,
+    "sortie_s": 329.90000000000015,
+    "time_to_dash_s": 27.900000000000126,
+    "V_LOF_mps": 48.56225561133796,
+    "ground_roll_m": 46.23004317813175,
+    "dash_throttle": 0.7781016331732417,
+    "dash_margin": 0.28517915573806984,
+    "m_at_dash": 19.43327736243577,
+    "m_landing": 17.704906939864053,
+    "turn3g_excess_N": 282.94621568251597
+   },
+   "segments": [
+    {
+     "segment": "0 ground roll to V_LOF",
+     "time_s": 1.7000000000000004,
+     "dist_km": 0.04623004317813175,
+     "fuel_kg": 0.040884005036886606,
+     "Treq_max_N": 22.358340587087692,
+     "Tavail_min_N": 595.6192767707898,
+     "excess_min_N": 573.2609361837021,
+     "V_LOF_mps": 48.56225561133796,
+     "CL_rot": 0.5499944707758838
+    },
+    {
+     "segment": "1 level accel 300 m to M0.70",
+     "time_s": 8.09999999999998,
+     "dist_km": 1.2311129459613182,
+     "fuel_kg": 0.20922070020134953,
+     "Treq_max_N": 191.66497610148616,
+     "Tavail_min_N": 546.4879439972256,
+     "excess_min_N": 374.3378979875402
+    },
+    {
+     "segment": "2 climb M0.70 to 5 km",
+     "time_s": 10.70000000000004,
+     "dist_km": 2.46856072390744,
+     "fuel_kg": 0.24804147415398958,
+     "Treq_max_N": 192.58368379014647,
+     "Tavail_min_N": 424.81850495074934,
+     "excess_min_N": 309.97409227876454,
+     "roc_min_mps": 387.3962368568854
+    },
+    {
+     "segment": "3 level accel to M1.02 @ 5 km",
+     "time_s": 7.400000000000105,
+     "dist_km": 2.0774604755135644,
+     "fuel_kg": 0.15382157711372102,
+     "Treq_max_N": 383.0419552815393,
+     "Tavail_min_N": 424.3129455306996,
+     "excess_min_N": 116.26970697778688,
+     "acc_min_mps2": 5.982320014333735
+    },
+    {
+     "segment": "4 hold M1.02 7 s",
+     "time_s": 7.0,
+     "dist_km": 2.28858039454368,
+     "fuel_kg": 0.12418471700132017,
+     "Treq_max_N": 389.0508169762364,
+     "Tavail_min_N": 500.0000005007258,
+     "excess_min_N": 110.9491835244894,
+     "throttle_frac": 0.7781016331732417,
+     "D_over_Tmax": 0.7781016331732417
+    },
+    {
+     "segment": "5 turn-back + idle descent",
+     "time_s": 235.00000000000003,
+     "dist_km": 45.19465485023234,
+     "fuel_kg": 1.0619257487578686,
+     "Treq_max_N": 183.89778039359214,
+     "Tavail_min_N": 466.8439960761081,
+     "excess_min_N": 282.94621568251597,
+     "note": "Treq = 3 g sustained turn at M0.90/5 km"
+    },
+    {
+     "segment": "6 pattern + landing",
+     "time_s": 60.0,
+     "dist_km": 0.0,
+     "fuel_kg": 0.5422599568125293,
+     "Treq_max_N": NaN,
+     "Tavail_min_N": NaN,
+     "excess_min_N": NaN
+    }
+   ]
+  }
+ },
+ "landing_m": {
+  "flaps + chute, mu 0.3": 174.99301704526752,
+  "flaps, mu 0.3": 316.27271310215326,
+  "no flaps + chute, mu 0.3": 194.38462377856322,
+  "no flaps, mu 0.3": 373.3257949227204
+ },
+ "m_landing": 17.730438792216834
+}

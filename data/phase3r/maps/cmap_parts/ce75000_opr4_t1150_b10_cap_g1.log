@@ -1,0 +1,1425 @@
+--------------------------------------------------------------------------------
+ Summary of operation points scheduled for simulation
+--------------------------------------------------------------------------------
+   Index    Fluid   angle_in        T0_in        p0_in mass_flow_rate        omega
+                       [deg]       [degC]        [kPa]       [kg/s]        [RPM]
+       1      air        0.0        35.75       101.74         1.07        75000
+--------------------------------------------------------------------------------
+
+ Computing operation point 1 of 1
+--------------------------------------------------------------------------------
+ Operating point: 
+--------------------------------------------------------------------------------
+ Fluid:                    air
+ Flow angle in:            0.00 deg
+ Total temperature in:     35.75 degC
+ Total pressure in:        1.017 bar
+ Mass flow rate:           1.072 kg/s
+ Angular speed:            75000.0 RPM
+--------------------------------------------------------------------------------
+
+Generating heuristic inital guesses from latin hypercube sampling
+Number of failures: 0 out of 30 samples
+Least norm of residuals: 0.12077951644279526
+
+--------------------------------------------------------------------------------
+               Final summary of performance analysis calculations               
+--------------------------------------------------------------------------------
+ Simulation successful for 1 out of 1 points
+ Average calculation time per operation point: 5.321 seconds
+ Minimum calculation time of all operation points: 5.321 seconds
+ Maximum calculation time of all operation points: 5.321 seconds
+ Total calculation time for all operation points: 5.321 seconds
+--------------------------------------------------------------------------------
+
+DESIGN CHECK: {'N': 1.0, 'mdot': 1.0723023730214192, 'PR': 4.0140086428470125, 'eta': 0.81476123549834, 'choked': False, 'success': True} | design run PR 4.014 eta 0.8148
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv-np1\Lib\site-packages\turboflow\centrifugal_compressor\performance_analysis.py:588: RuntimeWarning: All-NaN slice encountered
+  print(f"Least norm of residuals: {np.nanmin(norm_residuals)}")
+--------------------------------------------------------------------------------
+ Summary of operation points scheduled for simulation
+--------------------------------------------------------------------------------
+   Index    Fluid   angle_in        T0_in        p0_in mass_flow_rate        omega
+                       [deg]       [degC]        [kPa]       [kg/s]        [RPM]
+       1      air        0.0        35.75       101.74         1.52        78750
+--------------------------------------------------------------------------------
+
+ Computing operation point 1 of 1
+--------------------------------------------------------------------------------
+ Operating point: 
+--------------------------------------------------------------------------------
+ Fluid:                    air
+ Flow angle in:            0.00 deg
+ Total temperature in:     35.75 degC
+ Total pressure in:        1.017 bar
+ Mass flow rate:           1.520 kg/s
+ Angular speed:            78750.0 RPM
+--------------------------------------------------------------------------------
+
+Generating heuristic inital guesses from latin hypercube sampling
+Number of failures: 30 out of 30 samples
+Least norm of residuals: nan
+--------------------------------------------------------------------------------
+ Summary of operation points scheduled for simulation
+--------------------------------------------------------------------------------
+   Index    Fluid   angle_in        T0_in        p0_in mass_flow_rate        omega
+                       [deg]       [degC]        [kPa]       [kg/s]        [RPM]
+       1      air        0.0        35.75       101.74         1.46        78750
+--------------------------------------------------------------------------------
+
+ Computing operation point 1 of 1
+--------------------------------------------------------------------------------
+ Operating point: 
+--------------------------------------------------------------------------------
+ Fluid:                    air
+ Flow angle in:            0.00 deg
+ Total temperature in:     35.75 degC
+ Total pressure in:        1.017 bar
+ Mass flow rate:           1.464 kg/s
+ Angular speed:            78750.0 RPM
+--------------------------------------------------------------------------------
+
+Generating heuristic inital guesses from latin hypercube sampling
+Number of failures: 30 out of 30 samples
+Least norm of residuals: nan
+--------------------------------------------------------------------------------
+ Summary of operation points scheduled for simulation
+--------------------------------------------------------------------------------
+   Index    Fluid   angle_in        T0_in        p0_in mass_flow_rate        omega
+                       [deg]       [degC]        [kPa]       [kg/s]        [RPM]
+       1      air        0.0        35.75       101.74         1.41        78750
+--------------------------------------------------------------------------------
+
+ Computing operation point 1 of 1
+--------------------------------------------------------------------------------
+ Operating point: 
+--------------------------------------------------------------------------------
+ Fluid:                    air
+ Flow angle in:            0.00 deg
+ Total temperature in:     35.75 degC
+ Total pressure in:        1.017 bar
+ Mass flow rate:           1.407 kg/s
+ Angular speed:            78750.0 RPM
+--------------------------------------------------------------------------------
+
+Generating heuristic inital guesses from latin hypercube sampling
+Number of failures: 30 out of 30 samples
+Least norm of residuals: nan
+--------------------------------------------------------------------------------
+ Summary of operation points scheduled for simulation
+--------------------------------------------------------------------------------
+   Index    Fluid   angle_in        T0_in        p0_in mass_flow_rate        omega
+                       [deg]       [degC]        [kPa]       [kg/s]        [RPM]
+       1      air        0.0        35.75       101.74         1.35        78750
+--------------------------------------------------------------------------------
+
+ Computing operation point 1 of 1
+--------------------------------------------------------------------------------
+ Operating point: 
+--------------------------------------------------------------------------------
+ Fluid:                    air
+ Flow angle in:            0.00 deg
+ Total temperature in:     35.75 degC
+ Total pressure in:        1.017 bar
+ Mass flow rate:           1.351 kg/s
+ Angular speed:            78750.0 RPM
+--------------------------------------------------------------------------------
+
+Generating heuristic inital guesses from latin hypercube sampling
+Number of failures: 30 out of 30 samples
+Least norm of residuals: nan
+--------------------------------------------------------------------------------
+ Summary of operation points scheduled for simulation
+--------------------------------------------------------------------------------
+   Index    Fluid   angle_in        T0_in        p0_in mass_flow_rate        omega
+                       [deg]       [degC]        [kPa]       [kg/s]        [RPM]
+       1      air        0.0        35.75       101.74         1.29        78750
+--------------------------------------------------------------------------------
+
+ Computing operation point 1 of 1
+--------------------------------------------------------------------------------
+ Operating point: 
+--------------------------------------------------------------------------------
+ Fluid:                    air
+ Flow angle in:            0.00 deg
+ Total temperature in:     35.75 degC
+ Total pressure in:        1.017 bar
+ Mass flow rate:           1.295 kg/s
+ Angular speed:            78750.0 RPM
+--------------------------------------------------------------------------------
+
+Generating heuristic inital guesses from latin hypercube sampling
+Number of failures: 0 out of 30 samples
+Least norm of residuals: 0.17868641006053498
+
+--------------------------------------------------------------------------------
+               Final summary of performance analysis calculations               
+--------------------------------------------------------------------------------
+ Simulation successful for 1 out of 1 points
+ Average calculation time per operation point: 10.548 seconds
+ Minimum calculation time of all operation points: 10.548 seconds
+ Maximum calculation time of all operation points: 10.548 seconds
+ Total calculation time for all operation points: 10.548 seconds
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+ Summary of operation points scheduled for simulation
+--------------------------------------------------------------------------------
+   Index    Fluid   angle_in        T0_in        p0_in mass_flow_rate        omega
+                       [deg]       [degC]        [kPa]       [kg/s]        [RPM]
+       1      air        0.0        35.75       101.74         1.24        78750
+--------------------------------------------------------------------------------
+
+ Computing operation point 1 of 1
+--------------------------------------------------------------------------------
+ Operating point: 
+--------------------------------------------------------------------------------
+ Fluid:                    air
+ Flow angle in:            0.00 deg
+ Total temperature in:     35.75 degC
+ Total pressure in:        1.017 bar
+ Mass flow rate:           1.239 kg/s
+ Angular speed:            78750.0 RPM
+--------------------------------------------------------------------------------
+
+Generating heuristic inital guesses from latin hypercube sampling
+Number of failures: 0 out of 30 samples
+Least norm of residuals: 0.1632501165271336
+
+--------------------------------------------------------------------------------
+               Final summary of performance analysis calculations               
+--------------------------------------------------------------------------------
+ Simulation successful for 1 out of 1 points
+ Average calculation time per operation point: 5.858 seconds
+ Minimum calculation time of all operation points: 5.858 seconds
+ Maximum calculation time of all operation points: 5.858 seconds
+ Total calculation time for all operation points: 5.858 seconds
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+ Summary of operation points scheduled for simulation
+--------------------------------------------------------------------------------
+   Index    Fluid   angle_in        T0_in        p0_in mass_flow_rate        omega
+                       [deg]       [degC]        [kPa]       [kg/s]        [RPM]
+       1      air        0.0        35.75       101.74         1.18        78750
+--------------------------------------------------------------------------------
+
+ Computing operation point 1 of 1
+--------------------------------------------------------------------------------
+ Operating point: 
+--------------------------------------------------------------------------------
+ Fluid:                    air
+ Flow angle in:            0.00 deg
+ Total temperature in:     35.75 degC
+ Total pressure in:        1.017 bar
+ Mass flow rate:           1.182 kg/s
+ Angular speed:            78750.0 RPM
+--------------------------------------------------------------------------------
+
+Generating heuristic inital guesses from latin hypercube sampling
+Number of failures: 0 out of 30 samples
+Least norm of residuals: 0.12958269428041658
+
+--------------------------------------------------------------------------------
+               Final summary of performance analysis calculations               
+--------------------------------------------------------------------------------
+ Simulation successful for 1 out of 1 points
+ Average calculation time per operation point: 5.540 seconds
+ Minimum calculation time of all operation points: 5.540 seconds
+ Maximum calculation time of all operation points: 5.540 seconds
+ Total calculation time for all operation points: 5.540 seconds
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+ Summary of operation points scheduled for simulation
+--------------------------------------------------------------------------------
+   Index    Fluid   angle_in        T0_in        p0_in mass_flow_rate        omega
+                       [deg]       [degC]        [kPa]       [kg/s]        [RPM]
+       1      air        0.0        35.75       101.74         1.13        78750
+--------------------------------------------------------------------------------
+
+ Computing operation point 1 of 1
+--------------------------------------------------------------------------------
+ Operating point: 
+--------------------------------------------------------------------------------
+ Fluid:                    air
+ Flow angle in:            0.00 deg
+ Total temperature in:     35.75 degC
+ Total pressure in:        1.017 bar
+ Mass flow rate:           1.126 kg/s
+ Angular speed:            78750.0 RPM
+--------------------------------------------------------------------------------
+
+Generating heuristic inital guesses from latin hypercube sampling
+Number of failures: 0 out of 30 samples
+Least norm of residuals: 0.09493859453173832
+
+--------------------------------------------------------------------------------
+               Final summary of performance analysis calculations               
+--------------------------------------------------------------------------------
+ Simulation successful for 1 out of 1 points
+ Average calculation time per operation point: 5.480 seconds
+ Minimum calculation time of all operation points: 5.480 seconds
+ Maximum calculation time of all operation points: 5.480 seconds
+ Total calculation time for all operation points: 5.480 seconds
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+ Summary of operation points scheduled for simulation
+--------------------------------------------------------------------------------
+   Index    Fluid   angle_in        T0_in        p0_in mass_flow_rate        omega
+                       [deg]       [degC]        [kPa]       [kg/s]        [RPM]
+       1      air        0.0        35.75       101.74         1.07        78750
+--------------------------------------------------------------------------------
+
+ Computing operation point 1 of 1
+--------------------------------------------------------------------------------
+ Operating point: 
+--------------------------------------------------------------------------------
+ Fluid:                    air
+ Flow angle in:            0.00 deg
+ Total temperature in:     35.75 degC
+ Total pressure in:        1.017 bar
+ Mass flow rate:           1.070 kg/s
+ Angular speed:            78750.0 RPM
+--------------------------------------------------------------------------------
+
+Generating heuristic inital guesses from latin hypercube sampling
+Number of failures: 0 out of 30 samples
+Least norm of residuals: 0.071034888939014
+
+--------------------------------------------------------------------------------
+               Final summary of performance analysis calculations               
+--------------------------------------------------------------------------------
+ Simulation successful for 1 out of 1 points
+ Average calculation time per operation point: 5.438 seconds
+ Minimum calculation time of all operation points: 5.438 seconds
+ Maximum calculation time of all operation points: 5.438 seconds
+ Total calculation time for all operation points: 5.438 seconds
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+ Summary of operation points scheduled for simulation
+--------------------------------------------------------------------------------
+   Index    Fluid   angle_in        T0_in        p0_in mass_flow_rate        omega
+                       [deg]       [degC]        [kPa]       [kg/s]        [RPM]
+       1      air        0.0        35.75       101.74         1.01        78750
+--------------------------------------------------------------------------------
+
+ Computing operation point 1 of 1
+--------------------------------------------------------------------------------
+ Operating point: 
+--------------------------------------------------------------------------------
+ Fluid:                    air
+ Flow angle in:            0.00 deg
+ Total temperature in:     35.75 degC
+ Total pressure in:        1.017 bar
+ Mass flow rate:           1.013 kg/s
+ Angular speed:            78750.0 RPM
+--------------------------------------------------------------------------------
+
+Generating heuristic inital guesses from latin hypercube sampling
+Number of failures: 0 out of 30 samples
+Least norm of residuals: 0.08033733525763309
+
+--------------------------------------------------------------------------------
+               Final summary of performance analysis calculations               
+--------------------------------------------------------------------------------
+ Simulation successful for 1 out of 1 points
+ Average calculation time per operation point: 5.360 seconds
+ Minimum calculation time of all operation points: 5.360 seconds
+ Maximum calculation time of all operation points: 5.360 seconds
+ Total calculation time for all operation points: 5.360 seconds
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+ Summary of operation points scheduled for simulation
+--------------------------------------------------------------------------------
+   Index    Fluid   angle_in        T0_in        p0_in mass_flow_rate        omega
+                       [deg]       [degC]        [kPa]       [kg/s]        [RPM]
+       1      air        0.0        35.75       101.74         0.96        78750
+--------------------------------------------------------------------------------
+
+ Computing operation point 1 of 1
+--------------------------------------------------------------------------------
+ Operating point: 
+--------------------------------------------------------------------------------
+ Fluid:                    air
+ Flow angle in:            0.00 deg
+ Total temperature in:     35.75 degC
+ Total pressure in:        1.017 bar
+ Mass flow rate:           0.957 kg/s
+ Angular speed:            78750.0 RPM
+--------------------------------------------------------------------------------
+
+Generating heuristic inital guesses from latin hypercube sampling
+Number of failures: 0 out of 30 samples
+Least norm of residuals: 0.12407418104893812
+
+--------------------------------------------------------------------------------
+               Final summary of performance analysis calculations               
+--------------------------------------------------------------------------------
+ Simulation successful for 1 out of 1 points
+ Average calculation time per operation point: 5.593 seconds
+ Minimum calculation time of all operation points: 5.593 seconds
+ Maximum calculation time of all operation points: 5.593 seconds
+ Total calculation time for all operation points: 5.593 seconds
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+ Summary of operation points scheduled for simulation
+--------------------------------------------------------------------------------
+   Index    Fluid   angle_in        T0_in        p0_in mass_flow_rate        omega
+                       [deg]       [degC]        [kPa]       [kg/s]        [RPM]
+       1      air        0.0        35.75       101.74         0.90        78750
+--------------------------------------------------------------------------------
+
+ Computing operation point 1 of 1
+--------------------------------------------------------------------------------
+ Operating point: 
+--------------------------------------------------------------------------------
+ Fluid:                    air
+ Flow angle in:            0.00 deg
+ Total temperature in:     35.75 degC
+ Total pressure in:        1.017 bar
+ Mass flow rate:           0.901 kg/s
+ Angular speed:            78750.0 RPM
+--------------------------------------------------------------------------------
+
+Generating heuristic inital guesses from latin hypercube sampling
+Number of failures: 0 out of 30 samples
+Least norm of residuals: 0.18677539757616965
+
+--------------------------------------------------------------------------------
+               Final summary of performance analysis calculations               
+--------------------------------------------------------------------------------
+ Simulation successful for 1 out of 1 points
+ Average calculation time per operation point: 5.354 seconds
+ Minimum calculation time of all operation points: 5.354 seconds
+ Maximum calculation time of all operation points: 5.354 seconds
+ Total calculation time for all operation points: 5.354 seconds
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+ Summary of operation points scheduled for simulation
+--------------------------------------------------------------------------------
+   Index    Fluid   angle_in        T0_in        p0_in mass_flow_rate        omega
+                       [deg]       [degC]        [kPa]       [kg/s]        [RPM]
+       1      air        0.0        35.75       101.74         0.84        78750
+--------------------------------------------------------------------------------
+
+ Computing operation point 1 of 1
+--------------------------------------------------------------------------------
+ Operating point: 
+--------------------------------------------------------------------------------
+ Fluid:                    air
+ Flow angle in:            0.00 deg
+ Total temperature in:     35.75 degC
+ Total pressure in:        1.017 bar
+ Mass flow rate:           0.844 kg/s
+ Angular speed:            78750.0 RPM
+--------------------------------------------------------------------------------
+
+Generating heuristic inital guesses from latin hypercube sampling
+Number of failures: 0 out of 30 samples
+Least norm of residuals: 0.2630776877693869
+
+--------------------------------------------------------------------------------
+               Final summary of performance analysis calculations               
+--------------------------------------------------------------------------------
+ Simulation successful for 1 out of 1 points
+ Average calculation time per operation point: 6.011 seconds
+ Minimum calculation time of all operation points: 6.011 seconds
+ Maximum calculation time of all operation points: 6.011 seconds
+ Total calculation time for all operation points: 6.011 seconds
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+ Summary of operation points scheduled for simulation
+--------------------------------------------------------------------------------
+   Index    Fluid   angle_in        T0_in        p0_in mass_flow_rate        omega
+                       [deg]       [degC]        [kPa]       [kg/s]        [RPM]
+       1      air        0.0        35.75       101.74         0.79        78750
+--------------------------------------------------------------------------------
+
+ Computing operation point 1 of 1
+--------------------------------------------------------------------------------
+ Operating point: 
+--------------------------------------------------------------------------------
+ Fluid:                    air
+ Flow angle in:            0.00 deg
+ Total temperature in:     35.75 degC
+ Total pressure in:        1.017 bar
+ Mass flow rate:           0.788 kg/s
+ Angular speed:            78750.0 RPM
+--------------------------------------------------------------------------------
+
+Generating heuristic inital guesses from latin hypercube sampling
+Number of failures: 0 out of 30 samples
+Least norm of residuals: 0.3529052550754353
+
+--------------------------------------------------------------------------------
+               Final summary of performance analysis calculations               
+--------------------------------------------------------------------------------
+ Simulation successful for 1 out of 1 points
+ Average calculation time per operation point: 67.731 seconds
+ Minimum calculation time of all operation points: 67.731 seconds
+ Maximum calculation time of all operation points: 67.731 seconds
+ Total calculation time for all operation points: 67.731 seconds
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+ Summary of operation points scheduled for simulation
+--------------------------------------------------------------------------------
+   Index    Fluid   angle_in        T0_in        p0_in mass_flow_rate        omega
+                       [deg]       [degC]        [kPa]       [kg/s]        [RPM]
+       1      air        0.0        35.75       101.74         0.73        78750
+--------------------------------------------------------------------------------
+
+ Computing operation point 1 of 1
+--------------------------------------------------------------------------------
+ Operating point: 
+--------------------------------------------------------------------------------
+ Fluid:                    air
+ Flow angle in:            0.00 deg
+ Total temperature in:     35.75 degC
+ Total pressure in:        1.017 bar
+ Mass flow rate:           0.732 kg/s
+ Angular speed:            78750.0 RPM
+--------------------------------------------------------------------------------
+
+Generating heuristic inital guesses from latin hypercube samplingC:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv-np1\Lib\site-packages\turboflow\centrifugal_compressor\loss_model_oh.py:103: RuntimeWarning: invalid value encountered in scalar power
+  Y_cl = 0.6*t_cl/b_out*v_t_out*(4*np.pi/(b_out*z)*(r_in_tip**2 - r_in_hub**2)/((r_out - r_in_tip)*(1+d_out/d_in))*v_t_out*v_m_in)**(0.5)
+
+Number of failures: 0 out of 30 samples
+Least norm of residuals: 0.4270162401233902
+
+--------------------------------------------------------------------------------
+               Final summary of performance analysis calculations               
+--------------------------------------------------------------------------------
+ Simulation successful for 1 out of 1 points
+ Average calculation time per operation point: 5.823 seconds
+ Minimum calculation time of all operation points: 5.823 seconds
+ Maximum calculation time of all operation points: 5.823 seconds
+ Total calculation time for all operation points: 5.823 seconds
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+ Summary of operation points scheduled for simulation
+--------------------------------------------------------------------------------
+   Index    Fluid   angle_in        T0_in        p0_in mass_flow_rate        omega
+                       [deg]       [degC]        [kPa]       [kg/s]        [RPM]
+       1      air        0.0        35.75       101.74         0.68        78750
+--------------------------------------------------------------------------------
+
+ Computing operation point 1 of 1
+--------------------------------------------------------------------------------
+ Operating point: 
+--------------------------------------------------------------------------------
+ Fluid:                    air
+ Flow angle in:            0.00 deg
+ Total temperature in:     35.75 degC
+ Total pressure in:        1.017 bar
+ Mass flow rate:           0.676 kg/s
+ Angular speed:            78750.0 RPM
+--------------------------------------------------------------------------------
+
+Generating heuristic inital guesses from latin hypercube sampling
+Number of failures: 0 out of 30 samples
+Least norm of residuals: 0.5014059000719382
+
+--------------------------------------------------------------------------------
+               Final summary of performance analysis calculations               
+--------------------------------------------------------------------------------
+ Simulation successful for 1 out of 1 points
+ Average calculation time per operation point: 6.944 seconds
+ Minimum calculation time of all operation points: 6.944 seconds
+ Maximum calculation time of all operation points: 6.944 seconds
+ Total calculation time for all operation points: 6.944 seconds
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+ Summary of operation points scheduled for simulation
+--------------------------------------------------------------------------------
+   Index    Fluid   angle_in        T0_in        p0_in mass_flow_rate        omega
+                       [deg]       [degC]        [kPa]       [kg/s]        [RPM]
+       1      air        0.0        35.75       101.74         0.62        78750
+--------------------------------------------------------------------------------
+
+ Computing operation point 1 of 1
+--------------------------------------------------------------------------------
+ Operating point: 
+--------------------------------------------------------------------------------
+ Fluid:                    air
+ Flow angle in:            0.00 deg
+ Total temperature in:     35.75 degC
+ Total pressure in:        1.017 bar
+ Mass flow rate:           0.619 kg/s
+ Angular speed:            78750.0 RPM
+--------------------------------------------------------------------------------
+
+Generating heuristic inital guesses from latin hypercube sampling
+Number of failures: 0 out of 30 samples
+Least norm of residuals: 0.6108064474556781
+
+--------------------------------------------------------------------------------
+               Final summary of performance analysis calculations               
+--------------------------------------------------------------------------------
+ Simulation successful for 1 out of 1 points
+ Average calculation time per operation point: 87.546 seconds
+ Minimum calculation time of all operation points: 87.546 seconds
+ Maximum calculation time of all operation points: 87.546 seconds
+ Total calculation time for all operation points: 87.546 seconds
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+ Summary of operation points scheduled for simulation
+--------------------------------------------------------------------------------
+   Index    Fluid   angle_in        T0_in        p0_in mass_flow_rate        omega
+                       [deg]       [degC]        [kPa]       [kg/s]        [RPM]
+       1      air        0.0        35.75       101.74         0.56        78750
+--------------------------------------------------------------------------------
+
+ Computing operation point 1 of 1
+--------------------------------------------------------------------------------
+ Operating point: 
+--------------------------------------------------------------------------------
+ Fluid:                    air
+ Flow angle in:            0.00 deg
+ Total temperature in:     35.75 degC
+ Total pressure in:        1.017 bar
+ Mass flow rate:           0.563 kg/s
+ Angular speed:            78750.0 RPM
+--------------------------------------------------------------------------------
+
+Generating heuristic inital guesses from latin hypercube sampling
+Number of failures: 0 out of 30 samples
+Least norm of residuals: 0.7606124753740873
+ Error during solving: Brent's method f(b) is NAN for b = 2020, other input was a = 59.75
+
+--------------------------------------------------------------------------------
+               Final summary of performance analysis calculations               
+--------------------------------------------------------------------------------
+ Simulation successful for 1 out of 1 points
+ Average calculation time per operation point: 131.439 seconds
+ Minimum calculation time of all operation points: 131.439 seconds
+ Maximum calculation time of all operation points: 131.439 seconds
+ Total calculation time for all operation points: 131.439 seconds
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+ Summary of operation points scheduled for simulation
+--------------------------------------------------------------------------------
+   Index    Fluid   angle_in        T0_in        p0_in mass_flow_rate        omega
+                       [deg]       [degC]        [kPa]       [kg/s]        [RPM]
+       1      air        0.0        35.75       101.74         0.51        78750
+--------------------------------------------------------------------------------
+
+ Computing operation point 1 of 1
+--------------------------------------------------------------------------------
+ Operating point: 
+--------------------------------------------------------------------------------
+ Fluid:                    air
+ Flow angle in:            0.00 deg
+ Total temperature in:     35.75 degC
+ Total pressure in:        1.017 bar
+ Mass flow rate:           0.507 kg/s
+ Angular speed:            78750.0 RPM
+--------------------------------------------------------------------------------
+
+Generating heuristic inital guesses from latin hypercube sampling
+Number of failures: 0 out of 30 samples
+Least norm of residuals: 0.9588785936666777
+
+--------------------------------------------------------------------------------
+               Final summary of performance analysis calculations               
+--------------------------------------------------------------------------------
+ Simulation successful for 1 out of 1 points
+ Average calculation time per operation point: 152.351 seconds
+ Minimum calculation time of all operation points: 152.351 seconds
+ Maximum calculation time of all operation points: 152.351 seconds
+ Total calculation time for all operation points: 152.351 seconds
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+ Summary of operation points scheduled for simulation
+--------------------------------------------------------------------------------
+   Index    Fluid   angle_in        T0_in        p0_in mass_flow_rate        omega
+                       [deg]       [degC]        [kPa]       [kg/s]        [RPM]
+       1      air        0.0        35.75       101.74         0.45        78750
+--------------------------------------------------------------------------------
+
+ Computing operation point 1 of 1
+--------------------------------------------------------------------------------
+ Operating point: 
+--------------------------------------------------------------------------------
+ Fluid:                    air
+ Flow angle in:            0.00 deg
+ Total temperature in:     35.75 degC
+ Total pressure in:        1.017 bar
+ Mass flow rate:           0.450 kg/s
+ Angular speed:            78750.0 RPM
+--------------------------------------------------------------------------------
+
+Generating heuristic inital guesses from latin hypercube sampling
+Number of failures: 0 out of 30 samples
+Least norm of residuals: 1.217734076860294
+WARNING: All attempts failed to converge
+
+--------------------------------------------------------------------------------
+               Final summary of performance analysis calculations               
+--------------------------------------------------------------------------------
+ Simulation successful for 0 out of 1 points
+Failed operation points: 0
+ No valid calculation times available.
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+ Summary of operation points scheduled for simulation
+--------------------------------------------------------------------------------
+   Index    Fluid   angle_in        T0_in        p0_in mass_flow_rate        omega
+                       [deg]       [degC]        [kPa]       [kg/s]        [RPM]
+       1      air        0.0        35.75       101.74         0.39        78750
+--------------------------------------------------------------------------------
+
+ Computing operation point 1 of 1
+--------------------------------------------------------------------------------
+ Operating point: 
+--------------------------------------------------------------------------------
+ Fluid:                    air
+ Flow angle in:            0.00 deg
+ Total temperature in:     35.75 degC
+ Total pressure in:        1.017 bar
+ Mass flow rate:           0.394 kg/s
+ Angular speed:            78750.0 RPM
+--------------------------------------------------------------------------------
+
+Generating heuristic inital guesses from latin hypercube sampling
+Number of failures: 0 out of 30 samples
+Least norm of residuals: 1.5541229859166843
+WARNING: All attempts failed to converge
+
+--------------------------------------------------------------------------------
+               Final summary of performance analysis calculations               
+--------------------------------------------------------------------------------
+ Simulation successful for 0 out of 1 points
+Failed operation points: 0
+ No valid calculation times available.
+--------------------------------------------------------------------------------
+
+N 1.05: 15/21 converged; mdot 0.507-1.295, PR max 4.541
+--------------------------------------------------------------------------------
+ Summary of operation points scheduled for simulation
+--------------------------------------------------------------------------------
+   Index    Fluid   angle_in        T0_in        p0_in mass_flow_rate        omega
+                       [deg]       [degC]        [kPa]       [kg/s]        [RPM]
+       1      air        0.0        35.75       101.74         0.72        37500
+--------------------------------------------------------------------------------
+
+ Computing operation point 1 of 1
+--------------------------------------------------------------------------------
+ Operating point: 
+--------------------------------------------------------------------------------
+ Fluid:                    air
+ Flow angle in:            0.00 deg
+ Total temperature in:     35.75 degC
+ Total pressure in:        1.017 bar
+ Mass flow rate:           0.724 kg/s
+ Angular speed:            37500.0 RPM
+--------------------------------------------------------------------------------
+
+Generating heuristic inital guesses from latin hypercube sampling
+Number of failures: 0 out of 30 samples
+Least norm of residuals: 0.3938631960184509
+
+--------------------------------------------------------------------------------
+               Final summary of performance analysis calculations               
+--------------------------------------------------------------------------------
+ Simulation successful for 1 out of 1 points
+ Average calculation time per operation point: 6.291 seconds
+ Minimum calculation time of all operation points: 6.291 seconds
+ Maximum calculation time of all operation points: 6.291 seconds
+ Total calculation time for all operation points: 6.291 seconds
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+ Summary of operation points scheduled for simulation
+--------------------------------------------------------------------------------
+   Index    Fluid   angle_in        T0_in        p0_in mass_flow_rate        omega
+                       [deg]       [degC]        [kPa]       [kg/s]        [RPM]
+       1      air        0.0        35.75       101.74         0.70        37500
+--------------------------------------------------------------------------------
+
+ Computing operation point 1 of 1
+--------------------------------------------------------------------------------
+ Operating point: 
+--------------------------------------------------------------------------------
+ Fluid:                    air
+ Flow angle in:            0.00 deg
+ Total temperature in:     35.75 degC
+ Total pressure in:        1.017 bar
+ Mass flow rate:           0.697 kg/s
+ Angular speed:            37500.0 RPM
+--------------------------------------------------------------------------------
+
+Generating heuristic inital guesses from latin hypercube sampling
+Number of failures: 0 out of 30 samples
+Least norm of residuals: 0.37651709117528354
+
+--------------------------------------------------------------------------------
+               Final summary of performance analysis calculations               
+--------------------------------------------------------------------------------
+ Simulation successful for 1 out of 1 points
+ Average calculation time per operation point: 6.541 seconds
+ Minimum calculation time of all operation points: 6.541 seconds
+ Maximum calculation time of all operation points: 6.541 seconds
+ Total calculation time for all operation points: 6.541 seconds
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+ Summary of operation points scheduled for simulation
+--------------------------------------------------------------------------------
+   Index    Fluid   angle_in        T0_in        p0_in mass_flow_rate        omega
+                       [deg]       [degC]        [kPa]       [kg/s]        [RPM]
+       1      air        0.0        35.75       101.74         0.67        37500
+--------------------------------------------------------------------------------
+
+ Computing operation point 1 of 1
+--------------------------------------------------------------------------------
+ Operating point: 
+--------------------------------------------------------------------------------
+ Fluid:                    air
+ Flow angle in:            0.00 deg
+ Total temperature in:     35.75 degC
+ Total pressure in:        1.017 bar
+ Mass flow rate:           0.670 kg/s
+ Angular speed:            37500.0 RPM
+--------------------------------------------------------------------------------
+
+Generating heuristic inital guesses from latin hypercube sampling
+Number of failures: 0 out of 30 samples
+Least norm of residuals: 0.3591555416078523
+
+--------------------------------------------------------------------------------
+               Final summary of performance analysis calculations               
+--------------------------------------------------------------------------------
+ Simulation successful for 1 out of 1 points
+ Average calculation time per operation point: 8.304 seconds
+ Minimum calculation time of all operation points: 8.304 seconds
+ Maximum calculation time of all operation points: 8.304 seconds
+ Total calculation time for all operation points: 8.304 seconds
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+ Summary of operation points scheduled for simulation
+--------------------------------------------------------------------------------
+   Index    Fluid   angle_in        T0_in        p0_in mass_flow_rate        omega
+                       [deg]       [degC]        [kPa]       [kg/s]        [RPM]
+       1      air        0.0        35.75       101.74         0.64        37500
+--------------------------------------------------------------------------------
+
+ Computing operation point 1 of 1
+--------------------------------------------------------------------------------
+ Operating point: 
+--------------------------------------------------------------------------------
+ Fluid:                    air
+ Flow angle in:            0.00 deg
+ Total temperature in:     35.75 degC
+ Total pressure in:        1.017 bar
+ Mass flow rate:           0.643 kg/s
+ Angular speed:            37500.0 RPM
+--------------------------------------------------------------------------------
+
+Generating heuristic inital guesses from latin hypercube sampling
+Number of failures: 0 out of 30 samples
+Least norm of residuals: 0.34223377391032406
+
+--------------------------------------------------------------------------------
+               Final summary of performance analysis calculations               
+--------------------------------------------------------------------------------
+ Simulation successful for 1 out of 1 points
+ Average calculation time per operation point: 9.299 seconds
+ Minimum calculation time of all operation points: 9.299 seconds
+ Maximum calculation time of all operation points: 9.299 seconds
+ Total calculation time for all operation points: 9.299 seconds
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+ Summary of operation points scheduled for simulation
+--------------------------------------------------------------------------------
+   Index    Fluid   angle_in        T0_in        p0_in mass_flow_rate        omega
+                       [deg]       [degC]        [kPa]       [kg/s]        [RPM]
+       1      air        0.0        35.75       101.74         0.62        37500
+--------------------------------------------------------------------------------
+
+ Computing operation point 1 of 1
+--------------------------------------------------------------------------------
+ Operating point: 
+--------------------------------------------------------------------------------
+ Fluid:                    air
+ Flow angle in:            0.00 deg
+ Total temperature in:     35.75 degC
+ Total pressure in:        1.017 bar
+ Mass flow rate:           0.617 kg/s
+ Angular speed:            37500.0 RPM
+--------------------------------------------------------------------------------
+
+Generating heuristic inital guesses from latin hypercube sampling
+Number of failures: 0 out of 30 samples
+Least norm of residuals: 0.3264600023647653
+
+--------------------------------------------------------------------------------
+               Final summary of performance analysis calculations               
+--------------------------------------------------------------------------------
+ Simulation successful for 1 out of 1 points
+ Average calculation time per operation point: 7.492 seconds
+ Minimum calculation time of all operation points: 7.492 seconds
+ Maximum calculation time of all operation points: 7.492 seconds
+ Total calculation time for all operation points: 7.492 seconds
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+ Summary of operation points scheduled for simulation
+--------------------------------------------------------------------------------
+   Index    Fluid   angle_in        T0_in        p0_in mass_flow_rate        omega
+                       [deg]       [degC]        [kPa]       [kg/s]        [RPM]
+       1      air        0.0        35.75       101.74         0.59        37500
+--------------------------------------------------------------------------------
+
+ Computing operation point 1 of 1
+--------------------------------------------------------------------------------
+ Operating point: 
+--------------------------------------------------------------------------------
+ Fluid:                    air
+ Flow angle in:            0.00 deg
+ Total temperature in:     35.75 degC
+ Total pressure in:        1.017 bar
+ Mass flow rate:           0.590 kg/s
+ Angular speed:            37500.0 RPM
+--------------------------------------------------------------------------------
+
+Generating heuristic inital guesses from latin hypercube sampling
+Number of failures: 0 out of 30 samples
+Least norm of residuals: 0.3129033097077664
+
+--------------------------------------------------------------------------------
+               Final summary of performance analysis calculations               
+--------------------------------------------------------------------------------
+ Simulation successful for 1 out of 1 points
+ Average calculation time per operation point: 9.386 seconds
+ Minimum calculation time of all operation points: 9.386 seconds
+ Maximum calculation time of all operation points: 9.386 seconds
+ Total calculation time for all operation points: 9.386 seconds
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+ Summary of operation points scheduled for simulation
+--------------------------------------------------------------------------------
+   Index    Fluid   angle_in        T0_in        p0_in mass_flow_rate        omega
+                       [deg]       [degC]        [kPa]       [kg/s]        [RPM]
+       1      air        0.0        35.75       101.74         0.56        37500
+--------------------------------------------------------------------------------
+
+ Computing operation point 1 of 1
+--------------------------------------------------------------------------------
+ Operating point: 
+--------------------------------------------------------------------------------
+ Fluid:                    air
+ Flow angle in:            0.00 deg
+ Total temperature in:     35.75 degC
+ Total pressure in:        1.017 bar
+ Mass flow rate:           0.563 kg/s
+ Angular speed:            37500.0 RPM
+--------------------------------------------------------------------------------
+
+Generating heuristic inital guesses from latin hypercube sampling
+Number of failures: 0 out of 30 samples
+Least norm of residuals: 0.3031103473347754
+
+--------------------------------------------------------------------------------
+               Final summary of performance analysis calculations               
+--------------------------------------------------------------------------------
+ Simulation successful for 1 out of 1 points
+ Average calculation time per operation point: 5.392 seconds
+ Minimum calculation time of all operation points: 5.392 seconds
+ Maximum calculation time of all operation points: 5.392 seconds
+ Total calculation time for all operation points: 5.392 seconds
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+ Summary of operation points scheduled for simulation
+--------------------------------------------------------------------------------
+   Index    Fluid   angle_in        T0_in        p0_in mass_flow_rate        omega
+                       [deg]       [degC]        [kPa]       [kg/s]        [RPM]
+       1      air        0.0        35.75       101.74         0.54        37500
+--------------------------------------------------------------------------------
+
+ Computing operation point 1 of 1
+--------------------------------------------------------------------------------
+ Operating point: 
+--------------------------------------------------------------------------------
+ Fluid:                    air
+ Flow angle in:            0.00 deg
+ Total temperature in:     35.75 degC
+ Total pressure in:        1.017 bar
+ Mass flow rate:           0.536 kg/s
+ Angular speed:            37500.0 RPM
+--------------------------------------------------------------------------------
+
+Generating heuristic inital guesses from latin hypercube sampling
+Number of failures: 0 out of 30 samples
+Least norm of residuals: 0.29917615802103154
+
+--------------------------------------------------------------------------------
+               Final summary of performance analysis calculations               
+--------------------------------------------------------------------------------
+ Simulation successful for 1 out of 1 points
+ Average calculation time per operation point: 4.567 seconds
+ Minimum calculation time of all operation points: 4.567 seconds
+ Maximum calculation time of all operation points: 4.567 seconds
+ Total calculation time for all operation points: 4.567 seconds
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+ Summary of operation points scheduled for simulation
+--------------------------------------------------------------------------------
+   Index    Fluid   angle_in        T0_in        p0_in mass_flow_rate        omega
+                       [deg]       [degC]        [kPa]       [kg/s]        [RPM]
+       1      air        0.0        35.75       101.74         0.51        37500
+--------------------------------------------------------------------------------
+
+ Computing operation point 1 of 1
+--------------------------------------------------------------------------------
+ Operating point: 
+--------------------------------------------------------------------------------
+ Fluid:                    air
+ Flow angle in:            0.00 deg
+ Total temperature in:     35.75 degC
+ Total pressure in:        1.017 bar
+ Mass flow rate:           0.509 kg/s
+ Angular speed:            37500.0 RPM
+--------------------------------------------------------------------------------
+
+Generating heuristic inital guesses from latin hypercube sampling
+Number of failures: 0 out of 30 samples
+Least norm of residuals: 0.3036695933758273
+
+--------------------------------------------------------------------------------
+               Final summary of performance analysis calculations               
+--------------------------------------------------------------------------------
+ Simulation successful for 1 out of 1 points
+ Average calculation time per operation point: 4.674 seconds
+ Minimum calculation time of all operation points: 4.674 seconds
+ Maximum calculation time of all operation points: 4.674 seconds
+ Total calculation time for all operation points: 4.674 seconds
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+ Summary of operation points scheduled for simulation
+--------------------------------------------------------------------------------
+   Index    Fluid   angle_in        T0_in        p0_in mass_flow_rate        omega
+                       [deg]       [degC]        [kPa]       [kg/s]        [RPM]
+       1      air        0.0        35.75       101.74         0.48        37500
+--------------------------------------------------------------------------------
+
+ Computing operation point 1 of 1
+--------------------------------------------------------------------------------
+ Operating point: 
+--------------------------------------------------------------------------------
+ Fluid:                    air
+ Flow angle in:            0.00 deg
+ Total temperature in:     35.75 degC
+ Total pressure in:        1.017 bar
+ Mass flow rate:           0.483 kg/s
+ Angular speed:            37500.0 RPM
+--------------------------------------------------------------------------------
+
+Generating heuristic inital guesses from latin hypercube sampling
+Number of failures: 0 out of 30 samples
+Least norm of residuals: 0.311225531851191
+
+--------------------------------------------------------------------------------
+               Final summary of performance analysis calculations               
+--------------------------------------------------------------------------------
+ Simulation successful for 1 out of 1 points
+ Average calculation time per operation point: 4.054 seconds
+ Minimum calculation time of all operation points: 4.054 seconds
+ Maximum calculation time of all operation points: 4.054 seconds
+ Total calculation time for all operation points: 4.054 seconds
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+ Summary of operation points scheduled for simulation
+--------------------------------------------------------------------------------
+   Index    Fluid   angle_in        T0_in        p0_in mass_flow_rate        omega
+                       [deg]       [degC]        [kPa]       [kg/s]        [RPM]
+       1      air        0.0        35.75       101.74         0.46        37500
+--------------------------------------------------------------------------------
+
+ Computing operation point 1 of 1
+--------------------------------------------------------------------------------
+ Operating point: 
+--------------------------------------------------------------------------------
+ Fluid:                    air
+ Flow angle in:            0.00 deg
+ Total temperature in:     35.75 degC
+ Total pressure in:        1.017 bar
+ Mass flow rate:           0.456 kg/s
+ Angular speed:            37500.0 RPM
+--------------------------------------------------------------------------------
+
+Generating heuristic inital guesses from latin hypercube sampling
+Number of failures: 0 out of 30 samples
+Least norm of residuals: 0.32897203075050013
+
+--------------------------------------------------------------------------------
+               Final summary of performance analysis calculations               
+--------------------------------------------------------------------------------
+ Simulation successful for 1 out of 1 points
+ Average calculation time per operation point: 4.718 seconds
+ Minimum calculation time of all operation points: 4.718 seconds
+ Maximum calculation time of all operation points: 4.718 seconds
+ Total calculation time for all operation points: 4.718 seconds
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+ Summary of operation points scheduled for simulation
+--------------------------------------------------------------------------------
+   Index    Fluid   angle_in        T0_in        p0_in mass_flow_rate        omega
+                       [deg]       [degC]        [kPa]       [kg/s]        [RPM]
+       1      air        0.0        35.75       101.74         0.43        37500
+--------------------------------------------------------------------------------
+
+ Computing operation point 1 of 1
+--------------------------------------------------------------------------------
+ Operating point: 
+--------------------------------------------------------------------------------
+ Fluid:                    air
+ Flow angle in:            0.00 deg
+ Total temperature in:     35.75 degC
+ Total pressure in:        1.017 bar
+ Mass flow rate:           0.429 kg/s
+ Angular speed:            37500.0 RPM
+--------------------------------------------------------------------------------
+
+Generating heuristic inital guesses from latin hypercube sampling
+Number of failures: 0 out of 30 samples
+Least norm of residuals: 0.3612521208505236
+
+--------------------------------------------------------------------------------
+               Final summary of performance analysis calculations               
+--------------------------------------------------------------------------------
+ Simulation successful for 1 out of 1 points
+ Average calculation time per operation point: 3.907 seconds
+ Minimum calculation time of all operation points: 3.907 seconds
+ Maximum calculation time of all operation points: 3.907 seconds
+ Total calculation time for all operation points: 3.907 seconds
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+ Summary of operation points scheduled for simulation
+--------------------------------------------------------------------------------
+   Index    Fluid   angle_in        T0_in        p0_in mass_flow_rate        omega
+                       [deg]       [degC]        [kPa]       [kg/s]        [RPM]
+       1      air        0.0        35.75       101.74         0.40        37500
+--------------------------------------------------------------------------------
+
+ Computing operation point 1 of 1
+--------------------------------------------------------------------------------
+ Operating point: 
+--------------------------------------------------------------------------------
+ Fluid:                    air
+ Flow angle in:            0.00 deg
+ Total temperature in:     35.75 degC
+ Total pressure in:        1.017 bar
+ Mass flow rate:           0.402 kg/s
+ Angular speed:            37500.0 RPM
+--------------------------------------------------------------------------------
+
+Generating heuristic inital guesses from latin hypercube sampling
+Number of failures: 0 out of 30 samples
+Least norm of residuals: 0.41005058884399515
+
+--------------------------------------------------------------------------------
+               Final summary of performance analysis calculations               
+--------------------------------------------------------------------------------
+ Simulation successful for 1 out of 1 points
+ Average calculation time per operation point: 4.161 seconds
+ Minimum calculation time of all operation points: 4.161 seconds
+ Maximum calculation time of all operation points: 4.161 seconds
+ Total calculation time for all operation points: 4.161 seconds
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+ Summary of operation points scheduled for simulation
+--------------------------------------------------------------------------------
+   Index    Fluid   angle_in        T0_in        p0_in mass_flow_rate        omega
+                       [deg]       [degC]        [kPa]       [kg/s]        [RPM]
+       1      air        0.0        35.75       101.74         0.38        37500
+--------------------------------------------------------------------------------
+
+ Computing operation point 1 of 1
+--------------------------------------------------------------------------------
+ Operating point: 
+--------------------------------------------------------------------------------
+ Fluid:                    air
+ Flow angle in:            0.00 deg
+ Total temperature in:     35.75 degC
+ Total pressure in:        1.017 bar
+ Mass flow rate:           0.375 kg/s
+ Angular speed:            37500.0 RPM
+--------------------------------------------------------------------------------
+
+Generating heuristic inital guesses from latin hypercube sampling
+Number of failures: 0 out of 30 samples
+Least norm of residuals: 0.4771417925178131
+
+--------------------------------------------------------------------------------
+               Final summary of performance analysis calculations               
+--------------------------------------------------------------------------------
+ Simulation successful for 1 out of 1 points
+ Average calculation time per operation point: 4.580 seconds
+ Minimum calculation time of all operation points: 4.580 seconds
+ Maximum calculation time of all operation points: 4.580 seconds
+ Total calculation time for all operation points: 4.580 seconds
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+ Summary of operation points scheduled for simulation
+--------------------------------------------------------------------------------
+   Index    Fluid   angle_in        T0_in        p0_in mass_flow_rate        omega
+                       [deg]       [degC]        [kPa]       [kg/s]        [RPM]
+       1      air        0.0        35.75       101.74         0.35        37500
+--------------------------------------------------------------------------------
+
+ Computing operation point 1 of 1
+--------------------------------------------------------------------------------
+ Operating point: 
+--------------------------------------------------------------------------------
+ Fluid:                    air
+ Flow angle in:            0.00 deg
+ Total temperature in:     35.75 degC
+ Total pressure in:        1.017 bar
+ Mass flow rate:           0.348 kg/s
+ Angular speed:            37500.0 RPM
+--------------------------------------------------------------------------------
+
+Generating heuristic inital guesses from latin hypercube sampling
+Number of failures: 0 out of 30 samples
+Least norm of residuals: 0.5647392115964792
+
+--------------------------------------------------------------------------------
+               Final summary of performance analysis calculations               
+--------------------------------------------------------------------------------
+ Simulation successful for 1 out of 1 points
+ Average calculation time per operation point: 4.624 seconds
+ Minimum calculation time of all operation points: 4.624 seconds
+ Maximum calculation time of all operation points: 4.624 seconds
+ Total calculation time for all operation points: 4.624 seconds
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+ Summary of operation points scheduled for simulation
+--------------------------------------------------------------------------------
+   Index    Fluid   angle_in        T0_in        p0_in mass_flow_rate        omega
+                       [deg]       [degC]        [kPa]       [kg/s]        [RPM]
+       1      air        0.0        35.75       101.74         0.32        37500
+--------------------------------------------------------------------------------
+
+ Computing operation point 1 of 1
+--------------------------------------------------------------------------------
+ Operating point: 
+--------------------------------------------------------------------------------
+ Fluid:                    air
+ Flow angle in:            0.00 deg
+ Total temperature in:     35.75 degC
+ Total pressure in:        1.017 bar
+ Mass flow rate:           0.322 kg/s
+ Angular speed:            37500.0 RPM
+--------------------------------------------------------------------------------
+
+Generating heuristic inital guesses from latin hypercube sampling
+Number of failures: 0 out of 30 samples
+Least norm of residuals: 0.6762691749514046
+
+--------------------------------------------------------------------------------
+               Final summary of performance analysis calculations               
+--------------------------------------------------------------------------------
+ Simulation successful for 1 out of 1 points
+ Average calculation time per operation point: 4.991 seconds
+ Minimum calculation time of all operation points: 4.991 seconds
+ Maximum calculation time of all operation points: 4.991 seconds
+ Total calculation time for all operation points: 4.991 seconds
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+ Summary of operation points scheduled for simulation
+--------------------------------------------------------------------------------
+   Index    Fluid   angle_in        T0_in        p0_in mass_flow_rate        omega
+                       [deg]       [degC]        [kPa]       [kg/s]        [RPM]
+       1      air        0.0        35.75       101.74         0.29        37500
+--------------------------------------------------------------------------------
+
+ Computing operation point 1 of 1
+--------------------------------------------------------------------------------
+ Operating point: 
+--------------------------------------------------------------------------------
+ Fluid:                    air
+ Flow angle in:            0.00 deg
+ Total temperature in:     35.75 degC
+ Total pressure in:        1.017 bar
+ Mass flow rate:           0.295 kg/s
+ Angular speed:            37500.0 RPM
+--------------------------------------------------------------------------------
+
+Generating heuristic inital guesses from latin hypercube sampling
+Number of failures: 0 out of 30 samples
+Least norm of residuals: 0.8173068442912467
+
+--------------------------------------------------------------------------------
+               Final summary of performance analysis calculations               
+--------------------------------------------------------------------------------
+ Simulation successful for 1 out of 1 points
+ Average calculation time per operation point: 5.298 seconds
+ Minimum calculation time of all operation points: 5.298 seconds
+ Maximum calculation time of all operation points: 5.298 seconds
+ Total calculation time for all operation points: 5.298 seconds
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+ Summary of operation points scheduled for simulation
+--------------------------------------------------------------------------------
+   Index    Fluid   angle_in        T0_in        p0_in mass_flow_rate        omega
+                       [deg]       [degC]        [kPa]       [kg/s]        [RPM]
+       1      air        0.0        35.75       101.74         0.27        37500
+--------------------------------------------------------------------------------
+
+ Computing operation point 1 of 1
+--------------------------------------------------------------------------------
+ Operating point: 
+--------------------------------------------------------------------------------
+ Fluid:                    air
+ Flow angle in:            0.00 deg
+ Total temperature in:     35.75 degC
+ Total pressure in:        1.017 bar
+ Mass flow rate:           0.268 kg/s
+ Angular speed:            37500.0 RPM
+--------------------------------------------------------------------------------
+
+Generating heuristic inital guesses from latin hypercube sampling
+Number of failures: 0 out of 30 samples
+Least norm of residuals: 0.9970338591596214
+ Error during solving: Inputs in Brent [59.750000,2020.000000] do not bracket the root.  Function values are [2618.389370,70674.041406]
+
+--------------------------------------------------------------------------------
+               Final summary of performance analysis calculations               
+--------------------------------------------------------------------------------
+ Simulation successful for 1 out of 1 points
+ Average calculation time per operation point: 43.584 seconds
+ Minimum calculation time of all operation points: 43.584 seconds
+ Maximum calculation time of all operation points: 43.584 seconds
+ Total calculation time for all operation points: 43.584 seconds
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+ Summary of operation points scheduled for simulation
+--------------------------------------------------------------------------------
+   Index    Fluid   angle_in        T0_in        p0_in mass_flow_rate        omega
+                       [deg]       [degC]        [kPa]       [kg/s]        [RPM]
+       1      air        0.0        35.75       101.74         0.24        37500
+--------------------------------------------------------------------------------
+
+ Computing operation point 1 of 1
+--------------------------------------------------------------------------------
+ Operating point: 
+--------------------------------------------------------------------------------
+ Fluid:                    air
+ Flow angle in:            0.00 deg
+ Total temperature in:     35.75 degC
+ Total pressure in:        1.017 bar
+ Mass flow rate:           0.241 kg/s
+ Angular speed:            37500.0 RPM
+--------------------------------------------------------------------------------
+
+Generating heuristic inital guesses from latin hypercube sampling
+Number of failures: 0 out of 30 samples
+Least norm of residuals: 1.2310397075706416
+
+--------------------------------------------------------------------------------
+               Final summary of performance analysis calculations               
+--------------------------------------------------------------------------------
+ Simulation successful for 1 out of 1 points
+ Average calculation time per operation point: 34.140 seconds
+ Minimum calculation time of all operation points: 34.140 seconds
+ Maximum calculation time of all operation points: 34.140 seconds
+ Total calculation time for all operation points: 34.140 seconds
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+ Summary of operation points scheduled for simulation
+--------------------------------------------------------------------------------
+   Index    Fluid   angle_in        T0_in        p0_in mass_flow_rate        omega
+                       [deg]       [degC]        [kPa]       [kg/s]        [RPM]
+       1      air        0.0        35.75       101.74         0.21        37500
+--------------------------------------------------------------------------------
+
+ Computing operation point 1 of 1
+--------------------------------------------------------------------------------
+ Operating point: 
+--------------------------------------------------------------------------------
+ Fluid:                    air
+ Flow angle in:            0.00 deg
+ Total temperature in:     35.75 degC
+ Total pressure in:        1.017 bar
+ Mass flow rate:           0.214 kg/s
+ Angular speed:            37500.0 RPM
+--------------------------------------------------------------------------------
+
+Generating heuristic inital guesses from latin hypercube sampling
+Number of failures: 0 out of 30 samples
+Least norm of residuals: 1.5474331199834261
+
+--------------------------------------------------------------------------------
+               Final summary of performance analysis calculations               
+--------------------------------------------------------------------------------
+ Simulation successful for 1 out of 1 points
+ Average calculation time per operation point: 45.026 seconds
+ Minimum calculation time of all operation points: 45.026 seconds
+ Maximum calculation time of all operation points: 45.026 seconds
+ Total calculation time for all operation points: 45.026 seconds
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+ Summary of operation points scheduled for simulation
+--------------------------------------------------------------------------------
+   Index    Fluid   angle_in        T0_in        p0_in mass_flow_rate        omega
+                       [deg]       [degC]        [kPa]       [kg/s]        [RPM]
+       1      air        0.0        35.75       101.74         0.19        37500
+--------------------------------------------------------------------------------
+
+ Computing operation point 1 of 1
+--------------------------------------------------------------------------------
+ Operating point: 
+--------------------------------------------------------------------------------
+ Fluid:                    air
+ Flow angle in:            0.00 deg
+ Total temperature in:     35.75 degC
+ Total pressure in:        1.017 bar
+ Mass flow rate:           0.188 kg/s
+ Angular speed:            37500.0 RPM
+--------------------------------------------------------------------------------
+
+Generating heuristic inital guesses from latin hypercube sampling
+Number of failures: 0 out of 30 samples
+Least norm of residuals: 1.9989736789360184
+
+--------------------------------------------------------------------------------
+               Final summary of performance analysis calculations               
+--------------------------------------------------------------------------------
+ Simulation successful for 1 out of 1 points
+ Average calculation time per operation point: 78.462 seconds
+ Minimum calculation time of all operation points: 78.462 seconds
+ Maximum calculation time of all operation points: 78.462 seconds
+ Total calculation time for all operation points: 78.462 seconds
+--------------------------------------------------------------------------------
+
+N 0.50: 21/21 converged; mdot 0.188-0.724, PR max 1.519

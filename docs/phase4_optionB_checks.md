@@ -1,5 +1,10 @@
 # Phase 4: the two checks on option B, the axial-centrifugal (2026-09-14)
 
+> **Note (Phase 3R, 2026-09-14).** The TurboFlow impeller designs and maps used here, including the P400 benchmark,
+> were made with TurboFlow's defective Wiesner slip (`docs/phase3r_centrifugal.md` section 1.1). The P400 benchmark was
+> re-run with the fix: the chain still reproduces the P400's idle capability to about 5 points of speed. The option-B
+> verdict is moot: the user chose the pure centrifugal.
+
 Option B is the corrected axial-centrifugal (AC) from the Phase 3 erratum: 1 or 2 axial stages plus one centrifugal
 stage on one shaft at 90 000 rpm, OPR 4, T4 1150 K, fielded efficiencies. Both variants were checked:
 * `ax90000_opr4_t1150_ax2_pa2_cap_blk`: 2 axial stages (PR 2.0) + impeller (PR 2.0);

@@ -1,0 +1,18 @@
+﻿N 0.6: process failed
+N 0.3: process failed
+N 0.8: process failed
+DESIGN CHECK: {'omega': 7853.9816, 'N_frac': 1.0, 'p_out': 178759.7284, 'PR_ts': 2.1628, 'PR_tt': 1.9745, 'eta_tt': 0.9355, 'eta_ts': 0.833, 'mdot': 1.0932, 'success': True} design-opt mdot 1.0932 eta_tt 0.9355
+N 0.5: 21/23 converged; mdot range 0.707-1.112
+DESIGN CHECK: {'omega': 7853.9816, 'N_frac': 1.0, 'p_out': 178759.7284, 'PR_ts': 2.1628, 'PR_tt': 1.9745, 'eta_tt': 0.9355, 'eta_ts': 0.833, 'mdot': 1.0932, 'success': True} design-opt mdot 1.0932 eta_tt 0.9355
+N 0.7: 21/23 converged; mdot range 0.688-1.107
+DESIGN CHECK: {'omega': 7853.9816, 'N_frac': 1.0, 'p_out': 178759.7284, 'PR_ts': 2.1628, 'PR_tt': 1.9745, 'eta_tt': 0.9355, 'eta_ts': 0.833, 'mdot': 1.0932, 'success': True} design-opt mdot 1.0932 eta_tt 0.9355
+N 0.9: 22/23 converged; mdot range 0.676-1.101
+DESIGN CHECK: {'omega': 7853.9816, 'N_frac': 1.0, 'p_out': 178759.7284, 'PR_ts': 2.1628, 'PR_tt': 1.9745, 'eta_tt': 0.9355, 'eta_ts': 0.833, 'mdot': 1.0932, 'success': True} design-opt mdot 1.0932 eta_tt 0.9355
+N 1.0: 21/23 converged; mdot range 0.694-1.099
+DESIGN CHECK: {'omega': 7853.9816, 'N_frac': 1.0, 'p_out': 178759.7284, 'PR_ts': 2.1628, 'PR_tt': 1.9745, 'eta_tt': 0.9355, 'eta_ts': 0.833, 'mdot': 1.0932, 'success': True} design-opt mdot 1.0932 eta_tt 0.9355
+N 0.4: 21/23 converged; mdot range 0.724-1.113
+DESIGN CHECK: {'omega': 7853.9816, 'N_frac': 1.0, 'p_out': 178759.7284, 'PR_ts': 2.1628, 'PR_tt': 1.9745, 'eta_tt': 0.9355, 'eta_ts': 0.833, 'mdot': 1.0932, 'success': True} design-opt mdot 1.0932 eta_tt 0.9355
+N 1.1: 22/23 converged; mdot range 0.717-1.098
+DESIGN CHECK: {'omega': 7853.9816, 'N_frac': 1.0, 'p_out': 178759.7284, 'PR_ts': 2.1628, 'PR_tt': 1.9745, 'eta_tt': 0.9355, 'eta_ts': 0.833, 'mdot': 1.0932, 'success': True} design-opt mdot 1.0932 eta_tt 0.9355
+N 0.2: 21/23 converged; mdot range 0.783-1.113
+merged 7 parts, 161 points

@@ -1,0 +1,32 @@
+{
+ "C1_eye": 200.19983039412924,
+ "beta1": {
+  "hub": 34.28273609002763,
+  "rms": 55.57666725178284,
+  "shroud": 62.82344410474657
+ },
+ "L_components": 0.352452802399117,
+ "L_calibrated": 0.42615835590813156,
+ "drag": {
+  "Phase 2 inputs (capture 47.5 cm2, nozzle 49.1 cm2)": {
+   "CDS_nom_cm2": 81.88654027115945,
+   "CDS_hi_cm2": 98.63811945976319,
+   "A_capture_cm2": 47.5,
+   "A_nozzle_cm2": 49.1
+  },
+  "capture updated": {
+   "CDS_nom_cm2": 81.01755049728578,
+   "CDS_hi_cm2": 97.05653577590054,
+   "A_capture_cm2": 55.086999928448606,
+   "A_nozzle_cm2": 49.1
+  },
+  "capture + nozzle updated": {
+   "CDS_nom_cm2": 81.65853010566437,
+   "CDS_hi_cm2": 97.69751538427916,
+   "A_capture_cm2": 55.086999928448606,
+   "A_nozzle_cm2": 70.76905404454658
+  }
+ },
+ "provisional": 29,
+ "total": 74
+}

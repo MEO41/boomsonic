@@ -1,0 +1,60 @@
+﻿C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\pycycle\thermo\static_ps_resid.py:128: RuntimeWarning: invalid value encountered in sqrt
+  Vsonic = (i['gamma']*i['R']*i['Ts'])**0.5
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\pycycle\thermo\static_ps_resid.py:108: RuntimeWarning: invalid value encountered in sqrt
+  Vsonic = (i['gamma']*i['R']*i['Ts'])**0.5
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\pycycle\thermo\static_ps_calc.py:32: RuntimeWarning: invalid value encountered in sqrt
+  outputs['Vsonic'] = Vsonic = np.sqrt(inputs['gamma'] * inputs['R'] * inputs['Ts'])
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on print_bound_enforce in your solver options here: 
+OD0.burner.vitiated_flow.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.py:35: SolverWarning:'OD0.burner.vitiated_flow.balance.T' exceeds upper bounds
+  Val: [3943.15988815]
+  Upper: [2500.]
+
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\pycycle\thermo\static_ps_resid.py:128: RuntimeWarning: invalid value encountered in sqrt
+  Vsonic = (i['gamma']*i['R']*i['Ts'])**0.5
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\pycycle\thermo\static_ps_resid.py:94: RuntimeWarning: invalid value encountered in sqrt
+  f2 = MN - inputs['W']*(R_UNIVERSAL_SI*inputs['Ts'])**0.5/(ps_guess*1.0e6*inputs['area']*gamt**0.5)
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\pycycle\thermo\static_ps_resid.py:99: RuntimeWarning: The iteration is not making good progress, as measured by the 
+ improvement from the last ten iterations.
+  ps_guess, M_guess = fsolve(equations, (ps_guess, M_guess))
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on print_bound_enforce in your solver options here: 
+OD0.turb.real_flow_b4bld.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.py:35: SolverWarning:'OD0.turb.real_flow_b4bld.balance.T' exceeds upper bounds
+  Val: [3034.73935298]
+  Upper: [2500.]
+
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on print_bound_enforce in your solver options here: 
+OD0.turb.real_flow.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.py:35: SolverWarning:'OD0.turb.real_flow.balance.T' exceeds upper bounds
+  Val: [3034.73935298]
+  Upper: [2500.]
+
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\pycycle\thermo\static_ps_resid.py:128: RuntimeWarning: invalid value encountered in sqrt
+  Vsonic = (i['gamma']*i['R']*i['Ts'])**0.5
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\pycycle\thermo\static_ps_resid.py:94: RuntimeWarning: invalid value encountered in sqrt
+  f2 = MN - inputs['W']*(R_UNIVERSAL_SI*inputs['Ts'])**0.5/(ps_guess*1.0e6*inputs['area']*gamt**0.5)
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\pycycle\thermo\static_ps_resid.py:99: RuntimeWarning: The iteration is not making good progress, as measured by the 
+ improvement from the last ten iterations.
+  ps_guess, M_guess = fsolve(equations, (ps_guess, M_guess))
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on print_bound_enforce in your solver options here: 
+OD0.nozz.throat_total.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.py:35: SolverWarning:'OD0.nozz.throat_total.balance.T' exceeds upper bounds
+  Val: [3034.73935298]
+  Upper: [2500.]
+
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\pycycle\thermo\static_ps_resid.py:108: RuntimeWarning: invalid value encountered in sqrt
+  Vsonic = (i['gamma']*i['R']*i['Ts'])**0.5
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\pycycle\thermo\static_ps_resid.py:83: RuntimeWarning: invalid value encountered in power
+  ps_guess = inputs['guess:Pt'] * (1 + (gamt-1)/2 * inputs['MN']**2)**(-gamt/(gamt-1))
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\pycycle\thermo\static_ps_calc.py:32: RuntimeWarning: invalid value encountered in sqrt
+  outputs['Vsonic'] = Vsonic = np.sqrt(inputs['gamma'] * inputs['R'] * inputs['Ts'])
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\pycycle\thermo\static_ps_resid.py:128: RuntimeWarning: invalid value encountered in sqrt
+  Vsonic = (i['gamma']*i['R']*i['Ts'])**0.5

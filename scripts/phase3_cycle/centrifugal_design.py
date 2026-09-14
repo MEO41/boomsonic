@@ -15,15 +15,32 @@
    'custom' vaned-diffuser loss, throat choking check) at the design (mdot, omega).
 3. Secant iteration on r2 (i.e. tip speed) until TurboFlow's PR_tt equals the target.
 Outputs geometry, eta_tt, PR, tip speed, inducer relative Mach, diffuser exit Mach, choke flag.
+
+Phase 3R (2026-09-14):
+  * TurboFlow's Wiesner slip is patched (turboflow_fixes.py: the stock code takes cos of the blade angle in
+    degrees as radians). Every run of this script from Phase 3R on uses the corrected slip.
+  * Optional splitters (input Z_split, split_frac = splitter/full-blade meridional length): the blade number seen by
+    TurboFlow (slip and loss correlations) is Aungier's effective number Z_eff = Z + Z_split * split_frac
+    (Aungier, Centrifugal Compressors, 2000, slip with splitter blades).
+  * Optional effective_width=True: TurboFlow receives the EFFECTIVE exit width (continuity at phi2, no blade
+    blockage); the physical width b2_geo = b2_eff / (1 - B2) is set outside, from the stress-sized blade thickness
+    (cc_screen.py / impeller_stress.py). Default (False) keeps the Phase 3 behaviour (0.95 blockage inside b2).
+  * Optional choke_margin (e.g. 0.10): the inducer throat is opened until TurboFlow reports no throat choke at
+    (1 + choke_margin) x design flow at design speed (Phase 4 found the "just unchoked" rule left zero choke
+    margin; PR and efficiency at the design point do not depend on it).
 """
-import sys, json, copy, numpy as np
+import os, sys, json, copy, numpy as np
 import CoolProp.CoolProp as CP
 import turboflow as tf
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import turboflow_fixes  # noqa: F401  (applies the Wiesner-slip unit fix on import)
 
 inp = json.load(open(sys.argv[1]))
 mdot, T01, P01, PR_t = inp["mdot"], inp["T01"], inp["P01"], inp["PR"]
 omega = inp["rpm"] * np.pi / 30
-beta2b = inp.get("beta2b_deg", -30.0); Z = inp.get("Z", 12); tip_cl = inp.get("tip_clearance", 0.25e-3)
+beta2b = inp.get("beta2b_deg", -30.0); Z_main = inp.get("Z", 12); tip_cl = inp.get("tip_clearance", 0.25e-3)
+Z = Z_main + inp.get("Z_split", 0) * inp.get("split_frac", 0.5)          # effective blade number (Aungier)
+EFF_W = bool(inp.get("effective_width", False)); CHOKE_M = inp.get("choke_margin", None)
 R4R2 = inp.get("R4R2", 1.45); k_hub = inp.get("hub_tip_eye", 0.35); phi2 = inp.get("phi2", 0.28)
 R, g, cp = 287.05, 1.4, 1004.5
 
@@ -59,7 +76,7 @@ def geometry(r2):
     T02 = T01 + dh0 / cp; C2 = np.hypot(Ct2, Cm2); T2 = T02 - C2 ** 2 / (2 * cp)
     P02 = P01 * (1 + 0.92 * dh0 / (cp * T01)) ** (g / (g - 1))
     P2 = P02 * (T2 / T02) ** (g / (g - 1)); rho2 = P2 / (R * T2)
-    b2 = mdot / (2 * np.pi * r2 * rho2 * Cm2 * 0.95)
+    b2 = mdot / (2 * np.pi * r2 * rho2 * Cm2 * (1.0 if EFF_W else 0.95))
     r3 = 1.06 * r2; r4 = R4R2 * r2
     alpha3 = float(np.degrees(np.arctan2(Ct2 * r2 / r3, Cm2 * r2 / r3)))    # free vortex + continuity in vaneless space
     geo = dict(
@@ -86,9 +103,11 @@ base = dict(turbomachinery="centrifugal_compressor",
                                                           derivative_abs_step=1e-6, plot_convergence=False, print_convergence=False),
                                       initial_guess=dict(efficiency_impeller=[0.70, 0.95], phi_impeller=[0.15, 0.45], Ma_vaned_diffuser=[0.10, 0.50], n_samples=30)))
 
-def run(r2):
+def run(r2, mdot_run=None):
     geo, mean = geometry(r2)
     cfg = copy.deepcopy(base); cfg["geometry"] = geo
+    if mdot_run is not None:
+        cfg["operation_points"]["mass_flow_rate"] = float(mdot_run)
     cfg = tf.convert_configuration_options(cfg) if hasattr(tf, "convert_configuration_options") else cfg
     solvers = tf.centrifugal_compressor.compute_performance(cfg, cfg["operation_points"], export_results=False, stop_on_failure=True)
     s = solvers[0]; r = s.problem.results
@@ -120,7 +139,18 @@ for it in range(10):
     else:
         x1 = r2 - f * (r2 - x0) / (f - f0) if f != f0 else r2 * 1.01
     x0, f0, r2 = r2, f, float(np.clip(x1, 0.7 * r2, 1.3 * r2))
-out = dict(input=inp, area_throat_ratio=ATR[0], r1s=r1s, r1h=r1h, beta1b=beta1b, M1s_rel=M1s_rel, C1=C1, r2=r2, U2=omega * r2, geometry=geo, meanline=mean,
-           turboflow=res, history=hist, D_impeller_mm=2e3 * r2, D_diffuser_mm=2e3 * geo["vaned_diffuser"]["radius_out"])
+choke = None
+if CHOKE_M:                                            # open the throat until (1 + margin) x design flow is unchoked
+    while True:
+        try:
+            rm, _, _ = run(r2, mdot * (1 + CHOKE_M)); ch = bool(rm["choked"]) or not rm["success"]
+        except Exception:
+            ch = True
+        if not ch or ATR[0] >= 0.95: break
+        ATR[0] = round(ATR[0] + 0.05, 3)
+    choke = dict(margin=CHOKE_M, unchoked_at_margin=not ch, area_throat_ratio=ATR[0])
+    res, geo, mean = run(r2)                           # design point with the final throat
+out = dict(input=inp, Z_eff=Z, area_throat_ratio=ATR[0], choke_check=choke, r1s=r1s, r1h=r1h, beta1b=beta1b, M1s_rel=M1s_rel, C1=C1, r2=r2, U2=omega * r2,
+           geometry=geo, meanline=mean, turboflow=res, history=hist, D_impeller_mm=2e3 * r2, D_diffuser_mm=2e3 * geo["vaned_diffuser"]["radius_out"])
 json.dump(out, open(sys.argv[2], "w"), indent=1, default=float)
 print(json.dumps({k: v for k, v in out.items() if k not in ("geometry", "history", "input")}, default=float, indent=0))

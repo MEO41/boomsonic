@@ -1,0 +1,29 @@
+﻿
+impeller: m 1.245 kg (FE 1.132), Ip 15.89 e-4 kg m2, x_cg 35.7 mm, back face 66.6 mm | turbine m 0.425 kg, Ip 4.55 
+e-4, x 330.8 mm
+  map OD 12 mm done (43 s)
+  map OD 16 mm done (85 s)
+  map OD 20 mm done (125 s)
+  map OD 24 mm done (164 s)
+  map OD 28 mm done (203 s)
+  OD16_hard: criticals [14881, 44576, 48655] rpm -> below idle (ok), INSIDE operating range (FAIL), INSIDE operating 
+range (FAIL)
+  OD16_soft: criticals [8161, 16219, 38874] rpm -> below idle (ok), below idle (ok), INSIDE operating range (FAIL)
+  OD16_softmin: criticals [5187, 9623, 38015] rpm -> below idle (ok), below idle (ok), INSIDE operating range (FAIL)
+  OD20_hard: criticals [17475, 46392, 50519] rpm -> below idle (ok), INSIDE operating range (FAIL), INSIDE operating 
+range (FAIL)
+  OD20_soft: criticals [8448, 15569, 44522] rpm -> below idle (ok), below idle (ok), INSIDE operating range (FAIL)
+  OD20_softmin: criticals [5226, 9190, 43979] rpm -> below idle (ok), below idle (ok), INSIDE operating range (FAIL)
+  OD24_hard: criticals [18751, 44473, 56907] rpm -> below idle (ok), INSIDE operating range (FAIL), INSIDE operating 
+range (FAIL)
+  OD24_soft: criticals [8494, 14788, 51082] rpm -> below idle (ok), below idle (ok), INSIDE operating range (FAIL)
+  OD24_softmin: criticals [5196, 8717, 50591] rpm -> below idle (ok), below idle (ok), INSIDE operating range (FAIL)
+  damped OD 16 mm done (284 s)
+  damped OD 20 mm done (338 s)
+  damped OD 24 mm done (392 s)
+done in 393 s
+
+
+
+
+

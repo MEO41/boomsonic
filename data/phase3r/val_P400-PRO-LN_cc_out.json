@@ -1,0 +1,116 @@
+{
+ "input": {
+  "mdot": 0.67,
+  "T01": 288.15,
+  "P01": 101325.0,
+  "PR": 3.8,
+  "rpm": 98000,
+  "beta2b_deg": -30,
+  "Z": 12,
+  "tip_clearance": 0.00025,
+  "R4R2": 1.35,
+  "Z_split": 12,
+  "split_frac": 0.5,
+  "effective_width": true,
+  "choke_margin": 0.1
+ },
+ "Z_eff": 18.0,
+ "area_throat_ratio": 0.7,
+ "choke_check": {
+  "margin": 0.1,
+  "unchoked_at_margin": true,
+  "area_throat_ratio": 0.7
+ },
+ "r1s": 0.03453634085213032,
+ "r1h": 0.012087719298245612,
+ "beta1b": 53.24463217608879,
+ "M1s_rel": 1.2362327058621774,
+ "C1": 198.31739560265032,
+ "r2": 0.04849658390785661,
+ "U2": 497.6979383151362,
+ "geometry": {
+  "impeller": {
+   "radius_hub_in": 0.012087719298245612,
+   "radius_tip_in": 0.03453634085213032,
+   "radius_out": 0.04849658390785661,
+   "width_out": 0.006656288033674059,
+   "leading_edge_angle": 53.24463217608879,
+   "trailing_edge_angle": -30,
+   "number_of_blades": 18.0,
+   "length_axial": 0.0315227795401068,
+   "length_meridional": 0.033947608735499624,
+   "tip_clearance": 0.00025,
+   "area_throat_ratio": 0.7
+  },
+  "vaneless_diffuser": {
+   "width_out": 0.006656288033674059,
+   "radius_out": 0.05140637894232801,
+   "radius_in": 0.04849658390785661,
+   "width_in": 0.006656288033674059
+  },
+  "vaned_diffuser": {
+   "radius_out": 0.06547038827560643,
+   "radius_in": 0.05140637894232801,
+   "width_in": 0.006656288033674059,
+   "width_out": 0.006656288033674059,
+   "leading_edge_angle": 68.62226644599279,
+   "trailing_edge_angle": 34.0,
+   "number_of_vanes": 19,
+   "opening": 0.411362581668633,
+   "throat_location_factor": 1.0,
+   "area_throat_ratio": 0.5
+  }
+ },
+ "meanline": {
+  "U2": 497.6979383151362,
+  "dh0_euler": 177180.62089177844,
+  "T02_est": 464.53687993208405,
+  "Ct2": 356.000311135687,
+  "Cm2": 139.35542272823815,
+  "sigma": 0.8769519991149936,
+  "alpha3": 68.62226644599279
+ },
+ "turboflow": {
+  "PR": 3.8025168715759956,
+  "eta": 0.7999759557899608,
+  "power": 112646.49604471655,
+  "choked": false,
+  "M_out_vd": 0.24274263429396012,
+  "M_rel_in": 0.9452426566019155,
+  "success": true
+ },
+ "history": [
+  {
+   "r2": 0.047225545142995616,
+   "PR": 3.579070442176919,
+   "eta": 0.7970412548618743,
+   "power": 106948.32354817007,
+   "choked": false,
+   "M_out_vd": 0.24109460963622106,
+   "M_rel_in": 0.945242656601787,
+   "success": true
+  },
+  {
+   "r2": 0.047954332056731934,
+   "PR": 3.705746807249562,
+   "eta": 0.7988092571339596,
+   "power": 110201.84975677305,
+   "choked": false,
+   "M_out_vd": 0.24202966748468532,
+   "M_rel_in": 0.9452426566012455,
+   "success": true
+  },
+  {
+   "r2": 0.04849658390785661,
+   "PR": 3.802516873406521,
+   "eta": 0.7999759561400579,
+   "power": 112646.49604425105,
+   "choked": false,
+   "M_out_vd": 0.2427426341640526,
+   "M_rel_in": 0.9452426566016883,
+   "success": true
+  }
+ ],
+ "D_impeller_mm": 96.99316781571322,
+ "D_diffuser_mm": 130.94077655121285
+}

@@ -1,0 +1,432 @@
+{
+ "verify_disc": {
+  "periodic_pairs": 1,
+  "masters": 1,
+  "slaves": 1,
+  "max_pair_centroid_mismatch_mm": 7.135561524265977e-13,
+  "quality": {
+   "min": 0.3049043869486929,
+   "p1": 0.4268069809587072,
+   "median": 0.7213812784591004,
+   "n_below_0p1": 0,
+   "n_below_0p02": 0
+  },
+  "elements": 1233,
+  "cyclic_tie": {
+   "slave_dofs": 600,
+   "master_triangles": 80,
+   "slave_triangles": 80,
+   "max_outside_distance_mm": 6.801226248853668e-13
+  },
+  "direct": {
+   "rel_residual": 7.556667440238705e-13,
+   "nnz_LU": 2131026
+  },
+  "solve_s": 0.20421147346496582,
+  "ndof": 7344,
+  "nred": 6737,
+  "n_slave": 600,
+  "n_fixed": 7,
+  "centre_radial_FE": 451757169.8894414,
+  "centre_hoop_FE": 452144750.5652706,
+  "centre_theory": 452815273.98263437,
+  "rim_hoop_FE": 185555093.82703015,
+  "rim_hoop_theory_same_points": 185649619.81462157,
+  "rim_hoop_theory_at_b": 178956934.62786746
+ },
+ "conditions": {
+  "rpm_MCS": 78750.0,
+  "E_GPa": 110.0,
+  "nu": 0.34,
+  "rho": 4430.0,
+  "support": "boss axial within r 6 mm + weak tangential spring"
+ },
+ "verify_hub": {
+  "periodic_pairs": 1,
+  "masters": 1,
+  "slaves": 1,
+  "max_pair_centroid_mismatch_mm": 2.4489416146455477e-13,
+  "quality": {
+   "min": 0.08984047968078736,
+   "p1": 0.3456755212062339,
+   "median": 0.7926292334935827,
+   "n_below_0p1": 2,
+   "n_below_0p02": 0
+  },
+  "elements": 15124,
+  "spring": {
+   "k": 41122.3464704805,
+   "loc_mm": [
+    56.479004163765666,
+    2.9818407239734914,
+    0.8896930159780904
+   ],
+   "dofs": [
+    55981,
+    55982
+   ],
+   "t": [
+    -0.2859149308532771,
+    0.9582550038038756
+   ],
+   "reaction_N_per_sector": 8.990169262080447e-09
+  },
+  "cyclic_tie": {
+   "slave_dofs": 8070,
+   "master_triangles": 1308,
+   "slave_triangles": 1308,
+   "max_outside_distance_mm": 1.95538955405451e-12
+  },
+  "amg": {
+   "iterations": 72,
+   "rel_residual": 7.281172387263001e-11,
+   "levels": 2
+  },
+  "solve_s": 8.816971063613892,
+  "amg_vs_superlu_max_rel": 7.573871807796508e-08,
+  "ndof": 76905,
+  "nred": 68701,
+  "n_slave": 8070,
+  "n_fixed": 146,
+  "fe3d": {
+   "vm_peak_MPa": 307.90476687794796,
+   "vm_peak_x_mm": 45.97151412650658,
+   "vm_peak_r_mm": 0.7707979913746633,
+   "st_axis_MPa": 248.65483525420052,
+   "st_avg_MPa": 160.0065285026225
+  },
+  "axisym": {
+   "vm_peak_MPa": 311.5834262530935,
+   "vm_peak_z_mm": 46.827098915433425,
+   "vm_peak_r_mm": 0.0010673685369814727,
+   "st_axis_MPa": 259.5497213272498,
+   "st_avg_MPa": 159.7649160141476,
+   "mass_hub_kg": 0.9436183350413211
+  }
+ },
+ "reference_phase3r": {
+  "blade_root_Kt_MPa": 617.7543220568991,
+  "disc_vm_mech_MCS_MPa": 313.1979426964145,
+  "Fty_MPa": 622.1052631578947
+ },
+ "production": {
+  "mesh": {
+   "hmin_mm": 0.6,
+   "hmax_mm": 3.0,
+   "tets": 39912,
+   "periodic_pairs": 0,
+   "masters": 0,
+   "slaves": 0,
+   "max_pair_centroid_mismatch_mm": 0.0,
+   "quality": {
+    "min": 0.010022846180313346,
+    "p1": 0.09662036845239626,
+    "median": 0.7159772354798404,
+    "n_below_0p1": 438,
+    "n_below_0p02": 24
+   }
+  },
+  "solve": {
+   "spring": {
+    "k": 30116.65196434187,
+    "loc_mm": [
+     56.79466156470639,
+     1.4573799381532797,
+     2.3744752978157853
+    ],
+    "dofs": [
+     34060,
+     34061
+    ],
+    "t": [
+     -0.8522722353857904,
+     0.5230984962609889
+    ],
+    "reaction_N_per_sector": 1.9440527161681624
+   },
+   "cyclic_tie": {
+    "slave_dofs": 9336,
+    "master_triangles": 1475,
+    "slave_triangles": 1476,
+    "max_outside_distance_mm": 2.785812513410232e-09
+   },
+   "pardiso": {
+    "rel_residual": 1.5151702947284615e-11
+   },
+   "solve_s": 6.527144908905029,
+   "ndof": 218238,
+   "nred": 208457,
+   "n_slave": 9336,
+   "n_fixed": 455
+  },
+  "peak": {
+   "vm_MPa": 630.4484680515484,
+   "x_mm": 43.35922060308687,
+   "r_mm": 66.45033648919767,
+   "d_hub_mm": 0.1238680153959279,
+   "note": "sharp blade-root corner in the CAD: singular, mesh-dependent"
+  },
+  "exducer_root": {
+   "vm_at_0p4t_MPa": 349.94896508858164,
+   "at_0p4t_x_r_mm": [
+    42.4472020171434,
+    62.6264462181173
+   ],
+   "vm_at_1p0t_MPa": 236.59867675566645,
+   "at_1p0t_x_r_mm": [
+    40.97956553553474,
+    64.52461943639041
+   ],
+   "hot_spot_MPa": 425.89365827163476,
+   "hot_spot_x_Kt_MPa": 596.2511215802887
+  },
+  "exducer_root_incl_TE_corner": {
+   "vm_at_0p4t_MPa": 349.94896508858164,
+   "at_0p4t_x_r_mm": [
+    42.4472020171434,
+    62.6264462181173
+   ],
+   "vm_at_1p0t_MPa": 264.03163834085535,
+   "at_1p0t_x_r_mm": [
+    41.28186136980023,
+    64.69852718220388
+   ],
+   "hot_spot_MPa": 407.5135740095582,
+   "hot_spot_x_Kt_MPa": 570.5190036133814
+  },
+  "inducer_root": {
+   "vm_at_0p4t_MPa": 357.1187895384173,
+   "at_0p4t_x_r_mm": [
+    2.3994069276829593,
+    18.153079156901935
+   ],
+   "vm_at_1p0t_MPa": 352.3002672644965,
+   "at_1p0t_x_r_mm": [
+    23.04051109892423,
+    27.66852114590453
+   ],
+   "hot_spot_MPa": 360.3471994619441,
+   "hot_spot_x_Kt_MPa": 504.48607924672166
+  },
+  "inducer_root_incl_LE_corner": {
+   "vm_at_0p4t_MPa": 430.1969928041996,
+   "at_0p4t_x_r_mm": [
+    0.40926909872454026,
+    18.26169271911373
+   ],
+   "vm_at_1p0t_MPa": 443.8701062837959,
+   "at_1p0t_x_r_mm": [
+    0.24186256103076212,
+    19.462298832375442
+   ],
+   "hot_spot_MPa": 421.0360067728701,
+   "hot_spot_x_Kt_MPa": 589.4504094820181
+  },
+  "root_note": "max von Mises in blade material with hub distance 0.3-0.5 t_root and 0.9-1.1 t_root (t_root 2.235 mm); exducer r >= 0.7 r2, inducer r < 0.7 r2; 'excluding' = more than t_root from the LE (x) and the rim (r2)",
+  "blade_corner_peak_MPa": {
+   "LE_corner": 580.7549116592088,
+   "TE_corner": 630.4484680515484
+  },
+  "hub": {
+   "vm_max_MPa": 335.98959960302125,
+   "x_mm": 47.19397589007418,
+   "r_mm": 2.0873661762712823,
+   "vm_p999_MPa": 331.1888093777451,
+   "st_axis_MPa": 295.7197350810079
+  },
+  "tip": {
+   "n_points": 729,
+   "max_closing_mm": 0.07379276961025737,
+   "at_x_mm": 0.0002416021403038994,
+   "at_r_mm": 49.648590148117,
+   "cold_clearance_mm": 0.25,
+   "note": "blade tip vs a rigid casing; casing / hub thermal growth not included"
+  },
+  "displacement": {
+   "rigid_rotation_rad": 0.023503338963701992,
+   "max_meridional_mm": 0.16582272309217994,
+   "max_tangential_deformation_mm": 0.4395079256844297
+  }
+ },
+ "verify_hub_twisted": {
+  "elements": 15467,
+  "spring": {
+   "k": 49133.72866313225,
+   "loc_mm": [
+    56.556846113606504,
+    1.5088977514201178,
+    2.9743422696105113
+   ],
+   "dofs": [
+    65926,
+    65927
+   ],
+   "t": [
+    -0.891806264665306,
+    0.4524174911558063
+   ],
+   "reaction_N_per_sector": 0.6482398799034326
+  },
+  "cyclic_tie": {
+   "slave_dofs": 12501,
+   "master_triangles": 2023,
+   "slave_triangles": 2023,
+   "max_outside_distance_mm": 2.3458008539117836e-09
+  },
+  "pardiso": {
+   "rel_residual": 2.6641574442290254e-12
+  },
+  "solve_s": 2.6869115829467773,
+  "pardiso_vs_superlu_max_rel": 4.934841252358623e-07,
+  "ndof": 84366,
+  "nred": 71231,
+  "n_slave": 12501,
+  "n_fixed": 650,
+  "fe3d": {
+   "vm_peak_MPa": 307.9978708526187,
+   "vm_peak_x_mm": 45.57330253826026,
+   "vm_peak_r_mm": 0.8141671629623187,
+   "st_axis_MPa": 248.65001492867302,
+   "st_avg_MPa": 160.02563674050094
+  }
+ },
+ "production_fine": {
+  "mesh": {
+   "hmin_mm": 0.4,
+   "hmax_mm": 2.0,
+   "tets": 61345,
+   "periodic_pairs": 0,
+   "masters": 0,
+   "slaves": 0,
+   "max_pair_centroid_mismatch_mm": 0.0,
+   "quality": {
+    "min": 0.013440414052291542,
+    "p1": 0.20563796704704268,
+    "median": 0.751456227585739,
+    "n_below_0p1": 202,
+    "n_below_0p02": 8
+   }
+  },
+  "solve": {
+   "spring": {
+    "k": 23061.908881287938,
+    "loc_mm": [
+     56.43177958952027,
+     1.6665148471145368,
+     2.8730064623518894
+    ],
+    "dofs": [
+     133471,
+     133472
+    ],
+    "t": [
+     -0.8650088309250163,
+     0.5017566366494184
+    ],
+    "reaction_N_per_sector": 1.3698391154026943
+   },
+   "cyclic_tie": {
+    "slave_dofs": 15366,
+    "master_triangles": 2478,
+    "slave_triangles": 2480,
+    "max_outside_distance_mm": 1.977325205811223e-09
+   },
+   "pardiso": {
+    "rel_residual": 1.3677905385321049e-11
+   },
+   "solve_s": 13.916433334350586,
+   "ndof": 327612,
+   "nred": 311776,
+   "n_slave": 15366,
+   "n_fixed": 484
+  },
+  "peak": {
+   "vm_MPa": 668.6569087070483,
+   "x_mm": 0.12061043069975497,
+   "r_mm": 17.46031420930388,
+   "d_hub_mm": 0.0845896326417109,
+   "note": "sharp blade-root corner in the CAD: singular, mesh-dependent"
+  },
+  "exducer_root": {
+   "vm_at_0p4t_MPa": 344.20476535964434,
+   "at_0p4t_x_r_mm": [
+    42.692305782188924,
+    63.545175452069
+   ],
+   "vm_at_1p0t_MPa": 241.694984161296,
+   "at_1p0t_x_r_mm": [
+    40.19621985872651,
+    56.92695821581026
+   ],
+   "hot_spot_MPa": 412.8863187625377,
+   "hot_spot_x_Kt_MPa": 578.0408462675528
+  },
+  "exducer_root_incl_TE_corner": {
+   "vm_at_0p4t_MPa": 344.20476535964434,
+   "at_0p4t_x_r_mm": [
+    42.692305782188924,
+    63.545175452069
+   ],
+   "vm_at_1p0t_MPa": 241.694984161296,
+   "at_1p0t_x_r_mm": [
+    40.19621985872651,
+    56.92695821581026
+   ],
+   "hot_spot_MPa": 412.8863187625377,
+   "hot_spot_x_Kt_MPa": 578.0408462675528
+  },
+  "inducer_root": {
+   "vm_at_0p4t_MPa": 356.872556145418,
+   "at_0p4t_x_r_mm": [
+    2.3558431515494047,
+    18.237264929501556
+   ],
+   "vm_at_1p0t_MPa": 359.6070169962899,
+   "at_1p0t_x_r_mm": [
+    22.95637424240272,
+    27.348986039757616
+   ],
+   "hot_spot_MPa": 355.0404673753338,
+   "hot_spot_x_Kt_MPa": 497.05665432546726
+  },
+  "inducer_root_incl_LE_corner": {
+   "vm_at_0p4t_MPa": 429.08258640010234,
+   "at_0p4t_x_r_mm": [
+    0.11184222644096209,
+    18.380600943289938
+   ],
+   "vm_at_1p0t_MPa": 422.1969536022559,
+   "at_1p0t_x_r_mm": [
+    0.13180042976516276,
+    19.59740048383396
+   ],
+   "hot_spot_MPa": 433.6959603746593,
+   "hot_spot_x_Kt_MPa": 607.174344524523
+  },
+  "root_note": "max von Mises in blade material with hub distance 0.3-0.5 t_root and 0.9-1.1 t_root (t_root 2.235 mm); exducer r >= 0.7 r2, inducer r < 0.7 r2; 'excluding' = more than t_root from the LE (x) and the rim (r2)",
+  "blade_corner_peak_MPa": {
+   "LE_corner": 668.6569087070483,
+   "TE_corner": 469.8752801905323
+  },
+  "hub": {
+   "vm_max_MPa": 437.8283152936098,
+   "x_mm": 42.63803263501044,
+   "r_mm": 9.253933151580972,
+   "vm_p999_MPa": 332.72622770441006,
+   "st_axis_MPa": 345.95686388608993
+  },
+  "tip": {
+   "n_points": 982,
+   "max_closing_mm": 0.07398663977904214,
+   "at_x_mm": 0.0002416021403038994,
+   "at_r_mm": 49.648590148117,
+   "cold_clearance_mm": 0.25,
+   "note": "blade tip vs a rigid casing; casing / hub thermal growth not included"
+  },
+  "displacement": {
+   "rigid_rotation_rad": 0.018195113037055975,
+   "max_meridional_mm": 0.1662514558243624,
+   "max_tangential_deformation_mm": 0.44520674673165034
+  }
+ }
+}

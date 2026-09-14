@@ -9,6 +9,7 @@ openmdao_checks.out
 *.sql
 *.db
 .venv-np1/
+.venv-cad/
 scripts/phase0_tools/vendor/**/outputs/
 scripts/phase0_tools/vendor/turbodesign_tests/output/
 scripts/phase0_tools/vendor/turboflow_examples/output/

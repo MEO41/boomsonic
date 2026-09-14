@@ -1,0 +1,95 @@
+﻿.venv-cad\Scripts\python : 
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv-cad\Lib\site-packages\pyturbo\aero\centrif.py:811: 
+RuntimeWarning: Method 'bounded' does not support relative tolerance in x; defaulting to absolute tolerance.
+At line:1 char:302
++ ... tch {} } }; .venv-cad\Scripts\python scripts\phase6_cad\impeller_cad. ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (C:\Users\MEO\De...lute tolerance.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  res = minimize_scalar(solve_t,bounds=[0,1],args=(mp,func_mp_full),tol=1e-12)
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv-cad\Lib\site-packages\pyturbo\aero\centrif.py:819: 
+RuntimeWarning: Method 'bounded' does not support relative tolerance in x; defaulting to absolute tolerance.
+  res = minimize_scalar(solve_t,bounds=[0,1],args=(mp,func_mp_full),tol=1e-12)
+blades: {'main_valid': True, 'main_volume_mm3': 1804.4321543920018, 'splitter_valid': True, 'splitter_volume_mm3': 866.2232371457637}
+wheel: {'valid_parts': True, 'volume_mm3': 245149.30672819912, 'mass_kg': 1.0860114288059224, 'hub_mass_kg': 0.9440393881917745, 'blades_mass_kg': 0.14197204061414762, 'note': 'compound; blade embeds (0.6 mm) double-counted, ~0.4 %', 'Ip_kgm2': 0.0013007702556707306, 'Id_cg_kgm2': 0.0008404748159124494, 'x_cg_mm': 35.959500801864245}
+{
+ "wheel": {
+  "valid_parts": true,
+  "volume_mm3": 245149.30672819912,
+  "mass_kg": 1.0860114288059224,
+  "hub_mass_kg": 0.9440393881917745,
+  "blades_mass_kg": 0.14197204061414762,
+  "note": "compound; blade embeds (0.6 mm) double-counted, ~0.4 %",
+  "Ip_kgm2": 0.0013007702556707306,
+  "Id_cg_kgm2": 0.0008404748159124494,
+  "x_cg_mm": 35.959500801864245
+ },
+ "angles": {
+  "hub (first grid row)": {
+   "LE_deg": 32.825440964385045,
+   "TE_deg": 15.120308726137422
+  },
+  "mid": {
+   "LE_deg": 51.45937836915533,
+   "TE_deg": 17.55373325292385
+  },
+  "shroud": {
+   "LE_deg": 62.3988289709566,
+   "TE_deg": 22.840544753884995
+  }
+ },
+ "thickness_mm": {
+  "hub row at 30% chord": 2.0809877721385277,
+  "hub row at 60% chord": 2.1987690025669377,
+  "hub row at 85% chord": 1.7570322508239558,
+  "tip at 30% chord": 0.7805549421832066,
+  "tip at 60% chord": 0.7938756377669929,
+  "tip at 85% chord": 0.7114439190031667
+ },
+ "throat": {
+  "throat_widths_mm": [
+   6.860269199497858,
+   7.776689402391686,
+   8.642963956149716,
+   9.37140390128483,
+   10.036516589254958,
+   10.644557452469908,
+   11.188759722144539,
+   11.660520764363445,
+   12.050421119771533,
+   12.348816894766452,
+   12.54621631481283,
+   12.633631786844036,
+   12.60282198234851
+  ],
+  "A_throat_mm2": 4151.15974502594,
+  "A_eye_mm2": 6795.33448639243,
+  "ratio": 0.610883798779675,
+  "design_ratio": 0.75
+ },
+ "sector": {
+  "valid": true,
+  "volume_mm3": 17758.453502478802,
+  "volume_x12_over_wheel": 0.8692720565839271,
+  "cut_start_deg": -7.5,
+  "n_pieces": 1
+ },
+ "wrap": {
+  "hub": {
+   "Lm": 2.440894068258869,
+   "wrap_deg": 24.89293137000212,
+   "dtheta": 1.1326593042218074
+  },
+  "mid": {
+   "Lm": 1.2936850082282394,
+   "wrap_deg": 35.347644565573695,
+   "dtheta": 0.9175960700603654
+  },
+  "shroud": {
+   "Lm": 0.7215734682184377,
+   "wrap_deg": 41.90660157739077,
+   "dtheta": 0.6475809311868924
+  }
+ }
+}

@@ -1,0 +1,88 @@
+﻿C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\pycycle\thermo\static_ps_resid.py:108: RuntimeWarning: invalid value encountered in sqrt
+  Vsonic = (i['gamma']*i['R']*i['Ts'])**0.5
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\pycycle\thermo\static_ps_resid.py:108: RuntimeWarning: invalid value encountered in sqrt
+  Vsonic = (i['gamma']*i['R']*i['Ts'])**0.5
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\pycycle\thermo\static_ps_resid.py:108: RuntimeWarning: invalid value encountered in sqrt
+  Vsonic = (i['gamma']*i['R']*i['Ts'])**0.5
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\pycycle\thermo\static_ps_calc.py:32: RuntimeWarning: invalid value encountered in sqrt
+  outputs['Vsonic'] = Vsonic = np.sqrt(inputs['gamma'] * inputs['R'] * inputs['Ts'])
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\pycycle\thermo\static_ps_resid.py:108: RuntimeWarning: invalid value encountered in sqrt
+  Vsonic = (i['gamma']*i['R']*i['Ts'])**0.5
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\pycycle\thermo\static_ps_resid.py:108: RuntimeWarning: invalid value encountered in sqrt
+  Vsonic = (i['gamma']*i['R']*i['Ts'])**0.5
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\pycycle\thermo\static_ps_resid.py:108: RuntimeWarning: invalid value encountered in sqrt
+  Vsonic = (i['gamma']*i['R']*i['Ts'])**0.5
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\pycycle\thermo\static_ps_calc.py:32: RuntimeWarning: invalid value encountered in sqrt
+  outputs['Vsonic'] = Vsonic = np.sqrt(inputs['gamma'] * inputs['R'] * inputs['Ts'])
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\pycycle\thermo\static_ps_resid.py:108: RuntimeWarning: invalid value encountered in sqrt
+  Vsonic = (i['gamma']*i['R']*i['Ts'])**0.5
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\pycycle\thermo\static_ps_resid.py:108: RuntimeWarning: invalid value encountered in sqrt
+  Vsonic = (i['gamma']*i['R']*i['Ts'])**0.5
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\pycycle\thermo\static_ps_resid.py:108: RuntimeWarning: invalid value encountered in sqrt
+  Vsonic = (i['gamma']*i['R']*i['Ts'])**0.5
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\pycycle\thermo\static_ps_resid.py:108: RuntimeWarning: invalid value encountered in sqrt
+  Vsonic = (i['gamma']*i['R']*i['Ts'])**0.5
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\pycycle\thermo\static_ps_resid.py:108: RuntimeWarning: invalid value encountered in sqrt
+  Vsonic = (i['gamma']*i['R']*i['Ts'])**0.5
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\pycycle\thermo\static_ps_resid.py:108: RuntimeWarning: invalid value encountered in sqrt
+  Vsonic = (i['gamma']*i['R']*i['Ts'])**0.5
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\pycycle\thermo\static_ps_calc.py:32: RuntimeWarning: invalid value encountered in sqrt
+  outputs['Vsonic'] = Vsonic = np.sqrt(inputs['gamma'] * inputs['R'] * inputs['Ts'])
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\pycycle\thermo\static_ps_resid.py:108: RuntimeWarning: invalid value encountered in sqrt
+  Vsonic = (i['gamma']*i['R']*i['Ts'])**0.5
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\pycycle\thermo\static_ps_resid.py:108: RuntimeWarning: invalid value encountered in sqrt
+  Vsonic = (i['gamma']*i['R']*i['Ts'])**0.5
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\pycycle\thermo\static_ps_resid.py:108: RuntimeWarning: invalid value encountered in sqrt
+  Vsonic = (i['gamma']*i['R']*i['Ts'])**0.5
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\pycycle\thermo\static_ps_calc.py:32: RuntimeWarning: invalid value encountered in sqrt
+  outputs['Vsonic'] = Vsonic = np.sqrt(inputs['gamma'] * inputs['R'] * inputs['Ts'])
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\pycycle\thermo\static_ps_resid.py:108: RuntimeWarning: invalid value encountered in sqrt
+  Vsonic = (i['gamma']*i['R']*i['Ts'])**0.5
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\pycycle\thermo\static_ps_resid.py:108: RuntimeWarning: invalid value encountered in sqrt
+  Vsonic = (i['gamma']*i['R']*i['Ts'])**0.5
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\pycycle\thermo\static_ps_resid.py:108: RuntimeWarning: invalid value encountered in sqrt
+  Vsonic = (i['gamma']*i['R']*i['Ts'])**0.5
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\pycycle\thermo\static_ps_resid.py:108: RuntimeWarning: invalid value encountered in sqrt
+  Vsonic = (i['gamma']*i['R']*i['Ts'])**0.5
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\pycycle\thermo\static_ps_resid.py:108: RuntimeWarning: invalid value encountered in sqrt
+  Vsonic = (i['gamma']*i['R']*i['Ts'])**0.5
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\pycycle\thermo\static_ps_resid.py:108: RuntimeWarning: invalid value encountered in sqrt
+  Vsonic = (i['gamma']*i['R']*i['Ts'])**0.5
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\pycycle\thermo\static_ps_calc.py:32: RuntimeWarning: invalid value encountered in sqrt
+  outputs['Vsonic'] = Vsonic = np.sqrt(inputs['gamma'] * inputs['R'] * inputs['Ts'])
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\pycycle\thermo\static_ps_resid.py:108: RuntimeWarning: invalid value encountered in sqrt
+  Vsonic = (i['gamma']*i['R']*i['Ts'])**0.5
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\pycycle\thermo\static_ps_resid.py:108: RuntimeWarning: invalid value encountered in sqrt
+  Vsonic = (i['gamma']*i['R']*i['Ts'])**0.5
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\pycycle\thermo\static_ps_resid.py:108: RuntimeWarning: invalid value encountered in sqrt
+  Vsonic = (i['gamma']*i['R']*i['Ts'])**0.5
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\pycycle\thermo\static_ps_calc.py:32: RuntimeWarning: invalid value encountered in sqrt
+  outputs['Vsonic'] = Vsonic = np.sqrt(inputs['gamma'] * inputs['R'] * inputs['Ts'])
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\pycycle\thermo\static_ps_resid.py:108: RuntimeWarning: invalid value encountered in sqrt
+  Vsonic = (i['gamma']*i['R']*i['Ts'])**0.5
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\pycycle\thermo\static_ps_resid.py:108: RuntimeWarning: invalid value encountered in sqrt
+  Vsonic = (i['gamma']*i['R']*i['Ts'])**0.5
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\pycycle\thermo\static_ps_resid.py:108: RuntimeWarning: invalid value encountered in sqrt
+  Vsonic = (i['gamma']*i['R']*i['Ts'])**0.5
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\pycycle\thermo\static_ps_resid.py:108: RuntimeWarning: invalid value encountered in sqrt
+  Vsonic = (i['gamma']*i['R']*i['Ts'])**0.5
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\pycycle\thermo\static_ps_resid.py:108: RuntimeWarning: invalid value encountered in sqrt
+  Vsonic = (i['gamma']*i['R']*i['Ts'])**0.5
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\pycycle\thermo\static_ps_resid.py:108: RuntimeWarning: invalid value encountered in sqrt
+  Vsonic = (i['gamma']*i['R']*i['Ts'])**0.5
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\pycycle\thermo\static_ps_calc.py:32: RuntimeWarning: invalid value encountered in sqrt
+  outputs['Vsonic'] = Vsonic = np.sqrt(inputs['gamma'] * inputs['R'] * inputs['Ts'])
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\pycycle\thermo\static_ps_resid.py:108: RuntimeWarning: invalid value encountered in sqrt
+  Vsonic = (i['gamma']*i['R']*i['Ts'])**0.5
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\pycycle\thermo\static_ps_resid.py:108: RuntimeWarning: invalid value encountered in sqrt
+  Vsonic = (i['gamma']*i['R']*i['Ts'])**0.5
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\pycycle\thermo\static_ps_resid.py:108: RuntimeWarning: invalid value encountered in sqrt
+  Vsonic = (i['gamma']*i['R']*i['Ts'])**0.5
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\pycycle\thermo\static_ps_calc.py:32: RuntimeWarning: invalid value encountered in sqrt
+  outputs['Vsonic'] = Vsonic = np.sqrt(inputs['gamma'] * inputs['R'] * inputs['Ts'])
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\pycycle\thermo\static_ps_resid.py:108: RuntimeWarning: invalid value encountered in sqrt
+  Vsonic = (i['gamma']*i['R']*i['Ts'])**0.5
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\pycycle\thermo\static_ps_resid.py:108: RuntimeWarning: invalid value encountered in sqrt
+  Vsonic = (i['gamma']*i['R']*i['Ts'])**0.5
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\pycycle\thermo\static_ps_resid.py:108: RuntimeWarning: invalid value encountered in sqrt
+  Vsonic = (i['gamma']*i['R']*i['Ts'])**0.5

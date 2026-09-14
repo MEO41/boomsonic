@@ -1,5 +1,10 @@
 # Impeller stress gate: pure centrifugal, OPR 4, 85 000 rpm, fielded tip speed 537 m/s (2026-09-13)
 
+> **Note (Phase 3R, 2026-09-14).** The solvers and criteria here are verified and are reused as a design constraint in
+> `scripts/phase3_cycle/impeller_stress.py`. The impeller they were applied to came from TurboFlow with a defective slip
+> model: its real tip speed for PR 4 would have been higher still. The Phase 3R impeller (`docs/phase3r_centrifugal.md`)
+> is stress-sized at 105 % speed.
+
 A fast decision gate run before Phase 4. The question: does the pure-centrifugal impeller pass a real stress check
 at the fielded tip speed, where the Phase 3 solid-disc screening gave 526 MPa against a 450 MPa
 conceptual allowable? This is not a redesign. The impeller geometry is the Phase 3 TurboFlow design

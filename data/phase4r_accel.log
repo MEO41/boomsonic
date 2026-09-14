@@ -1,0 +1,1529 @@
+﻿
+compressor map: design PR 4.009 (cycle OPR 4.0), design R-line 2.144, design SMN to peak 28.2 %
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\pycycle\elements\turbine.py:41: 
+RuntimeWarning: divide by zero encountered in power
+  outputs['Np'] = inputs['Nmech'] * inputs['Tt']**-0.5
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\vectors\default_vector.py:435: 
+RuntimeWarning: invalid value encountered in subtract
+  data[idxs] -= val
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\pycycle\elements\turbine.py:41: 
+RuntimeWarning: divide by zero encountered in power
+  outputs['Np'] = inputs['Nmech'] * inputs['Tt']**-0.5
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\vectors\default_vector.py:435: 
+RuntimeWarning: invalid value encountered in subtract
+  data[idxs] -= val
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\pycycle\thermo\static_ps_resid.py:128: 
+RuntimeWarning: invalid value encountered in sqrt
+  Vsonic = (i['gamma']*i['R']*i['Ts'])**0.5
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\pycycle\thermo\static_ps_resid.py:128: 
+RuntimeWarning: invalid value encountered in sqrt
+  Vsonic = (i['gamma']*i['R']*i['Ts'])**0.5
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\pycycle\thermo\static_ps_resid.py:128: 
+RuntimeWarning: invalid value encountered in sqrt
+  Vsonic = (i['gamma']*i['R']*i['Ts'])**0.5
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\pycycle\thermo\static_ps_resid.py:128: 
+RuntimeWarning: invalid value encountered in sqrt
+  Vsonic = (i['gamma']*i['R']*i['Ts'])**0.5
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\pycycle\thermo\static_ps_resid.py:128: 
+RuntimeWarning: invalid value encountered in sqrt
+  Vsonic = (i['gamma']*i['R']*i['Ts'])**0.5
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\pycycle\thermo\static_ps_resid.py:128: 
+RuntimeWarning: invalid value encountered in sqrt
+  Vsonic = (i['gamma']*i['R']*i['Ts'])**0.5
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\pycycle\thermo\static_ps_resid.py:128: 
+RuntimeWarning: invalid value encountered in sqrt
+  Vsonic = (i['gamma']*i['R']*i['Ts'])**0.5
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\pycycle\thermo\static_ps_resid.py:128: 
+RuntimeWarning: invalid value encountered in sqrt
+  Vsonic = (i['gamma']*i['R']*i['Ts'])**0.5
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\pycycle\thermo\static_ps_resid.py:128: 
+RuntimeWarning: invalid value encountered in sqrt
+  Vsonic = (i['gamma']*i['R']*i['Ts'])**0.5
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\pycycle\thermo\static_ps_resid.py:128: 
+RuntimeWarning: invalid value encountered in sqrt
+  Vsonic = (i['gamma']*i['R']*i['Ts'])**0.5
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\pycycle\elements\turbine.py:41: 
+RuntimeWarning: divide by zero encountered in power
+  outputs['Np'] = inputs['Nmech'] * inputs['Tt']**-0.5
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\vectors\default_vector.py:435: 
+RuntimeWarning: invalid value encountered in subtract
+  data[idxs] -= val
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.inlet.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.balance.T' exceeds lower bounds
+  Val: [-237.42012111]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110427]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.duct.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.balance.T' exceeds lower bounds
+  Val: [-235.45503341]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110298]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\pycycle\elements\turbine.py:41: 
+RuntimeWarning: divide by zero encountered in power
+  outputs['Np'] = inputs['Nmech'] * inputs['Tt']**-0.5
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\vectors\default_vector.py:435: 
+RuntimeWarning: invalid value encountered in subtract
+  data[idxs] -= val
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.inlet.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.balance.T' exceeds lower bounds
+  Val: [-237.42011894]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110427]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.duct.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.balance.T' exceeds lower bounds
+  Val: [-235.45503111]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110298]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\pycycle\thermo\static_ps_resid.py:128: 
+RuntimeWarning: invalid value encountered in sqrt
+  Vsonic = (i['gamma']*i['R']*i['Ts'])**0.5
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\pycycle\thermo\static_ps_resid.py:128: 
+RuntimeWarning: invalid value encountered in sqrt
+  Vsonic = (i['gamma']*i['R']*i['Ts'])**0.5
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\pycycle\thermo\static_ps_resid.py:128: 
+RuntimeWarning: invalid value encountered in sqrt
+  Vsonic = (i['gamma']*i['R']*i['Ts'])**0.5
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.inlet.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.balance.T' exceeds lower bounds
+  Val: [-237.42024059]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110427]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.duct.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.balance.T' exceeds lower bounds
+  Val: [-235.45516002]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110298]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\pycycle\thermo\static_ps_resid.py:128: 
+RuntimeWarning: invalid value encountered in sqrt
+  Vsonic = (i['gamma']*i['R']*i['Ts'])**0.5
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.inlet.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.balance.T' exceeds lower bounds
+  Val: [-237.42013553]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110427]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.duct.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.balance.T' exceeds lower bounds
+  Val: [-235.45504869]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110298]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\pycycle\thermo\static_ps_resid.py:128: 
+RuntimeWarning: invalid value encountered in sqrt
+  Vsonic = (i['gamma']*i['R']*i['Ts'])**0.5
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\pycycle\thermo\static_ps_resid.py:128: 
+RuntimeWarning: invalid value encountered in sqrt
+  Vsonic = (i['gamma']*i['R']*i['Ts'])**0.5
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.inlet.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.balance.T' exceeds lower bounds
+  Val: [-237.42016027]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110427]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.duct.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.balance.T' exceeds lower bounds
+  Val: [-235.45507491]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110298]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.inlet.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.balance.T' exceeds lower bounds
+  Val: [-237.42016074]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110427]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.duct.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.balance.T' exceeds lower bounds
+  Val: [-235.45507541]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110298]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.inlet.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.balance.T' exceeds lower bounds
+  Val: [-237.42016108]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110427]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.duct.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.balance.T' exceeds lower bounds
+  Val: [-235.45507577]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110298]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.inlet.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.balance.T' exceeds lower bounds
+  Val: [-237.42016108]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110427]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.duct.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.balance.T' exceeds lower bounds
+  Val: [-235.45507576]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110298]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.inlet.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.balance.T' exceeds lower bounds
+  Val: [-237.42016108]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110427]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.duct.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.balance.T' exceeds lower bounds
+  Val: [-235.45507576]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110298]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.inlet.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.balance.T' exceeds lower bounds
+  Val: [-237.42016107]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110427]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.duct.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.balance.T' exceeds lower bounds
+  Val: [-235.45507575]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110298]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.inlet.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.balance.T' exceeds lower bounds
+  Val: [-237.42016105]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110427]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.duct.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.balance.T' exceeds lower bounds
+  Val: [-235.45507573]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110298]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.inlet.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.balance.T' exceeds lower bounds
+  Val: [-237.42016118]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110427]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.duct.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.balance.T' exceeds lower bounds
+  Val: [-235.45507587]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110298]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.inlet.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.balance.T' exceeds lower bounds
+  Val: [-237.4201624]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110427]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.duct.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.balance.T' exceeds lower bounds
+  Val: [-235.45507716]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110298]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.inlet.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.balance.T' exceeds lower bounds
+  Val: [-237.42016322]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110427]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.duct.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.balance.T' exceeds lower bounds
+  Val: [-235.45507803]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110298]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.inlet.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.balance.T' exceeds lower bounds
+  Val: [-237.42016321]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110427]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.duct.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.balance.T' exceeds lower bounds
+  Val: [-235.45507802]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110298]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.inlet.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.balance.T' exceeds lower bounds
+  Val: [-237.42016321]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110427]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.duct.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.balance.T' exceeds lower bounds
+  Val: [-235.45507802]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110298]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.inlet.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.balance.T' exceeds lower bounds
+  Val: [-237.42016321]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110427]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.duct.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.balance.T' exceeds lower bounds
+  Val: [-235.45507802]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110298]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.inlet.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.balance.T' exceeds lower bounds
+  Val: [-237.42016321]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110427]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.duct.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.balance.T' exceeds lower bounds
+  Val: [-235.45507802]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110298]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.inlet.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.balance.T' exceeds lower bounds
+  Val: [-237.42016321]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110427]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.duct.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.balance.T' exceeds lower bounds
+  Val: [-235.45507802]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110298]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.inlet.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.balance.T' exceeds lower bounds
+  Val: [-237.42016321]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110427]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.duct.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.balance.T' exceeds lower bounds
+  Val: [-235.45507802]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110298]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.inlet.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.balance.T' exceeds lower bounds
+  Val: [-237.42016321]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110427]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.duct.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.balance.T' exceeds lower bounds
+  Val: [-235.45507802]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110298]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.inlet.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.balance.T' exceeds lower bounds
+  Val: [-237.42016321]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110427]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.duct.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.balance.T' exceeds lower bounds
+  Val: [-235.45507802]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110298]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.inlet.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.balance.T' exceeds lower bounds
+  Val: [-237.42016321]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110427]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.duct.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.balance.T' exceeds lower bounds
+  Val: [-235.45507802]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110298]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.inlet.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.balance.T' exceeds lower bounds
+  Val: [-237.42016321]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110427]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.duct.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.balance.T' exceeds lower bounds
+  Val: [-235.45507802]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110298]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.inlet.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.balance.T' exceeds lower bounds
+  Val: [-237.42016321]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110427]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.duct.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.balance.T' exceeds lower bounds
+  Val: [-235.45507802]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110298]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.inlet.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.balance.T' exceeds lower bounds
+  Val: [-237.42016321]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110427]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.duct.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.balance.T' exceeds lower bounds
+  Val: [-235.45507802]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110298]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.inlet.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.balance.T' exceeds lower bounds
+  Val: [-237.42016321]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110427]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.duct.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.balance.T' exceeds lower bounds
+  Val: [-235.45507802]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110298]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.inlet.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.balance.T' exceeds lower bounds
+  Val: [-237.42016321]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110427]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.duct.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.balance.T' exceeds lower bounds
+  Val: [-235.45507802]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110298]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.inlet.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.balance.T' exceeds lower bounds
+  Val: [-237.42016321]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110427]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.duct.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.balance.T' exceeds lower bounds
+  Val: [-235.45507802]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110298]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.inlet.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.balance.T' exceeds lower bounds
+  Val: [-237.42016321]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110427]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.duct.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.balance.T' exceeds lower bounds
+  Val: [-235.45507802]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110298]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.inlet.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.balance.T' exceeds lower bounds
+  Val: [-237.42016321]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110427]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.duct.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.balance.T' exceeds lower bounds
+  Val: [-235.45507802]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110298]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.inlet.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.balance.T' exceeds lower bounds
+  Val: [-237.42016321]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110427]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.duct.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.balance.T' exceeds lower bounds
+  Val: [-235.45507802]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110298]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.inlet.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.balance.T' exceeds lower bounds
+  Val: [-237.42016321]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110427]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.duct.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.balance.T' exceeds lower bounds
+  Val: [-235.45507802]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110298]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.inlet.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.balance.T' exceeds lower bounds
+  Val: [-237.42016321]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110427]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.duct.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.balance.T' exceeds lower bounds
+  Val: [-235.45507802]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110298]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.inlet.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.balance.T' exceeds lower bounds
+  Val: [-237.42016321]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110427]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.duct.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.balance.T' exceeds lower bounds
+  Val: [-235.45507802]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110298]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.inlet.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.balance.T' exceeds lower bounds
+  Val: [-237.42016321]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110427]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.duct.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.balance.T' exceeds lower bounds
+  Val: [-235.45507802]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110298]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.inlet.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.balance.T' exceeds lower bounds
+  Val: [-237.42016321]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110427]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.duct.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.balance.T' exceeds lower bounds
+  Val: [-235.45507802]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110298]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.inlet.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.balance.T' exceeds lower bounds
+  Val: [-237.42016321]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110427]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.duct.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.balance.T' exceeds lower bounds
+  Val: [-235.45507802]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110298]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.inlet.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.balance.T' exceeds lower bounds
+  Val: [-237.42016321]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110427]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.duct.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.balance.T' exceeds lower bounds
+  Val: [-235.45507802]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110298]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.inlet.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.balance.T' exceeds lower bounds
+  Val: [-237.42016321]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110427]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.duct.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.balance.T' exceeds lower bounds
+  Val: [-235.45507802]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110298]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.inlet.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.balance.T' exceeds lower bounds
+  Val: [-237.42016321]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110427]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.duct.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.balance.T' exceeds lower bounds
+  Val: [-235.45507802]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110298]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.inlet.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.balance.T' exceeds lower bounds
+  Val: [-237.42016321]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110427]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.duct.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.balance.T' exceeds lower bounds
+  Val: [-235.45507802]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110298]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.inlet.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.balance.T' exceeds lower bounds
+  Val: [-237.42016321]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.inlet.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110427]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\solver.py:819: 
+SolverWarning:Your model has stalled three times and may be violating the bounds. In the future, turn on 
+print_bound_enforce in your solver options here: 
+OD0.duct.out_stat.nonlinear_solver.linesearch.options['print_bound_enforce']=True. 
+The bound(s) being violated now are:
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.balance.T' exceeds lower bounds
+  Val: [-235.45507802]
+  Lower: [150.]
+System.Management.Automation.RemoteException
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv\Lib\site-packages\openmdao\solvers\linesearch\backtracking.p
+y:39: SolverWarning:'OD0.duct.out_stat.ps_resid.Ps' exceeds lower bounds
+  Val: [-0.00110298]
+  Lower: [-0.0009009]
+System.Management.Automation.RemoteException
+{'N': 1.0, 'T4_steady': 1150.0, 'SM_steady': np.float64(0.238), 'P_ex_kW_5': 0.0, 'T4_lim_5': nan, 'SM_lim_5': nan, 
+'limit_5': 'none', 'P_ex_kW_10': 0.0, 'T4_lim_10': nan, 'SM_lim_10': nan, 'limit_10': 'none'}
+{'N': 0.95, 'T4_steady': 1110.0, 'SM_steady': np.float64(0.233), 'P_ex_kW_5': 9.454, 'T4_lim_5': 1150.0, 'SM_lim_5': 
+np.float64(0.21), 'limit_5': 'T4', 'P_ex_kW_10': 9.454, 'T4_lim_10': 1150.0, 'SM_lim_10': np.float64(0.21), 
+'limit_10': 'T4'}
+{'N': 0.9, 'T4_steady': 1030.0, 'SM_steady': np.float64(0.23), 'P_ex_kW_5': 20.355, 'T4_lim_5': 1150.0, 'SM_lim_5': 
+np.float64(0.162), 'limit_5': 'T4', 'P_ex_kW_10': 20.355, 'T4_lim_10': 1150.0, 'SM_lim_10': np.float64(0.162), 
+'limit_10': 'T4'}
+{'N': 0.85, 'T4_steady': 990.0, 'SM_steady': np.float64(0.262), 'P_ex_kW_5': 24.845, 'T4_lim_5': 1150.0, 'SM_lim_5': 
+np.float64(0.17), 'limit_5': 'T4', 'P_ex_kW_10': 24.845, 'T4_lim_10': 1150.0, 'SM_lim_10': np.float64(0.17), 
+'limit_10': 'T4'}
+{'N': 0.8, 'T4_steady': 950.0, 'SM_steady': np.float64(0.262), 'P_ex_kW_5': 26.24, 'T4_lim_5': 1150.0, 'SM_lim_5': 
+np.float64(0.146), 'limit_5': 'T4', 'P_ex_kW_10': 26.24, 'T4_lim_10': 1150.0, 'SM_lim_10': np.float64(0.146), 
+'limit_10': 'T4'}
+{'N': 0.75, 'T4_steady': 910.0, 'SM_steady': np.float64(0.244), 'P_ex_kW_5': 24.935, 'T4_lim_5': 1150.0, 'SM_lim_5': 
+np.float64(0.107), 'limit_5': 'T4', 'P_ex_kW_10': 24.935, 'T4_lim_10': 1150.0, 'SM_lim_10': np.float64(0.107), 
+'limit_10': 'T4'}
+{'N': 0.7, 'T4_steady': 870.0, 'SM_steady': np.float64(0.258), 'P_ex_kW_5': 22.786, 'T4_lim_5': 1150.0, 'SM_lim_5': 
+np.float64(0.098), 'limit_5': 'T4', 'P_ex_kW_10': 21.128, 'T4_lim_10': 1130.0, 'SM_lim_10': np.float64(0.108), 
+'limit_10': 'surge margin'}
+{'N': 0.65, 'T4_steady': 850.0, 'SM_steady': np.float64(0.24), 'P_ex_kW_5': 18.946, 'T4_lim_5': 1150.0, 'SM_lim_5': 
+np.float64(0.071), 'limit_5': 'T4', 'P_ex_kW_10': 14.357, 'T4_lim_10': 1070.0, 'SM_lim_10': np.float64(0.109), 
+'limit_10': 'surge margin'}
+{'N': 0.6, 'T4_steady': 830.0, 'SM_steady': np.float64(0.231), 'P_ex_kW_5': 15.231, 'T4_lim_5': 1150.0, 'SM_lim_5': 
+np.float64(0.051), 'limit_5': 'T4', 'P_ex_kW_10': 9.92, 'T4_lim_10': 1030.0, 'SM_lim_10': np.float64(0.11), 
+'limit_10': 'surge margin'}
+{'N': 0.55, 'T4_steady': 830.0, 'SM_steady': np.float64(0.218), 'P_ex_kW_5': 11.244, 'T4_lim_5': 1130.0, 'SM_lim_5': 
+np.float64(0.054), 'limit_5': 'surge margin', 'P_ex_kW_10': 7.374, 'T4_lim_10': 1010.0, 'SM_lim_10': 
+np.float64(0.111), 'limit_10': 'surge margin'}
+{'N': 0.5, 'T4_steady': 830.0, 'SM_steady': np.float64(0.184), 'P_ex_kW_5': 5.688, 'T4_lim_5': 1050.0, 'SM_lim_5': 
+np.float64(0.058), 'limit_5': 'surge margin', 'P_ex_kW_10': 3.256, 'T4_lim_10': 950.0, 'SM_lim_10': np.float64(0.111), 
+'limit_10': 'surge margin'}
+{'N': 0.45, 'T4_steady': 850.0, 'SM_steady': np.float64(0.125), 'P_ex_kW_5': 2.352, 'T4_lim_5': 970.0, 'SM_lim_5': 
+np.float64(0.054), 'limit_5': 'surge margin', 'P_ex_kW_10': 0.579, 'T4_lim_10': 870.0, 'SM_lim_10': np.float64(0.113), 
+'limit_10': 'surge margin'}
+{'N': 0.4, 'T4_steady': 910.0, 'SM_steady': np.float64(0.08), 'P_ex_kW_5': 0.526, 'T4_lim_5': 950.0, 'SM_lim_5': 
+np.float64(0.058), 'limit_5': 'surge margin', 'P_ex_kW_10': 0.0, 'T4_lim_10': nan, 'SM_lim_10': nan, 'limit_10': 
+'none'}
+{'N': 0.35, 'T4_steady': 1030.0, 'SM_steady': np.float64(0.09), 'P_ex_kW_5': 0.501, 'T4_lim_5': 1110.0, 'SM_lim_5': 
+np.float64(0.055), 'limit_5': 'surge margin', 'P_ex_kW_10': 0.0, 'T4_lim_10': nan, 'SM_lim_10': nan, 'limit_10': 
+'none'}
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\scripts\phase4_turbomachinery\cc_transient.py:54: RuntimeWarning: 
+invalid value encountered in subtract
+  df.loc[df.index[o], f"t_to_100pct_s{tag}"] = (t_cum[-1] - t_cum) * I_P
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\scripts\phase4_turbomachinery\cc_transient.py:54: RuntimeWarning: 
+invalid value encountered in subtract
+  df.loc[df.index[o], f"t_to_100pct_s{tag}"] = (t_cum[-1] - t_cum) * I_P
+   N  T4_steady  SM_steady  P_ex_kW_5  T4_lim_5  SM_lim_5      limit_5  P_ex_kW_10  T4_lim_10  SM_lim_10     limit_10  
+t_to_100pct_s_5  t_to_100pct_s_10   I_p
+1.00     1150.0      0.238      0.000       NaN       NaN         none       0.000        NaN        NaN         none  
+            NaN               NaN 0.002
+0.95     1110.0      0.233      9.454    1150.0     0.210           T4       9.454     1150.0      0.210           T4  
+            inf               NaN 0.002
+0.90     1030.0      0.230     20.355    1150.0     0.162           T4      20.355     1150.0      0.162           T4  
+            inf               NaN 0.002
+0.85      990.0      0.262     24.845    1150.0     0.170           T4      24.845     1150.0      0.170           T4  
+            inf               NaN 0.002
+0.80      950.0      0.262     26.240    1150.0     0.146           T4      26.240     1150.0      0.146           T4  
+            inf               NaN 0.002
+0.75      910.0      0.244     24.935    1150.0     0.107           T4      24.935     1150.0      0.107           T4  
+            inf               NaN 0.002
+0.70      870.0      0.258     22.786    1150.0     0.098           T4      21.128     1130.0      0.108 surge margin  
+            inf               NaN 0.002
+0.65      850.0      0.240     18.946    1150.0     0.071           T4      14.357     1070.0      0.109 surge margin  
+            inf               NaN 0.002
+0.60      830.0      0.231     15.231    1150.0     0.051           T4       9.920     1030.0      0.110 surge margin  
+            inf               NaN 0.002
+0.55      830.0      0.218     11.244    1130.0     0.054 surge margin       7.374     1010.0      0.111 surge margin  
+            inf               NaN 0.002
+0.50      830.0      0.184      5.688    1050.0     0.058 surge margin       3.256      950.0      0.111 surge margin  
+            inf               NaN 0.002
+0.45      850.0      0.125      2.352     970.0     0.054 surge margin       0.579      870.0      0.113 surge margin  
+            inf               NaN 0.002
+0.40      910.0      0.080      0.526     950.0     0.058 surge margin       0.000        NaN        NaN         none  
+            inf               NaN 0.002
+0.35     1030.0      0.090      0.501    1110.0     0.055 surge margin       0.000        NaN        NaN         none  
+            inf               inf 0.002
+
+

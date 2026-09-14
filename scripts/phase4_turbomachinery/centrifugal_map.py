@@ -7,9 +7,13 @@ diffuser, 'custom' vaned-diffuser loss, throat choke check, LHS heuristic initia
 fixed at the design eye values; the map is swept in rotational speed (fraction of design) and mass flow.
 Each point is solved independently (the LHS heuristic guess), failures recorded. Verification: the design point
 must reproduce the design run's PR and efficiency.
+Phase 3R: TurboFlow's Wiesner slip is patched (scripts/phase3_cycle/turboflow_fixes.py). Maps made before 2026-09-14
+used the stock (defective) slip.
 """
-import sys, json, copy, numpy as np
+import os, sys, json, copy, numpy as np
 import turboflow as tf
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "phase3_cycle"))
+import turboflow_fixes  # noqa: F401  (Wiesner-slip unit fix)
 d = json.load(open(sys.argv[1])); out_file = sys.argv[2]
 Ns = [float(v) for v in sys.argv[3].split(",")] if len(sys.argv) > 3 else [1.0, 1.05, 0.95, 0.9, 0.85, 0.8, 0.7, 0.6, 0.5, 0.4]
 inp = d["input"]; T01, P01, mdot_d = inp["T01"], inp["P01"], inp["mdot"]; omega_d = inp["rpm"] * np.pi / 30

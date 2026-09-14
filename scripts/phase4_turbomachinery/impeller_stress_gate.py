@@ -74,10 +74,17 @@ def analyse_hub(r_bore, t_rim, A, p, nr=90, nz=18, omega=W, dT=None):
     ds = np.hypot(np.gradient(rh), np.gradient(zh)); h = np.hypot(rs - rh, zs - zh)
     m_bl = RHO * T_BLADE * np.sum(np.where(phis < np.pi / 4, 12, 24) * h * ds)
     bore_mask = st["r"] < (r_bore + 0.002) if r_bore > 0 else st["r"] < 0.002
+    # mass properties (Phase 4 rotordynamics): hub from the FE quadrature, blades as rings at the mid-span point
+    w = 2 * np.pi * st["r"] * st["dA"] * RHO
+    dm_b = RHO * T_BLADE * np.where(phis < np.pi / 4, 12, 24) * h * ds; rb, zb = 0.5 * (rh + rs), 0.5 * (zh + zs)
+    m_tot = w.sum() + dm_b.sum(); z_cg = float(((w * st["z"]).sum() + (dm_b * zb).sum()) / m_tot)
+    Ip = float((w * st["r"] ** 2).sum() + (dm_b * rb ** 2).sum())
+    Id = float((w * (0.5 * st["r"] ** 2 + (st["z"] - z_cg) ** 2)).sum() + (dm_b * (0.5 * rb ** 2 + (zb - z_cg) ** 2)).sum())
     return dict(r_bore_mm=r_bore * 1e3, t_rim_mm=t_rim * 1e3, A_mm=A * 1e3, p=p, vm_peak_MPa=vm.max() / 1e6,
                 vm_peak_r_mm=st["r"][i] * 1e3, vm_peak_z_mm=st["z"][i] * 1e3, st_bore_MPa=st["st"][bore_mask].max() / 1e6,
                 st_avg_MPa=st_avg / 1e6, mass_hub_kg=m_hub, mass_blades_kg=m_bl, mass_total_kg=m_hub + m_bl,
-                burst_ratio=float(np.sqrt(K_BURST * FTU / st_avg)), yield_MS=FTY / vm.max() - 1)
+                burst_ratio=float(np.sqrt(K_BURST * FTU / st_avg)), yield_MS=FTY / vm.max() - 1,
+                Ip_kgm2=Ip, Id_cg_kgm2=Id, z_cg_mm=z_cg * 1e3, z_back_axis_mm=(L + t_rim + A) * 1e3)
 
 def plate_root(t_root, t_tip=0.8e-3, r_i_frac=0.7, beta2=30.0, nx=40, ny=16, Kt=1.4, E=110e9, verify=False):
     """Morley-plate FE of one exducer blade; returns peak root bending stress (x Kt) [Pa]."""

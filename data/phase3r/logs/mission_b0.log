@@ -1,0 +1,126 @@
+﻿compressor map: design PR 4.000 (cycle OPR 4.0), design R-line 1.002, design SMN to peak 0.0 %
++  +  |  LS: AG 1 ; 4259.09765 1
++  +  |  LS: AG 2 ; 11.1373566 0.5
++  +  |  LS: AG 1 ; 469.274126 1
++  +  |  LS: AG 2 ; 5.57177472 0.5
++  +  |  LS: AG 1 ; 93.7912197 1
++  +  |  LS: AG 2 ; 2.78570611 0.5
++  +  |  LS: AG 1 ; 36.5383902 1
++  +  |  LS: AG 2 ; 1.39283983 0.5
++  +  |  LS: AG 1 ; 10.4760098 1
++  +  |  LS: AG 2 ; 0.696415884 0.5
++  +  |  LS: AG 1 ; 2.9227207 1
++  +  |  LS: AG 2 ; 0.348205578 0.5
++  +  |  LS: AG 1 ; 2.92276439 1
++  +  |  LS: AG 2 ; 0.174105251 0.5
++  +  |  LS: AG 1 ; 165556944 1
++  +  |  LS: AG 2 ; 4.58213362 0.5
++  +  |  LS: AG 1 ; 30880633.9 1
++  +  |  LS: AG 2 ; 2.29786962 0.5
++  +  |  LS: AG 1 ; 1416849.13 1
++  +  |  LS: AG 2 ; 1.14910962 0.5
++  +  |  LS: AG 1 ; 1375.86072 1
++  +  |  LS: AG 2 ; 0.575651331 0.5
++  +  |  LS: AG 1 ; 363.546639 1
++  +  |  LS: AG 2 ; 0.287850228 0.5
++  +  |  LS: AG 1 ; 99.7690556 1
++  +  |  LS: AG 2 ; 0.14393526 0.5
++  +  |  LS: AG 1 ; 30.4620975 1
++  +  |  LS: AG 2 ; 0.07196763 0.5
++  +  |  LS: AG 1 ; 6.93747655 1
++  +  |  LS: AG 2 ; 0.035983815 0.5
++  +  |  LS: AG 1 ; 1.65877774 1
++  +  |  LS: AG 2 ; 0.0179919075 0.5
++  +  |  LS: AG 1 ; 0.405754946 1
++  +  |  LS: AG 2 ; 0.00899595375 0.5
++  +  |  LS: AG 1 ; 0.10035138 1
++  +  |  LS: AG 2 ; 0.0255705177 0.5
++  +  |  LS: AG 1 ; 0.0249706579 1
++  +  |  LS: AG 2 ; 0.0189727699 0.5
+  SLS N 100.0%: conv False Fn   672.1 W 1.359 PR 4.327 T4 1178.2 EGT   728 C Rline 1.000 Nc 1.035 SMN +nan NPR 1.57
+  SLS N  95.0%: conv False Fn   546.3 W 1.255 PR 3.866 T4 1103.1 EGT   667 C Rline 1.000 Nc 0.984 SMN +nan NPR 1.45
+  SLS N  90.0%: conv True Fn   443.4 W 1.154 PR 3.457 T4 1038.3 EGT   618 C Rline 1.026 Nc 0.932 SMN +0.004 NPR 1.35
+  SLS N  85.0%: conv True Fn   359.8 W 1.056 PR 3.095 T4  986.5 EGT   580 C Rline 1.046 Nc 0.880 SMN +0.008 NPR 1.28
+  SLS N  80.0%: conv False Fn   288.4 W 0.958 PR 2.777 T4  942.0 EGT   550 C Rline 1.000 Nc 0.828 SMN +nan NPR 1.22
+  SLS N  75.0%: conv True Fn   233.3 W 0.869 PR 2.505 T4  906.9 EGT   528 C Rline 1.026 Nc 0.777 SMN +0.008 NPR 1.18
+  SLS N  70.0%: conv True Fn   188.2 W 0.787 PR 2.262 T4  876.7 EGT   511 C Rline 1.021 Nc 0.725 SMN +0.007 NPR 1.14
+  SLS N  65.0%: conv False Fn   146.3 W 0.696 PR 2.048 T4  852.7 EGT   499 C Rline 1.000 Nc 0.673 SMN +nan NPR 1.11
+  SLS N  60.0%: conv False Fn   113.5 W 0.614 PR 1.862 T4  834.3 EGT   492 C Rline 1.000 Nc 0.621 SMN +nan NPR 1.08
+  SLS N  55.0%: conv False Fn    88.3 W 0.541 PR 1.702 T4  822.5 EGT   491 C Rline 1.000 Nc 0.569 SMN +nan NPR 1.07
+  SLS N  50.0%: conv False Fn    64.0 W 0.453 PR 1.561 T4  832.2 EGT   511 C Rline 1.000 Nc 0.518 SMN +nan NPR 1.05
+  SLS N  45.0%: conv False Fn    47.0 W 0.383 PR 1.445 T4  840.3 EGT   528 C Rline 1.000 Nc 0.466 SMN +nan NPR 1.03
+  SLS N  40.0%: conv False Fn    37.3 W 0.327 PR 1.341 T4  903.2 EGT   600 C Rline 1.000 Nc 0.414 SMN +nan NPR 1.03
+  SLS N  37.5%: conv False Fn    35.0 W 0.306 PR 1.294 T4  952.4 EGT   654 C Rline 1.000 Nc 0.388 SMN +nan NPR 1.03
+  SLS N  35.0%: conv False Fn    33.7 W 0.286 PR 1.253 T4 1039.6 EGT   745 C Rline 1.000 Nc 0.362 SMN +nan NPR 1.02
+  SLS N  32.5%: conv False Fn    33.0 W 0.259 PR 1.216 T4 1218.4 EGT   927 C Rline 1.000 Nc 0.337 SMN +nan NPR 1.02
+OD0.nozz.staticMN.ps_resid [-17.91650958] [279.32734491] [2500.]
+OD0.nozz.staticMN.ps_resid [-17.91650958] [279.32734491] [2500.]
+OD0.nozz.staticMN.ps_resid [-0.67181403] [1619.37537236] [2500.]
+OD0.nozz.staticMN.ps_resid [-0.67181403] [1619.37537236] [2500.]
+OD0.nozz.staticMN.ps_resid [-0.67181403] [1619.37537236] [2500.]
+  SLS N  30.0%: conv False Fn  1599.1 W 0.023 PR 1.183 T4 2500.0 EGT  2227 C Rline 1.000 Nc 0.311 SMN +nan NPR 1.57
++  +  |  LS: AG 1 ; 4259.09765 1
++  +  |  LS: AG 2 ; 11.1373566 0.5
++  +  |  LS: AG 1 ; 469.274126 1
++  +  |  LS: AG 2 ; 5.57177472 0.5
++  +  |  LS: AG 1 ; 93.7912197 1
++  +  |  LS: AG 2 ; 2.78570611 0.5
++  +  |  LS: AG 1 ; 36.5383902 1
++  +  |  LS: AG 2 ; 1.39283983 0.5
++  +  |  LS: AG 1 ; 10.4760098 1
++  +  |  LS: AG 2 ; 0.696415884 0.5
++  +  |  LS: AG 1 ; 2.9227207 1
++  +  |  LS: AG 2 ; 0.348205578 0.5
++  +  |  LS: AG 1 ; 2.92276439 1
++  +  |  LS: AG 2 ; 0.174105251 0.5
++  +  |  LS: AG 1 ; 4476.53506 1
++  +  |  LS: AG 2 ; 6.67053287 0.5
++  +  |  LS: AG 1 ; 516.914499 1
++  +  |  LS: AG 2 ; 3.33798517 0.5
++  +  |  LS: AG 1 ; 95.809154 1
++  +  |  LS: AG 2 ; 1.66917348 0.5
++  +  |  LS: AG 1 ; 33.0195055 1
++  +  |  LS: AG 2 ; 0.834608015 0.5
++  +  |  LS: AG 1 ; 7.92404248 1
++  +  |  LS: AG 2 ; 0.417308617 0.5
++  +  |  LS: AG 1 ; 4.87363441 1
++  +  |  LS: AG 2 ; 0.208694473 0.5
++  +  |  LS: AG 1 ; 2.58398456 1
++  +  |  LS: AG 2 ; 0.104351907 0.5
+  dash N 100.0%: conv True Fn   500.0 W 1.326 PR 4.000 T4 1150.0 EGT   698 C Rline 1.002 Nc 1.000 SMN +0.000 NPR 2.76
+  dash N  95.0%: conv True Fn   382.9 W 1.255 PR 3.586 T4 1038.0 EGT   600 C Rline 1.365 Nc 0.950 SMN +0.049 NPR 2.46
+  dash N  90.0%: conv True Fn   281.0 W 1.187 PR 3.218 T4  939.1 EGT   514 C Rline 1.620 Nc 0.900 SMN +0.104 NPR 2.20
+  dash N  85.0%: conv True Fn   187.5 W 1.133 PR 2.890 T4  835.6 EGT   423 C Rline 1.608 Nc 0.850 SMN +0.123 NPR 1.97
+  dash N  80.0%: conv True Fn   106.8 W 1.085 PR 2.599 T4  740.5 EGT   341 C Rline 1.763 Nc 0.800 SMN +0.209 NPR 1.77
+  dash N  75.0%: conv True Fn    48.8 W 1.037 PR 2.359 T4  668.6 EGT   281 C Rline 1.867 Nc 0.750 SMN +0.270 NPR 1.62
+  dash N  70.0%: conv True Fn    -4.0 W 0.989 PR 2.120 T4  593.4 EGT   220 C Rline 1.960 Nc 0.700 SMN +0.342 NPR 1.49
+  dash N  65.0%: conv True Fn   -41.1 W 0.952 PR 1.935 T4  532.3 EGT   171 C Rline 2.107 Nc 0.650 SMN +0.400 NPR 1.41
+  dash N  60.0%: conv True Fn   -73.4 W 0.912 PR 1.752 T4  473.4 EGT   124 C Rline 2.263 Nc 0.600 SMN +0.463 NPR 1.33
++  +  |  LS: AG 1 ; 4259.09765 1
++  +  |  LS: AG 2 ; 11.1373566 0.5
++  +  |  LS: AG 1 ; 469.274126 1
++  +  |  LS: AG 2 ; 5.57177472 0.5
++  +  |  LS: AG 1 ; 93.7912197 1
++  +  |  LS: AG 2 ; 2.78570611 0.5
++  +  |  LS: AG 1 ; 36.5383902 1
++  +  |  LS: AG 2 ; 1.39283983 0.5
++  +  |  LS: AG 1 ; 10.4760098 1
++  +  |  LS: AG 2 ; 0.696415884 0.5
++  +  |  LS: AG 1 ; 2.9227207 1
++  +  |  LS: AG 2 ; 0.348205578 0.5
++  +  |  LS: AG 1 ; 2.92276439 1
++  +  |  LS: AG 2 ; 0.174105251 0.5
++  +  |  LS: AG 1 ; 4476.53506 1
++  +  |  LS: AG 2 ; 6.67053287 0.5
++  +  |  LS: AG 1 ; 516.914499 1
++  +  |  LS: AG 2 ; 3.33798517 0.5
++  +  |  LS: AG 1 ; 95.809154 1
++  +  |  LS: AG 2 ; 1.66917348 0.5
++  +  |  LS: AG 1 ; 33.0195055 1
++  +  |  LS: AG 2 ; 0.834608015 0.5
++  +  |  LS: AG 1 ; 7.92404248 1
++  +  |  LS: AG 2 ; 0.417308617 0.5
++  +  |  LS: AG 1 ; 4.87363441 1
++  +  |  LS: AG 2 ; 0.208694473 0.5
++  +  |  LS: AG 1 ; 2.58398456 1
++  +  |  LS: AG 2 ; 0.104351907 0.5

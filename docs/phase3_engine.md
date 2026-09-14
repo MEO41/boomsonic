@@ -1,5 +1,18 @@
 # Phase 3 — Engine cycle and architecture trade (2026-09-13)
 
+> **SUPERSEDED (2026-09-14) by `docs/phase3r_centrifugal.md` (Phase 3R).** The user chose the centrifugal architecture
+> and Phase 3 was redone around it. Four problems in this document's centrifugal numbers were found, so they should not
+> be used:
+> 1. TurboFlow's Wiesner slip took the cosine of a degree value as radians. The -30 deg impeller gives PR 3.39, not
+>    4.0, at 504 m/s.
+> 2. At the fielded airflow, 85 000 rpm puts the inducer relative Mach at 1.43, beyond every fielded micro-turbojet
+>    (1.10-1.33).
+> 3. The fielded turbine, scaled by √W, exceeded its own 350 MPa blade-root limit by about 24 % in stress.
+> 4. The impeller was never stress-sized.
+>
+> The recommended engine is now the Phase 3R centrifugal (OPR 4, 75 000 rpm, 15 deg backsweep): 187 mm, 6.74 kg,
+> +55 / +29 % margin. The axial and axial-centrifugal material below is kept for the record.
+
 Scripts: `scripts/phase3_cycle/` (list in section 12). The Phase 2 catalog-fit engine (6.83 kg,
 188 mm) is **not** used anywhere in this phase: every engine mass and diameter below comes from
 a designed geometry and its materials.

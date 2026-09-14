@@ -746,3 +746,451 @@ or tip-concentrated backsweep, then:
 2. run the stress gate and this operability chain on it.
 
 Phase 4 mechanical design and CAD have not been started.
+
+---
+
+## Phase 3R — engine redesigned around a centrifugal compressor (2026-09-14)
+
+Write-up: `docs/phase3r_centrifugal.md`. Plots: `plots/phase3r_cc_trade.png`, `phase3r_backsweep.png`,
+`phase3r_mission.png`. Data: `data/phase3r/`, `data/phase3r_*`.
+
+### D3R.0 User decision: centrifugal compressor only
+The user decided to design the engine around a centrifugal compressor as the configuration suited to this scale, and
+asked to go back to Phase 3 with the brief in view. Phase 3 was redone to the brief's Phase 3 scope:
+* cycle at the reference point;
+* a quantitative trade of 2-3 options with SFC, airflow, mass and size (here OPR, spool speed and backsweep of the
+  single-stage centrifugal engine);
+* off-design across the mission;
+* one recommendation.
+
+Phase 4 not started.
+
+### F3R.1 Tool defect: TurboFlow 0.1.18 Wiesner slip takes cos(degrees) as radians
+`centrifugal_compressor/slip_model.py`: `np.sqrt(np.cos(theta_out))`, while `theta_out` is in degrees everywhere else.
+* **Evidence** (`verify_turboflow_slip.py`): the slip factor solved on the Phase 3 impeller is 0.9310 against the correct
+  0.8366 at -30 deg; at -10 deg the model returns NaN.
+* **Consequence:** the Phase 3 impeller gives PR 3.39, not 4.01, at 504 m/s. At the upstream example's -24.5 deg the
+  error is only 6 %, which is why Phase 0 passed.
+* **Fix:** `turboflow_fixes.py`, imported by `centrifugal_design.py` and `centrifugal_map.py`. The solved σ now equals
+  Wiesner exactly.
+* **Scope:** every earlier centrifugal result, including the Phase 3b and Phase 4 axial-centrifugal impellers, the gate
+  and the P400 / Nike runs.
+
+### F3R.2 The Phase 3 inducer was beyond fielded practice
+`inducer_anchor.py`, with the same optimum-inducer rule on 9 database engines: inducer shroud relative Mach 1.10-1.33
+(TJ40-G1 highest). At the fielded airflow, 85 000 rpm gives 1.43; 75 000 gives 1.29; 77 500 gives 1.33.
+**A3R.1:** M1s,rel <= 1.33 → design speed 75 000 rpm.
+
+### F3R.3 Fielded scaling was wrong for the impeller and unsafe for the turbine
+* The √W scaling (A3.6) grew the impeller exit radius with flow, although work sets it. Work-based scaling is used
+  instead: -6 to -8 mm where the diffuser sets the OD.
+* The √W-scaled turbine tip was about 11 % past its 350 MPa blade-root limit, about 24 % in stress (Phase 3 centrifugal
+  included). The turbine is now re-designed by TurboFlow at the fielded cycle: it sits on the limit, and mass drops
+  about 0.7 kg.
+* At 85 000 rpm the fielded turbine cannot pass the flow within the limit.
+
+### F3R.4 Calibrations re-anchored with the fix
+* **Mass model:** P400 3.52 vs 4.01 kg (-12 %); Nike 7.23 vs 9.15 kg (-21 %). Mass ×1.20 (1.14-1.27), length ×1.21.
+  The Nike's compressor-set OD is over-predicted (212 vs 201 mm, +5.7 %), so the diffuser rule is conservative.
+* **P400 operability benchmark:** steady to 37.5 % against the published 31 % idle (about 5 points pessimistic); design
+  SMN 61 %.
+
+### D3R.1 Method: stress inside the design loop
+`impeller_stress.py` wraps the verified gate solvers. At MCS 105 %:
+* the exducer root thickness is sized to Fty (Kt 1.4, >= 1.6 mm) and its blockage sets the physical exit width;
+* boreless disc with the thermal gradient <= Fty;
+* burst >= 1.2 × N_MCS.
+
+Other conventions: 12 + 12 splitters (Aungier Z_eff 18), 10 % choke margin, trailing-edge dump loss checked
+(<= 0.14 points).
+
+### F3R.5 Trade (13 full-chain cases after the 36-design screen; fielded)
+* **OPR:** optimum 4.0 at 75k, where the combustor (170 mm) and the diffuser meet.
+* **Backsweep:** from 0 to -30 deg, OD 177 → 199 mm and pessimistic margin +41 → +14 %.
+* **Stress:** every case is feasible once the root is sized.
+* **77.5k radial:** 172 mm, +48 %, at the inducer limit.
+* **85k:** looks best on paper (170 mm, +51 %) but violates A3R.1 and the turbine flow / stress limit.
+
+### F3R.6 Backsweep sets the stability (TurboFlow maps + pyCycle, benchmarked chain)
+Design surge margin is 0 / 19 / 28 / 39 % at 0 / -10 / -15 / -20 deg.
+* **Radial:** radial blades give work independent of flow, so the characteristic peaks at the design point. The
+  running line rides the surge surrogate: not operable.
+* **-10 deg:** the SLS line has 12-17 % surge margin, and the engine cannot run steadily below 45 % speed.
+* **Criteria:** SMN >= ~20 % needs >= 10.5 deg of backsweep; the 25 % pessimistic thrust margin needs <= 19 deg.
+
+### D3R.2 Recommendation: single-stage centrifugal, OPR 4.0, 75 000 rpm, -15 deg backsweep
+Chosen because it sits mid-window on both criteria.
+
+| quantity | fielded | tool |
+|---|---|---|
+| airflow | 1.326 kg/s | 1.068 kg/s |
+| dash TSFC | 0.164 kg/(N h) | 0.138 |
+| impeller tip speed | 525 m/s (root 2.2 mm, blockage 9 %) | |
+| engine OD | **187 mm**, diffuser-set | 173 mm |
+| length / dry mass | **478 mm / 6.74 kg** (6.38-7.09) | 6.21 kg |
+| margin nom / pess | **+55 / +29 %** (worst corner +22 %) | +71 / +46 % |
+| design surge margin | 28 %; SLS line 22-27 % over 55-100 % | |
+| SLS max thrust | 631 N at 98.2 % speed, T4-limited | |
+| lowest steady speed / idle for fuel | 35 % / 40 % (37 N, 19 % of max fuel) | |
+
+Impeller disc +86 % yield margin, burst ratio 1.90 at MCS.
+
+**Cantera:** T4 -4 K, γ +0.0002 against pyCycle.
+
+**Sensitivities:**
+* OD calibrated to the Nike: 177 mm, +42 %;
+* η_c 0.66: 192 mm, +22 %;
+* η_c 0.74: 182 mm, +35 %.
+
+Against the Phase 3 centrifugal claim (175 mm, +44 %): 12 mm larger and 15 points lower, because the Phase 3 numbers
+were not achievable (F3R.1-F3R.3, plus the gate).
+
+### F3R.7 Mission with the real-map deck (replaces the placeholder maps, A3.8)
+* The deck is T4-limited at low Mach; 500 N at the dash point.
+* Brake release to M 1.02 / 5 km in 28 s. Minimum transonic excess thrust 115 N (pessimistic drag).
+* Sortie fuel 3.05 kg including reserve, against 1.90 kg in the trade's scaling. Idle fuel from the model is 19 % of max;
+  fielded engines are 14-18 %, and Phase 2's A1.4 used 10 %.
+* **TOGW 20.0 kg, 5.0 kg under 25 kg.**
+* The inherited Phase 2 climb is not flight-path-limited at T/W > 1 (small fuel effect).
+
+**Decision (user, 2026-09-14):** "go ahead with the -15° design". D3R.2 is the baseline, and Phase 4 proceeds on
+`ce75000_opr4_t1150_b15_cap`.
+
+**Open for Phase 4** (see the Phase 4 centrifugal entries below for what was done):
+1. diffuser design (the diameter driver, worth ~13 points of margin);
+2. 3D impeller FE, vibration and LCF (the root sits at Fty at MCS by construction);
+3. rotor dynamics at 75k;
+4. start and acceleration transients;
+5. turbine material data (on its 350 MPa limit);
+6. compressor map above 105 % corrected speed.
+
+---
+
+## Phase 4 (centrifugal baseline) — turbomachinery preliminary design and Phase 2 ↔ 4 closure (2026-09-14)
+
+Write-up: `docs/phase4r_centrifugal.md`. Plots: `plots/phase4r_td_check.png`, `phase4r_rotor_critmap.png`,
+`phase4r_rotor_final.png`. Scripts: `scripts/phase4_turbomachinery/td_check.py`, `hecc_surge_check.py`,
+`cc_blade_modes.py`, `cc_rotor*.py`, `cc_transient.py`, `cc_closure.py`.
+
+### F4R.1 Independent compressor check (NASA turbo-design, HECC-validated)
+The code was reviewed before use: no unit errors; no shock loss; no diffuser-stall model; its vaned-diffuser loss cannot
+size the diffuser.
+
+On the three OPR-4 / 75k impellers, rebuilt from their meanline geometry without tuning:
+
+| impeller | turbo-design PR / η | TurboFlow PR / η |
+|---|---|---|
+| 0° | 3.96 / 0.786 | 4.00 / 0.810 |
+| -15° | 4.05 / 0.803 | 4.01 / 0.818 |
+| -20° | 4.07 / 0.808 | 4.00 / 0.819 |
+
+**The design point is confirmed.** A throat estimated from blade angles (0.63 of the eye area) choked 2 % above design
+flow, which confirms that the 10 %-margin throat (0.75 of the eye) is needed.
+
+### F4R.2 The surge surrogate fails on a real vaned-diffuser stage
+* **NASA HECC measured:** last stable point at 95.1 % of design flow with PR still rising. Design surge margin 8.4 %.
+* **turbo-design on HECC:** the characteristic rises down to 61 % flow, so the surrogate gives >= 73 %.
+* **On our -15° impeller:** turbo-design's peak is at 0.94 W_d (SMN 6.5 %), against TurboFlow's 0.80 W_d (28 %).
+
+For vaned diffusers, surge is set by diffuser stall, which neither tool models. **The Phase 3R surge margins are
+unvalidated (risk R4R.1, top).** The backsweep trend is confirmed by both tools; its magnitude is not.
+
+### F4R.3 Exducer blade vibration (Morley plate modal, verified -1.5 % against a clamped strip)
+Static modes: 9.33 / 15.96 / 28.37 kHz. With 19 diffuser vanes, mode 1 crosses 19/rev at 39 % speed (idle) and mode 2 at
+67 %; no engine order 1-6 crosses in 35-105 %. 15-17 vanes would move the static crossings away from idle and from
+95-100 %. The vane count is to be chosen together with the diffuser's stall range.
+
+### F4R.4 Rotor dynamics: the bending mode is set by the combustor length
+The first shaft-bending mode has 4 % of its strain energy in the bearings, so dampers cannot reach it.
+* With the Phase 3 combustor (235 mm bearing span): 38-59 krpm for 16-28 mm shafts, and 74-76 krpm for a 32 mm thin
+  tube. All inside the 26-79 krpm range; API fail.
+* The bending critical rises steeply as the span shortens. A lighter impeller boss lengthens the span.
+
+### D4R.1 Rotor and combustor configuration
+* combustor liner 0.8 × the Phase 3 rule (bearing span 192 mm), with the combustor grown radially to the diffuser
+  envelope (OD 184 mm, no diameter cost). Volume-corrected theta -0.42 σ of the 7-engine reference spread;
+* AISI 4340 tube shaft 32 × 25.6 mm, 12 mm journals (DN 0.95e6 at MCS);
+* damped soft supports, k 1.75e6 N/m, c 876 N s/m.
+
+Criticals:
+
+| critical | AF | position |
+|---|---|---|
+| 8.3 krpm | 2.64 | 68 % below minimum speed |
+| 14.4 krpm | 1.28 | critically damped |
+| 105.6 krpm (bending) | - | 34 % above MCS (25.8 % required) |
+
+**API pass.** The bending mode is 34 krpm at rest; gyroscopic stiffening from the overhung impeller lifts its crossing.
+Rotor 2.11 kg, Ip 2.13e-3 kg m². Open: combustion performance at L/D_ref 2.2; damper mass.
+
+### F4R.5 Acceleration (SLS, T4 <= 1150 K, SMN >= 5 %)
+* 40 % → 95 % in 6.6 s; 45 % → 95 % in 3.5 s. The B300F data sheet quotes 37 → 100 % in 4.6 s.
+* Acceleration from idle is limited by surge margin, not T4.
+* With a 10 % transient margin the engine cannot accelerate from 40 %.
+
+### D4R.2 Phase 2 ↔ 4 closure
+* **Engine:** 6.85 kg calibrated (6.49-7.21), against 6.74 kg: shaft +0.24, casing -0.12, liners -0.06 kg raw. Length
+  426 mm (-52 mm), OD 187 mm.
+* **Mass budget:** accessories 1.60 + structure 3.82 + gear and chute 1.27 + fuel system 0.40 + systems 2.02 + growth
+  1.13 + fuel 2.98 kg.
+* **TOGW 20.09 kg, 4.91 kg under 25 kg. Closes.**
+* **Checks:** dash margin +54.7 / +28.5 %; transonic minimum excess thrust 116 N (pessimistic); take-off roll 46 m.
+* **Landing at 17.7 kg:** 175 m with flaps + chute; 316 m with flaps only. The chute stays required for 300 m.
+
+**Decisions for the user before the design freeze:**
+1. how to secure the surge margin: diffuser designed for range, vaneless diffuser, -20° backsweep, bleed or variable
+   nozzle, or a rig test;
+2. the diffuser vane count, together with (1);
+3. whether to accept the shorter combustor pending combustor data.
+
+---
+
+## Phase 5 — design freeze: status snapshot for review (2026-09-14)
+
+User request: compile `docs/design_freeze.md` from the current state (Phase 4R, -15° backsweep, with the rotor fix) as
+a snapshot for review. Carry the open risks forward explicitly; do not start Phase 6.
+
+### D5.0 Freeze document compiled; sign-off NOT given
+No new analysis was run for the freeze; every number comes from the Phase 3R / 4R data files.
+
+Contents:
+* architecture, cycle and components (section 1);
+* airframe closure: TOGW 20.09 kg, +54.7 / +28.5 % dash margin, 46 m take-off roll, 175 m landing with chute
+  (section 2);
+* rotor dynamics: API pass and the fix that got there (section 3);
+* open risks (section 4);
+* what CAD would commit to (section 5);
+* decisions for the reviewer (section 6).
+
+Precisions against the request, as the data show:
+* the worst-corner margin +21.8 % dates from Phase 3R (before the Phase 4 engine changes) and was not re-run;
+* the grown, shortened combustor has 94 % of the Phase 3R liner volume and volume-corrected loading 0.92 × the
+  reference mean: near parity, not exact;
+* the idle-range surge margin is 8.4-8.7 % at 35-40 % speed and 13 % at 45 % (TurboFlow surrogate).
+
+**Open risks carried, none resolved:**
+1. surge margin (no validated method; tools 28 % vs 6.5 %; the surrogate is wrong by ~9× on HECC; the diffuser redesign
+   has not been run);
+2. idle-range surge margin and acceleration (the start bleed has not been sized);
+3. combustor shortened 20 %, unverified;
+4. the 19 diffuser vanes excite exducer mode 1 at idle (39 %);
+5. no rig or bench validation;
+6. carried items (exducer root at Fty at MCS, turbine on its limit, dampers, DN, diffuser sets OD, worst corner < 25 %,
+   and others).
+
+**Phase 6 (CAD) not started**, awaiting the user's review and sign-off.
+
+---
+
+## Phase 6 — CAD / 3D: toolchain step (2026-09-14)
+
+**User instruction:** "continue phase 6", given after the Phase 5 snapshot. It is taken as the go-ahead to enter
+Phase 6. The freeze's open decisions (surge margin, diffuser vane count, combustor length) were not answered and remain
+open. The brief's first Phase 6 step is to propose the CAD toolchain and confirm it with the user **before any geometry
+is generated**, and this entry covers only that step.
+
+### D6.0 Toolchain proposed; install verified; awaiting confirmation (`docs/phase6_toolchain_proposal.md`)
+* **Separate `.venv-cad`** (Python 3.12.10, NumPy 2.5.3, `requirements-cad.txt`) with CadQuery 2.8.0 (OCCT 7.9.3),
+  gmsh 4.15.2 and pyturbo-aero 1.3.8. The frozen `.venv` and `.venv-np1` are untouched.
+* **Verified** (`scripts/phase6_cad/smoke_cad.py`, primitives only), all exact to rounding:
+  * box volume and STEP round trip;
+  * B-spline surface through cylinder points against the analytic area;
+  * spline-section loft against the analytic volume, valid solid;
+  * gmsh tetra volume.
+* **Findings:**
+  * pyturbo `Centrif` outputs point clouds only (no solids, no export), and has a shared class-level `patterns` list;
+  * the OCP bindings need enum arguments;
+  * the smoke process exits non-zero at teardown after passing.
+* **Proposed plan:**
+  1. parameter sheet with frozen / provisional tags;
+  2. 2D meridional layout;
+  3. impeller from pyturbo-aero, checked against the analysis;
+  4. the other components as conceptual solids, assembled in STEP;
+  5. optional 3D impeller FE (gmsh + scikit-fem, verified first).
+
+  Diffuser, combustor, bearing span / shaft and the bleed provision are modelled parametrically.
+
+No engine geometry has been generated.
+
+**User confirmation (2026-09-14):**
+* toolchain: CadQuery + pyturbo-aero + gmsh (as proposed);
+* scope: **engine + airframe + 3D impeller FE**;
+* open items: **provisional parts modelled parametrically**, with the decisions staying open in
+  `docs/design_freeze.md`.
+
+Geometry generation starts with the parameter sheet.
+
+### D6.1 Parameter sheet (`scripts/phase6_cad/make_params.py` -> `data/phase6/engine_params.json`, `airframe_params.json`)
+* Every CAD dimension is an entry `{value, unit, status, source}`, with status one of: **frozen** (from the freeze),
+  **derived** (computed from frozen values), or **provisional** (a construction rule no analysis fixed).
+  **29 of 74** engine parameters are provisional. These are the freeze's open items (diffuser, combustor, bearing
+  span / shaft) plus the LE radius and the impeller camber law.
+* Consistency checks (`params_consistency.json`):
+  * eye velocity C1 = 200.2 m/s, β1 hub / rms / shroud 34.3 / 55.6 / 62.8° (zero incidence);
+  * component length 352.5 mm against the calibrated envelope 426 mm (the calibration adds length for items not
+    modelled; the CAD keeps the calibrated cylinder as a reserved volume).
+* **Airframe inputs updated:** capture area 47.5 → 55.1 cm² (Phase 3R fielded flow) and nozzle A8 49.1 → 70.8 cm²
+  (the Phase 4 engine's throat). Both were stale Phase 2 values.
+  * Re-running the Phase 2 drag model with them gives CDS 81.89 → 81.66 cm² nominal and 98.64 → 97.70 cm² pessimistic
+    (−0.3 % / −1.0 %). Negligible; the closure is not re-run.
+
+### D6.2 Engine CAD (`engine_cad.py` -> `cad/engine/*.step`, `cad/engine_assembly.step`)
+* 27 parts, all valid solids.
+* Construction:
+  * revolved profiles for the casings, liners and rings;
+  * log-spiral diffuser vanes (19) and 30 placeholder deswirl vanes;
+  * NGV (34) and rotor (28) rows built as planar sections with polygon wires and ruled lofts. Spline sections
+    self-intersected at the TE cusp (volume off 19 %). Single-vane volume matches area × height to 0.1 %;
+  * Stodola turbine disc (engine_mass law), shaft with journals, bearings, housings, tunnel;
+  * impeller imported (D6.3).
+* **Envelope rule found:** the diffuser OD sets the engine OD (r4 + 3 mm), so the 90° bend into the deswirl annulus
+  must turn **inside r4**. The diffuser back plate stops at the deswirl inner radius.
+* **Size:**
+  * bounding box 382.5 mm long including the 30 mm inlet lip; components 352.5 mm; calibrated envelope 426 mm;
+  * OD 186.6 mm, equal to the envelope.
+* **Mass** (`mass_compare.py`, CAD against the RAW bottom-up model, since the ×1.20 calibration covers the items the
+  CAD does not draw):
+  * total: CAD 5.19 kg against 4.92 kg for the model items that are drawn (+5.4 %). The model's starter, fuel manifold
+    and 10 % fasteners (0.78 kg) are not drawn;
+  * items: impeller +17 %, shroud / inlet +19 %, outer casing +53 %, diffuser + deswirl −49 %, shaft −26 %, turbine
+    items within ±20 %;
+  * so the calibrated 6.85 kg is not contradicted, but the item split is.
+
+### D6.3 Impeller CAD (`impeller_cad.py`; pyturbo-aero + CadQuery)
+* **Inducer throat, found:** the tool-level design ratio 0.75 × eye was not met by the first CAD camber (0.611 × eye).
+  * TurboFlow's `area_throat_ratio` multiplies the eye area. Its choke check is isentropic relative flow through
+    A_throat, at the mean eye radius.
+  * Reproduced by hand at tool level: 0.70 → 1.086, 0.75 → 1.164 × design flow, the same bracket Phase 3R found.
+  * On the larger fielded eye, the Phase 3R requirement (10 % choke margin) needs **0.665 × eye**. The first CAD camber
+    gave 1.010 × design flow, i.e. ~1 % margin.
+* **Camber law replaced (provisional, analysis-traceable):** θ = θ_rf(x) + θ_bs(r).
+  * Radial-fibre inducer, θ_rf′(x) = (ω/C1)(1 − x/L)^n. Zero incidence at every LE radius at once; no centrifugal
+    bending of the inducer, as the gate's inducer-root estimate assumed.
+  * Plus exducer backsweep, linear in r from 0 at 0.7 r2 to 15°: the plate model's own law.
+  * The TE metal angle is 15° on every span.
+  * pyturbo's 4-point Bezier with one TE θ for all spans could not deliver this. It hooked from 43° to 15° in the last
+    10 % of chord at the shroud. Replaced through the `__build_camber__` hook by a 14-point least-squares Bezier
+    (fit ≤ 0.6°).
+  * **n = 3**, the smallest exponent meeting the 10 % margin (n 2 / 2.5 / 3 → choke 1.040 / 1.072 / **1.102** × design).
+    This means fast inducer unloading: shroud metal angle 62.8° at the LE, 42.8° at 30 % chord. The inducer
+    diffusion / loading this implies has not been analysed (no CFD) — new open item.
+* **Checks:**
+  * CAD metal angles within 1.1° of the law along the chord;
+  * TE measured 11.6 / 13.1 / 14.2° hub / mid / shroud over the last grid segment against 13.9 / 14.4 / 14.8° target
+    there (the TE closure rounds it);
+  * thickness 2.23 mm root and 0.80 mm tip (sized 2.235 / 0.8);
+  * throat 0.667 × eye, choke **1.102 × design**.
+* **pyturbo / OCCT problems met and fixed** (tools_survey section 9):
+  * the SS / PS are Beziers through control points (`camber_follow_density = 60`);
+  * `splitterblade` sits at the main blade's θ, so every splitter lay inside a main blade until rotated half a pitch;
+  * faceted blades: fan caps gave silently failing booleans, and even with ladder caps the sliver-tet meshes followed;
+    now **smooth B-spline blade solids** (grid points on the surface to 1e-5 mm).
+* **Sector and wheel:**
+  * the FE sector is bounded **through the passages** by radial-line ruled surfaces ψ = ψ_main(x) − 22.5° / +7.5°, so
+    no blade is cut. Flat cut planes cut every blade, and the slivers made the FE near-singular;
+  * 1 solid; volume closure 3e-5; 12 × hub sector = hub to 2e-8;
+  * the wheel is 12 copies of the sector.
+* **Mass:** wheel 1.082 kg (hub 0.944, blades 0.138).
+  * The CAD hub matches the axisymmetric FE's hub to 0.04 %.
+  * The stress model's impeller is 1.132 kg (smeared blades at 1.52 mm mean thickness), so its blade pull on the hub
+    is ~36 % heavier than the CAD blades: conservative for the hub.
+  * Ip 1.287e-3, Id 8.29e-4 kg m², CG 36.2 mm from the nose.
+
+### D6.4 Airframe integration (`airframe_cad.py` -> `cad/airframe/*.step`, `cad/aircraft_assembly.step`)
+* **Built:**
+  * fuselage OML with the D2.6 area-rule waist (as the drag model assumes), 1.5 mm skin;
+  * pitot intake duct straight to the engine face at x = 1.315 m;
+  * biconvex wing / tail panels;
+  * jetpipe to the tail nozzle;
+  * engine assembly plus the calibrated envelope as a reserved volume. All parts valid.
+* **Findings** (not in any earlier model):
+  1. **engine-to-skin radial gap 8.7 mm**, at x = 1721 mm where the waist is deepest over the envelope. Positive, but
+     thin for structure, mounts and insulation around a hot casing;
+  2. **jetpipe** 1.09 m long at M 0.34, 64.1 mm radius:
+     * friction ΔPt/Pt ≈ 0.64 % (Haaland), not in the cycle (nozzle Cv 0.98 only). Rough thrust effect −1.7 %
+       (estimate, not run through the cycle);
+     * the turbine exit swirl (−17.8°, TurboFlow) is not recovered in the model, arguably covered by the fielded
+       calibration;
+     * at the tail the jetpipe wall is the nozzle lip (−0.5 mm "gap" to the boattail skin at the exit);
+  3. **fuel:** the forebody annulus around the duct holds 13.75 L gross against 3.72 L of fuel (27 %). It shares that
+     space with avionics, batteries and instrumentation (not laid out);
+  4. intake duct: area ratio 1.42 over 1.29 m (0.36° equivalent cone), benign.
+
+### D6.5 3D FE of the impeller (`fe3d_impeller.py`; gmsh + scikit-fem P2 tets + cyclic tie; `data/phase6/fe3d_impeller.json`)
+* **Model:**
+  * the 30° passage-bounded sector (D6.3); centrifugal load at MCS (105 % of 75 000 rpm);
+  * Ti-6Al-4V, E 110 GPa, no thermal load;
+  * boss held axially within the 6 mm stub-shaft radius; the rigid rotation about x is held by a weak spring and
+    subtracted from the reported displacements.
+* **Cyclic symmetry:** a tie. Each slave-face DOF is interpolated from the P2 trace of the master face, because gmsh
+  `setPeriodic` needs matching face topology.
+* **Verification** (same code path):
+
+  | case | FE | reference | difference |
+  |---|---|---|---|
+  | (A) rotating disc, centre stress | 451.8 MPa | 452.8 MPa (theory) | −0.2 % |
+  | (A) outer-band hoop | 185.6 MPa | 185.7 MPa (theory, same points) | −0.05 % |
+  | (B) hub alone, flat cuts, peak von Mises | 307.9 MPa | 311.6 MPa (verified axisymmetric FE) | −1.2 % |
+  | (B) average hoop | 160.0 MPa | 159.8 MPa | +0.1 % |
+  | (B′) same hub, twisted passage cuts | 308.0 / 160.0 MPa | as (B) | tie points within 2e-9 mm of the master face |
+
+  * Hoop stress within 2 mm of the axis: 249 vs 260 MPa (−4 %, sampling of that small region).
+* **Solvers:**
+  * pyamg converged on (B) (agrees with SuperLU to 1e-7) but stalled with the interpolated tie;
+  * SciPy SuperLU paged at 220 k DOF;
+  * MKL PARDISO (pypardiso, added to `.venv-cad`): matches SuperLU to 5e-7 on (B′), residual ~1e-11, 8-14 s.
+* **Rejected intermediate runs, recorded so they are not reused:**
+  * flat-cut sector: near-singular stiffness (AMG stalled at 3 % residual);
+  * faceted blades: 15 % sliver tets, 1e6 MPa spurious peaks.
+* **Production results at MCS** (mesh 40 k tets baseline / 61 k tets fine, quality median 0.72 / 0.75):
+
+  | quantity | baseline | fine | reference |
+  |---|---|---|---|
+  | **exducer root** hot spot (0.4 t / 1.0 t extrapolation, > t_root from the blade ends) | 426 MPa | **413 MPa** | Phase 3R plate model nominal 441 MPa |
+  | exducer root × Kt 1.4 | 596 MPa | **578 MPa** | plate 618 MPa; **Fty 622 MPa** |
+  | **inducer root** hot spot (same rule) | 360 MPa | **355 MPa** | gate estimate 196 MPa (radial-fibre tension, k 0.6) |
+  | inducer root × Kt 1.4 | 505 MPa | 497 MPa | Fty 622 MPa |
+  | **hub** > 1 mm inside the surface, 99.9th percentile | 331 MPa | **333 MPa** | axisymmetric with smeared blade pull 313 MPa |
+  | hub single-point maximum | 336 MPa | 438 MPa | not converged; the percentile holds |
+  | blade-end corner peaks, LE / TE (singular) | 581 / 630 MPa | 669 / 470 MPa | mesh-dependent |
+  | blade tip closing toward the casing (inducer LE tip) | 0.074 mm | 0.074 mm | cold clearance 0.25 mm |
+
+* **Findings:**
+  1. **The exducer root sizing holds.** The 3D root stress is 3-7 % below the plate model, which included no hub
+     compliance or membrane load. With Kt 1.4 it is 93-96 % of Fty at MCS. The freeze's "exducer root at Fty at MCS"
+     item is confirmed as essentially on the limit, not relieved.
+  2. **The inducer root is ~1.8× the gate estimate** (355 vs 196 MPa). The load is carried in-plane (membrane stress
+     nearly flat from 0.4 t to 1.0 t), and the hub's meridional strain is imposed on the blade root; the 1D radial-
+     tension estimate has neither. It is still inside Fty after Kt 1.4 (~25 % margin). This is new information, not
+     a failure.
+  3. **The hub peak is 6 % above the axisymmetric model** (333 vs 313 MPa mechanical). With the gate's +22 MPa thermal
+     gradient that is ~355 MPa, still ~75 % yield margin.
+  4. **The blade-end corners are singular in this CAD.** The LE root sits on the hub's front edge (no nose ahead of
+     the blades) and the TE root on the rim edge, with no fillets anywhere. Peaks of 470-669 MPa there change with the
+     mesh. A detailed design needs a hub nose extension and root / end fillets. Kt 1.4 is an assumed fillet factor
+     that no fillet in the CAD represents.
+  5. **Tip closing** is 0.074 mm mechanical (30 % of the clearance). Thermal growth of the wheel and casing is not
+     included.
+  6. **Deflection:** meridional 0.17 mm; tangential blade deflection 0.44 mm (no clearance effect).
+* **Not done:** thermal load, vibration modes of the 3D blade (Phase 4R used the plate model), fillet geometry,
+  contact at the stub shaft.
+
+### D6.6 Figures and tool additions
+* `render_cad.py` (VTK off-screen, matplotlib) writes:
+  * `plots/phase6_engine_cutaway.png`, `phase6_engine_section.png`;
+  * `phase6_impeller.png`, `phase6_impeller_sector.png`, `phase6_impeller_fe.png`;
+  * `phase6_aircraft.png`, `phase6_aircraft_cutaway.png`, `phase6_aircraft_section.png`.
+  * Off-screen VTK dropped translucent actors, so the aircraft interior is shown as a cutaway.
+* `.venv-cad` additions (in `requirements-cad.txt`): pyamg 5.3.0, pypardiso 0.4.7 (MKL 2026.1), each checked against
+  SciPy's SuperLU before use.
+* **Engine specification PDF** (user request, 2026-09-14): `scripts/phase6_cad/spec_sheet.py` → `docs/boomsonic_engine_spec.pdf`, 5 pages.
+  * Every number is read from the data files at run time. The constants η_b and the turbine blade-root allowable are
+    parsed from `dash_cycle.py` / `turbine_design.py`.
+  * Two quantities were dropped rather than printed with an unsourced input:
+    * an equivalence ratio (it needed a hand-typed stoichiometric fuel-air ratio);
+    * an intake recovery from a γ = 1.4 freestream total (it disagreed with the cycle's documented duct loss).
+  * The open risks are stated on page 1 and in section 9.
+  * reportlab 5.0.1 added to `.venv-cad`; its dependencies pillow and charset-normalizer were already present. The layout
+    was checked page by page, rendered with pypdfium2 in a throw-away `uv run` environment, not installed.
+* Documentation correction: the freeze and Phase 3R docs said the physical exit width b2 is "12.0 mm". The data say
+  11.796 mm; the text now reads 11.8.

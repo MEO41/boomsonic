@@ -38,7 +38,14 @@ def centrifugal_compressor_mass(cc, omega):
     x = np.linspace(0, Lx, 200); rh = r1h + (r2 - r1h) * (1 - np.sqrt(np.clip(1 - (x / Lx) ** 2, 0, 1)))
     V_hub = np.trapezoid(np.pi * rh ** 2, x) + np.pi * r2 ** 2 * 0.06 * r2
     # blades: full + splitter equivalent Z main blades, mean thickness 1.2 mm, meridional length ~0.7 r2, mean height (r1s - r1h + b2)/2
-    V_bl = Z * 1.5 * 1.2e-3 * (0.70 * r2) * 0.5 * ((r1s - r1h) + b2)     # factor 1.5: splitters
+    # Phase 3R designs carry Z_eff = Z + Z_split * split_frac (already splitter-equivalent), the physical/effective exit
+    # width ratio 1/(1 - B2) and the stress-sized mean blade thickness; Phase 3 designs (no Z_eff key) keep the original
+    # factor 1.5 and 1.2 mm.
+    if "Z_eff" in cc:
+        b2 = b2 * cc.get("b2_geo_ratio", 1.0)
+        V_bl = cc["Z_eff"] * cc.get("t_blade_mean", 1.2e-3) * (0.70 * r2) * 0.5 * ((r1s - r1h) + b2)
+    else:
+        V_bl = Z * 1.5 * 1.2e-3 * (0.70 * r2) * 0.5 * ((r1s - r1h) + b2)     # factor 1.5: splitters
     m_imp = RHO["Ti"] * (V_hub + V_bl)
     U2 = omega * r2; sig_disc = (3 + 0.3) / 8 * RHO["Ti"] * U2 ** 2
     r3, r4 = g["vaneless_diffuser"]["radius_out"], vd["radius_out"]
@@ -83,7 +90,8 @@ def turbine_mass(tt, omega, scale=1.0):
     return dict(ngv_vanes=m_ngv_vanes, ngv_rings=m_ngv_rings, turbine_blades=m_rotor_bl, turbine_disc=m_disc, turbine_shroud=m_shroud), \
         dict(D_mm=2e3 * (r_tip + 0.3e-3 + 2.0e-3), L_mm=1e3 * chord.sum() * 1.6, r_tip=r_tip, disc_bore_width_mm=h0 * 1e3, Z=Z.tolist(), h_mm=(h * 1e3).tolist())
 
-def engine(cycle, comp_kind, comp, turb, comb, rpm, turb_scale=1.0):
+def engine(cycle, comp_kind, comp, turb, comb, rpm, turb_scale=1.0, shaft_od=0.016, shaft_id=0.008, tunnel_r=0.014, damper_kg=0.0):
+    """shaft_od / shaft_id / tunnel_r / damper_kg: Phase 4 rotordynamic design overrides (defaults = the Phase 3 model)."""
     omega = rpm * np.pi / 30
     if comp_kind == "centrifugal":
         mc, gc = centrifugal_compressor_mass(comp, omega)
@@ -110,10 +118,11 @@ def engine(cycle, comp_kind, comp, turb, comb, rpm, turb_scale=1.0):
     m_nozzle = RHO["SS"] * np.pi * (gt["r_tip"] + np.sqrt(cycle["A8_cm2"] / 1e4 / np.pi)) * np.hypot(0.9 * gt["r_tip"], gt["r_tip"] - np.sqrt(cycle["A8_cm2"] / 1e4 / np.pi)) * 0.5e-3 \
         + RHO["SS"] * np.pi * 0.6 * gt["r_tip"] * 0.9 * gt["r_tip"] * 0.5e-3                                                     # outer cone + inner tail cone
     L_shaft = L_total * 0.72
-    m_shaft = RHO["steel"] * np.pi / 4 * (0.016 ** 2 - 0.008 ** 2) * L_shaft
-    m_tunnel = RHO["SS"] * 2 * np.pi * 0.014 * L_shaft * 1.0e-3 + 0.12                   # shaft tunnel + 2 bearing housings/preload
+    m_shaft = RHO["steel"] * np.pi / 4 * (shaft_od ** 2 - shaft_id ** 2) * L_shaft
+    m_tunnel = RHO["SS"] * 2 * np.pi * tunnel_r * L_shaft * 1.0e-3 + 0.12                 # shaft tunnel + 2 bearing housings/preload
     items = dict(**mc, **mt, combustor_liners=m_liner, outer_casing=m_case, nozzle_cones=m_nozzle, shaft=m_shaft, shaft_tunnel_bearing_housings=m_tunnel,
                  bearings_2x_hybrid=0.05, starter_motor=0.18, fuel_manifold_igniter=0.08)
+    if damper_kg: items["bearing_dampers"] = damper_kg
     sub = sum(items.values()); items["fasteners_seals_balancing_10pct"] = 0.10 * sub
     return dict(items=items, dry_mass_kg=float(sum(items.values())), D_engine_mm=float(D_eng), L_engine_mm=float(L_total * 1e3),
                 D_breakdown=dict(compressor=gc["D_mm"], combustor=comb["OD_mm"], turbine=gt["D_mm"]), comp_geo=gc, turb_geo=gt)

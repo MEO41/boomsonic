@@ -18,7 +18,9 @@ HERE = os.path.dirname(os.path.abspath(__file__)); ROOT = os.path.abspath(os.pat
 sys.path.insert(0, HERE); sys.path.insert(0, os.path.join(ROOT, "scripts", "phase2_airframe"))
 import dash_cycle as dc, cycle_model as cm, combustor_sizing as cs, engine_mass as em, axial_design as ad, axicent_design as acd
 NP1 = os.path.join(ROOT, ".venv-np1", "Scripts", "python.exe")
-OUT = os.path.join(ROOT, "data", "phase3")
+OUT = os.path.join(ROOT, "data", os.environ.get("P3_DATA", "phase3"))     # Phase 3R: P3_DATA=phase3r
+os.makedirs(OUT, exist_ok=True)
+CC_DEFAULT = dict(beta2b_deg=-30, Z=12, tip_clearance=0.25e-3, R4R2=1.35)  # Phase 3 centrifugal options
 OPR, T4 = float(os.environ.get("P3_OPR", 4.0)), float(os.environ.get("P3_T4", 1150.0))
 FIELDED = dict(eta_c_centrifugal=0.70, eta_t=0.75)
 
@@ -69,15 +71,15 @@ def envelope_cap(kind, comp, cyc):
         Dc = comp["D_casing_mm"] if kind == "axial" else 2e3 * (comp["geometry"]["vaned_diffuser"]["radius_out"] + 3e-3)
     return (max(Dc, comb["mean"]["OD_mm"]) / 2e3) - 2.3e-3
 
-def design_case(kind, rpm=None, tag="x", n_ax=None, pi_a=None):
+def design_case(kind, rpm=None, tag="x", n_ax=None, pi_a=None, cc_opts=None):
+    cc_opts = {**CC_DEFAULT, **(cc_opts or {})}
     eta_c, eta_t = 0.78, 0.88
     rpm_fixed = rpm if kind == "axial" and rpm else None       # axial: 0 = best compressor efficiency over the rpm grid, else fixed rpm
     hist = []
     for it in range(4):
         cyc, _ = dc.design(OPR, T4, eta_c, eta_t)
         if kind == "centrifugal":
-            comp = run_np1("centrifugal_design.py", dict(mdot=cyc["W_kgps"], T01=cyc["Tt2_K"], P01=cyc["Pt2_kPa"] * 1e3, PR=OPR, rpm=rpm,
-                                                         beta2b_deg=-30, Z=12, tip_clearance=0.25e-3, R4R2=1.35), f"{tag}_cc")
+            comp = run_np1("centrifugal_design.py", dict(mdot=cyc["W_kgps"], T01=cyc["Tt2_K"], P01=cyc["Pt2_kPa"] * 1e3, PR=OPR, rpm=rpm, **cc_opts), f"{tag}_cc")
             eta_c_new = comp["turboflow"]["eta"]
         elif kind == "axicentrifugal":
             comp = acd.design(cyc["W_kgps"], cyc["Tt2_K"], cyc["Pt2_kPa"] * 1e3, OPR, n_ax, pi_a, rpm, f"{tag}_ac")
@@ -95,7 +97,7 @@ def design_case(kind, rpm=None, tag="x", n_ax=None, pi_a=None):
         eta_c, eta_t = eta_c_new, eta_t_new
         if done: break
     cyc, _ = dc.design(OPR, T4, eta_c, eta_t)
-    return dict(kind=kind, rpm=rpm, cycle=cyc, comp=comp, turb=turb, eta_c=eta_c, eta_t=eta_t, hist=hist, n_ax=n_ax, pi_a=pi_a)
+    return dict(kind=kind, rpm=rpm, cycle=cyc, comp=comp, turb=turb, eta_c=eta_c, eta_t=eta_t, hist=hist, n_ax=n_ax, pi_a=pi_a, cc_opts=cc_opts)
 
 def scaled_comp(kind, comp, s):
     if kind == "axicentrifugal":

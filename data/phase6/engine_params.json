@@ -1,0 +1,612 @@
+{
+ "tag": "ce75000_opr4_t1150_b15_cap",
+ "note": "fielded engine (design freeze); SI units",
+ "impeller": {
+  "rpm": {
+   "value": 75000.0,
+   "unit": "rpm",
+   "status": "frozen",
+   "source": "data/phase3r/cct_ce75000_opr4_t1150_b15_cap.json"
+  },
+  "n_main": {
+   "value": 12.0,
+   "unit": "-",
+   "status": "frozen",
+   "source": "Phase 3R conventions"
+  },
+  "n_splitter": {
+   "value": 12.0,
+   "unit": "-",
+   "status": "frozen",
+   "source": "Phase 3R conventions"
+  },
+  "splitter_start_frac_meridional": {
+   "value": 0.5,
+   "unit": "-",
+   "status": "frozen",
+   "source": "Phase 3R (Aungier Z_eff = 12 + 12 x 0.5)"
+  },
+  "r2": {
+   "value": 0.06689768775031352,
+   "unit": "m",
+   "status": "frozen",
+   "source": "data/phase3r/cct_ce75000_opr4_t1150_b15_cap.json stress_geo (work-based fielded)"
+  },
+  "r1_shroud": {
+   "value": 0.04964859014755906,
+   "unit": "m",
+   "status": "frozen",
+   "source": "data/phase3r/cct_ce75000_opr4_t1150_b15_cap.json"
+  },
+  "r1_hub": {
+   "value": 0.01737700655164567,
+   "unit": "m",
+   "status": "frozen",
+   "source": "data/phase3r/cct_ce75000_opr4_t1150_b15_cap.json"
+  },
+  "axial_length": {
+   "value": 0.04348349703770379,
+   "unit": "m",
+   "status": "frozen",
+   "source": "0.65 r2 (centrifugal_design / gate)"
+  },
+  "b2_physical": {
+   "value": 0.01179569041305502,
+   "unit": "m",
+   "status": "frozen",
+   "source": "stress-sized blockage B2 = 0.090"
+  },
+  "b2_effective": {
+   "value": 0.010737448239522107,
+   "unit": "m",
+   "status": "frozen",
+   "source": "data/phase3r/cct_ce75000_opr4_t1150_b15_cap.json"
+  },
+  "backsweep_deg": {
+   "value": -15.0,
+   "unit": "deg from radial (negative = backswept)",
+   "status": "frozen",
+   "source": "D3R.2 / user approval"
+  },
+  "beta1_hub_deg": {
+   "value": 34.28273609002763,
+   "unit": "deg from axial",
+   "status": "derived",
+   "source": "zero incidence, axial inflow, fielded eye velocity C1 = 200.2 m/s"
+  },
+  "beta1_rms_deg": {
+   "value": 55.57666725178284,
+   "unit": "deg from axial",
+   "status": "derived",
+   "source": "as above"
+  },
+  "beta1_shroud_deg": {
+   "value": 62.82344410474657,
+   "unit": "deg from axial",
+   "status": "derived",
+   "source": "as above"
+  },
+  "t_root_hub": {
+   "value": 0.0022353949488961035,
+   "unit": "m",
+   "status": "frozen",
+   "source": "stress sizing, Fty at MCS (impeller_stress.py)"
+  },
+  "t_tip": {
+   "value": 0.0008,
+   "unit": "m",
+   "status": "frozen",
+   "source": "stress model thickness at the shroud edge"
+  },
+  "thickness_law": {
+   "value": "linear hub -> shroud, constant along the chord except LE/TE rounding",
+   "unit": "-",
+   "status": "derived",
+   "source": "impeller_stress / gate plate model"
+  },
+  "le_radius": {
+   "value": 0.0004,
+   "unit": "m",
+   "status": "provisional",
+   "source": "half the tip thickness; not analysed"
+  },
+  "camber_law": {
+   "value": "radial-fibre inducer theta_rf'(x) = (w/C1)(1 - x/L)^n, n = 3, + exducer backsweep linear in r from 0 at 0.7 r2 to the TE angle",
+   "unit": "-",
+   "status": "provisional",
+   "source": "stress model's blade (radial fibres; plate-model backsweep law); n set in the CAD for the 10 % choke margin (impeller_cad.py, D6.3)"
+  },
+  "tip_clearance": {
+   "value": 0.00025,
+   "unit": "m",
+   "status": "frozen",
+   "source": "A3.5"
+  },
+  "hub_curve": {
+   "value": "quarter ellipse (r1h,0) -> (r2,L)",
+   "unit": "-",
+   "status": "frozen",
+   "source": "impeller_stress_gate.hub_point"
+  },
+  "shroud_curve": {
+   "value": "quarter ellipse (r1s,0) -> (r2,L-b2)",
+   "unit": "-",
+   "status": "frozen",
+   "source": "impeller_stress_gate.shroud_point"
+  },
+  "back_face": {
+   "value": {
+    "t_rim": 0.003,
+    "boss_A_over_r2": 0.3,
+    "boss_p": 2.0,
+    "bore": 0.0
+   },
+   "unit": "m / -",
+   "status": "frozen",
+   "source": "stress sizing (boreless, lowest-stress boss)"
+  },
+  "throat_area_ratio_design": {
+   "value": 0.75,
+   "unit": "of the TOOL-level eye area",
+   "status": "frozen",
+   "source": "10 % choke margin at tool level (centrifugal_design); the requirement carried to the fielded eye is the 10 % margin itself (0.665 x fielded eye, impeller_cad.choke_ratio)"
+  },
+  "material": {
+   "value": "Ti-6Al-4V",
+   "unit": "-",
+   "status": "frozen",
+   "source": "A3.2 / gate"
+  }
+ },
+ "diffuser": {
+  "r3": {
+   "value": 0.07091154901533234,
+   "unit": "m",
+   "status": "provisional",
+   "source": "vaneless gap 1.06 r2 (Phase 3R)"
+  },
+  "r4": {
+   "value": 0.09031187846292325,
+   "unit": "m",
+   "status": "provisional",
+   "source": "R4/R2 1.35 (not optimised; freeze 4.6)"
+  },
+  "width": {
+   "value": 0.010737448239522107,
+   "unit": "m",
+   "status": "provisional",
+   "source": "= effective impeller exit width (TurboFlow model)"
+  },
+  "n_vanes": {
+   "value": 19.0,
+   "unit": "-",
+   "status": "provisional",
+   "source": "19; excites exducer mode 1 at idle (freeze 4.4)"
+  },
+  "vane_le_deg": {
+   "value": 70.59818644016754,
+   "unit": "deg from radial",
+   "status": "provisional",
+   "source": "TurboFlow design flow angle alpha3"
+  },
+  "vane_te_deg": {
+   "value": 34.0,
+   "unit": "deg from radial",
+   "status": "provisional",
+   "source": "TurboFlow example (NASA-derived)"
+  },
+  "vane_thickness": {
+   "value": 0.002,
+   "unit": "m",
+   "status": "provisional",
+   "source": "engine_mass assumption"
+  },
+  "deswirl": {
+   "value": {
+    "r_out": 0.09031187846292325,
+    "r_in": 0.07742694057549672,
+    "axial_length": 0.03344884387515676,
+    "n_vanes": 30
+   },
+   "unit": "m / -",
+   "status": "provisional",
+   "source": "engine_mass envelope; deswirl never designed by an analysis tool (vane count placeholder)"
+  },
+  "casing_wall": {
+   "value": 0.003,
+   "unit": "m",
+   "status": "frozen",
+   "source": "engine_mass: diffuser OD = 2 (r4 + 3 mm)"
+  }
+ },
+ "combustor": {
+  "casing_OD": {
+   "value": 0.18362375692584654,
+   "unit": "m",
+   "status": "provisional",
+   "source": "data/phase4r_closure.json (grown to the diffuser envelope, D4R.1)"
+  },
+  "Ro": {
+   "value": 0.09031187846292328,
+   "unit": "m",
+   "status": "provisional",
+   "source": "data/phase4r_closure.json"
+  },
+  "Ri": {
+   "value": 0.02257796961573082,
+   "unit": "m",
+   "status": "provisional",
+   "source": "data/phase4r_closure.json"
+  },
+  "liner_length": {
+   "value": 0.1502000101421215,
+   "unit": "m",
+   "status": "provisional",
+   "source": "0.8 x 3 x annulus height (rotor fix, freeze 4.3)"
+  },
+  "section_length": {
+   "value": 0.1727300116634397,
+   "unit": "m",
+   "status": "provisional",
+   "source": "engine_mass: 1.15 L_liner"
+  },
+  "outer_liner_r": {
+   "value": 0.08128069061663094,
+   "unit": "m",
+   "status": "provisional",
+   "source": "engine_mass"
+  },
+  "inner_liner_r": {
+   "value": 0.028222462019663525,
+   "unit": "m",
+   "status": "provisional",
+   "source": "engine_mass"
+  },
+  "liner_wall": {
+   "value": 0.0005,
+   "unit": "m",
+   "status": "provisional",
+   "source": "engine_mass"
+  },
+  "vaporisers": {
+   "value": {
+    "n": 8,
+    "d": 0.008,
+    "length_frac": 0.6
+   },
+   "unit": "-",
+   "status": "provisional",
+   "source": "engine_mass (8 vaporiser tubes)"
+  },
+  "material_liner": {
+   "value": "Inconel 625",
+   "unit": "-",
+   "status": "frozen",
+   "source": "engine_mass"
+  }
+ },
+ "turbine": {
+  "source_file": {
+   "value": "data/phase3r/ce75000_opr4_t1150_b15_cap_ttf70_out.json",
+   "unit": "-",
+   "status": "frozen",
+   "source": "TurboFlow, 350 MPa blade-root limit, 75 000 rpm"
+  },
+  "n_ngv": {
+   "value": 34.0,
+   "unit": "-",
+   "status": "frozen",
+   "source": "data/phase3r/ce75000_opr4_t1150_b15_cap_ttf70_out.json"
+  },
+  "n_rotor": {
+   "value": 28.0,
+   "unit": "-",
+   "status": "frozen",
+   "source": "data/phase3r/ce75000_opr4_t1150_b15_cap_ttf70_out.json"
+  },
+  "radius_hub_in": {
+   "value": [
+    0.03835066360893529,
+    0.036673852596863184
+   ],
+   "unit": "m",
+   "status": "frozen",
+   "source": "data/phase3r/ce75000_opr4_t1150_b15_cap_ttf70_out.json [NGV, rotor]"
+  },
+  "radius_hub_out": {
+   "value": [
+    0.036673852596863184,
+    0.03667385259682655
+   ],
+   "unit": "m",
+   "status": "frozen",
+   "source": "data/phase3r/ce75000_opr4_t1150_b15_cap_ttf70_out.json [NGV, rotor]"
+  },
+  "radius_tip_in": {
+   "value": [
+    0.05944627664926886,
+    0.061123087661340975
+   ],
+   "unit": "m",
+   "status": "frozen",
+   "source": "data/phase3r/ce75000_opr4_t1150_b15_cap_ttf70_out.json [NGV, rotor]"
+  },
+  "radius_tip_out": {
+   "value": [
+    0.061123087661340975,
+    0.06112308766137759
+   ],
+   "unit": "m",
+   "status": "frozen",
+   "source": "data/phase3r/ce75000_opr4_t1150_b15_cap_ttf70_out.json [NGV, rotor]"
+  },
+  "chord": {
+   "value": [
+    0.011386223041340527,
+    0.01222607128839507
+   ],
+   "unit": "m",
+   "status": "frozen",
+   "source": "data/phase3r/ce75000_opr4_t1150_b15_cap_ttf70_out.json [NGV, rotor]"
+  },
+  "axial_chord": {
+   "value": [
+    0.009509667813934447,
+    0.011483786992451473
+   ],
+   "unit": "m",
+   "status": "frozen",
+   "source": "data/phase3r/ce75000_opr4_t1150_b15_cap_ttf70_out.json [NGV, rotor]"
+  },
+  "pitch": {
+   "value": [
+    0.008965751603750073,
+    0.010996817548788227
+   ],
+   "unit": "m",
+   "status": "frozen",
+   "source": "data/phase3r/ce75000_opr4_t1150_b15_cap_ttf70_out.json [NGV, rotor]"
+  },
+  "opening": {
+   "value": [
+    0.0037486782183995104,
+    0.0063075435945590935
+   ],
+   "unit": "m",
+   "status": "frozen",
+   "source": "data/phase3r/ce75000_opr4_t1150_b15_cap_ttf70_out.json [NGV, rotor]"
+  },
+  "maximum_thickness": {
+   "value": [
+    0.0020643726790457485,
+    0.002290308168319604
+   ],
+   "unit": "m",
+   "status": "frozen",
+   "source": "data/phase3r/ce75000_opr4_t1150_b15_cap_ttf70_out.json [NGV, rotor]"
+  },
+  "trailing_edge_thickness": {
+   "value": [
+    0.00018743391096995388,
+    0.0003153771797446579
+   ],
+   "unit": "m",
+   "status": "frozen",
+   "source": "data/phase3r/ce75000_opr4_t1150_b15_cap_ttf70_out.json [NGV, rotor]"
+  },
+  "leading_edge_diameter": {
+   "value": [
+    0.00254,
+    0.00162
+   ],
+   "unit": "m",
+   "status": "frozen",
+   "source": "data/phase3r/ce75000_opr4_t1150_b15_cap_ttf70_out.json [NGV, rotor]"
+  },
+  "leading_edge_angle": {
+   "value": [
+    0.8425255438040011,
+    14.864063633872092
+   ],
+   "unit": "deg",
+   "status": "frozen",
+   "source": "data/phase3r/ce75000_opr4_t1150_b15_cap_ttf70_out.json [NGV, rotor]"
+  },
+  "stagger_angle": {
+   "value": [
+    33.36429756778518,
+    -20.067878583528646
+   ],
+   "unit": "deg",
+   "status": "frozen",
+   "source": "data/phase3r/ce75000_opr4_t1150_b15_cap_ttf70_out.json [NGV, rotor]"
+  },
+  "gauging_angle": {
+   "value": [
+    65.88606959176636,
+    -54.99982080092938
+   ],
+   "unit": "deg",
+   "status": "frozen",
+   "source": "data/phase3r/ce75000_opr4_t1150_b15_cap_ttf70_out.json [NGV, rotor]"
+  },
+  "tip_clearance": {
+   "value": [
+    0.0,
+    0.0003
+   ],
+   "unit": "m",
+   "status": "frozen",
+   "source": "data/phase3r/ce75000_opr4_t1150_b15_cap_ttf70_out.json [NGV, rotor]"
+  },
+  "material": {
+   "value": "IN-713LC",
+   "unit": "-",
+   "status": "frozen",
+   "source": "A3.2"
+  }
+ },
+ "rotor": {
+  "shaft_od": {
+   "value": 0.032,
+   "unit": "m",
+   "status": "provisional",
+   "source": "D4R.1 (rotor fix)"
+  },
+  "shaft_id": {
+   "value": 0.0256,
+   "unit": "m",
+   "status": "provisional",
+   "source": "D4R.1"
+  },
+  "journal_d": {
+   "value": 0.012,
+   "unit": "m",
+   "status": "provisional",
+   "source": "D4R.1, DN 0.95e6 at MCS"
+  },
+  "journal_len": {
+   "value": 0.02,
+   "unit": "m",
+   "status": "provisional",
+   "source": "cc_rotor"
+  },
+  "bearing": {
+   "value": {
+    "bore": 0.012,
+    "od": 0.028,
+    "width": 0.008
+   },
+   "unit": "m",
+   "status": "provisional",
+   "source": "ISO 15 dimension series 10 (12 x 28 x 8, e.g. 6001 / 7001 size)"
+  },
+  "x_front_bearing": {
+   "value": 0.07655280336279784,
+   "unit": "m",
+   "status": "provisional",
+   "source": "10 mm behind the impeller back face (cc_rotor)"
+  },
+  "x_rear_bearing": {
+   "value": 0.26877133100937267,
+   "unit": "m",
+   "status": "provisional",
+   "source": "under the NGV (cc_rotor)"
+  },
+  "bearing_span": {
+   "value": 0.19221852764657477,
+   "unit": "m",
+   "status": "provisional",
+   "source": "data/phase4r_rotor_final.json"
+  },
+  "tunnel_r": {
+   "value": 0.018,
+   "unit": "m",
+   "status": "provisional",
+   "source": "D4R.1"
+  },
+  "damper": {
+   "value": {
+    "k": 1750000.0,
+    "c": 876.0
+   },
+   "unit": "N/m, N s/m",
+   "status": "provisional",
+   "source": "A4R.2; cartridge not designed"
+  },
+  "shaft_material": {
+   "value": "AISI 4340",
+   "unit": "-",
+   "status": "frozen",
+   "source": "engine_mass"
+  }
+ },
+ "stations": {
+  "x_impeller_nose": {
+   "value": 0.0,
+   "unit": "m",
+   "status": "derived",
+   "source": "origin"
+  },
+  "x_impeller_exit": {
+   "value": 0.04348349703770379,
+   "unit": "m",
+   "status": "derived",
+   "source": "hub exit plane"
+  },
+  "x_compressor_section_end": {
+   "value": 0.08693234091286055,
+   "unit": "m",
+   "status": "derived",
+   "source": "engine_mass: Lx + 0.5 r2 + 10 mm"
+  },
+  "x_combustor_end": {
+   "value": 0.25966235257630027,
+   "unit": "m",
+   "status": "derived",
+   "source": "engine_mass: + 1.15 L_liner"
+  },
+  "x_ngv_le": {
+   "value": 0.25966235257630027,
+   "unit": "m",
+   "status": "derived",
+   "source": "NGV at the combustor exit"
+  },
+  "x_rotor_centre": {
+   "value": 0.2876611664731612,
+   "unit": "m",
+   "status": "derived",
+   "source": "cc_rotor"
+  },
+  "x_nozzle_exit": {
+   "value": 0.352452802399117,
+   "unit": "m",
+   "status": "derived",
+   "source": "engine_mass: turbine section 1.6 (c_NGV + c_rot) + nozzle 0.9 r_tip"
+  },
+  "nozzle_A8": {
+   "value": 0.007076905404454658,
+   "unit": "m2",
+   "status": "frozen",
+   "source": "data/phase3r/cct_ce75000_opr4_t1150_b15_cap.json (convergent)"
+  },
+  "nozzle_r8": {
+   "value": 0.04746207911401917,
+   "unit": "m",
+   "status": "derived",
+   "source": "A8"
+  }
+ },
+ "envelope": {
+  "OD_model": {
+   "value": 0.18662375692584654,
+   "unit": "m",
+   "status": "frozen",
+   "source": "data/phase4r_closure.json"
+  },
+  "length_components": {
+   "value": 0.352452802399117,
+   "unit": "m",
+   "status": "derived",
+   "source": "sum of the modelled component sections (engine_mass)"
+  },
+  "length_calibrated": {
+   "value": 0.42615835590813156,
+   "unit": "m",
+   "status": "frozen",
+   "source": "data/phase4r_closure.json (x1.21 calibration: real engines carry flanges, starter, fittings)"
+  },
+  "mass_raw": {
+   "value": 5.69684882612916,
+   "unit": "kg",
+   "status": "frozen",
+   "source": "data/phase4r_closure.json"
+  },
+  "mass_calibrated": {
+   "value": 6.850491155259563,
+   "unit": "kg",
+   "status": "frozen",
+   "source": "data/phase4r_closure.json"
+  }
+ }
+}

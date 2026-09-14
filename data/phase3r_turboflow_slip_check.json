@@ -1,0 +1,78 @@
+[
+ {
+  "beta2b": -30.0,
+  "ok": true,
+  "sigma_TF": 0.9310256279643805,
+  "sigma_wiesner": 0.8365674926519859,
+  "sigma_as_coded": 0.9310256279659264,
+  "PR": 4.011777928272526,
+  "eta": 0.7939245201365381,
+  "run": "stock TurboFlow"
+ },
+ {
+  "beta2b": -24.5,
+  "ok": true,
+  "sigma_TF": 0.8422930096554548,
+  "sigma_wiesner": 0.8324730884711021,
+  "sigma_as_coded": 0.8422930096511623,
+  "PR": 3.685906259291391,
+  "eta": 0.7915338752816113,
+  "run": "stock TurboFlow"
+ },
+ {
+  "beta2b": -20.0,
+  "ok": true,
+  "sigma_TF": 0.8878118774678609,
+  "sigma_wiesner": 0.8297582652798978,
+  "sigma_as_coded": 0.8878118774704432,
+  "PR": 4.16302310766551,
+  "eta": 0.7941628981643987,
+  "run": "stock TurboFlow"
+ },
+ {
+  "beta2b": -10.0,
+  "ok": false,
+  "err": "All-NaN slice encountered",
+  "run": "stock TurboFlow"
+ },
+ {
+  "beta2b": -30.0,
+  "ok": true,
+  "sigma_TF": 0.8365674926670663,
+  "sigma_wiesner": 0.8365674926519859,
+  "sigma_as_coded": 0.9310256279659264,
+  "PR": 3.3937910839792362,
+  "eta": 0.7866427965153682,
+  "run": "with turboflow_fixes"
+ },
+ {
+  "beta2b": -24.5,
+  "ok": true,
+  "sigma_TF": 0.8324730884988882,
+  "sigma_wiesner": 0.8324730884711021,
+  "sigma_as_coded": 0.8422930096511623,
+  "PR": 3.6225013845973515,
+  "eta": 0.7907184162045886,
+  "run": "with turboflow_fixes"
+ },
+ {
+  "beta2b": -20.0,
+  "ok": true,
+  "sigma_TF": 0.8297582652747547,
+  "sigma_wiesner": 0.8297582652798978,
+  "sigma_as_coded": 0.8878118774704432,
+  "PR": 3.792153291768467,
+  "eta": 0.7926283100288536,
+  "run": "with turboflow_fixes"
+ },
+ {
+  "beta2b": -10.0,
+  "ok": true,
+  "sigma_TF": 0.8257194759085492,
+  "sigma_wiesner": 0.8257194759134059,
+  "sigma_as_coded": NaN,
+  "PR": 4.140967556322361,
+  "eta": 0.7941576237326258,
+  "run": "with turboflow_fixes"
+ }
+]

@@ -1,0 +1,88 @@
+﻿.venv-cad\Scripts\python : 
+C:\Users\MEO\Desktop\Projects\JetEngine\boomsonic_v0\.venv-cad\Lib\site-packages\cadquery\utils.py:82: FutureWarning: 
+save will be removed in the next release.
+At line:1 char:302
++ ... tch {} } }; .venv-cad\Scripts\python scripts\phase6_cad\airframe_cad. ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (C:\Users\MEO\De...e next release.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  warn(f"{f.__name__} will be removed in the next release.", FutureWarning)
+{
+ "intake": {
+  "capture_r_mm": 41.874499014831166,
+  "capture_area_cm2": 55.086999928448606,
+  "duct_length_mm": 1285.0000000000002,
+  "face_r_mm": 49.89859014755906,
+  "area_ratio": 1.4199638948207305,
+  "equivalent_cone_half_angle_deg": 0.35777477109531414
+ },
+ "engine_clearance": {
+  "min_waisted_skin_inner_r_mm": 102.03067719165148,
+  "at_x_mm": 1721.2500000000002,
+  "envelope_r_mm": 93.31187846292327,
+  "radial_gap_mm": 8.718798728728203,
+  "envelope_x_mm": [
+   1315.0000000000002,
+   1741.1583559081319
+  ]
+ },
+ "jetpipe": {
+  "x_start_mm": 1611.4030599693872,
+  "x_convergence_start_mm": 2416.4159231853027,
+  "length_constant_part_m": 0.8050128632159156,
+  "total_length_m": 1.0885969400306128,
+  "radius_mm": 64.12308766137758,
+  "Mach": 0.3425265571421045,
+  "Re": 331908.4913413358,
+  "f_Haaland": 0.014078642103386912,
+  "dPt_over_Pt_friction": 0.006382181159329964,
+  "residual_swirl_deg": -17.84433276183071,
+  "note": "not in the cycle (nozzle Cv 0.98 only); the turbine exit swirl (TurboFlow exit flow angle) is not recovered either",
+  "min_gap_to_boattail_mm": -0.5
+ },
+ "fuel_volume": {
+  "annulus_x_mm": [
+   300.0,
+   1265.0000000000002
+  ],
+  "annulus_volume_L": 13.751652084026517,
+  "fuel_required_L": 3.7249999999999996,
+  "fraction_used": 0.2708765446681742,
+  "note": "gross annulus; systems (avionics 0.3 kg, batteries 0.35 kg, instrumentation) also need space here"
+ },
+ "parts": {
+  "fuselage_skin": {
+   "valid": true,
+   "volume_cm3": 2184.1739702789296
+  },
+  "intake_duct": {
+   "valid": true,
+   "volume_cm3": 374.52000314196573
+  },
+  "wing_right": {
+   "valid": true,
+   "volume_cm3": 1002.2492659518642
+  },
+  "wing_left": {
+   "valid": true,
+   "volume_cm3": 1002.2492659518642
+  },
+  "htail_right": {
+   "valid": true,
+   "volume_cm3": 47.05723049474125
+  },
+  "htail_left": {
+   "valid": true,
+   "volume_cm3": 47.05723049474125
+  },
+  "vtail": {
+   "valid": true,
+   "volume_cm3": 37.22808999282834
+  },
+  "jetpipe": {
+   "valid": true,
+   "volume_cm3": 419.9273081348408
+  }
+ }
+}
