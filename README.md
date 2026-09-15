@@ -1,186 +1,211 @@
-# boomsonic_v0 — 500 N-class turbojet + ≤25 kg MTOW airframe conceptual design study
+# boomsonic
 
-Integrated engine/airframe conceptual sizing study. See `turbojet_500N_mission_brief.md`
-for the brief, `tools_survey.md` for the Phase 0 tool survey, `design_log.md` for the
-running decision log, and (at the Phase 5 gate) `design_freeze.md`.
+**A 500 N-class turbojet and a ≤ 25 kg supersonic airframe, designed from first principles with open-source tools.**
 
-![Alt text](https://github.com/MEO41/boomsonic/blob/main/plots/phase6_engine_cutaway.png?raw=true)
+Conceptual design study for an aircraft that must reach and hold **Mach 1** under the Boom Prize rules.
+Design point: **500 N net thrust at M 1.02, 5 000 m ISA**.
 
+![Engine cutaway](plots/phase6_engine_cutaway.png)
 
-## Repo layout
+*Single-spool turbojet: centrifugal impeller and vaned diffuser (grey), annular vaporiser combustor (orange),
+single-stage axial turbine (red). 187 mm diameter, 426 mm long, 6.85 kg.*
+
+---
+
+## Status
+
+This is a **student learning project** and a **conceptual study**. Every number comes from a tool run or a cited
+handbook relation, and the whole chain is reproducible from this repository — but **nothing has been built or
+tested on hardware**, and several questions that decide whether this design survives are still open. They are
+listed in [Open risks](#open-risks) and stated in full in [`docs/design_freeze.md`](docs/design_freeze.md).
+
+Phases 0–6 are complete: requirements → airframe sizing → cycle and architecture trade → turbomachinery and rotor
+dynamics → design freeze → CAD and 3D FE.
+
+---
+
+## What it came out as
+
+### Engine — single-stage centrifugal turbojet
+
+| | |
+|---|---|
+| Architecture | single spool: centrifugal compressor, annular combustor, axial turbine, convergent nozzle |
+| Overall pressure ratio | 4.0 |
+| Turbine inlet temperature | 1150 K |
+| Airflow | 1.326 kg/s |
+| TSFC | 0.164 kg/(N·h) |
+| Spool speed | 75 000 rpm (105 % MCS = 78 750 rpm) |
+| Impeller | Ti-6Al-4V, 12 main + 12 splitter blades, −15° exit backsweep, boreless hub |
+| Impeller tip speed | 525 m/s (552 m/s at MCS) |
+| Diffuser | vaneless gap, then 19 radial vanes to R4/R2 = 1.35, then axial deswirl |
+| Turbine | single-stage axial, IN-713LC, 34 NGV / 28 rotor blades |
+| Envelope / dry mass | **187 mm × 426 mm / 6.85 kg** |
+| Sea-level static thrust | 631 N at 98.2 % speed (T4-limited) |
+
+Efficiencies are quoted at the **fielded** level (η_c 0.70, η_t 0.75, η_b 0.95) — the level calibrated to reproduce
+the TSFC of real commercial micro-turbojets, not the optimistic level the design tools predict.
+
+### Aircraft — 0.30 m² wing, nose-pitot intake
+
+| mass item | kg |
+|---|---|
+| engine (calibrated) | 6.85 |
+| engine accessories | 1.60 |
+| structure | 3.82 |
+| landing gear + drag chute | 1.27 |
+| fuel system | 0.40 |
+| systems, avionics, instrumentation | 2.02 |
+| growth allowance (15 %) | 1.13 |
+| fuel (sortie + reserve + unusable) | 2.98 |
+| **TOGW** | **20.09** |
+| **margin to the 25 kg limit** | **4.91** |
+
+| performance | nominal wave drag | pessimistic wave drag |
+|---|---|---|
+| **dash thrust margin at M 1.02 / 5 km** (target +25 %) | **+54.7 %** | **+28.5 %** |
+| brake release to M 1.02 at 5 km | 27.7 s | 27.9 s |
+| minimum excess thrust, transonic acceleration | 177 N | 116 N |
+| 3 g sustained turn at M 0.9 / 5 km | +283 N | +283 N |
+| ground roll / landing (flaps + chute) | 46 m / 175 m | |
+
+> The **worst corner** (η_c 0.66, combustor +1σ, pessimistic drag) gives **+21.8 %, below the 25 % target.**
+> It has not been re-run on the Phase 4 engine.
+
+![Aircraft cutaway](plots/phase6_aircraft_cutaway.png)
+
+*Airframe with the intake duct (green), engine (grey/orange) and jetpipe (yellow). 2.7 m long, 217 mm fuselage
+diameter, engine face at x = 1.315 m.*
+
+---
+
+## Selected results
+
+### Architecture trade — why centrifugal
+
+The Phase 3R trade swept OPR, spool speed and exit backsweep, screening each design for impeller stress feasibility
+before evaluating it. Bars are engine diameter, calibrated dry mass, dash margin at pessimistic drag, and worst-corner
+margin. The chosen point is OPR 4 / 75 krpm / −15°.
+
+![Phase 3R centrifugal trade](plots/phase3r_cc_trade.png)
+
+### Off-design on real component maps
+
+Thrust deck, sea-level-static running line and the flown sortie — computed in pyCycle with **TurboFlow-generated
+compressor and turbine maps**, not placeholder map shapes.
+
+![Phase 3R mission](plots/phase3r_mission.png)
+
+### Rotor dynamics
+
+Campbell diagram and mode shapes for the 32 × 25.6 mm tube shaft on damped supports. Three criticals at
+8 335 / 14 383 / 105 571 rpm with amplification factors 2.64 / 1.28 / 29.09 — an **API-style separation-margin check
+passes**, with the running range (grey) clear of the first two.
+
+![Rotor dynamics](plots/phase4r_rotor_final.png)
+
+### 3D impeller stress
+
+Cyclic-sector FE of the impeller passage, von Mises against Ti-6Al-4V minimum yield (622 MPa at temperature).
+The exducer blade root sits on its limit by construction; the 3D model confirms the 1D sizing.
+
+<p align="center"><img src="plots/phase6_impeller_fe.png" width="560" alt="3D impeller FE"></p>
+
+More figures in [`plots/`](plots/) — constraint diagram, drag polar, area distribution, mass budget, cycle trade,
+backsweep sweep, turbo-design cross-check, critical-speed map, and the CAD renders.
+
+---
+
+## Open risks
+
+None of these is resolved. They are the reason this is a snapshot and not a closed design.
+
+| risk | status |
+|---|---|
+| **Compressor surge margin** — no validated prediction method exists for a vaned-diffuser stage of this type. The peak-of-characteristic surrogate **failed its only validation** against NASA HECC data (measured 8.4 % vs surrogate ≥ 73 %). | **OPEN — top risk** |
+| **Surge margin in the idle range** — 8.4–8.7 % on the ground running line; a start/handling bleed was proposed but never sized or integrated. | OPEN |
+| **Combustor shortened 20 %** for rotor dynamics; combustion performance unverified at the shorter length. | OPEN |
+| **Diffuser vane count excites the exducer at idle** — a live high-cycle-fatigue concern until the vane count is redesigned. | OPEN |
+| **No rig or bench test.** Nothing here has been validated on hardware. | OPEN |
+| Exducer root at yield at MCS by construction; turbine on its 350 MPa root limit; damped bearing cartridge not designed. | carried |
+
+---
+
+## How it was done
+
+Every phase ends by handing the next decision to a human; nothing proceeds without that. Every non-trivial decision
+is logged in [`design_log.md`](design_log.md) with the tool, the inputs, the outputs and why the choice won.
+
+**Ground rule: no guessing.** Where a tool could not answer a question, that is recorded rather than filled in.
+
+Tools are verified against closed-form or published results *before* being trusted, and the defects found along the
+way are documented in [`tools_survey.md`](tools_survey.md) — including a genuine bug in TurboFlow's centrifugal slip
+model (it takes `cos` of an angle in degrees), which is patched at run time and evidenced by a dedicated script.
+
+| tool | used for |
+|---|---|
+| [pyCycle](https://github.com/OpenMDAO/pyCycle) / OpenMDAO | thermodynamic cycle, off-design, engine deck |
+| [TurboFlow](https://github.com/turbo-sim/TurboFlow) | centrifugal compressor and axial turbine meanline design + maps |
+| [turbo-design](https://github.com/nasa/turbo-design) (NASA) | independent centrifugal cross-check |
+| [TurboDesigner](https://github.com/Turbodesigner/turbodesigner) | axial compressor meanline |
+| [Cantera](https://cantera.org/) | combustion, real-gas check |
+| [ADRpy](https://github.com/sobester/ADRpy) / [AeroSandbox](https://github.com/peterdsharpe/AeroSandbox) | constraint diagram, drag build-up |
+| [ROSS](https://github.com/petrobras/ross) | rotor dynamics |
+| [CadQuery](https://github.com/CadQuery/cadquery) + gmsh + scikit-fem | CAD, meshing, 3D FE |
+
+---
+
+## Repository layout
 
 ```
-scripts/
-  phase0_tools/          smoke tests for every candidate tool (+ vendored upstream examples)
-  phase1_requirements/   operating point + mission definition
-  phase2_airframe/       ADRpy constraint diagram, mass budget
-  phase3_cycle/          pyCycle + Cantera cycle model and architecture trades
-  phase4_turbomachinery/ turbo-design / TurboFlow meanline design, maps, mass estimate
-plots/                   all generated figures
-data/                    input data (engine database, maps, mission tables)
-docs/                    supporting notes
-design_log.md            running decision log (tool, inputs, outputs, why)
-tools_survey.md          Phase 0 deliverable
-requirements-np2.txt     frozen main env (.venv, NumPy 2)
-requirements-np1.txt     frozen legacy env (.venv-np1, NumPy 1.26)
+scripts/       phase0_tools/          tool smoke tests and verification
+               phase1_requirements/   operating point and mission
+               phase2_airframe/       constraint diagram, drag, mass budget
+               phase3_cycle/          cycle model, architecture trade, centrifugal design
+               phase4_turbomachinery/ maps, operability, stress, rotor dynamics
+               phase6_cad/            CAD, 3D FE, rendering
+docs/          one report per phase; design_freeze.md is the status snapshot
+data/          generated results (committed)
+plots/         generated figures
+cad/           STEP solids
+axial/         the axial + axial-centrifugal branch, self-contained
 ```
 
-## Environments (two, on purpose)
+The **axial branch is kept separate** under [`axial/`](axial/README.md). A 6-stage axial engine was taken to its own
+freeze for comparison; it is not the baseline, and which architecture goes forward is still an open decision.
+Keeping it in its own tree means axial numbers cannot leak into continued centrifugal work.
 
-Python 3.12.10 via `uv`. Two venvs because ADRpy and TurboFlow are NumPy-1-only while
-OpenMDAO/pyCycle and turbodesigner require NumPy ≥ 2 (details in `tools_survey.md`).
+## Running it
+
+Python 3.12 via [`uv`](https://github.com/astral-sh/uv), in three virtual environments (ADRpy and TurboFlow need
+NumPy 1; pyCycle and the CAD stack need NumPy 2).
 
 ```powershell
 uv venv --python 3.12 .venv      ; $env:VIRTUAL_ENV="$PWD\.venv";     uv pip install -r requirements-np2.txt
 uv venv --python 3.12 .venv-np1  ; $env:VIRTUAL_ENV="$PWD\.venv-np1"; uv pip install -r requirements-np1.txt
+uv venv --python 3.12 .venv-cad  ; $env:VIRTUAL_ENV="$PWD\.venv-cad"; uv pip install -r requirements-cad.txt
 ```
 
-| env         | packages                                                        | used for                              |
-|-------------|-----------------------------------------------------------------|---------------------------------------|
-| `.venv`     | openmdao, om-pycycle (git), cantera, turbo-design (git), turbodesigner, pyturbo-aero, aerosandbox | cycle, combustion, turbomachinery, drag build-up |
-| `.venv-np1` | ADRpy, turboflow, CoolProp                                       | airframe constraint sizing, centrifugal/axial meanline cross-check |
-
-## Phase 0 smoke tests
+Check the toolchain, then reproduce the baseline engine:
 
 ```powershell
-.venv\Scripts\python scripts\phase0_tools\smoke_pycycle.py        # design + 2 off-design points converge
-.venv\Scripts\python scripts\phase0_tools\smoke_cantera.py        # kerosene surrogate T_ad, gamma, cp
-.venv\Scripts\python scripts\phase0_tools\smoke_turbodesign.py    # NASA HECC centrifugal validation (PR, eta vs measured)
-.venv\Scripts\python scripts\phase0_tools\smoke_turbodesigner.py  # axial compressor meanline at micro scale
-.venv-np1\Scripts\python scripts\phase0_tools\smoke_adrpy.py      # jet constraint diagram at 25 kg scale
-.venv-np1\Scripts\python scripts\phase0_tools\smoke_turboflow.py  # centrifugal compressor meanline (Oh losses)
+.venv\Scripts\python scripts\phase0_tools\smoke_pycycle.py                          # toolchain check
+.venv\Scripts\python scripts\phase3_cycle\cc_trade.py run 4.0:75000:-15             # the baseline engine
+.venv\Scripts\python scripts\phase3_cycle\cc_mission.py ce75000_opr4_t1150_b15_cap  # deck + sortie on real maps
+.venv\Scripts\python scripts\phase4_turbomachinery\cc_closure.py                    # airframe mass closure
 ```
 
-## Phase 2 (airframe sizing)
+Full per-phase command reference: [`docs/running_the_code.md`](docs/running_the_code.md).
 
-```powershell
-python scripts/phase2_airframe/run_phase2.py     # regenerates every Phase 2 table and plot (both venvs)
-```
+## Documents
 
-Report: `docs/phase2_airframe.md`. Key plots: `plots/phase2_constraint_diagram.png`,
-`plots/phase2_drag_polar.png`, `plots/phase2_area_distribution.png`,
-`plots/phase2_mass_budget.png`, `plots/phase2_engine_database.png`.
-
-## Phase 6 (CAD / 3D; started on the user's instruction, freeze decisions still open)
-
-Report: `docs/phase6_cad.md`. Engine, impeller and airframe CAD in STEP (`cad/`), an item-by-item mass check against
-the analysis model, a 3D cyclic-sector FE of the impeller, and the airframe integration checks. Findings:
-* the inducer throat needed a new camber law to keep the 10 % choke margin;
-* the exducer root stays on its limit in 3D;
-* the inducer root runs 1.8 × the 1D estimate (inside the limit);
-* the engine-to-skin gap is 8.7 mm;
-* the jetpipe loses ~0.6 % total pressure.
-
-The freeze's open risks are carried unchanged. Environment: `.venv-cad` (`requirements-cad.txt`).
-
-```powershell
-.venv-cad\Scripts\python scripts\phase6_cad\smoke_cad.py          # CAD toolchain primitives
-.venv\Scripts\python scripts\phase6_cad\make_params.py            # parameter sheet (frozen / derived / provisional)
-.venv-cad\Scripts\python scripts\phase6_cad\impeller_cad.py       # impeller + FE sector (~10 min); IMP_THROAT_ONLY=1 for the camber scan
-.venv-cad\Scripts\python scripts\phase6_cad\engine_cad.py         # engine parts + assembly
-.venv-cad\Scripts\python scripts\phase6_cad\airframe_cad.py       # airframe + integration checks
-.venv-cad\Scripts\python scripts\phase6_cad\fe3d_impeller.py A,B,BT,P,PF   # 3D FE: verifications, production, mesh check
-.venv\Scripts\python scripts\phase6_cad\mass_compare.py           # CAD vs bottom-up mass model
-.venv-cad\Scripts\python scripts\phase6_cad\render_cad.py         # plots/phase6_*.png
-.venv-cad\Scripts\python scripts\phase6_cad\spec_sheet.py         # docs/boomsonic_engine_spec.pdf (engine specification, all numbers from data)
-```
-
-## Phase 5 design freeze (status snapshot)
-
-`docs/design_freeze.md`: the current design with its open risks stated explicitly (surge margin, idle-range transient
-margin, shortened combustor, diffuser-vane/exducer resonance at idle, no hardware validation). Formal sign-off was not
-recorded; Phase 6 started on the user's instruction with the freeze decisions left open.
-
-## Phase 4 on the centrifugal baseline (turbomachinery, rotor, closure)
-
-Report: `docs/phase4r_centrifugal.md`. Engine 6.85 kg / 426 mm / 187 mm; TOGW 20.1 kg; top open risk: compressor surge
-margin (vaned-diffuser stall not modelled; the peak-PR surrogate fails on NASA HECC).
-
-```powershell
-.venv\Scripts\python scripts\phase4_turbomachinery\td_check.py                  # NASA turbo-design check of the impellers
-.venv\Scripts\python scripts\phase4_turbomachinery\hecc_surge_check.py          # surge surrogate vs NASA HECC measured
-.venv\Scripts\python scripts\phase4_turbomachinery\cc_blade_modes.py            # exducer blade modes / Campbell screening
-.venv\Scripts\python scripts\phase4_turbomachinery\cc_rotor.py                  # rotor model, critical-speed map (~7 min)
-.venv\Scripts\python scripts\phase4_turbomachinery\cc_rotor_stiffening.py       # levers on the bending critical (~15 min)
-.venv\Scripts\python scripts\phase4_turbomachinery\cc_rotor_final.py            # chosen rotor: Campbell, API check
-.venv\Scripts\python scripts\phase4_turbomachinery\cc_transient.py ce75000_opr4_t1150_b15_cap 0.00213   # acceleration
-.venv\Scripts\python scripts\phase4_turbomachinery\cc_closure.py                # engine update + Phase 2 <-> 4 mass closure
-```
-
-## Phase 3R (centrifugal-only redesign)
-
-Report: `docs/phase3r_centrifugal.md`. Recommended engine: single-stage centrifugal, OPR 4, 75 000 rpm, 15 deg
-backsweep (187 mm, 6.74 kg, +55 / +29 % dash margin, TOGW 20.0 kg). Outputs in `data/phase3r/` and `data/phase3r_*`.
-TurboFlow's centrifugal slip model is patched at run time (`scripts/phase3_cycle/turboflow_fixes.py`).
-
-```powershell
-.venv-np1\Scripts\python scripts\phase3_cycle\verify_turboflow_slip.py              # evidence for the TurboFlow slip defect + fix
-$env:P3_DATA="phase3r"; $env:P3_CC_OPTS='{"Z": 12, "Z_split": 12, "split_frac": 0.5, "effective_width": true, "choke_margin": 0.10}'; $env:P3_OUT_SUFFIX="_3r"; .venv\Scripts\python scripts\phase3_cycle\validate_mass_model.py
-.venv\Scripts\python scripts\phase3_cycle\inducer_anchor.py                          # fielded inducer relative Mach range
-.venv\Scripts\python scripts\phase3_cycle\impeller_stress.py                         # regression vs the Phase 4 gate
-.venv\Scripts\python scripts\phase3_cycle\cc_screen.py                               # 36-design screen (OPR x rpm x backsweep)
-.venv\Scripts\python scripts\phase3_cycle\cc_trade.py run 4.0:75000:-15              # one full-chain case (run cases in parallel)
-.venv\Scripts\python scripts\phase3_cycle\cc_trade.py reeval                         # re-evaluate saved designs without re-design
-.venv\Scripts\python scripts\phase3_cycle\cc_trade.py compile                        # data/phase3r_cc_trade.csv + plot
-$env:CC_SRC="data/phase3r/ce75000_opr4_t1150_b15_cap_cc_out.json"; $env:MAP_DIR="data/phase3r/maps"; $env:CC_GROUPS="1.0,0.6 1.05,0.5 0.95,0.4 0.9,0.7 0.85,0.8 0.35,0.3"; bash scripts/phase4_turbomachinery/run_centrifugal_map.sh ce75000_opr4_t1150_b15_cap
-$env:TT_SRC="data/phase3r/ce75000_opr4_t1150_b15_cap_tt_out.json"; $env:TMAP_NS="1.0 1.1 0.9 0.8 0.7 0.6 0.5 0.4 0.3 0.25"; bash scripts/phase4_turbomachinery/run_turbine_map.sh ce75000_opr4_t1150_b15_cap
-.venv\Scripts\python scripts\phase3_cycle\cc_mission.py ce75000_opr4_t1150_b15_cap   # running lines, deck, sortie ('lines' = running lines only)
-.venv\Scripts\python scripts\phase3_cycle\cc_sensitivity.py ce75000_opr4_t1150_b15_cap
-.venv\Scripts\python scripts\phase3_cycle\plot_phase3r.py
-```
-
-Map generation is memory-hungry. Running the compressor groups and turbine lines of more than two maps at once on a
-14 GB machine crashed processes with `MemoryError`; re-run failed groups under their original part numbers.
-
-## Phase 3 (engine cycle and architecture trade; superseded by Phase 3R)
-
-Report: `docs/phase3_engine.md`. Main entry points (run from the repo root with `.venv`; they
-call TurboFlow in `.venv-np1` themselves):
-
-```powershell
-.venv\Scripts\python scripts\phase3_cycle\arch_trade.py            # env: P3_OPR, P3_CASES, P3_TURB_CAP, P3_CC_REF
-.venv\Scripts\python scripts\phase3_cycle\compile_trade.py         # summary table + plots/phase3_arch_trade.png
-.venv\Scripts\python scripts\phase3_cycle\validate_mass_model.py   # P400 / Nike validation of the mass model
-```
-
-## Phase 4 entry gate (impeller stress check, pure centrifugal)
-
-Report: `docs/phase4_impeller_stress_gate.md`. Verdict: the disc and burst pass with a boreless
-hub, but the 30 deg backswept exducer blade root fails at 537 m/s. Phase 4 proceeds on the pure axial.
-
-```powershell
-.venv\Scripts\python scripts\phase4_turbomachinery\verify_axisym_fe.py       # FE check vs rotating-disc theory
-.venv\Scripts\python scripts\phase4_turbomachinery\impeller_stress_gate.py   # hub sweep, burst, blade root (~7 s)
-.venv\Scripts\python scripts\phase4_turbomachinery\impeller_gate_extras.py   # thermal gradient, backsweep sensitivity
-```
-
-## Phase 4 (axial engine: Phase 3 correction, operability, rotor dynamics)
-
-**Reports:**
-* `docs/phase3_engine.md` section 14: erratum, with corrected axial numbers;
-* `docs/phase4_operability.md`;
-* `docs/phase4_rotordynamics.md`.
-
-```powershell
-.venv\Scripts\python scripts\phase4_turbomachinery\check_turbodesigner_blockage.py        # evidence for the Phase 3 blockage error
-$env:P3_OPR=5; $env:P3_CASES="axial:0"; $env:P3_TURB_CAP=1; $env:P3_CC_REF=0.794; $env:P3_TAG_SUFFIX="_blk"; .venv\Scripts\python scripts\phase3_cycle\arch_trade.py
-bash scripts/phase4_turbomachinery/run_turbine_map.sh ax0_opr5_t1150_cap_blk                 # TurboFlow turbine map (.venv-np1)
-.venv\Scripts\python scripts\phase4_turbomachinery\operability.py ax0_opr5_t1150_cap_blk      # stacking map, running lines, variable IGV
-.venv\Scripts\python scripts\phase4_turbomachinery\nozzle_sweep.py ax0_opr5_t1150_cap_blk 1.3,1.6,2.0
-.venv\Scripts\python scripts\phase4_turbomachinery\bleed_sweep.py ax0_opr5_t1150_cap_blk 0.1,0.2,0.3
-.venv\Scripts\python scripts\phase4_turbomachinery\running_line_axi5.py                      # bracket with the NPSS AXI5 map
-.venv\Scripts\python scripts\phase4_turbomachinery\plot_operability.py
-.venv\Scripts\python scripts\phase4_turbomachinery\rotordynamics_verify.py; .venv\Scripts\python scripts\phase4_turbomachinery\rotordynamics.py
-```
-
-### Option B checks (axial-centrifugal) and method benchmark
-
-Report: `docs/phase4_optionB_checks.md`.
-
-```powershell
-.venv\Scripts\python scripts\phase4_turbomachinery\impeller_check_ac.py                 # check 1: impeller stress, both AC variants
-bash scripts/phase4_turbomachinery/run_centrifugal_map.sh ax90000_opr4_t1150_ax2_pa2_cap_blk   # TurboFlow centrifugal map (.venv-np1); CC_ATR=0.80 + suffix for the throat sensitivity
-.venv\Scripts\python scripts\phase4_turbomachinery\ac_operability.py ax90000_opr4_t1150_ax2_pa2_cap_blk [neg_width] [cc map]
-.venv\Scripts\python scripts\phase4_turbomachinery\cc_benchmark.py                      # same chain on the JetCat P400 model (idles at 31 %)
-.venv\Scripts\python scripts\phase4_turbomachinery\plot_optionB.py
-```
+| | |
+|---|---|
+| [`turbojet_500N_mission_brief.md`](turbojet_500N_mission_brief.md) | the brief and its binding ground rules |
+| [`docs/design_freeze.md`](docs/design_freeze.md) | **status snapshot: the design and every open risk** |
+| [`docs/phase3r_centrifugal.md`](docs/phase3r_centrifugal.md) | cycle and centrifugal compressor design |
+| [`docs/phase4r_centrifugal.md`](docs/phase4r_centrifugal.md) | maps, operability, stress, rotor dynamics |
+| [`docs/phase6_cad.md`](docs/phase6_cad.md) | CAD, 3D FE, airframe integration |
+| [`design_log.md`](design_log.md) | every decision, with numbers |
+| [`tools_survey.md`](tools_survey.md) | tool survey and the defects found |
+| [`axial/README.md`](axial/README.md) | the axial branch |
