@@ -68,6 +68,49 @@ The freeze's open risks are carried unchanged. Environment: `.venv-cad` (`requir
 .venv-cad\Scripts\python scripts\phase6_cad\spec_sheet.py         # docs/boomsonic_engine_spec.pdf (engine specification, all numbers from data)
 ```
 
+## Phase 7 (afterburner; run on the user's instruction, freeze decisions still open)
+
+Report: `docs/phase7_afterburner.md`. The afterburner lives in `cycle_model.py` behind
+`afterburner=False`, so with it off the Phase 3/4 model is unchanged — `verify_ab_cycle.py` proves
+that and must keep passing before any Phase 7 number is used. Findings:
+* **+79 % net thrust** at the dash (500 → 896 N at Tt7 1900 K) for +63 % TSFC;
+* the envelope is capped at **M 1.33 by the turbine exit annulus**, not by thrust — the afterburner
+  is never thrust-limited up to M 2.0, and the cap is altitude-independent;
+* a **fixed nozzle turns +79 % into +9.6 % and halves the surge margin**, so the variable nozzle is
+  not optional;
+* the **translating plug** wins the nozzle trade on actuation load (123 N vs the iris's 1198 N) and
+  is the only concept a sourced actuator covers;
+* it costs **+4.08 kg and +484 mm** (the engine more than doubles in length), and TOGW closes at
+  24.78 kg **only for brief afterburner use** — 26.02 kg, over the 25 kg limit, if the afterburner
+  runs through the whole acceleration.
+
+New open risks R7.1–R7.7; freeze risks 4.1/4.2 and 4.4 are made **worse**, not better.
+
+```powershell
+.venv\Scripts\python scripts\phase7_afterburner\verify_ab_cycle.py       # run this first: Rayleigh vs tables,
+                                                                         # afterburner-off regression, null-AB identity,
+                                                                         # fuel bookkeeping, Cantera heat release, A8, Fg
+.venv\Scripts\python scripts\phase7_afterburner\ab_envelope.py --regress # dry deck vs data/phase3r_mission_<tag>_deck.csv (0.000 %)
+.venv\Scripts\python scripts\phase7_afterburner\ab_design_point.py       # Tt7 sweep, duct-Mach trade, thermal choking, eta_AB
+.venv\Scripts\python scripts\phase7_afterburner\ab_envelope.py           # envelope on real maps (~15 min); --alt-only reuses the 5 km line
+.venv\Scripts\python scripts\phase7_afterburner\ab_hardware.py           # turbine exit, diffuser, flameholder, Cantera stability, mass
+.venv\Scripts\python scripts\phase7_afterburner\ab_nozzle_trade.py       # iris / two-position / plug + the fixed-nozzle reference
+.venv\Scripts\python scripts\phase7_afterburner\ab_closure.py            # mass, fuel and the 25 kg closure matrix
+.venv-cad\Scripts\python scripts\phase7_afterburner\ab_cad.py            # CAD on top of the Phase 6 engine (~2 min)
+.venv-cad\Scripts\python scripts\phase7_afterburner\ab_render.py         # cutaway and meridional-section figures
+```
+
+Run them in that order: `ab_envelope.py` needs `ab_design_point.json`, `ab_nozzle_trade.py` and
+`ab_closure.py` need both, and `ab_cad.py` needs all three plus `cad/engine/*.step` from Phase 6.
+The two CAD steps run in `.venv-cad` and, like every `.venv-cad` script, can exit non-zero at
+teardown — check the outputs, not the exit code.
+
+CAD findings (design_log D7.7, F7.13–F7.15): the afterburner flow path fits inside the 186.6 mm
+engine envelope with a 10.2 mm annulus to spare, but **the nozzle actuator fits nowhere** (+25.0 mm
+over the envelope, against an 8.7 mm engine-to-skin gap — Phase 6A's F6A.2 repeated, risk R7.8); and
+the CAD mass is +0.298 kg over the bottom-up model, which puts TOGW at 25.10 kg, just over the
+ceiling, where the recommended duct-Mach-0.30 build would be 23.80 kg.
+
 ## Axial option (Phase 3A-R / 4A / 5A / 6A) — see `axial/README.md`
 
 The axial and axial-centrifugal work lives under `axial/`, with its own README, commands, data,

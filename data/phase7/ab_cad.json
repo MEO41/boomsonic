@@ -1,0 +1,173 @@
+{
+ "config": "M0.20_theta7",
+ "cad_mass_kg": 8.823307786473256,
+ "cad_afterburner_kg": 3.74055187492162,
+ "model_afterburner_kg": 3.4459861804008183,
+ "cad_total_with_allowances_kg": 4.38016389401731,
+ "undrawn_allowances": {
+  "AB fuel valve and lines (A7.13)": 0.12,
+  "plug slide bearing": 0.04,
+  "actuator linkage allowance": 0.06,
+  "AB fuel system (A7.15)": 0.15,
+  "flanges + fasteners, 10 % of the drawn AB module": 0.26961201909569027
+ },
+ "model_total_kg": 4.082123508438731,
+ "delta_kg": 0.29804038557857915,
+ "TOGW_model_kg": 24.78041086819885,
+ "TOGW_cad_kg": 25.09950549469896,
+ "margin_to_25_kg": -0.09950549469895975,
+ "length": {
+  "x_turbine_exit_mm": 296.40305996938696,
+  "x_plug_tip_mm": 810.3189719585096,
+  "x_dry_nozzle_exit_mm": 352.45280239911705,
+  "growth_over_dry_mm": 457.8661695593925,
+  "assembly_length_mm": 840.3189719585122,
+  "max_diameter_mm": 211.62375692584624
+ },
+ "packaging": [
+  {
+   "part": "nozzle_actuator",
+   "r_max_mm": 118.31187846292325,
+   "over_envelope_mm": 25.0
+  },
+  {
+   "part": "nozzle_pushrod",
+   "r_max_mm": 110.31187846292325,
+   "over_envelope_mm": 17.0
+  },
+  {
+   "part": "nozzle_link_radial",
+   "r_max_mm": 107.31187846292325,
+   "over_envelope_mm": 14.0
+  },
+  {
+   "part": "ab_igniter",
+   "r_max_mm": 98.09367361589332,
+   "over_envelope_mm": 4.781795152970076
+  },
+  {
+   "part": "ab_fuel_manifold",
+   "r_max_mm": 91.09367361589332,
+   "over_envelope_mm": -2.2182048470299236
+  },
+  {
+   "part": "ab_diffuser_casing",
+   "r_max_mm": 83.09367361589332,
+   "over_envelope_mm": -10.218204847029924
+  },
+  {
+   "part": "ab_casing",
+   "r_max_mm": 83.09367361589332,
+   "over_envelope_mm": -10.218204847029924
+  },
+  {
+   "part": "nozzle_cowl",
+   "r_max_mm": 83.09367361589332,
+   "over_envelope_mm": -10.218204847029924
+  },
+  {
+   "part": "nozzle_plug_struts",
+   "r_max_mm": 82.09367361589332,
+   "over_envelope_mm": -11.218204847029924
+  },
+  {
+   "part": "ab_diffuser_struts",
+   "r_max_mm": 80.09367361589332,
+   "over_envelope_mm": -13.218204847029924
+  },
+  {
+   "part": "ab_liner",
+   "r_max_mm": 78.69360773850896,
+   "over_envelope_mm": -14.618270724414288
+  },
+  {
+   "part": "ab_spray_bars",
+   "r_max_mm": 76.09367361589332,
+   "over_envelope_mm": -17.218204847029924
+  },
+  {
+   "part": "ab_gutter_struts",
+   "r_max_mm": 75.09367361589332,
+   "over_envelope_mm": -18.218204847029924
+  },
+  {
+   "part": "ab_flameholder_gutters",
+   "r_max_mm": 69.57025521192,
+   "over_envelope_mm": -23.741623251003247
+  },
+  {
+   "part": "nozzle_plug",
+   "r_max_mm": 45.00000000000001,
+   "over_envelope_mm": -48.31187846292324
+  },
+  {
+   "part": "ab_tail_cone",
+   "r_max_mm": 36.673852596826556,
+   "over_envelope_mm": -56.63802586609669
+  },
+  {
+   "part": "nozzle_actuator_rod",
+   "r_max_mm": 5.0,
+   "over_envelope_mm": -88.31187846292325
+  }
+ ],
+ "envelope_diameter_mm": 186.6237569258465,
+ "groups": [
+  {
+   "group": "diffuser + tail cone + struts",
+   "CAD_kg": 1.3725882899041686,
+   "model_kg": 1.244314890124904,
+   "delta_kg": 0.12827339977926466,
+   "pct": 10.30875711584458
+  },
+  {
+   "group": "burn casing",
+   "CAD_kg": 0.4497461955574038,
+   "model_kg": 0.44731050979246517,
+   "delta_kg": 0.002435685764938633,
+   "pct": 0.5445178934133876
+  },
+  {
+   "group": "screech liner",
+   "CAD_kg": 0.2431392371490123,
+   "model_kg": 0.30287300407082246,
+   "delta_kg": -0.05973376692181015,
+   "pct": -19.72238070707757
+  },
+  {
+   "group": "flameholder + struts",
+   "CAD_kg": 0.4550485627462207,
+   "model_kg": 0.3393473482798737,
+   "delta_kg": 0.11570121446634701,
+   "pct": 34.09521690763986
+  },
+  {
+   "group": "spray bars + manifold",
+   "CAD_kg": 0.14397903217877756,
+   "model_kg": 0.14752752811106448,
+   "delta_kg": -0.003548495932286927,
+   "pct": -2.4053110478577833
+  },
+  {
+   "group": "igniter",
+   "CAD_kg": 0.03161887342131987,
+   "model_kg": 0.06,
+   "delta_kg": -0.02838112657868013,
+   "pct": -47.30187763113355
+  },
+  {
+   "group": "nozzle cowl + plug + struts",
+   "CAD_kg": 0.7121266033503252,
+   "model_kg": 0.6493131348722695,
+   "delta_kg": 0.06281346847805569,
+   "pct": 9.673833025172375
+  },
+  {
+   "group": "actuation (rod, pushrod, links, actuator)",
+   "CAD_kg": 0.3323050806143918,
+   "model_kg": 0.2552997651494192,
+   "delta_kg": 0.07700531546497258,
+   "pct": 30.162705171273352
+  }
+ ]
+}

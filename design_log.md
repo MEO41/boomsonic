@@ -1658,3 +1658,359 @@ Both were silent — they only bite on a regeneration path, so neither showed up
 The full centrifugal solver chain (`cc_trade`, `cc_mission`, `cc_benchmark`) was not re-run end to end: none of its
 files were edited, and the reproduction targets (centrifugal dash W 1.32575 kg/s, TSFC 0.16416) are unchanged by a
 file move. Re-run them before the next Phase 6 step if a fresh baseline is wanted.
+
+## Phase 7 — Afterburner (2026-09-15)
+
+Report: `docs/phase7_afterburner.md`. Scripts `scripts/phase7_afterburner/`, data `data/phase7/`,
+figures `plots/phase7_*.png`. **Nothing in the freeze, in Phase 6 CAD, or under `axial/` was changed.**
+
+### D7.0 Phase 7 started on the user's instruction; purpose and nozzle treatment chosen by the user
+User request: "add this design an afterburner". Before any run, a screening calculation was done
+(pyCycle prototype reproducing the frozen dash point; overall phi at the dash is **0.244**, so about
+76 % of the oxygen leaves the turbine unused) and two load-bearing scope questions were put to the
+user, who chose:
+1. **purpose — extend the envelope past Mach 1** (over: thrust augmenter on the frozen mission; a
+   smaller core behind the afterburner; or studying both);
+2. **nozzle — size and compare all three concepts and decide on the numbers** (over: committing to
+   a fully variable or a two-position nozzle up front).
+
+### D7.1 The afterburner lives in `cycle_model.py` as an option that is OFF by default
+Following the Phase 4 precedent (`comp_bleed`, `nozz_type`), rather than a forked model. New options
+`afterburner` (default False) and `ab_mode` ('FAR' = set the added fuel-air ratio, 'T7' = balance it
+to an exit temperature), plus `ab_mode_design` so the core is always **sized dry** while an
+off-design point runs wet. `read()` gains `eta_ab`; `set_design()` gains `ab_dPqP`, `ab_FAR`, `T7_K`,
+each applied only where the point actually has it.
+
+**Verification (`verify_ab_cycle.py`), all passing:**
+* **Rayleigh relations** added to `ab_common.py` vs published Rayleigh-flow tables (gamma 1.4),
+  Tt/Tt* and Pt/Pt* at M 0.2/0.3/0.5: worst error **2.1e-5**.
+* **Regression, afterburner off**: the frozen fielded dash point reproduced — Fn 4.3e-8, W 1.7e-16,
+  TSFC 4.3e-8, Tt5/Pt5 < 3e-9, A8 2.3e-9, turbine PR 2.7e-9. CLAUDE.md targets W 1.32575 and
+  TSFC 0.16416 met.
+* **Null afterburner**: `afterburner=True` with zero AB fuel and zero AB loss equals
+  `afterburner=False` to <= 1e-9 on every quantity, Tt7 = Tt5 and Pt7 = Pt5 exactly.
+* **Fuel bookkeeping**: pyCycle's tabular `ThermoAdd` references the mix ratio to the incoming
+  **dry air** (`thermo/tabular/thermo_add.py`: "for reactant mode, we reference from the incoming
+  air"), so a second burner in series accumulates composition. Checked rather than trusted:
+  `Wf_ab = W_air x FAR_ab` to 3.5e-16, `FAR_total = FAR_main + FAR_ab` to 1.5e-16. Reading this
+  wrong would have corrupted every TSFC in the phase.
+* **Energy vs Cantera**: the tabular fuel carries **zero injection enthalpy** in the table's datum,
+  so an internal energy balance is vacuous. The heat release is checked against Cantera instead
+  (the `cantera_check.py` cross-check extended to a second burn in the vitiated stream):
+  **1925.7 K vs pyCycle 1900.0 K, +1.35 %** (main burner was -0.35 % at 1150 K).
+* **A8** vs the closed-form choked-throat relation **+0.15 %**; **Fg** vs momentum + pressure with
+  Cv debiting the momentum term only (`nozzle.py:117`) **1.2e-6**.
+* `smoke_pycycle.py` still passes; the real-map **dry deck reproduces `phase3r_mission_..._deck.csv`
+  at 5 km to 0.000 % at all ten Mach numbers** (`ab_envelope.py --regress`).
+
+### A7.1-A7.15 Stated assumptions (none is a tool output)
+A7.1 Tt7 = 1900 K. A7.2 eta_AB = 0.90, post-processed on fuel flow as eta_b is. A7.3 AB dry
+total-pressure loss — **superseded**: computed from the flameholder blockage relation instead (F7.7).
+A7.4 AB duct Mach 0.20. A7.5 petal/plug sheet 0.8 mm. A7.6 12 petals. A7.7 120 C epoxy screening
+threshold for skin stagnation temperature (**not** a structural allowable). A7.8 7 deg
+equivalent-cone half-angle for an attached diffuser (Idelchik, the source Phase 2 used for the
+intake diffuser); 10 and 12 deg swept alongside. A7.9 V-gutter blockage 0.30. A7.10 gutter Cd 1.4.
+A7.11 2 gutter rings. A7.12 1200 K sheet Hastelloy-X liner limit. A7.13 igniter 60 g, AB fuel valve
+and lines 120 g. A7.14 turbulence intensity u'/U = 0.10 and S_T = S_L + 2u' (Damkohler large-scale,
+order-of-magnitude). A7.15 AB fuel system 150 g.
+
+### F7.1 pyCycle's tabular thermo runs out of fuel-air ratio at 0.050, and extrapolates silently
+`AIR_JETA_TAB_SPEC` FAR axis: 0 to **0.050**. Stoichiometric Jet-A is 0.068. No error is raised
+beyond the edge. **Tt7 ~ 2000 K is the ceiling of the thermodynamic data, not a physical limit.**
+The chosen Tt7 1900 K gives FAR_total 0.0460, 8 % inside the edge (A7.1's third justification).
+
+### F7.2 pyCycle's `Combustor` does not model the Rayleigh loss of heat addition
+`dPqP` is a fixed fraction applied before the heat addition. Negligible for the main burner at
+MN 0.10; in the afterburner at MN 0.20 with a total-temperature ratio of 1.96 the Rayleigh loss is
+**2.7 % of Pt**. It is computed in `ab_common.rayleigh_loss` (verified against tables, D7.1) and
+handed to the element at every point, recomputed from the point's own AB-duct Mach.
+
+### F7.3 Cantera's n-dodecane mechanism ships two phases; the default one breaks reactors and flames
+`nDodecane_Reitz.yaml` default phase is `nDodecane_RK` (Redlich-Kwong), which every reactor and
+flame object rejects ("Incompatible phase type 'Redlich-Kwong'"). Use `nDodecane_IG`.
+`phase3_cycle/cantera_check.py` works only because `equilibrate()` accepts the RK phase.
+
+### D7.2 Afterburner design point: Tt7 1900 K, duct Mach 0.20 (`ab_design_point.py`)
+Core held exactly at the frozen fielded operating point, nozzle throat free, at M 1.02 / 5 km.
+
+| Tt7 K | FAR_total | phi | Fn N | x dry | TSFC | A8 cm2 | A8/A8_dry |
+|---|---|---|---|---|---|---|---|
+| 971.5 dry | 0.0163 | 0.24 | 500 | 1.00 | 0.1642 | 70.8 | 1.00 |
+| 1400 | 0.0289 | 0.43 | 691 | 1.38 | 0.2156 | 89.8 | 1.27 |
+| 1700 | 0.0388 | 0.57 | 816 | 1.63 | 0.2467 | 101.3 | 1.43 |
+| **1900** | **0.0460** | **0.68** | **896** | **1.79** | **0.2671** | **109.0** | **1.54** |
+| 2000 | 0.0498 | 0.73 | 936 | 1.87 | 0.2776 | 112.9 | 1.60 |
+
+**+79 % net thrust for +63 % TSFC.** Gross thrust rises only ~40 % (Vj ~ sqrt(Tt7)); net rises 79 %
+because the 434 N of ram drag is already subtracted and does not grow. **The thrust is insensitive
+to the eta_AB assumption** (896 N at every eta_AB, by construction of the Tt7 target); only the fuel
+moves, TSFC 0.302 to 0.258 across eta_AB 0.75-0.95.
+
+### F7.4 The afterburner duct thermally chokes above about Mach 0.39
+Rayleigh flow: the temperature ratio the duct can accept falls with inlet Mach. At Tt7 1900 K the
+duct can reach 5743 K at M_ab 0.20, 2862 K at 0.30, 2256 K at 0.35, and **1867 K at 0.40 — below the
+1900 K required, i.e. choked.** Computed, not assumed. The chosen duct runs at M_ab 0.20-0.25 over
+the whole flight envelope, so the limit is never approached in flight, but it is what stops the duct
+being shrunk to save length.
+
+### D7.3 Nozzle schedule: hold the compressor still, and prove it
+The wet point is solved at the **dry point's own mechanical speed**, with the throat opened until T4
+returns to its dry value. Same speed and same T4 behind a choked NGV is the same compressor point.
+An earlier formulation chased the compressor R-line with a secant while also searching the throttle
+limit; the N-limit/T4-limit switching made that discontinuous and it failed to converge at most Mach
+numbers. **Check: worst compressor R-line shift dry -> wet over the whole envelope is 9.9e-4.**
+Surge margin is therefore unchanged by lighting the afterburner at every point — which is the whole
+purpose of a variable nozzle, and is why no surge-margin claim is made from this.
+
+### F7.5 The envelope: the afterburner removes thrust as the constraint, and the engine's hot end becomes it
+`ab_envelope.py`, real Phase 3R TurboFlow maps, fixed geometry, max throttle, 5 km, 20.09 kg.
+
+| Mach | dry N | wet N | A8/A8_dry | drag A | drag B | turbine-exit margin |
+|---|---|---|---|---|---|---|
+| 1.02 | 500 | **896** | 1.539 | 326 | 378 | +5.8 % |
+| 1.20 | 553 | 1051 | 1.545 | 509 | 509 | +4.3 % |
+| 1.30 | 594 | 1160 | 1.544 | 542 | 588 | **+1.2 %** |
+| 1.40 | 622 | 1289 | 1.565 | 616 | 671 | **-3.5 %** |
+| 1.60 | 718 | 1610 | 1.579 | 777 | 850 | -14.4 % |
+
+| limit | Mach |
+|---|---|
+| thrust = drag, dry, drag method A / B | 1.42 / 1.31 |
+| thrust = drag, with afterburner | never inside M <= 2.0 |
+| **turbine exit annulus out of capacity** | **1.33** |
+| dynamic pressure = 2 x the frozen dash value | 1.41 |
+| stagnation temperature = 120 C | 1.64 |
+
+**The useful answer: about M 1.3, and the afterburner is not what gets you there** — the dry engine
+already reaches M 1.31-1.42 against drag. What the afterburner buys is margin: **+174 % thrust margin
+at the dash instead of +53 %**, and a supersonic acceleration of 0.22 s instead of 0.66 s.
+
+The turbine-exit margin is **altitude-independent** (+5.7 % at M 1.02 and -3.6 % at M 1.40 at 3, 5,
+7, 9 and 11 km alike), because it is set by the compressor match and not by altitude. So M 1.33 is
+an envelope-wide cap, not a 5 km one.
+
+**Drag above M 1.05 is outside the Phase 2 model's stated validity** ("subsonic to M 1.05"), so the
+top speed is bracketed by two methods (the model as built, and a slender-body wave-drag floor) that
+differ by 11 %. Neither contains inlet spillage/additive drag, which is absent from the Phase 2
+build-up entirely; the capture stream tube grows 55.1 -> 67.0 cm2 from M 1.02 to 1.6 while pitot
+recovery falls 1.000 -> 0.895, so the high-Mach numbers are optimistic by an unquantified amount.
+
+### F7.6 The real turbine exit runs at Mach 0.76, not the cycle's assumed 0.45 — the centrifugal F6A.5
+`cycle_model` sets `turb.MN = 0.45` at design. The real annulus from TurboFlow's own geometry is
+**75.12 cm2** (hub 36.67, tip 61.12 mm) and at the cycle's Pt5/Tt5 has to run at **M 0.761**, with
+17.8 deg of residual swirl. `arch_trade.turb_pout` used the 0.45 assumption to convert the cycle's
+Pt5 into the static pressure handed to TurboFlow (130.8 kPa), so the turbine was designed against a
+back pressure inconsistent with its own annulus. **This is Phase 6A's F6A.5 repeated on the
+centrifugal engine. It is PRE-EXISTING in the frozen design; Phase 7 found it, did not create it,
+and did not fix it.** It is the cause of the M 1.33 cap in F7.5.
+
+### F7.7 A fixed nozzle turns +79 % into +9.6 % and halves the surge margin
+Real engine on its real maps at the dash point, A8 held fixed:
+
+| A8 scale | dry Fn | dry SM | wet Fn | wet SM |
+|---|---|---|---|---|
+| 1.00 (sized dry) | 500 N | 0.282 | **548 N** | **0.121** |
+| 1.30 | 257 N | 0.467 | 755 N | 0.199 |
+| 1.45 | 152 N | 0.531 | 841 N | 0.236 |
+| 1.54 (sized wet) | will not run | - | 896 N | 0.282 |
+
+**The variable nozzle is not optional.** A dry-sized fixed nozzle halves the surge margin into the
+region open risk 4.1 says cannot be predicted; a wet-sized one destroys the dry engine. This is also
+what makes the afterburner's benefit conditional on the nozzle's **transient** behaviour, which was
+not analysed (R7.2).
+
+The flameholder blockage relation (dPt/q = Cd B/(1-B)^2, B 0.30, Cd 1.4) gives a dry loss of
+**2.2 % of Pt**, which is what A7.3's assumed 2 % was; A7.3 is therefore superseded by a computed
+value rather than carried as an assumption.
+
+### D7.4 Nozzle concept: translating plug, chosen on the actuation load
+`ab_nozzle_trade.py`. Duty: throat 70.77 -> 111.74 cm2 (D 94.9 -> 119.3 mm), ratio 1.579 over the
+whole envelope. Loads are integrated from a quasi-1D internal static-pressure solution along each
+moving surface, not assumed.
+
+| | iris (concepts A and B) | translating plug (C) |
+|---|---|---|
+| travel | 22.63 -> 14.45 deg (8.18 deg) | 51.0 mm stroke |
+| worst load | **112.7 N m** hinge moment -> **1198 N** sync-ring force | **123 N** axial |
+| mass | 0.557 kg | 0.850 kg |
+| sourced actuator | **none compliant**: best rotary (Volz DA 22-12-4112, 1.20 N m) needs a 4.8x reduction; linear P16 needs 3.9x | **Actuonix P16-50-256 at 41 % of rated load**, self-locking |
+
+**9.7x less actuation load decides it.** The iris's 0.29 kg mass advantage disappears into the
+reduction stage and heavier actuator it forces — the same trap Phase 6A hit on the axial nozzle
+(D6A.2). Concept B (two-position iris) carries the identical 112.7 N m, so it inherits the problem
+without solving it. **Both need the actuator mounted forward**: the tailpipe skin is at 698 C and the
+jet at 1900 K against +50/+70 C ratings; the only cool site is the compressor casing at 36 C, reached
+by a pushrod that is **not designed**. Two unresolved items on the plug: the stroke is 51.0 mm
+against the sourced part's 50 mm (2 % over), and the plug's support, cooling and thermal growth on
+the centreline of a 1900 K stream are not designed.
+
+### F7.8 Length is the afterburner's real cost, and the diffuser is most of it
+The flow leaves the turbine at M 0.76 in 75.12 cm2 and must be diffused before anything can burn.
+At the 7 deg attached-diffuser limit the diffuser alone is **270.8 mm at duct Mach 0.20** — 64 % of
+the whole 426 mm engine — falling to 155.9 mm at duct Mach 0.30. Burn length is **102.7 mm**.
+Packaged engine length **426.2 -> 909.6 mm (+484 mm, +113 %)**.
+
+### F7.9 Flame stabilisation: not autoignition, but blowout is not a constraint either
+The first model assumed a 972 K turbine exit would make the afterburner autoignition-stabilised.
+Cantera says otherwise: the **autoignition delay of a fresh stoichiometric pocket is 15.8 ms**
+against a 0.62 ms recirculation residence time — **Da 0.039**. At 1.45 bar the mixture does not
+light itself, so the afterburner needs a flameholder **and an igniter**. Once lit it holds easily:
+a well-stirred-reactor blowout search (Longwell & Weiss; **continuation**, see F7.10) gives
+**tau_blowout 0.039 ms against 0.62 ms available, Da 15.8**, and a minimum gutter of 1.6 mm against
+the 25 mm assumed. Burn length is set by turbulent flame spreading (103 mm), not by autoignition
+(which would need 1917 mm).
+
+### F7.10 Two Cantera traps in the stirred-reactor blowout search
+* A PSR is **bistable**. Bisecting on residence time from a freshly equilibrated initial state lands
+  on the burning branch at every tau and reports no blowout at all. Continuation downwards, each
+  solve restarted from the previous burning state, is required.
+* Sharing one `Solution` object between the inlet reservoir and the reactor (`clone=False`) makes
+  the "fresh" feed **track the reactor**, so the reactor is fed its own hot products and the answer
+  is meaningless. Give each object its own `Solution`.
+Also **F7.11**: `nDodecane_Reitz.yaml` carries **no gas-phase transport data for c12h26**, so a
+laminar flame speed cannot be solved with it at all. The turbulent flame speed used is
+S_T ~ 2u' = 24 m/s, turbulence-dominated, so a missing S_L of 1-3 m/s changes the burn length by a
+few per cent.
+
+### F7.12 Liner cooling is the least-resolved part: required film effectiveness 0.754
+A turbojet afterburner has **no cold air**. The only coolant is turbine-exit gas already at 972 K,
+against a 1900 K flame. For a 1200 K sheet Hastelloy-X limit,
+eta_film = (1900-1200)/(1900-972) = **0.754**. Above ~0.5 conventional single-slot film cooling will
+not do it; a continuously-injecting corrugated (screech) liner is needed, which is what the mass
+model assumes. **No cooling design was done and no liner temperature was computed** (R7.3).
+
+### D7.5 Closure: it fits under 25 kg, but how it is flown decides whether it fits
+`ab_closure.py`. Added mass **4.082 kg** (AB module 2.928 + plug nozzle 0.850 + actuator/linkage
+0.155 + AB fuel system 0.150). Fuel flow **0.0665 kg/s wet vs 0.0228 dry, 2.91x**.
+
+| usage | wet time | extra fuel | TOGW | margin |
+|---|---|---|---|---|
+| supersonic acceleration + the 7 s hold | 7.2 s | +0.325 kg | **24.78 kg** | **+0.22 kg** |
+| the whole 27.7 s brake-release acceleration + hold | 34.7 s | +1.560 kg | **26.02 kg** | **-1.02 kg, fails** |
+| duct Mach 0.30 / 10 deg build, used throughout | 34.7 s | +1.560 kg | 24.72 kg | +0.28 kg |
+| duct Mach 0.30 / 10 deg build, brief use | 7.2 s | +0.325 kg | 23.49 kg | +1.52 kg |
+
+The supersonic acceleration is very short — M 1.00 -> 1.02 at 5 km takes **0.66 s dry and 0.22 s
+wet** — so "hold only" and "acceleration + hold" are nearly the same number, and the failing case is
+using the afterburner through the whole subsonic/transonic climb and acceleration.
+
+Dash margin at the closed 24.78 kg: dry **+53.0 %** (pessimistic wave drag +37.5 %), afterburner lit
+**+174.2 %** (+146.4 %).
+
+**A7.16 / model limitation:** the Phase 2 fuselage is fixed-geometry (L_fus 2.70 m,
+D_fus = D_engine + 30 mm), so a 484 mm longer engine moves the modelled zero-lift drag area only
+81.9 -> 82.6 cm2. That is a limitation, not a result: centre of gravity, tail arrangement, structure
+and the nozzle/boattail junction are **not modelled** (R7.5). Separately, correcting the frozen
+closure's leftover Phase 2 placeholder nozzle and capture areas (49.1 -> 70.8 and 47.5 -> 55.1 cm2)
+by itself moves the dash margin +54.70 % -> +55.13 %.
+
+### R7.1-R7.7 New open risks
+| id | risk |
+|---|---|
+| R7.1 | **Turbine exit annulus chokes at M 1.33**, altitude-independent; traced to `turb.MN = 0.45` in `arch_trade.turb_pout`. Pre-existing, not fixed. It caps the very envelope extension Phase 7 was asked for. |
+| R7.2 | **No compliant nozzle actuator installation.** Load fits a sourced part; stroke is 2 % over its travel, forward mounting needs an undesigned pushrod, and no plug support/cooling/thermal-growth design exists. **No afterburner light-up or shut-down transient was analysed** — a nozzle that lags the light drives the compressor to the F7.7 fixed-nozzle condition. |
+| R7.3 | **Liner cooling unresolved** (F7.12). No cooling design, no liner temperature, no screech-liner acoustic design. |
+| R7.4 | **Airframe drag above M 1.05 is outside its model's validity** and inlet spillage/additive drag is absent entirely. |
+| R7.5 | **Engine length +113 % is not carried into the airframe** (CG, tails, structure, boattail). |
+| R7.6 | **eta_AB 0.90 assumed**, unvalidated at 1.45 bar and this scale. Thrust is insensitive; **fuel is not**, and fuel decides the 25 kg closure. |
+| R7.7 | **Afterburner-on results above M 1.33 are not physically valid** (beyond the turbine-exit choke). The M 1.4-1.6 rows are trend only. |
+
+### D7.6 What Phase 7 makes worse, and status
+**Worse:** freeze risks **4.1/4.2** (the entire benefit now rests on the variable nozzle, including
+its transients, and the fixed-nozzle column shows what a lagging nozzle does to the surge margin) and
+**4.4** (an afterburner adds a 1900 K heat-release zone and a bluff-body flameholder just downstream
+of the turbine; **screech** is a known excitation source and was not checked against the impeller
+modes already crossing at idle). **4.3, 4.5 unchanged.**
+
+**Untouched:** the freeze's open decisions 1-5, Phase 6 CAD, everything under `axial/`.
+**No architecture or freeze decision is taken here.** Decisions handed to the user in
+`docs/phase7_afterburner.md` section 10: whether the afterburner earns its 4.08 kg and 484 mm at
+0.22 kg of margin; whether to adopt the lighter duct-Mach-0.30 build (needs the envelope and nozzle
+trade re-run); and whether to fix R7.1, which re-opens Phase 3R/4R and the freeze.
+
+### D7.7 Afterburner CAD built ON the Phase 6 engine (user instruction, 2026-09-15)
+User request: "can you designed CAD for the afterburner added engine ... you can either build on it
+or redesign from scratch and named as engine_with_afterburner_assembly.step", with "we can
+overlooked the weight a bit but still track it".
+
+**Built on**, not redesigned: `scripts/phase7_afterburner/ab_cad.py` imports all of `cad/engine/*.step`
+unchanged — **25 Phase 6 parts carried over bit-for-bit** — and drops only the two the afterburner
+physically replaces, `nozzle_outer_cone` and `tail_cone`. Nothing upstream of the turbine exit is
+re-drawn, so the compressor, combustor, turbine, shaft and impeller are the geometry Phase 6 already
+checked. **17 new parts**, plus the plug exported a second time in its dry position so the stroke is
+visible in CAD. **42/42 solids pass `BRepCheck_Analyzer`.** Every new dimension is read from
+`data/phase7/*.json` and `data/phase6/engine_params.json`; nothing is typed into the CAD script.
+Outputs `cad/engine_with_afterburner_assembly.step`, `cad/afterburner/*.step`,
+`data/phase7/ab_cad_mass.csv` and `ab_cad.json`; figures `plots/phase7_ab_section.png` and
+`plots/phase7_ab_cutaway.png` (`ab_render.py`, reusing the Phase 6 renderer's helpers).
+
+| section | x from the impeller nose | geometry |
+|---|---|---|
+| turbine exit | 296.4 mm | hub 36.67, tip 61.12 mm |
+| diffuser | 296.4 -> 567.2 mm (270.8) | outer wall 64.02 -> 82.09 mm (3.82 deg), hub 36.67 -> 3.0 mm (7.65 deg) |
+| burn section | 567.2 -> 669.9 mm (102.7) | duct r 82.09, corrugated liner 76.09, 2 gutter rings |
+| nozzle cowl | 669.9 -> 779.9 mm (110.0) | 82.09 -> 62.00 mm |
+| plug | shoulder 40.5 mm into the cowl (wet) | dry 91.4 mm, 51 mm stroke, tip at x 810.3 mm |
+
+**F7.13 Length, corrected by the CAD.** The dry engine's nozzle ended at x 352.5 mm and the
+afterburner replaces it, so the engine grows by **457.9 mm**, not by the 483.5 mm module length the
+closure charged. The closure used the conservative figure, which is the right way round.
+
+### F7.14 The afterburner fits inside the engine envelope; its nozzle actuator has nowhere to go (R7.8)
+Part-by-part radial extent against the 93.31 mm envelope radius:
+
+| part | r_max | over the envelope |
+|---|---|---|
+| nozzle actuator | 118.31 mm | **+25.00 mm** |
+| nozzle pushrod | 110.31 mm | **+17.00 mm** |
+| nozzle radial link | 107.31 mm | **+14.00 mm** |
+| igniter | 98.09 mm | **+4.78 mm** |
+| fuel manifold | 91.09 mm | -2.22 mm |
+| AB duct and casing | 83.09 mm | -10.22 mm |
+| everything else | <= 82.09 mm | inside |
+
+**The flow path fits with room to spare** (10.2 mm free annulus) because the compressor diffuser sets
+the engine diameter and the afterburner is slimmer than the combustor it follows. **The actuator has
+nowhere to go:** a Volz DA 22 case is 22.0 mm on its smallest side and the P16 body about 20 mm,
+against a 10.2 mm annulus over the AB duct, **no annulus at all** over the compressor casing (where
+D7.4 puts it for temperature), and the **8.7 mm** engine-to-fuselage-skin gap Phase 6 measured.
+**This is Phase 6A's F6A.2 repeated on the centrifugal engine.** The two fixes — a local fairing
+(which changes the airframe cross-section and hence the wave drag the dash margin rests on) or a
+longer remote linkage — are **not assessed**. The actuation train is drawn where it actually lands,
+proud of the engine line, not tucked away.
+
+### F7.15 CAD mass is 0.298 kg over the bottom-up model, and that is enough to fail the 25 kg closure
+Mass is tracked as the user asked, group by group against the Phase 7 model:
+
+| group | CAD | model | delta |
+|---|---|---|---|
+| diffuser + tail cone + struts | 1.373 | 1.244 | +10.3 % |
+| burn casing | 0.450 | 0.447 | +0.5 % |
+| screech liner | 0.243 | 0.303 | -19.7 % |
+| flameholder + struts | 0.455 | 0.339 | +34.1 % |
+| spray bars + manifold | 0.144 | 0.147 | -2.4 % |
+| igniter | 0.032 | 0.060 | -47.3 % |
+| nozzle cowl + plug + struts | 0.712 | 0.649 | +9.7 % |
+| actuation | 0.332 | 0.255 | +30.2 % |
+| **drawn total** | **3.741** | **3.446** | **+8.5 %** |
+
+Plus the allowances the CAD does not draw (AB fuel valve and lines 0.120, plug slide bearing 0.040,
+actuator linkage 0.060, AB fuel system 0.150, flanges/fasteners at 10 % of the drawn module 0.270):
+**4.380 kg against the model's 4.082 kg, +0.298 kg.** With its growth allowance that takes TOGW
+**24.780 -> 25.100 kg, 0.100 kg OVER the 25 kg ceiling.** The recommended duct-Mach-0.30 / 10 deg
+build is 1.210 kg lighter in the module alone and comes out at about **23.804 kg (+1.196 kg margin)**
+on the same drawing basis. The CAD does not change D7.5's conclusion, it sharpens it: **the
+conservative 7 deg-diffuser afterburner does not fit the mass budget and the shorter one does.**
+(Per the user, weight is not binding for this study but is tracked; it is tracked here.)
+
+**A7.17 What the CAD is not** (same convention as Phase 6 — provisional, shape only): straight
+conical diffuser walls rather than a contour; a screech liner drawn with 25 mm-pitch, 2 mm-amplitude
+corrugations as a **drawing convention** with no acoustic design and no cooling holes (R7.3); V-gutters
+as 25 mm bluff bodies at the analysed blockage rather than designed gutters; a **schematic** actuation
+linkage (bellcrank, pushrod buckling and thermal growth not designed, R7.2); no thermal growth,
+mounts, joints or manufacturing features anywhere. Radial parts are drawn on +y so they appear in the
+meridional section, following the Phase 6 deswirl-vane convention.
+
+**R7.8 (new):** the nozzle actuator and its linkage do not fit inside the engine envelope, and the
+engine-to-skin gap cannot take them either. Unresolved; both fixes touch the airframe cross-section
+the dash margin depends on.

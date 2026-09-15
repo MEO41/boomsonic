@@ -164,10 +164,11 @@ scripts/       phase0_tools/          tool smoke tests and verification
                phase3_cycle/          cycle model, architecture trade, centrifugal design
                phase4_turbomachinery/ maps, operability, stress, rotor dynamics
                phase6_cad/            CAD, 3D FE, rendering
+               phase7_afterburner/    afterburner cycle, envelope, nozzle trade, closure
 docs/          one report per phase; design_freeze.md is the status snapshot
 data/          generated results (committed)
 plots/         generated figures
-cad/           STEP solids
+cad/           STEP solids (engine_assembly.step, engine_with_afterburner_assembly.step)
 axial/         the axial + axial-centrifugal branch, self-contained
 ```
 
@@ -195,6 +196,20 @@ Check the toolchain, then reproduce the baseline engine:
 .venv\Scripts\python scripts\phase4_turbomachinery\cc_closure.py                    # airframe mass closure
 ```
 
+Phase 7 (afterburner) — verify first, then the study:
+
+```powershell
+.venv\Scripts\python scripts\phase7_afterburner\verify_ab_cycle.py      # regression + closed form + Cantera
+.venv\Scripts\python scripts\phase7_afterburner\ab_envelope.py --regress # dry deck vs the frozen deck
+.venv\Scripts\python scripts\phase7_afterburner\ab_design_point.py      # Tt7 sweep, duct Mach, thermal choking
+.venv\Scripts\python scripts\phase7_afterburner\ab_envelope.py          # how far past Mach 1, on real maps
+.venv\Scripts\python scripts\phase7_afterburner\ab_hardware.py          # diffuser, flameholder, Cantera stability
+.venv\Scripts\python scripts\phase7_afterburner\ab_nozzle_trade.py      # three nozzle concepts + fixed reference
+.venv\Scripts\python scripts\phase7_afterburner\ab_closure.py           # mass and 25 kg closure
+.venv-cad\Scripts\python scripts\phase7_afterburner\ab_cad.py          # CAD: engine_with_afterburner_assembly.step
+.venv-cad\Scripts\python scripts\phase7_afterburner\ab_render.py       # plots/phase7_ab_cutaway.png, _section.png
+```
+
 Full per-phase command reference: [`docs/running_the_code.md`](docs/running_the_code.md).
 
 ## Documents
@@ -206,6 +221,7 @@ Full per-phase command reference: [`docs/running_the_code.md`](docs/running_the_
 | [`docs/phase3r_centrifugal.md`](docs/phase3r_centrifugal.md) | cycle and centrifugal compressor design |
 | [`docs/phase4r_centrifugal.md`](docs/phase4r_centrifugal.md) | maps, operability, stress, rotor dynamics |
 | [`docs/phase6_cad.md`](docs/phase6_cad.md) | CAD, 3D FE, airframe integration |
+| [`docs/phase7_afterburner.md`](docs/phase7_afterburner.md) | afterburner: +79 % thrust, what actually caps the envelope, the nozzle trade |
 | [`design_log.md`](design_log.md) | every decision, with numbers |
 | [`tools_survey.md`](tools_survey.md) | tool survey and the defects found |
 | [`axial/README.md`](axial/README.md) | the axial branch |

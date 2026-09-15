@@ -1,0 +1,16 @@
+{
+ "mass_kg": 20.085245118941717,
+ "T7_K": 1900.0,
+ "A_turb_exit_cm2": 75.11737727134559,
+ "M_max_dry_A": 1.4222058823594437,
+ "M_max_wet_A": Infinity,
+ "M_max_dry_B": 1.3105878693918533,
+ "M_max_wet_B": Infinity,
+ "M_q_2x": 1.4135392125645538,
+ "M_skin_Tg": 1.6391586508543283,
+ "M_turb_exit_choke": 1.3258369842392501,
+ "M_ab_thermal_choke": Infinity,
+ "A8_scale_max": 1.578930220734727,
+ "A8_scale_at_dash": 1.5390224286443988,
+ "Rline_err_max": 0.0009857151592078672
+}
