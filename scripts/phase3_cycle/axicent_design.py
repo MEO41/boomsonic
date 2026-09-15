@@ -15,6 +15,8 @@ Usage (screening):  python axicent_design.py screen <W> <T01> <P01> <tag>
 """
 import os, sys, json, subprocess, itertools, numpy as np
 HERE = os.path.dirname(os.path.abspath(__file__)); ROOT = os.path.abspath(os.path.join(HERE, "..", ".."))
+# shared module (arch_trade.py imports it), but the __main__ screen below is axial-centrifugal: its results live under axial/
+AXROOT = os.path.join(ROOT, "axial")
 sys.path.insert(0, HERE)
 import axial_design as ad
 NP1 = os.path.join(ROOT, ".venv-np1", "Scripts", "python.exe")
@@ -88,6 +90,6 @@ if __name__ == "__main__" and sys.argv[1] == "screen":
             rows.append({k: v for k, v in d.items() if k not in ("axial", "centrifugal")}); print({k: (round(v, 3) if isinstance(v, float) else v) for k, v in rows[-1].items()}, flush=True)
     json.dump(rows, open(os.path.join(ROOT, "data", "phase3", f"axicent_screen_{tag}.json"), "w"), indent=1, default=float)
     import pandas as pd
-    df = pd.DataFrame(rows); df.to_csv(os.path.join(ROOT, "data", f"phase3_axicent_screen_{tag}.csv"), index=False)
+    df = pd.DataFrame(rows); df.to_csv(os.path.join(AXROOT, "data", f"phase3_axicent_screen_{tag}.csv"), index=False)
     pd.set_option("display.width", 250); pd.set_option("display.max_columns", 30)
     print(df.round(3).to_string(index=False))

@@ -1,0 +1,1034 @@
+{
+ "tag": "ax80000_opr5_t1150_n6_cap_3r",
+ "phase": "6A (exploratory: packaging and mass only)",
+ "note": "Exploratory CAD of the AXIAL option, to resolve open risk 4.4 (unsourced variable-geometry hardware) and check radial packaging inside the 142.45 mm engine OD. NOT a build release, NOT an architecture decision. The centrifugal baseline (docs/design_freeze.md) and its Phase 6 status are unchanged.",
+ "sources": {
+  "trade": "data/phase3ax/axt_ax80000_opr5_t1150_n6_cap_3r.json",
+  "turbine": "data/phase3ax/ax80000_opr5_t1150_n6_cap_3r_ttf_out.json",
+  "closure": "data/phase4ax/closure_ax80000_opr5_t1150_n6_cap_3r.json",
+  "operability": "data/phase4ax/operability_ax80000_opr5_t1150_n6_cap_3r_final.json",
+  "rotor": "data/phase4ax/rotor_ax80000_opr5_t1150_n6_cap_3r.json",
+  "rotor_stress": "data/phase4ax/rotor_stress_ax80000_opr5_t1150_n6_cap_3r.json",
+  "trade_like": "data/phase4ax/trade_like_ax80000_opr5_t1150_n6_cap_3r.json"
+ },
+ "cycle": {
+  "rpm": {
+   "value": 80000.0,
+   "unit": "rpm",
+   "status": "frozen",
+   "source": "data/phase3ax/axt_ax80000_opr5_t1150_n6_cap_3r.json"
+  },
+  "mcs_frac": {
+   "value": 1.05,
+   "unit": "-",
+   "status": "frozen",
+   "source": "docs/design_freeze_axial.md 1.2"
+  },
+  "W": {
+   "value": 1.3600463497735005,
+   "unit": "kg/s",
+   "status": "frozen",
+   "source": "data/phase3ax/axt_ax80000_opr5_t1150_n6_cap_3r.json"
+  },
+  "Pt2": {
+   "value": 102145.47666594537,
+   "unit": "Pa",
+   "status": "frozen",
+   "source": "data/phase3ax/axt_ax80000_opr5_t1150_n6_cap_3r.json"
+  },
+  "Tt2": {
+   "value": 308.90466137184154,
+   "unit": "K",
+   "status": "frozen",
+   "source": "data/phase3ax/axt_ax80000_opr5_t1150_n6_cap_3r.json"
+  },
+  "Pt3": {
+   "value": 510727.3833297269,
+   "unit": "Pa",
+   "status": "frozen",
+   "source": "data/phase3ax/axt_ax80000_opr5_t1150_n6_cap_3r.json"
+  },
+  "Tt3": {
+   "value": 558.7708206723291,
+   "unit": "K",
+   "status": "frozen",
+   "source": "data/phase3ax/axt_ax80000_opr5_t1150_n6_cap_3r.json"
+  },
+  "Tt4": {
+   "value": 1150.0,
+   "unit": "K",
+   "status": "frozen",
+   "source": "data/phase3ax/axt_ax80000_opr5_t1150_n6_cap_3r.json"
+  },
+  "Pt5": {
+   "value": 151421.01510409493,
+   "unit": "Pa",
+   "status": "frozen",
+   "source": "data/phase3ax/axt_ax80000_opr5_t1150_n6_cap_3r.json"
+  },
+  "Tt5": {
+   "value": 937.1982940064128,
+   "unit": "K",
+   "status": "frozen",
+   "source": "data/phase3ax/axt_ax80000_opr5_t1150_n6_cap_3r.json"
+  },
+  "A8": {
+   "value": 0.0070162393975298325,
+   "unit": "m2",
+   "status": "frozen",
+   "source": "data/phase3ax/axt_ax80000_opr5_t1150_n6_cap_3r.json"
+  },
+  "inlet_M": {
+   "value": 0.5868674050990774,
+   "unit": "-",
+   "status": "frozen",
+   "source": "data/phase3ax/axt_ax80000_opr5_t1150_n6_cap_3r.json"
+  }
+ },
+ "compressor": {
+  "n_stages": {
+   "value": 6.0,
+   "unit": "-",
+   "status": "frozen",
+   "source": "data/phase3ax/axt_ax80000_opr5_t1150_n6_cap_3r.json"
+  },
+  "x_first_rotor_le": {
+   "value": 0.015,
+   "unit": "m",
+   "status": "derived",
+   "source": "engine_mass comp_geo: 15 mm ahead of the first rotor"
+  },
+  "stack_rule": {
+   "value": "each row occupies 1.25 x chord (row_gap_to_chord = stage_gap_to_chord = 0.25)",
+   "unit": "-",
+   "status": "frozen",
+   "source": "scripts/phase3_cycle/axial_design.py:41"
+  },
+  "blading_length": {
+   "value": 0.19647767519972398,
+   "unit": "m",
+   "status": "frozen",
+   "source": "data/phase3ax/axt_ax80000_opr5_t1150_n6_cap_3r.json comp.length"
+  },
+  "section_length": {
+   "value": 0.22647767519972398,
+   "unit": "m",
+   "status": "derived",
+   "source": "blading + 15 mm each end (engine_mass)"
+  },
+  "r_tip_max": {
+   "value": 0.05237857383447521,
+   "unit": "m",
+   "status": "frozen",
+   "source": "data/phase3ax/axt_ax80000_opr5_t1150_n6_cap_3r.json"
+  },
+  "casing_id": {
+   "value": 0.05262857383447521,
+   "unit": "m",
+   "status": "derived",
+   "source": "r_tip_max + 0.25 mm running clearance (axial_design)"
+  },
+  "casing_od": {
+   "value": 0.05512857383447521,
+   "unit": "m",
+   "status": "frozen",
+   "source": "data/phase3ax/axt_ax80000_opr5_t1150_n6_cap_3r.json (2.5 mm Al wall)"
+  },
+  "casing_wall": {
+   "value": 0.0025,
+   "unit": "m",
+   "status": "frozen",
+   "source": "engine_mass.axial_compressor_mass"
+  },
+  "tip_clearance": {
+   "value": 0.00025,
+   "unit": "m",
+   "status": "frozen",
+   "source": "data/phase3ax/axt_ax80000_opr5_t1150_n6_cap_3r.json"
+  },
+  "stages": [
+   {
+    "stage": 1,
+    "rotor": {
+     "x_le": 0.015,
+     "chord": 0.021384267290898956,
+     "r_hub": 0.020302172898126775,
+     "r_tip": 0.05237857383447521,
+     "h": 0.032076400936348434,
+     "Z": 14,
+     "tc": 0.07,
+     "t_max": 0.001496898710362927,
+     "disc_x": 0.028365167056811847,
+     "disc_r_rim": 0.020302172898126775,
+     "disc_bore_width": 0.0046121109838411665,
+     "m_disc_kg": 0.02465955071039006,
+     "m_blades_kg": 0.04457611586780083
+    },
+    "stator": {
+     "x_le": 0.041730334113623695,
+     "chord": 0.019868485837544025,
+     "r_hub": 0.021439008988142973,
+     "r_tip": 0.05124173774445901,
+     "h": 0.029802728756316038,
+     "Z": 14,
+     "tc": 0.07,
+     "t_max": 0.0013907940086280819
+    },
+    "PR": 1.4113007502133221,
+    "U_mean": 304.4443999900837,
+    "M_rel_tip": 1.268029133949833
+   },
+   {
+    "stage": 2,
+    "rotor": {
+     "x_le": 0.06656594141055372,
+     "chord": 0.016814106461281526,
+     "r_hub": 0.023729793520339847,
+     "r_tip": 0.04895095321226214,
+     "h": 0.02522115969192229,
+     "Z": 17,
+     "tc": 0.07,
+     "t_max": 0.001176987452289707,
+     "disc_x": 0.07707475794885467,
+     "disc_r_rim": 0.023729793520339847,
+     "disc_bore_width": 0.004858959172652783,
+     "m_disc_kg": 0.03460409098980993,
+     "m_blades_kg": 0.026312454693024807
+    },
+    "stator": {
+     "x_le": 0.08758357448715562,
+     "chord": 0.01578537996109271,
+     "r_hub": 0.024501338395481458,
+     "r_tip": 0.048179408337120526,
+     "h": 0.02367806994163907,
+     "Z": 18,
+     "tc": 0.07,
+     "t_max": 0.00110497659727649
+    },
+    "PR": 1.356940355206257,
+    "U_mean": 304.4443999900837,
+    "M_rel_tip": 1.1053457406314526
+   },
+   {
+    "stage": 3,
+    "rotor": {
+     "x_le": 0.10731529943852151,
+     "chord": 0.013624048024202862,
+     "r_hub": 0.026122337348148846,
+     "r_tip": 0.04655840938445314,
+     "h": 0.020436072036304292,
+     "Z": 21,
+     "tc": 0.07,
+     "t_max": 0.0009536833616942004,
+     "disc_x": 0.1158303294536483,
+     "disc_r_rim": 0.026122337348148846,
+     "disc_bore_width": 0.0050633509486741396,
+     "m_disc_kg": 0.04283822798321418,
+     "m_blades_kg": 0.017291348245758165
+    },
+    "stator": {
+     "x_le": 0.12434535946877509,
+     "chord": 0.012891439144026537,
+     "r_hub": 0.02667179400828109,
+     "r_tip": 0.046008952724320894,
+     "h": 0.019337158716039804,
+     "Z": 22,
+     "tc": 0.07,
+     "t_max": 0.0009024007400818576
+    },
+    "PR": 1.315215068265631,
+    "U_mean": 304.4443999900837,
+    "M_rel_tip": 0.9891535123891809
+   },
+   {
+    "stage": 4,
+    "rotor": {
+     "x_le": 0.14045965839880825,
+     "chord": 0.011300386142340357,
+     "r_hub": 0.027865083759545724,
+     "r_tip": 0.04481566297305626,
+     "h": 0.016950579213510536,
+     "Z": 26,
+     "tc": 0.07,
+     "t_max": 0.0007910270299638251,
+     "disc_x": 0.14752239973777098,
+     "disc_r_rim": 0.027865083759545724,
+     "disc_bore_width": 0.005230629523083332,
+     "m_disc_kg": 0.049577219641366306,
+     "m_blades_kg": 0.012216428709543006
+    },
+    "stator": {
+     "x_le": 0.1545851410767337,
+     "chord": 0.010758665457743705,
+     "r_hub": 0.028271374272993213,
+     "r_tip": 0.04440937245960877,
+     "h": 0.016137998186615557,
+     "Z": 26,
+     "tc": 0.07,
+     "t_max": 0.0007531065820420594
+    },
+    "PR": 1.282191052799289,
+    "U_mean": 304.4443999900837,
+    "M_rel_tip": 0.90190105691947
+   },
+   {
+    "stage": 5,
+    "rotor": {
+     "x_le": 0.16803347289891332,
+     "chord": 0.009550041064893489,
+     "r_hub": 0.029177842567630875,
+     "r_tip": 0.04350290416497111,
+     "h": 0.014325061597340233,
+     "Z": 30,
+     "tc": 0.07,
+     "t_max": 0.0006685028745425442,
+     "disc_x": 0.17400224856447175,
+     "disc_r_rim": 0.029177842567630875,
+     "disc_bore_width": 0.005367707816395547,
+     "m_disc_kg": 0.05509956083273845,
+     "m_blades_kg": 0.008508010890693203
+    },
+    "stator": {
+     "x_le": 0.1799710242300302,
+     "chord": 0.009137203047908151,
+     "r_hub": 0.02948747108036988,
+     "r_tip": 0.043193275652232105,
+     "h": 0.013705804571862226,
+     "Z": 32,
+     "tc": 0.07,
+     "t_max": 0.0006396042133535707
+    },
+    "PR": 1.2554103846789446,
+    "U_mean": 304.4443999900837,
+    "M_rel_tip": 0.8337902287667897
+   },
+   {
+    "stage": 6,
+    "rotor": {
+     "x_le": 0.19139252803991538,
+     "chord": 0.00819530621667322,
+     "r_hub": 0.030193893703796076,
+     "r_tip": 0.04248685302880591,
+     "h": 0.01229295932500983,
+     "Z": 35,
+     "tc": 0.07,
+     "t_max": 0.0005736714351671255,
+     "disc_x": 0.19651459442533614,
+     "disc_r_rim": 0.030193893703796076,
+     "disc_bore_width": 0.005480743554816422,
+     "m_disc_kg": 0.059653322339720705,
+     "m_blades_kg": 0.006272702152626999
+    },
+    "stator": {
+     "x_le": 0.2016366608107569,
+     "chord": 0.007872811511173639,
+     "r_hub": 0.030435764732920763,
+     "r_tip": 0.04224498199968122,
+     "h": 0.011809217266760458,
+     "Z": 36,
+     "tc": 0.07,
+     "t_max": 0.0005510968057821547
+    },
+    "PR": 1.2332594123731162,
+    "U_mean": 304.4443999900837,
+    "M_rel_tip": 0.7789667529059544
+   }
+  ]
+ },
+ "combustor": {
+  "x_start": {
+   "value": 0.22647767519972398,
+   "unit": "m",
+   "status": "derived",
+   "source": "end of the compressor section"
+  },
+  "section_length": {
+   "value": 0.18041947348886772,
+   "unit": "m",
+   "status": "derived",
+   "source": "1.15 x L_liner (engine_mass)"
+  },
+  "L_liner": {
+   "value": 0.15688649868597193,
+   "unit": "m",
+   "status": "provisional",
+   "source": "Phase 3 length rule, not re-checked (freeze 4.9)"
+  },
+  "Ro": {
+   "value": 0.06972733274932084,
+   "unit": "m",
+   "status": "frozen",
+   "source": "data/phase4ax/closure_ax80000_opr5_t1150_n6_cap_3r.json"
+  },
+  "Ri": {
+   "value": 0.01743183318733021,
+   "unit": "m",
+   "status": "frozen",
+   "source": "data/phase4ax/closure_ax80000_opr5_t1150_n6_cap_3r.json"
+  },
+  "OD": {
+   "value": 0.14245466549864172,
+   "unit": "m",
+   "status": "frozen",
+   "source": "data/phase4ax/closure_ax80000_opr5_t1150_n6_cap_3r.json (sets the engine diameter)"
+  },
+  "r_liner_outer": {
+   "value": 0.06275459947438877,
+   "unit": "m",
+   "status": "frozen",
+   "source": "engine_mass: outer liner at 0.90 Ro"
+  },
+  "r_liner_inner": {
+   "value": 0.021789791484162765,
+   "unit": "m",
+   "status": "frozen",
+   "source": "engine_mass: inner liner at 1.25 Ri"
+  },
+  "t_liner": {
+   "value": 0.0005,
+   "unit": "m",
+   "status": "frozen",
+   "source": "engine_mass"
+  },
+  "n_vaporisers": {
+   "value": 8.0,
+   "unit": "-",
+   "status": "frozen",
+   "source": "engine_mass"
+  },
+  "U_ref": {
+   "value": 29.82830541291235,
+   "unit": "m/s",
+   "status": "frozen",
+   "source": "data/phase4ax/closure_ax80000_opr5_t1150_n6_cap_3r.json"
+  }
+ },
+ "turbine": {
+  "x_section_start": {
+   "value": 0.40689714868859167,
+   "unit": "m",
+   "status": "derived",
+   "source": "compressor section + 1.15 L_liner (rotor_model)"
+  },
+  "section_length": {
+   "value": 0.03667590032047744,
+   "unit": "m",
+   "status": "derived",
+   "source": "1.6 (c_ngv + c_rotor) (engine_mass)"
+  },
+  "x_ngv_le": {
+   "value": 0.4103357036271648,
+   "unit": "m",
+   "status": "provisional",
+   "source": "NGV placed 0.3 c_ngv into the turbine section (Phase 6A layout)"
+  },
+  "x_rotor_le": {
+   "value": 0.4252361083609819,
+   "unit": "m",
+   "status": "derived",
+   "source": "1.6 c_ngv from the section start (engine_mass / rotor_model)"
+  },
+  "r_hub": {
+   "value": 0.034381736810088936,
+   "unit": "m",
+   "status": "frozen",
+   "source": "data/phase3ax/ax80000_opr5_t1150_n6_cap_3r_ttf_out.json"
+  },
+  "r_tip": {
+   "value": 0.05730289468244134,
+   "unit": "m",
+   "status": "frozen",
+   "source": "data/phase3ax/ax80000_opr5_t1150_n6_cap_3r_ttf_out.json (on the 350 MPa root limit)"
+  },
+  "c_ngv": {
+   "value": 0.011461849795243903,
+   "unit": "m",
+   "status": "frozen",
+   "source": "data/phase3ax/ax80000_opr5_t1150_n6_cap_3r_ttf_out.json"
+  },
+  "c_rotor": {
+   "value": 0.011460587905054494,
+   "unit": "m",
+   "status": "frozen",
+   "source": "data/phase3ax/ax80000_opr5_t1150_n6_cap_3r_ttf_out.json"
+  },
+  "Z_ngv": {
+   "value": 33.00143596928291,
+   "unit": "-",
+   "status": "frozen",
+   "source": "data/phase3ax/ax80000_opr5_t1150_n6_cap_3r_ttf_out.json (2 pi r_mean / pitch)"
+  },
+  "Z_rotor": {
+   "value": 26.75188676907974,
+   "unit": "-",
+   "status": "frozen",
+   "source": "data/phase3ax/ax80000_opr5_t1150_n6_cap_3r_ttf_out.json"
+  },
+  "t_max_ngv": {
+   "value": 0.0021024607926553606,
+   "unit": "m",
+   "status": "frozen",
+   "source": "data/phase3ax/ax80000_opr5_t1150_n6_cap_3r_ttf_out.json"
+  },
+  "t_max_rotor": {
+   "value": 0.002117384822361782,
+   "unit": "m",
+   "status": "frozen",
+   "source": "data/phase3ax/ax80000_opr5_t1150_n6_cap_3r_ttf_out.json"
+  },
+  "stagger_ngv": {
+   "value": 34.4586355906623,
+   "unit": "deg",
+   "status": "frozen",
+   "source": "data/phase3ax/ax80000_opr5_t1150_n6_cap_3r_ttf_out.json"
+  },
+  "stagger_rotor": {
+   "value": -21.098382588785753,
+   "unit": "deg",
+   "status": "frozen",
+   "source": "data/phase3ax/ax80000_opr5_t1150_n6_cap_3r_ttf_out.json"
+  },
+  "disc_x": {
+   "value": 0.4344045786850255,
+   "unit": "m",
+   "status": "frozen",
+   "source": "rotor_model (rotordynamic pass)"
+  },
+  "disc_r_rim": {
+   "value": 0.034381736809464804,
+   "unit": "m",
+   "status": "frozen",
+   "source": "rotor_model"
+  },
+  "disc_bore_width": {
+   "value": 0.012211150921779667,
+   "unit": "m",
+   "status": "frozen",
+   "source": "engine_mass Stodola disc, IN-713LC 300 MPa"
+  },
+  "m_disc_kg": {
+   "value": 0.21810645167313497,
+   "unit": "kg",
+   "status": "frozen",
+   "source": "engine_mass"
+  },
+  "m_blades_kg": {
+   "value": 0.08238956043615105,
+   "unit": "kg",
+   "status": "frozen",
+   "source": "engine_mass"
+  },
+  "shroud_t": {
+   "value": 0.002,
+   "unit": "m",
+   "status": "frozen",
+   "source": "engine_mass turbine shroud ring"
+  }
+ },
+ "nozzle": {
+  "r8_design": {
+   "value": 0.04725820948857404,
+   "unit": "m",
+   "status": "frozen",
+   "source": "data/phase3ax/axt_ax80000_opr5_t1150_n6_cap_3r.json"
+  },
+  "a8_max": {
+   "value": 2.0,
+   "unit": "-",
+   "status": "frozen",
+   "source": "data/phase4ax/operability_ax80000_opr5_t1150_n6_cap_3r_final.json"
+  },
+  "r8_max": {
+   "value": 0.06683320079221029,
+   "unit": "m",
+   "status": "derived",
+   "source": "r8 sqrt(A8 ratio)"
+  },
+  "x_exit": {
+   "value": 0.49514565422326634,
+   "unit": "m",
+   "status": "derived",
+   "source": "engine_mass L_total (raw)"
+  },
+  "cone_t": {
+   "value": 0.0005,
+   "unit": "m",
+   "status": "frozen",
+   "source": "engine_mass nozzle cones"
+  }
+ },
+ "rotor": {
+  "shaft_od": {
+   "value": 0.024,
+   "unit": "m",
+   "status": "frozen",
+   "source": "ax_rotor adopted layout A (D4A.2)"
+  },
+  "shaft_id": {
+   "value": 0.012,
+   "unit": "m",
+   "status": "frozen",
+   "source": "ax_rotor"
+  },
+  "journal_od": {
+   "value": 0.012,
+   "unit": "m",
+   "status": "frozen",
+   "source": "ax_rotor (DN 1.008e6 at MCS)"
+  },
+  "journal_len": {
+   "value": 0.02,
+   "unit": "m",
+   "status": "frozen",
+   "source": "rotor_model.build default"
+  },
+  "tunnel_r": {
+   "value": 0.014,
+   "unit": "m",
+   "status": "frozen",
+   "source": "ax_closure (Phase 4 limit under the combustor hub)"
+  },
+  "drum_t": {
+   "value": 0.002,
+   "unit": "m",
+   "status": "frozen",
+   "source": "ax_closure / ax_rotor"
+  },
+  "drum_r_mean": {
+   "value": 0.02623185396626469,
+   "unit": "m",
+   "status": "frozen",
+   "source": "data/phase4ax/closure_ax80000_opr5_t1150_n6_cap_3r.json"
+  },
+  "drum_length": {
+   "value": 0.1763925280399154,
+   "unit": "m",
+   "status": "frozen",
+   "source": "data/phase4ax/closure_ax80000_opr5_t1150_n6_cap_3r.json"
+  },
+  "x_bearing_front": {
+   "value": 0.005,
+   "unit": "m",
+   "status": "frozen",
+   "source": "rotor_model layout A"
+  },
+  "x_bearing_rear": {
+   "value": 0.4160666285247868,
+   "unit": "m",
+   "status": "frozen",
+   "source": "rotor_model layout A"
+  },
+  "bearing_span": {
+   "value": 0.4110666285247868,
+   "unit": "m",
+   "status": "frozen",
+   "source": "data/phase4ax/rotor_ax80000_opr5_t1150_n6_cap_3r.json"
+  },
+  "bearing_bore": {
+   "value": 0.012,
+   "unit": "m",
+   "status": "frozen",
+   "source": "12 mm journals"
+  },
+  "bearing_od": {
+   "value": 0.028,
+   "unit": "m",
+   "status": "provisional",
+   "source": "12 x 28 x 8 hybrid ball bearing envelope (as Phase 6 centrifugal)"
+  },
+  "bearing_width": {
+   "value": 0.008,
+   "unit": "m",
+   "status": "provisional",
+   "source": "as above"
+  },
+  "m_rotor_kg": {
+   "value": 1.5974247383484812,
+   "unit": "kg",
+   "status": "frozen",
+   "source": "data/phase4ax/rotor_ax80000_opr5_t1150_n6_cap_3r.json (adopted row)"
+  },
+  "disc_stress_MPa": {
+   "value": 365.0,
+   "unit": "kg",
+   "status": "frozen",
+   "source": "ax_rotor_stress: discs re-sized to 365 MPa at design speed, burst 1.20 at MCS"
+  },
+  "disc_mass_delta": {
+   "value": 0.008579813533369486,
+   "unit": "kg",
+   "status": "frozen",
+   "source": "data/phase4ax/rotor_stress_ax80000_opr5_t1150_n6_cap_3r.json"
+  }
+ },
+ "envelope": {
+  "OD": {
+   "value": 0.14245466549864172,
+   "unit": "m",
+   "status": "frozen",
+   "source": "data/phase4ax/closure_ax80000_opr5_t1150_n6_cap_3r.json (combustor-set)"
+  },
+  "L_raw": {
+   "value": 0.49514565422326634,
+   "unit": "m",
+   "status": "frozen",
+   "source": "engine_mass L_total"
+  },
+  "L_calibrated": {
+   "value": 0.5986913893222373,
+   "unit": "m",
+   "status": "frozen",
+   "source": "data/phase4ax/closure_ax80000_opr5_t1150_n6_cap_3r.json (raw x K_L 1.209)"
+  },
+  "K_M": {
+   "value": 1.2025053436277102,
+   "unit": "-",
+   "status": "frozen",
+   "source": "data/phase3ax/axt_ax80000_opr5_t1150_n6_cap_3r.json"
+  },
+  "K_L": {
+   "value": 1.209121768949791,
+   "unit": "-",
+   "status": "frozen",
+   "source": "data/phase3ax/axt_ax80000_opr5_t1150_n6_cap_3r.json"
+  },
+  "dry_raw": {
+   "value": 5.707506154781998,
+   "unit": "kg",
+   "status": "frozen",
+   "source": "data/phase4ax/closure_ax80000_opr5_t1150_n6_cap_3r.json"
+  },
+  "dry_calibrated": {
+   "value": 6.863306649913398,
+   "unit": "kg",
+   "status": "frozen",
+   "source": "data/phase4ax/closure_ax80000_opr5_t1150_n6_cap_3r.json"
+  },
+  "radial_gap_over_compressor": {
+   "value": 0.01609875891484565,
+   "unit": "m",
+   "status": "derived",
+   "source": "engine OD radius minus compressor casing OD radius: the space the VG hardware has to live in"
+  }
+ },
+ "vg_schedule": {
+  "vigv_design_swirl": {
+   "value": 22.4,
+   "unit": "deg",
+   "status": "frozen",
+   "source": "docs/design_freeze_axial.md 1.3"
+  },
+  "vigv_closure": {
+   "value": 15.0,
+   "unit": "deg",
+   "status": "frozen",
+   "source": "data/phase4ax/operability_ax80000_opr5_t1150_n6_cap_3r_final.json"
+  },
+  "bleed_fraction": {
+   "value": 0.1,
+   "unit": "-",
+   "status": "frozen",
+   "source": "data/phase4ax/operability_ax80000_opr5_t1150_n6_cap_3r_final.json"
+  },
+  "bleed_stage": {
+   "value": 3.0,
+   "unit": "-",
+   "status": "frozen",
+   "source": "data/phase4ax/operability_ax80000_opr5_t1150_n6_cap_3r_final.json"
+  },
+  "bleed_close_speed": {
+   "value": 0.95,
+   "unit": "-",
+   "status": "frozen",
+   "source": "data/phase4ax/operability_ax80000_opr5_t1150_n6_cap_3r_final.json"
+  },
+  "a8_max": {
+   "value": 2.0,
+   "unit": "-",
+   "status": "frozen",
+   "source": "data/phase4ax/operability_ax80000_opr5_t1150_n6_cap_3r_final.json"
+  }
+ },
+ "vg_loads": {
+  "vigv": {
+   "Z": {
+    "value": 14.0,
+    "unit": "-",
+    "status": "provisional",
+    "source": "ax_closure.vg_hardware: IGV count = stage-1 stator count"
+   },
+   "chord": {
+    "value": 0.017107413832719166,
+    "unit": "m",
+    "status": "provisional",
+    "source": "0.8 x rotor-1 chord (ax_closure.vg_hardware)"
+   },
+   "span": {
+    "value": 0.032076400936348434,
+    "unit": "m",
+    "status": "derived",
+    "source": "stage-1 rotor blade height, data/phase3ax/axt_ax80000_opr5_t1150_n6_cap_3r.json"
+   },
+   "q_dynamic": {
+    "value": 20333.214774549,
+    "unit": "Pa",
+    "status": "derived",
+    "source": "0.5 rho V_m^2 at the compressor face (M 0.587, rho 0.9752 kg/m3, V_m 204.2 m/s)"
+   },
+   "CL_vane": {
+    "value": 0.7697177352667463,
+    "unit": "-",
+    "status": "derived",
+    "source": "cascade lift CL = 2 (s/c) cos(a_m) tan(a2), a2 = 22.4 deg design swirl (Dixon eq. 3.17)"
+   },
+   "lift_per_vane": {
+    "value": 8.588306513537283,
+    "unit": "N",
+    "status": "derived",
+    "source": "CL q c h"
+   },
+   "hinge_moment_per_vane": {
+    "value": 0.02461504900145916,
+    "unit": "N m",
+    "status": "derived",
+    "source": "lift x 0.15 c (centre of pressure aft of a 0.30 c spindle) + bushing friction mu 0.2, d 3 mm"
+   },
+   "unison_ring_force": {
+    "value": 57.43511433673803,
+    "unit": "N",
+    "status": "derived",
+    "source": "Z x hinge moment / crank arm 6 mm"
+   },
+   "stroke": {
+    "value": 0.001566314306640619,
+    "unit": "m",
+    "status": "derived",
+    "source": "ring travel for 15 deg vane rotation at the crank arm"
+   },
+   "note": "stationary vanes: no centrifugal term. Aero load at the DASH point (highest q at the compressor face)."
+  },
+  "bleed": {
+   "stage": {
+    "value": 3.0,
+    "unit": "-",
+    "status": "frozen",
+    "source": "data/phase4ax/operability_ax80000_opr5_t1150_n6_cap_3r_final.json"
+   },
+   "bleed_fraction": {
+    "value": 0.1,
+    "unit": "-",
+    "status": "frozen",
+    "source": "data/phase4ax/operability_ax80000_opr5_t1150_n6_cap_3r_final.json"
+   },
+   "P_total": {
+    "value": 257274.20579728796,
+    "unit": "Pa",
+    "status": "derived",
+    "source": "cumulative stage PRs to the stage-3 exit"
+   },
+   "T_total": {
+    "value": 418.1575611067939,
+    "unit": "K",
+    "status": "derived",
+    "source": "cumulative stage PRs / stage efficiencies"
+   },
+   "mass_flow": {
+    "value": 0.13600463497735005,
+    "unit": "kg/s",
+    "status": "derived",
+    "source": "0.10 x inlet flow 1.360 kg/s"
+   },
+   "port_area": {
+    "value": 0.0003343458592010261,
+    "unit": "m2",
+    "status": "derived",
+    "source": "choked flow, Cd 0.8, discharging to ambient"
+   },
+   "n_ports": {
+    "value": 8.0,
+    "unit": "-",
+    "status": "provisional",
+    "source": "Phase 6A layout choice"
+   },
+   "delta_p": {
+    "value": 203255.20579728796,
+    "unit": "Pa",
+    "status": "derived",
+    "source": "stage-3 total minus ISA 5 km ambient (bounding: the bleed is open at <= 95 % speed)"
+   },
+   "seal_force": {
+    "value": 67.95753641937561,
+    "unit": "N",
+    "status": "derived",
+    "source": "delta_p x port area"
+   },
+   "valve_torque": {
+    "value": 1.019545567817361,
+    "unit": "N m",
+    "status": "derived",
+    "source": "band-valve seal friction mu 0.3 at r 50.0 mm"
+   },
+   "note": "bounding case: full dash pressure. The bleed actually opens at <= 95 % speed, mostly at SLS."
+  },
+  "nozzle": {
+   "n_flaps": {
+    "value": 12.0,
+    "unit": "-",
+    "status": "provisional",
+    "source": "ax_closure.vg_hardware"
+   },
+   "r8_design": {
+    "value": 0.04725820948857404,
+    "unit": "m",
+    "status": "frozen",
+    "source": "A8 70.2 cm2, data/phase3ax/axt_ax80000_opr5_t1150_n6_cap_3r.json"
+   },
+   "r8_max": {
+    "value": 0.06683320079221029,
+    "unit": "m",
+    "status": "frozen",
+    "source": "A8 x 2.0 (ax_operability final schedule)"
+   },
+   "flap_length": {
+    "value": 0.08019984095065234,
+    "unit": "m",
+    "status": "provisional",
+    "source": "0.6 x 2 r8_max (ax_closure.vg_hardware)"
+   },
+   "flap_width": {
+    "value": 0.045491916735351544,
+    "unit": "m",
+    "status": "derived",
+    "source": "1.3 x circumference at r8_max / 12 (30 % overlap) - the material width"
+   },
+   "flap_wetted_width_closed": {
+    "value": 0.02474434062518528,
+    "unit": "m",
+    "status": "derived",
+    "source": "2 pi r8 / 12 at A8 x1.0 - the pressure-loaded width"
+   },
+   "turbine_exit_M": {
+    "value": 0.99,
+    "unit": "-",
+    "status": "derived",
+    "source": "continuity on the 66.02 cm2 turbine exit annulus"
+   },
+   "p_mean_inner": {
+    "value": 82289.72787451322,
+    "unit": "Pa",
+    "status": "derived",
+    "source": "mean of the turbine-exit static (82.8 kPa, M 0.990) and the choked throat static (81.8 kPa, gamma 1.330)"
+   },
+   "delta_p": {
+    "value": 28270.72787451322,
+    "unit": "Pa",
+    "status": "derived",
+    "source": "mean inner static minus ISA 5 km ambient"
+   },
+   "force_per_flap": {
+    "value": 56.1030384624964,
+    "unit": "N",
+    "status": "derived",
+    "source": "delta_p x flap area"
+   },
+   "hinge_moment_per_flap": {
+    "value": 2.249727380770271,
+    "unit": "N m",
+    "status": "derived",
+    "source": "force at mid-flap about the front hinge"
+   },
+   "hinge_moment_total": {
+    "value": 26.996728569243253,
+    "unit": "N m",
+    "status": "derived",
+    "source": "12 flaps: the moment ANY mechanism must hold at the dash point (linkage-independent)"
+   },
+   "flap_travel": {
+    "value": 14.12733418359305,
+    "unit": "deg",
+    "status": "derived",
+    "source": "flap rotation from A8 x1.0 to x2.0 at the modelled flap length"
+   },
+   "actuation_work": {
+    "value": 6.656542761136015,
+    "unit": "J",
+    "status": "derived",
+    "source": "hinge moment x travel: the work any mechanism must do (upper bound; the moment falls as the nozzle opens)"
+   },
+   "link_force_per_flap": {
+    "value": 70.12879807812051,
+    "unit": "N",
+    "status": "derived",
+    "source": "pushrod at 0.8 of the flap length, 30 deg to the flap"
+   },
+   "sync_ring_force": {
+    "value": 728.7998480702603,
+    "unit": "N",
+    "status": "derived",
+    "source": "axial component of the 12 link forces"
+   },
+   "stroke": {
+    "value": 0.03390487949561693,
+    "unit": "m",
+    "status": "derived",
+    "source": "sync-ring travel from A8 x1.0 to x2.0 at the link angle"
+   },
+   "note": "the actuator HOLDS the flaps closed at the dash point against the jet pressure; this is the bounding load."
+  }
+ },
+ "vg_mass_allowance": {
+  "vigv_hardware": {
+   "value": 0.0901,
+   "unit": "kg",
+   "status": "frozen",
+   "source": "data/phase4ax/closure_ax80000_opr5_t1150_n6_cap_3r.json items (geometric estimate)"
+  },
+  "vigv_servo": {
+   "value": 0.075,
+   "unit": "kg",
+   "status": "frozen",
+   "source": "data/phase4ax/closure_ax80000_opr5_t1150_n6_cap_3r.json (placeholder 75 g hobby servo)"
+  },
+  "bleed_hardware": {
+   "value": 0.0465,
+   "unit": "kg",
+   "status": "frozen",
+   "source": "data/phase4ax/closure_ax80000_opr5_t1150_n6_cap_3r.json"
+  },
+  "bleed_servo": {
+   "value": 0.075,
+   "unit": "kg",
+   "status": "frozen",
+   "source": "data/phase4ax/closure_ax80000_opr5_t1150_n6_cap_3r.json"
+  },
+  "nozzle_hardware": {
+   "value": 0.2785,
+   "unit": "kg",
+   "status": "frozen",
+   "source": "data/phase4ax/closure_ax80000_opr5_t1150_n6_cap_3r.json"
+  },
+  "nozzle_servo": {
+   "value": 0.075,
+   "unit": "kg",
+   "status": "frozen",
+   "source": "data/phase4ax/closure_ax80000_opr5_t1150_n6_cap_3r.json"
+  },
+  "total": {
+   "value": 0.6401,
+   "unit": "kg",
+   "status": "frozen",
+   "source": "data/phase4ax/closure_ax80000_opr5_t1150_n6_cap_3r.json (the 0.64 kg raw allowance the CAD must test)"
+  }
+ },
+ "materials": {
+  "rho": {
+   "Ti": 4430.0,
+   "Al": 2760.0,
+   "SS": 7900.0,
+   "IN625": 8440.0,
+   "IN713": 7910.0,
+   "steel": 7850.0
+  },
+  "note": "engine_mass.RHO; Ti-6Al-4V rotating/hot, Al 2760 casings and stators, AISI 321 hot casing, IN625 liners, IN-713LC turbine, 4340 shaft"
+ }
+}

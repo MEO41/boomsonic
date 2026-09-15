@@ -1,0 +1,2 @@
+config,vigv,bleed,a8_max,idle_pct,Fn_100_SLS,SM_100,T4_100,max_igv,first_fail
+V0_B0_N1,False,0.0,1.0,,685.5678165312655,0.10633111969941589,1169.0302887912528,22.37071526248297,"100.0 %: conv True, T4 1169, si 0.90 (S6), SM +0.106"

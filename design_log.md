@@ -1194,3 +1194,467 @@ Geometry generation starts with the parameter sheet.
     was checked page by page, rendered with pypdfium2 in a throw-away `uv run` environment, not installed.
 * Documentation correction: the freeze and Phase 3R docs said the physical exit width b2 is "12.0 mm". The data say
   11.796 mm; the text now reads 11.8.
+
+---
+
+## Axial design (option A) taken to its freeze — Phase 3A-R refresh (2026-09-14)
+
+**User instruction:** "search the project folder and you will see an early design concept that uses 6 axial stages
+take that design paremeters where we left off and finished it as you did with centrigual one". The concept is the pure
+axial baseline (OPR 5, 6 stages, 80 000 rpm; D4.2), last worked in Phase 4 (operability D4.4, rotor dynamics D4.R2)
+before the switch to the centrifugal (D3R.0). **User decision (AskUserQuestion): pause at the axial freeze for review
+before any axial CAD** (brief rule 4). The centrifugal design is not changed. The axial is Phase 3A-R / 4A / 5A, tags
+`ax*_3r`, data in `data/phase3ax/`, `data/phase4ax/`.
+
+### F3A.1 The Phase 3 / 4 axial numbers are stale in three ways
+1. **Fielded efficiency.** A3.4 debited the axial tool efficiency by 0.70 / 0.794. The 0.794 is the Phase 3 centrifugal
+   tool efficiency, computed with TurboFlow's defective slip (F3R.1).
+2. **Compressor scaling.** The √W scaling of the tool-level geometry (A3.6) cannot match both the fielded flow (area
+   ~ r²) and the fielded work (~ U²) at fixed speed; F3R.3 found the same flaw for the impeller.
+3. **Turbine.** The √W-scaled turbine ran past its 350 MPa blade-root limit (F3R.3 applies to every Phase 3 case).
+
+In addition, the mass / length calibrations were re-anchored in Phase 3R (×1.20 / ×1.21).
+
+### A3A.1 Fielded axial efficiency re-referenced
+* η_c,fielded = η_c,tool × 0.70 / η_ref, with η_ref = the Phase 3R centrifugal tool efficiency 0.8175
+  (`cct_ce75000_opr4_t1150_b15_cap`), so K_F = 0.856 (was 0.882).
+* The axial tool efficiency stays 0.8285 (TurboDesigner + Howell, not touched by the slip defect), so fielded
+  **0.709** (was 0.730).
+* Still an assumption (A3.4). Phase 3 showed the architecture conclusion does not depend on it.
+
+### D3A.1 Method (`scripts/phase3_cycle/ax_trade.py`)
+1. **Fielded compressor re-designed AT the fielded cycle.** TurboDesigner at the fielded W / Tt2 / Pt2 / PR 5, with
+   the fielded efficiency setting the work. The Howell loss model is evaluated once; it reports the tool-level
+   efficiency of that blading. Phase 3 limits apply: DF ≤ 0.5, de Haller ≥ 0.72, rotor-1 tip M_rel ≤ 1.35, last blade
+   ≥ 10 mm.
+   * Grid: 70-90 krpm × 5-8 stages × hub/tip 0.40-0.55 × Cx 170-200 m/s. 98 of 240 designs are feasible.
+2. **Fielded turbine re-designed by TurboFlow** at the fielded cycle (350 MPa, envelope cap).
+3. **Engine and airframe:** θ-scaled combustor, engine_mass, 3R calibration, Phase 2 airframe drag.
+4. **Worst corner:** η_c × 0.66/0.70, combustor +1σ, pessimistic drag.
+
+### F3A.2 Results (fielded; best blading at each speed; `data/phase3ax_trade.csv`)
+
+| rpm / stages | tool η of blading | rotor-1 M_rel | turbine tip (on the limit) | L | dry mass cal. | margin nom / pess | worst | TOGW |
+|---|---|---|---|---|---|---|---|---|
+| 70k / 8 | 0.832 | 1.13 | 65.5 mm | 714 mm | 6.41 kg | +104 / +88 % | +71 % | 18.03 kg |
+| 75k / 7 | 0.832 | 1.20 | 61.1 mm | 651 mm | 5.64 kg | +104 / +88 % | +71 % | 17.27 kg |
+| **80k / 6** | 0.832 | 1.27 | 57.3 mm | **599 mm** | **5.02 kg** | **+104 / +89 %** | **+71 %** | **16.65 kg** |
+| 85k / 6 | 0.827 | 1.32 | 53.9 mm | 593 mm | 4.83 kg | +104 / +89 % | +71 % | 16.46 kg |
+
+* Fielded airflow 1.360 kg/s (was 1.314), TSFC 0.159 kg/(N h).
+* Every case is combustor-set at **OD 142.5 mm**, so drag and margins are equal.
+* TurboFlow flags the 75k turbine `success=False` at a point on its stress limit to 1e-9 mm (known quirk, tools_survey
+  section 8).
+
+### D3A.2 Refreshed baseline: 80 000 rpm, 6 stages, hub/tip 0.40, Cx 200 m/s
+* **Why:**
+  * margins are equal across the grid, so length and mass decide;
+  * 80k is 51 mm shorter and 0.62 kg lighter than 75k;
+  * 85k saves only 0.19 kg (1 % of TOGW, inside the ±5 % mass calibration band), but takes rotor-1 to M_rel 1.32 of
+    the 1.35 limit, raises bearing DN by 6 %, and has had no rotor-dynamics check.
+* Same speed and stage count as the Phase 3/4 baseline.
+* **Against Phase 3:** mass 5.74 → 5.02 kg (the turbine re-design), length 611 → 599 mm, OD 142 → 142.5 mm, dash margin
+  unchanged.
+
+### F3A.3 Validation attempt for R4.1 (published small-axial test data)
+* **NASA-CR-134827** (AiResearch 1976, scaled single-stage transonic axial, 70-110 % speed): tip clearance 1.0 → 2.2 % of
+  blade height, both with casing treatment, cost 5.7 − 3.5 = 2.2 efficiency points, ≈ 1.8 points per 1 %. The model
+  uses 2.0 points per 1 %, which is consistent.
+  * The same test: stall margin 12.8 → 8.7 %. **The stacking model has no clearance effect on stall**; noted for
+    operability.
+* **NACA TR-758** (8-stage axial, 1943): has speed lines at 5 000-14 000 rpm and stage-by-stage pressures. The text layer
+  gives geometry and summary numbers, but the characteristics are scanned figures. A multistage part-speed benchmark of
+  the stacking model is possible, but needs the geometry rebuilt and the figures digitised; the machine is large,
+  subsonic and lightly loaded. **Not run**; offered as an option at the freeze.
+* NASA-TM-106999 (small 2-stage rig, 1995): inlet calibration only, no maps.
+* **R4.1 stays open.** Only the clearance sensitivity is supported by data.
+
+### F4A.1 Rotor stress screening (`ax_rotor_stress.py`, 80k blading, MCS 105 %, Ti-6Al-4V Fty 620 / Ftu 681 MPa)
+* **Verification:** the rotating-beam FE reproduces the static cantilever (3.5160 / 22.0345) exactly and Wright et al.
+  (1982) at speed parameters 1 and 2 (3.6816 / 4.1373) to 0.001 %.
+* **Blade roots:** centrifugal + gas bending on a biconvex section, × Kt 1.4.
+  * The mass model's constant-section stage-1 blade fails: 677 MPa. U_tip at MCS is 461 m/s.
+  * **A 10 % thickness taper** (root 1.65 / tip 1.35 mm, same mass) gives 598 MPa (96 % of Fty). Stage 2 is at 597 MPa
+    (96 %); stages 3-6 are at 523-550 MPa.
+  * The taper is provisional geometry.
+* **Discs:** the mass model's 450 MPa constant-stress discs give a burst ratio of 1.08 at MCS, failing the ≥ 1.20
+  criterion used for the impeller. Re-sized to 365 MPa at design speed (402 MPa at MCS), which gives 1.20. Mass
+  **+0.009 kg**: the 4 mm minimum rim governs these small discs.
+* **Blade vibration** (1F / 2F with centrifugal stiffening, taper included): low-engine-order crossings in the likely
+  operating range:
+  * stage 1: 1F × 2E at 61 %;
+  * stage 2: 1F × 2E at 79 %;
+  * stage 4: 1F × 3E at 60 %;
+  * stage 5: 1F × 3E at 76 %;
+  * **stage 6: 1F × 3E at 95 %**, near maximum speed.
+
+  Vane-passing crossings are only with 2F, at 40-43 %. Carried as an open risk; no retuning done.
+
+### F4A.2 Three model problems found running the operability chain on the refreshed design (fixed; Phase 4 results unchanged)
+1. **Wrong triangles for a blading sized at a set efficiency.**
+   * `axial_offdesign.Compressor` rebuilt the TurboDesigner triangles at the loss-model efficiency (0.832). The 3A-R
+     blading was sized at 0.709.
+   * Fix: rebuild at `eta_sizing` when present. Phase 3 designs lack the key; the Phase 3 regression is unchanged
+     (PR 5.031, η 0.831).
+2. **Tool-level losses on a fielded-work blading.**
+   * The stacking design point over-delivered PR, which put the design in the wrong place on its own map.
+   * Scaling the WHOLE row loss to the fielded efficiency (stage η −0.103) instead doubled the incidence parabola:
+     every flow choked below 80 % speed (row losses so large that the exit could not pass any flow). That is a model
+     artefact.
+   * **Adopted (`axial_offdesign.fielded`):** stage losses calibrated so the design point gives the fielded 0.709 and
+     PR 5.09 at the design flow. Off design, only the tool-level (Howell) part follows the incidence parabola; the
+     fielded debit (clearance / Re / finish-type) is a **constant extra loss** (ΔY 0.054-0.058 per row).
+   * Howell stall is unchanged (deflection-based).
+   * Result: lines at all speeds; design SMN to the peak line ~14 %, as in Phase 4. Rotor 1 is past Howell's stalling
+     deflection along the whole line below 85-90 % speed, as Phase 4 found.
+3. **pyCycle off-design start.**
+   * `cycle_model.set_design` seeds every off-design point with W 2.0 lbm/s, FAR 0.018, turbine PR 2.0. At η_c 0.730
+     (Phase 4) that converges; at 0.709 (W 3.0 lbm/s, turbine PR 2.64) Newton diverged to NaN at every point. The
+     Phase 4 maps gave the same failure at 0.709 and converged at 0.730, so the maps are not the cause.
+   * **Fix:** `cycle_model.seed_od_from_design` copies every implicit state from the design point (map balances from
+     the design map location) and re-solves. The off-design point is then marched from the design flight condition.
+   * Verified: the off-design point reproduces the design (500 N, 1150 K); SLS 100 % gives 686 N at T4 1169 K.
+   * Not used by any Phase 3 / 4 script.
+
+### D4A.1 Operability: combined variable geometry (option A) sized (`ax_operability.py`, `ax_operability_summary.py`)
+* **Criteria (Phase 4):** a steady point is acceptable if converged, T4 ≤ 1150 K, no row beyond its Howell stalling
+  deflection, and SM to the peak line ≥ 10 % (the transient half of ~20 %). Idle = the lowest speed from which every
+  point up to the T4-limited maximum-throttle speed is acceptable.
+* **Scheduling corrections during the search** (first batches wasted, recorded):
+  * **Bleed and nozzle opening at 95 % speed.** The Phase 4 setting (90 %) acts below the first fixed-geometry failure
+    (92.5 %, SM 9.2 %).
+  * **VIGV as a scheduled closure** (design swirl at ≥ 95 %, closing linearly by Δ at 60 %). The Phase 4
+    stall-index-driven schedule never closed the IGV here, because the binding limit is the surge-surrogate margin.
+* **Results at SLS** (max throttle 97.5-98.7 % in every configuration, T4-limited):
+
+  | configuration | idle | idle thrust | idle fuel | limit below idle |
+  |---|---|---|---|---|
+  | fixed geometry | 95 % | 573 N | 20.3 g/s | SM 9.2 % |
+  | 10 % bleed | 87.5 % | 396 N | 16.7 g/s | SM 9.4 % |
+  | nozzle ×1.6 | 92.5 % | 500 N | 18.2 g/s | SM 8.4 % |
+  | VIGV 15-30° + 10 % bleed | 85 % | 338-348 N | 14.9-15.3 g/s | SM, stator 1 |
+  | VIGV 15-30° + 10 % bleed + nozzle ×1.6 (at 40 %) | 80 % | 222-231 N | 11.8-12.2 g/s | SM 7.7-8.9 % |
+  | **VIGV 15° + 10 % bleed + nozzle ×2.0, fully open at 80 %** | **77.5 %** | **114 N** | **10.0 g/s** | **stator-1 stall at 75 %** |
+  | 15-20 % bleed (any) | none below 97.5 % | | | T4 1159-1207 K at 95 % |
+
+  * At SM ≥ 5 % the best idle is still 77.5 %, with stator-1 stall binding. The VIGV unloads rotor 1 and loads stator 1,
+    as Phase 4 found.
+  * Nozzle ×2.5 gives 77.5 % / 91 N.
+* **Adopted:**
+  * VIGV 15° closure (stage-1 swirl 22.4° → 28.7° at idle);
+  * 10 % overboard bleed after stage 3, open ≤ 95 % speed;
+  * variable nozzle to 2.0 × A8 by 80 % speed.
+* **Idle 77.5 % speed:** SM 11.9 %, T4 878 K, 114 N, idle fuel 41 % of the 100 % SLS fuel flow (the centrifugal: ~19 %).
+* **Dash line** (VIGV scheduled, bleed closed, nozzle design): acceptable from 100 % down to 87.5 % speed (184 N);
+  rotor 1 stalls below.
+  * Dash cruise needs ~245 N (throttle 49 %): 90 % speed, SM 12 %, no bleed.
+  * The engine cannot be throttled below ~184 N at M 1.02 without the bleed (not analysed).
+
+### F4A.3 Idle thrust makes a powered idle approach impossible
+* Approach drag (Phase 2 airframe model, 14-16 kg, M 0.12-0.20): **15-21 N** (L/D 7.5-9).
+* Idle thrust: 114 N static (≈ 100 N net in flight after ram drag), **5-6 × the approach drag**; 231 N with the nozzle at
+  1.16.
+* A conventional descent / approach at idle is not possible. The engine must be **shut down at the top of descent**
+  (glide from 5 km at L/D 7-9, dead-stick landing with flaps and the 0.6 m chute), or a thrust spoiler / reverser /
+  large airbrake added (not assessed).
+
+### D4A.2 Rotor (`ax_rotor.py`, verified ROSS model; idle 80 % for the assessment)
+* The mass-sized Phase 3 rotor passes at 2 of 6 support settings: its bending mode (57-61 krpm, 71-77 % speed) now lies
+  below idle. Not robust.
+* The stiffened rotor passes at all 24 settings.
+* **Adopted:** layout A, 2 mm Ti drum, 24 / 12 mm AISI 4340 shaft, **12 mm journals (DN 1.01e6 at MCS: R4.R2 largely
+  resolved)**, supports k 1.75e6 N/m / c 876 N s/m.
+  * Criticals 2.8 / 12.4 (AF 2.0) / 19.6 (1.3) / 39.9 (1.2) krpm, all below idle and critically damped; 122.3 krpm
+    (46 % above MCS).
+  * Rotor 1.60 kg (mass-sized 1.10), Ip 8e-4 kg m².
+
+### D4A.3 Phase 2 ↔ 4 closure (`ax_mission.py`, `ax_closure.py`)
+* **Deck:** stacking map with the VIGV schedule, fielded TurboFlow turbine map.
+  * SLS max 659 N at 98.7 % (T4-limited, SM 10.5 %).
+  * Dash 500 N at 100 %, SM 13.9 %.
+* **Engine:** 5.02 → **6.86 kg** calibrated (6.50-7.22), L 599 mm, OD 142.5 mm (combustor-set; liner 157 mm,
+  U_ref 29.8 m/s).
+  * Raw changes: shaft 24 / 12 (0.95 kg raw), drum 2 mm (0.26), discs +0.009.
+  * Variable geometry 0.64 kg raw (geometric estimates + 3 × 75 g servos; not sourced from a fielded design):
+    VIGV 0.165, bleed 0.122, nozzle 0.354.
+* **Closure with the mission model's powered idle descent:** fuel **5.46 kg**, **TOGW 22.12 kg**, margin 2.88 kg.
+  * Dash margin +103 / +88 %; time to dash 29.1 s; ground roll 54 m; landing 177 m (flaps + chute).
+  * About 4.5 kg of the fuel is idle-related: the 235 s descent from 5 km, the pattern, and the 120 s reserve, all at
+    41 % of max fuel flow. That descent is inconsistent with F4A.3.
+* **Engine-off descent variant** (engine shut down at the top of descent, reserve 120 s at idle fuel flow kept): fuel
+  **1.88 kg, TOGW 18.54 kg, margin 6.46 kg**, dash margins unchanged.
+  * Not a like-for-like comparison with the centrifugal (20.09 kg, flown with a powered descent at its ~19 % idle).
+
+### D4A.4 Acceleration (`ax_transient.py`, `data/phase4ax/accel_<tag>.csv|json`)
+* **Method** as `cc_transient.py`:
+  * pyCycle NT4 (speed and T4 imposed);
+  * VIGV / bleed / nozzle on their schedules;
+  * usable excess power under T4 ≤ 1150 K, no Howell stall, SM ≥ 5 % or 10 % to the peak line;
+  * dN/dt = P / (I_p ω) with I_p 8.07e-4 kg m² (D4A.2 rotor).
+* **Solver fixes needed:**
+  * first run: T4 stepped 1150 → 700 K in one jump diverged, and the diverged state poisoned every later point, so no
+    speed had a converged point;
+  * second run: stepping T4 down from 1150 K in 15 K steps reproduced 80-98.5 %, but still found nothing at 77.5 %;
+  * final: speed is marched along the steady line with T4 imposed at its steady value, then T4 is swept up from
+    there, and `solve()` restores the last converged output vector after any failure.
+  * The excess powers of the second and final runs agree at 80-98.5 % (e.g. 29.28 kW at 90 %).
+* **Check:** imposing the steady-line T4 of the N-mode operability run gives a net shaft power of 0.0 kW at every speed
+  from 77.5 to 97.5 %.
+* **Result (SLS), idle 77.5 % → 98.5 %:** **1.73 s** at SM ≥ 5 %, **2.25 s** at SM ≥ 10 %. Of that, 95 → 98.5 % takes
+  1.09 s, because the steady T4 is within 4-25 K of the limit there. At idle with a 10 % reserve only 2.2 kW is usable.
+* **Why it is fast:** light rotor (38 % of the centrifugal's Ip) and a short speed span (10.5 kJ of rotor kinetic
+  energy). The centrifugal takes 6.6 s from 40 % to 95 %.
+* **Not modelled:** actuator rates (the VG is assumed to follow its schedule instantly), the transient when the bleed
+  closes at 95 %, fuel-control and heat-soak dynamics, deceleration. The margins are measured against the unvalidated
+  surrogate (R4.1).
+
+### D5A.1 Axial freeze snapshot issued; paused for the user's review
+* **Documents:**
+  * `docs/phase4a_axial.md`: Phase 3A-R / 4A report, with plots `plots/phase4a_operability.png` and
+    `plots/phase4a_blade_campbell.png` (`ax_plots.py`);
+  * `docs/design_freeze_axial.md`: architecture, closure for both descent concepts, rotor dynamics, open risks,
+    Phase 6 starting point, reviewer decisions, and a centrifugal vs axial comparison.
+* **Open risks stated, none resolved:**
+  * R4.1, the unvalidated axial model (top risk);
+  * idle 77.5 %, which forces an engine-off descent (relight and go-around not assessed);
+  * start not analysed (below 70 % the model has no steady match);
+  * unsourced variable-geometry hardware;
+  * dash throttling below 184 N needs the bleed;
+  * blade roots at 96 % of Fty;
+  * five low-order blade resonances;
+  * transient quasi-steady only;
+  * no hardware validation;
+  * others as carried.
+* **Decisions put to the user:**
+  1. centrifugal or axial;
+  2. the descent concept (engine-off, or a spoiler / reverser assessment);
+  3. the NACA TR-758 benchmark;
+  4. a like-for-like centrifugal closure with an engine-off descent;
+  5. axial Phase 6.
+* **No axial CAD started. The centrifugal baseline and its Phase 6 work are unchanged.**
+
+---
+
+## Phase 6A (AXIAL OPTION, EXPLORATORY) — packaging and mass CAD (2026-09-15)
+
+> **Scope banner.** This section is a **separate, exploratory branch on the axial option**
+> (`ax80000_opr5_t1150_n6_cap_3r`). It is **not** part of the centrifugal Phase 6 work above, it is **not a build
+> release**, and it is **not an architecture decision**: the centrifugal remains the baseline, its Phase 6 status is
+> unchanged and still held, and freeze decisions 1-5 of `docs/design_freeze_axial.md` remain open. Phase 6A was run on
+> the user's instruction to resolve as much of axial **open risk 4.4 (unsourced variable-geometry hardware)** as
+> geometry and mass can, and to test whether the shaft, bearings, bleed ducting and VIGV actuation ring fit inside the
+> 142.45 mm engine OD. Scope was packaging and mass only: no manufacturing drawings, no tolerancing, no blade aero
+> surfaces. **R4.1 and the other axial open risks are untouched.**
+> Report: `docs/phase6a_axial_cad.md`.
+
+### D6A.1 Toolchain and scope confirmed by the user
+* **CadQuery 2.8 / OCCT 7.9 in `.venv-cad`** (user choice over FreeCAD): already the Phase 6 stack, `cadlib.py`
+  helpers reused, volume-checked booleans, direct mass properties, STEP export, no fourth environment.
+* User also confirmed: actuators to be selected from **real published datasheets** (web-sourced, cited), and the
+  **bleed discharge path modelled only to the engine OD** (no airframe routing).
+* Geometry source rule set by the user and followed: **per-stage numbers, no scaling, no even spacing.** Stages come
+  one by one from `data/phase3ax/axt_<tag>.json` `levels.fielded.comp.stages`; the axial stack-up uses the
+  compressor's own rule (`axial_design.py:41`, `row_gap_to_chord = stage_gap_to_chord = 0.25`); disc, bearing and
+  turbine stations come from `rotor_model.geometry()`, so CAD and rotor model share one layout. Stage pitch runs
+  51.6 / 40.7 / 33.1 / 27.6 / 23.4 mm: even spacing would have misplaced the rear stages by ~26 mm.
+* New files: `scripts/phase6a_axial_cad/{make_params_axial,ax_flowpath_check,ax_engine_cad,ax_vg_cad,ax_clash,ax_mass_compare}.py`,
+  `data/phase6a/*`, `cad/axial/*`. **Nothing under `data/phase3ax`, `data/phase4ax`, `data/phase6` or `cad/engine` was
+  modified.**
+
+### A6A.1 Variable-geometry actuation loads (first-order, stated relations)
+* **VIGV**: cascade lift `CL = 2 (s/c) cos a_m tan a2` at the 22.4 deg design swirl, q 19.4 kPa at the compressor
+  face -> 8.6 N per vane, hinge moment 24.6 N mm per vane (centre of pressure 0.15 c aft of a 0.30 c spindle, bushing
+  friction mu 0.2), **unison-ring force 57 N**, stroke 1.57 mm.
+* **Bleed**: choked port area 3.34 cm2 (10 % of 1.360 kg/s at 257 kPa / 433 K, Cd 0.8), seal force 68 N,
+  **band torque 1.02 N m** (mu 0.3 at r 50.0 mm).
+* **Nozzle**: mean flap inner static 82 kPa against 54 kPa ambient -> 56 N per flap, and the linkage-independent
+  invariants **27.0 N m total hinge moment over 14.1 deg = 6.7 J of work**. The modelled linkage turns that into
+  729 N at the sync ring over 33.9 mm.
+* These are conceptual relations, not a validated actuation analysis.
+
+### D6A.2 Actuators selected from datasheets; the nozzle has no compliant part (F6A.1)
+`data/phase6a/actuators.json`, transcribed and cited.
+* **VIGV: Volz DA 22-12-2615**, 105 g, rated 0.80 N m. Demand 0.285 N m on a 5 mm arm, 18.3 deg travel:
+  **36 % utilised, compliant**; ~16 deg C at the compressor face, inside the -30..+70 C rating.
+* **Bleed: Volz DA 22-12-2615**, 105 g. Demand 0.51 N m through a 2:1 crank: torque compliant (64 %), but the
+  stage-3 manifold is at **433 K (160 C) against a +70 C rating** - **not compliant on temperature**; a thermal
+  standoff is required and was not designed.
+* **Variable nozzle: NOT COMPLIANT.** Holding 27.0 N m on the DA 22-12-4112's 1.20 N m rated torque needs a
+  **22.5:1 reduction**, giving 317 deg of servo travel (reachable only with the optional 330 deg version) and
+  requiring a screwjack/gear stage that **is not in the freeze's 0.279 kg estimate**. On peak torque (3.00 N m) a
+  9:1 bellcrank holds it with zero margin. It also sits beside a **937 K** jet against a +70 C rating. The alternative
+  (Actuonix P16-50-256, 95 g, self-locking) is worse: 300 N lift / 500 N static against 729 N, and -10..+50 C.
+* Sources: Volz DA 22 Technical Specification Rev D (02/2016); Actuonix P16 datasheet Rev B (2016).
+
+### F6A.2 The actuation hardware does not fit inside the 142.45 mm OD (R6A.1)
+Boolean-confirmed, `data/phase6a/clash_report.json`. The compressor casing is 110.26 mm OD and the engine OD is
+142.45 mm, so the variable geometry has a **16.10 mm radial annulus** (free: `engine_mass` puts sheet metal only over
+the hot section). **The smallest dimension of a Volz DA 22 case is 22.0 mm.**
+
+| part | r_max | over the OD | volume outside |
+|---|---|---|---|
+| nozzle actuator | 127.10 mm | **+55.87 mm** | 81 531 mm3 |
+| nozzle reduction stage | 104.91 mm | +33.68 mm | 30 000 mm3 |
+| nozzle pushrods | 93.36 mm | +22.14 mm | 1 402 mm3 |
+| VIGV actuator | 82.48 mm | **+11.25 mm** | 21 850 mm3 |
+| nozzle sync ring | 78.83 mm | +7.61 mm | 7 825 mm3 |
+| VIGV cranks | 78.38 mm | +7.15 mm | 601 mm3 |
+| bleed actuator | 76.56 mm | **+5.33 mm** | 4 591 mm3 |
+| VIGV spindles | 72.38 mm | +1.15 mm | 114 mm3 |
+
+The sync ring is outside before any actuator is added: `ax_closure` sizes it at r8_max + 10 mm = 76.83 mm.
+**What does fit:** shaft (1.00 mm to the tunnel), tunnel (7.79 mm to the inner liner), **front bearing 28 mm OD inside
+the 20.30 mm inlet hub with 6.30 mm clear** (housing 3.30 mm), the whole bleed manifold / valve / full-area collector
+duct (reaching exactly the OD line), the VIGV unison ring (9.25 mm clear of the casing), and the flaps at both stops
+(0.07 mm inside the OD at fully open). Fix options (local fairing, which changes the airframe cross-section and hence
+the wave drag the dash margin rests on, or remote mounting with long pushrods) are **not assessed**.
+
+### F6A.3 The engine is at least 42.5 mm longer once the mechanisms are packaged (R6A.2)
+The VIGV row (chord 17.11 mm + the 0.25-chord gap) does not fit in the 15 mm front allowance: it starts **6.38 mm
+ahead** of the compressor front face, its actuator 24.75 mm ahead. The nozzle flaps end 28.1 mm **aft** of the raw
+length, the actuator and heat shield 36.1 mm aft. Packaged raw length >= **537.6 mm against the frozen 495.1 mm
+(+8.6 %)**; the frozen 598.7 mm calibrated length has no allowance at either end.
+
+### F6A.4 The rotordynamic drum geometry is not buildable as modelled (R6A.4)
+D4A.2 used a **2 mm Ti drum at a constant r 26.23 mm** (`ax_closure`'s mean of the rotor hub radii). The hub line
+rises 20.30 -> 30.19 mm, so the drum (outer radius 27.23 mm) stands **6.93 / 5.79 / 3.50 / 2.73 / 1.11 / 0.56 mm into
+the flow path** at the stage-1 rotor through the stage-3 stator, intersecting those stator vanes and inner bands and
+swallowing part of the stage-1/2 rotor blade roots. A buildable drum must follow the hub line, which changes its
+bending stiffness. **This does not say the API 684 pass is wrong and it is not re-opened here**: the 122.3 krpm
+bending critical (46 % above MCS) should be re-run on a hub-following drum before it is relied on.
+
+### F6A.5 The drawn hot end has its minimum area at the turbine exit, not at the nozzle (R6A.5)
+`ax_flowpath_check.py`, area/choking capacity at every drawn station.
+* **Method verified first:** the choking relation reproduces pyCycle's own A8 sizing to **-0.6 %**.
+* Compressor rows: +17.5 % to +56.2 % capacity margin, comfortable everywhere.
+* **Turbine exit annulus 66.02 cm2 vs nozzle A8 70.16 cm2 (A8/A = 1.063)**: at the fielded Pt5 151.4 kPa the annulus
+  chokes at **1.292 kg/s against the 1.381 kg/s required (-6.5 %)**.
+* **Traced cause:** `arch_trade.turb_pout` assumes an **exit Mach of 0.45** to convert the cycle's Pt5 into the static
+  pressure handed to TurboFlow. TurboFlow met that static pressure but left the flow at **408 m/s, -19.5 deg swirl,
+  M ~ 0.71**, so its own exit total pressure is **184.0 kPa**, not 151.4 kPa. The annulus is sized for the tool-level
+  machine (eta_tt 0.917) while the cycle runs the fielded one (eta_t 0.75). The same tool-vs-fielded mismatch as
+  F3R.3 and F4A.2, this time as an area.
+* **Consequence:** at high speed the controlling area is upstream of the flaps, so the variable nozzle has less
+  authority over the running line than `ax_operability` assumed. How much less is **not assessed**.
+* **Not fixed and not re-run.** Reported only.
+
+### F6A.6 CAD mass: the core model holds, the variable geometry is 1.76 x its allowance (R6A.3, R6A.6)
+Compared against the **raw** bottom-up items (the x1.2025 calibration covers what the CAD does not draw).
+* **Core:** blades -3.0 %, discs -3.1 %, stators -3.4 %, liners -0.4 %, hot casing -0.4 %, turbine disc and NGV rings
+  exact. Core CAD 4.154 kg vs 4.289 kg of model items, **-3.1 %**.
+* **Two core discrepancies, opposite in sign:** the shaft is **+106 g** (the model's `L_shaft = 0.72 x L_total` gives
+  356 mm; the layout needs 434 mm), and the tunnel + bearing housings are **-201 g** (the model's flat +0.12 kg
+  housing allowance is the more realistic of the two; the CAD housings are thin placeholders). Bearings +13 g (the CAD
+  draws solid rings).
+* **`engine_mass` double count:** `ngv_rings` and `turbine_shroud` occupy the same space (8 441 mm3 common volume),
+  about 67 g of IN-713LC counted twice.
+* **Variable geometry (the point of Phase 6A):**
+
+| system | freeze allowance | CAD | delta | ratio |
+|---|---|---|---|---|
+| VIGV | 165 g | 232 g | +66 g | 1.40 |
+| bleed | 122 g | 200 g | +79 g | 1.65 |
+| variable nozzle | 354 g | 695 g | **+342 g** | 1.97 |
+| **total** | **640 g** | **1127 g** | **+487 g** | **1.76** |
+
+Of the +487 g: **+248 g is hardware the freeze's estimate did not contain at all** (nozzle heat shield 165 g, the
+22.5:1 reduction stage 83 g), +117 g is real actuators against 3 x 75 g, +52 g brackets, +18 g bleed duct. The heat
+shield is drawn as a full ring, so the nozzle figure is the softest of the three; the actuator masses are datasheet
+values and are firm.
+* **For scale only, not carried through and no re-closure run:** calibrated dry mass would go 6.863 -> 7.449 kg
+  (+586 g), TOGW 22.12 -> 22.71 kg (margin 2.29 kg) in the powered-descent case and 18.54 -> 19.13 kg (margin
+  5.87 kg) in the engine-off case. Both stay under 25 kg.
+
+### D6A.3 Status after Phase 6A
+* **Partly resolved:** axial open risk 4.4 is no longer "no sourced hardware" - the VIGV and bleed actuators have a
+  named in-production part with torque margin, and the variable-geometry mass is a CAD number.
+* **Still open inside 4.4:** no compliant nozzle actuator exists at this load and temperature; the bleed actuator is
+  outside its temperature rating; actuator rates were not checked against the transient assumption (freeze 4.7); no
+  ECU, failure modes, or discharge path beyond the engine OD.
+* **New open risks: R6A.1-R6A.6** (packaging, length, no nozzle actuator, drum geometry, turbine-exit area, minor
+  `engine_mass` items), listed in `docs/phase6a_axial_cad.md` section 7.
+* **Untouched:** R4.1 and everything downstream, idle 77.5 % and the descent concept, start, dash throttling, blade
+  roots and resonances, no hardware validation.
+* **No architecture decision taken. The centrifugal baseline and its Phase 6 work are unchanged. Freeze decisions 1-5
+  remain with the user.**
+
+## Housekeeping — repository split (2026-09-15)
+
+### D0.1 Axial work quarantined under `axial/` (user instruction)
+User request: "reorganize folder structure to separate axial work and centrifugal one because later we will continue
+the development of centrifugal compressor staged jet engine, I don't want the axial data to mess with it." Structure
+and legacy placement chosen by the user from two options each: **quarantine the axial side only** (the centrifugal
+files keep their exact paths, so the chain that continues cannot be disturbed) and **superseded option-B work goes
+into the axial tree** rather than a separate `legacy/`.
+
+**No engineering result changed.** Only file locations, the paths that address them, and the two small
+path-plumbing fixes recorded in F0.3 below. No model, correlation, tolerance or numerical setting was touched.
+
+Moved to `axial/` (`git mv`, history preserved):
+
+| from | to | what |
+|---|---|---|
+| `scripts/phase3_cycle/{ax_trade,axial_sweep,axicent_sensitivity}.py` | `axial/scripts/phase3_cycle/` | 3 scripts |
+| `scripts/phase4_turbomachinery/{ax_*,operability,accel,bleed_sweep,nozzle_sweep,running_line_axi5,plot_operability,axial_blockage_screen,check_turbodesigner_blockage,ac_operability,impeller_check_ac,plot_optionB}.py` | `axial/scripts/phase4_turbomachinery/` | 19 scripts |
+| `scripts/phase6a_axial_cad/` | `axial/scripts/phase6a_axial_cad/` | 6 scripts |
+| `data/{phase3ax,phase4ax,phase6a}/`, `data/phase3ax_trade.csv` | `axial/data/` | Phase 3A-R / 4A / 6A results |
+| `data/phase4/` axial + option-B maps and parts | `axial/data/phase4/` | TurboFlow maps |
+| `data/phase4_{running_line,operability_ax,bleed_sweep,nozzle_sweep,axial_blockage_screen,optionB_impeller,rotordynamics*}.*`, `data/phase3_axicent_*.csv` | `axial/data/` | loose axial results |
+| `docs/{phase4a_axial,design_freeze_axial,phase4_operability,phase4_rotordynamics,phase4_optionB_checks,phase6a_axial_cad}.md` | `axial/docs/` | 6 reports |
+| `plots/{phase4a_*,phase4_operability,phase4_optionB_operability,phase4_campbell,phase4_critical_speed_map,phase4_rotor_*}.png` | `axial/plots/` | 9 figures |
+| `cad/axial/` | `axial/cad/parts/` | 67 STEP solids |
+| `cad/axial_{core,vg}_assembly.step` | `axial/cad/` | 2 assemblies |
+
+### F0.1 Five axial-named modules could not move — the centrifugal chain imports them
+Established with an AST import closure over both trees, not by name. `arch_trade.py` — which `cc_trade.py` is built
+on — imports `axial_design` and `axicent_design` at module level; `cc_mission.py` and `cc_benchmark.py` import
+`ac_offdesign` (for `PureCC` and `CentrifugalMap`: the **pure centrifugal** off-design model lives in that file),
+`axial_map` (for `build_compressor_lines` / `compressor_mapdata` / `turbine_mapdata`, which are generic map → pyCycle
+helpers, not axial-specific) and `axial_offdesign` (for the `Choked` exception). `cc_rotor.py` imports `rotor_model`,
+`rotordynamics` and `rotordynamics_damped`. All of these therefore stayed in `scripts/`; the table is in `CLAUDE.md`.
+Their axial `__main__` studies now write to `axial/data/` and `axial/plots/` via an added `AXROOT`, so no axial number
+is produced at the root.
+
+### A0.1 `data/phase3/` and `data/phase3_arch_trade_*.csv` kept at the root, intact
+They are the Phase 3 architecture-trade record — both architectures compared in one table — and are read by
+`arch_trade.py`, `compile_trade.py`, `reeval_level.py`, `rotor_model.py` and `axial_offdesign.py`. Splitting them would
+have broken the shared Phase 3 path for no gain: they are superseded for design use by `data/phase3r/` (centrifugal)
+and `axial/data/phase3ax/` (axial). The pre-Phase-3R JetCat P400 benchmark maps likewise stayed in `data/phase4/`,
+which `cc_benchmark.py` defaults to.
+
+### D0.2 How the moved scripts address files
+Each moved script keeps `ROOT` meaning the repo root and gains `AXROOT` = `axial/`. Shared modules and shared data are
+still reached through `ROOT` (nothing was duplicated); every axial artefact is read and written through `AXROOT`. Each
+moved script also inserts its original shared directory on `sys.path`, so its imports resolve exactly as before.
+
+### F0.3 Two things the move broke, found and fixed
+Both were silent — they only bite on a regeneration path, so neither showed up in a plotting or summary run.
+
+1. **`turbine_map.py` launched by absolute `HERE`.** `ax_operability.py` and `operability.py` regenerate a missing
+   turbine map with `subprocess.run([NP1, os.path.join(HERE, "turbine_map.py"), ...])`. `HERE` is now the axial
+   directory, but `turbine_map.py` stayed in the shared tree (it serves both architectures). Both call sites now use
+   `os.path.join(ROOT, "scripts", "phase4_turbomachinery", "turbine_map.py")`.
+2. **`P3_DATA` could only name a directory under `data/`.** `ax_trade.py` sets `P3_DATA=phase3ax` and `arch_trade.py`
+   built `OUT = ROOT/data/<P3_DATA>`, so an axial run would have recreated `data/phase3ax/` in the shared tree — the
+   exact contamination this reorganisation removes. `arch_trade.py` and `cc_benchmark.py` now accept an **absolute**
+   `P3_DATA` and use it as given, a bare name still resolving under `data/` as before; `ax_trade.py` passes the
+   absolute `axial/data/phase3ax`. Checked both ways: `P3_DATA=phase3r` → `data/phase3r`, absolute → `axial/data/phase3ax`.
+
+### F0.2 Verification that nothing broke
+* `compileall` over `scripts/` and `axial/scripts/`: clean.
+* Static import-resolution check over all 112 scripts (evaluates each script's own `HERE`/`ROOT`/`AXROOT` and
+  `sys.path.insert` lines, then resolves every repo-local import against that path): every import resolves.
+* Import smoke of the centrifugal chain modules (`arch_trade`, `ac_offdesign`, `axial_map`, `axial_offdesign`,
+  `rotor_model`, `rotordynamics`, `rotordynamics_damped`, `engine_mass`, `cycle_model`, `impeller_stress`): OK.
+* `verify_axisym_fe.py`: sigma_t(center) +0.00 %, sigma_t(rim) +0.35 %, bore case -0.44 % — unchanged.
+* `rotordynamics_verify.py` (exercises the two edited shared modules): ROSS 2.3.0 vs closed forms, errors
+  0.0001-0.20 % — unchanged.
+* `impeller_stress.py` regression against the Phase 4 gate: 3.5 mm root at 100 % speed 656 MPa vs gate 656 MPa — unchanged.
+* Moved axial scripts run end to end on the relocated data: `plot_operability.py` and `plot_optionB.py` (the
+  latter reads both moved axial results and the P400 benchmark that stayed at the root) regenerate their figures
+  into `axial/plots/`, and `ax_operability_summary.py` reproduces its per-configuration idle table.
+* `plots/` at the root now contains no axial figure, and `docs/` no axial report.
+
+The full centrifugal solver chain (`cc_trade`, `cc_mission`, `cc_benchmark`) was not re-run end to end: none of its
+files were edited, and the reproduction targets (centrifugal dash W 1.32575 kg/s, TSFC 0.16416) are unchanged by a
+file move. Re-run them before the next Phase 6 step if a fresh baseline is wanted.

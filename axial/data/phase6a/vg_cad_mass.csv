@@ -1,0 +1,23 @@
+system,part,material,volume_cm3,mass_kg,from_datasheet,valid,note
+VIGV,vg_vigv_vanes,Ti,9.199843326472925,0.04075530593627506,False,True,"14 vanes, chord 17.11 mm, span 32.08 mm, t/c 0.07"
+VIGV,vg_vigv_spindles,steel,1.9792033717615716,0.015536746468328337,False,True,"14 x 3 mm spindles, 20 mm long, at 0.30 chord (ax_closure)"
+VIGV,vg_vigv_cranks,steel,0.6719999999999993,0.005275199999999995,False,True,"14 crank arms, 6 mm effective radius (12 x 4 x 1.5 mm)"
+VIGV,vg_vigv_unison_ring,steel,4.929428334253575,0.03869601242389056,False,True,unison ring 6 x 2 mm at r 64.38 mm (ax_closure dimensions)
+VIGV,vg_vigv_actuator,datasheet,60.43730000000001,0.105,True,True,"DA 22-12-2615 installed envelope 47.0 x 58.45 x 22.0 mm, 105 g, inner face on the casing OD"
+VIGV,vg_vigv_actuator_bracket,Al,9.36945,0.025859682000000002,False,True,3 mm mounting bracket under the actuator (provisional)
+VIGV,vg_vigv_pushrod,steel,0.044178646691106514,0.00034680237652518614,False,True,"3 mm pushrod, 5 mm servo arm to a ring lug (provisional)"
+bleed,vg_bleed_manifold,Al,7.933927740962027,0.021897640565055197,False,True,manifold ring 25 x 1 mm at r 50.01 mm (ax_closure dimensions)
+bleed,vg_bleed_band_valve,SS,3.220694986188646,0.025443490390890305,False,True,rotating band valve 20 x 0.5 mm over the ports (ax_closure dimensions)
+bleed,vg_bleed_ports,Al,1.420969901604359,0.003921876928428032,False,True,8 ports of 7.29 mm dia = 334.3 mm2 total (choked area)
+bleed,vg_bleed_duct,Al,6.592758711510967,0.018196014043770272,False,True,collector duct 20.6 mm dia (full port area) radially out to the engine OD; path beyond is out of scope
+bleed,vg_bleed_actuator,datasheet,60.4373,0.105,True,True,"DA 22-12-2615 installed envelope, 105 g, inner face on the casing OD, opposite the duct"
+bleed,vg_bleed_actuator_bracket,Al,9.36945,0.025859682000000002,False,True,3 mm bracket (provisional)
+bleed,vg_bleed_pushrod,steel,0.015904312808798313,0.00012484885554906678,False,True,"3 mm pushrod, 2:1 crank pair to the band (provisional)"
+nozzle,vg_nozzle_hinge_ring,SS,4.433633806660125,0.03502570707261499,False,True,hinge ring at the outer-cone start (provisional)
+nozzle,vg_nozzle_flaps_closed,SS,26.26880030435178,0.2075235224043791,False,True,12 flaps 80.2 x 45.5 x 0.6 mm at A8 x1.0 (+7.19 deg to the axis); the two positions are the SAME hardware drawn twice
+nozzle,vg_nozzle_flaps_open,SS,26.26880030435165,0.20752352240437805,False,True,12 flaps 80.2 x 45.5 x 0.6 mm at A8 x2.0 (-6.82 deg to the axis); the two positions are the SAME hardware drawn twice
+nozzle,vg_nozzle_sync_ring,SS,7.82464677805396,0.06181470954662629,False,True,sync ring 8 x 2 mm at r 76.83 mm (ax_closure dimension r8_max + 10 mm)
+nozzle,vg_nozzle_pushrods,steel,1.4021501823731,0.011006878931628838,False,True,"12 x 3 mm pushrods, sync ring to flap at 0.8 of its length"
+nozzle,vg_nozzle_heat_shield,SS,20.88646808348701,0.16500309785954737,False,True,20 mm heat-shield standoff under the nozzle actuator (provisional; no thermal analysis)
+nozzle,vg_nozzle_actuator,datasheet,81.53090000000003,0.132,True,True,"DA 22-12-4112 installed envelope 47.0 x 78.85 x 22.0 mm, 132 g, on the standoff"
+nozzle,vg_nozzle_reduction,Al,30.0,0.0828,False,True,22.5:1 screwjack / gear stage the actuator needs to hold 27.0 N m (NOT in the freeze's 0.279 kg estimate)

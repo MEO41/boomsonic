@@ -1,0 +1,94 @@
+{
+ "note": "Off-the-shelf actuator specifications for Phase 6A (exploratory axial CAD). Every number is transcribed from the manufacturer's published datasheet, cited per entry. These REPLACE the freeze's placeholder '3 x 75 g hobby servo' allowance (docs/design_freeze_axial.md 4.4, open risk). Nothing here is qualified for this application; the temperature ratings in particular are datasheet limits, not analysis results.",
+ "actuators": {
+  "volz_da22_12_2615": {
+   "manufacturer": "Volz Servos GmbH & Co. KG",
+   "model": "DA 22-12-2615",
+   "type": "rotary servo actuator",
+   "mass_kg": 0.105,
+   "mass_tolerance": "+/-10 %",
+   "case_mm": [41.5, 45.5, 22.0],
+   "installed_envelope_mm": [47.0, 58.45, 22.0],
+   "mount": "2 lugs, 3.1 mm holes, 48 mm spacing",
+   "torque_rated_Nm": 0.80,
+   "torque_peak_Nm": 1.60,
+   "speed_rated_deg_s": 120.0,
+   "speed_no_load_deg_s": 210.0,
+   "travel_standard_deg": 170.0,
+   "travel_extended_deg": 330.0,
+   "backlash_deg": 0.5,
+   "supply_V": 12.0,
+   "current_rated_A": 0.4,
+   "T_operating_C": [-30, 70],
+   "T_storage_C": [-35, 80],
+   "ingress": "IP 67",
+   "source": "Volz DA 22 Technical Specification Rev D (02/2016), sections 2.1 (operating data 12 V), 6 (dimensions): https://www.volz-servos.com/fileadmin/user_upload/Downloads/Datasheets/DA-22_Datasheet_Rev_D.pdf"
+  },
+  "volz_da22_12_4112": {
+   "manufacturer": "Volz Servos GmbH & Co. KG",
+   "model": "DA 22-12-4112",
+   "type": "rotary servo actuator",
+   "mass_kg": 0.132,
+   "mass_tolerance": "+/-10 %",
+   "case_mm": [41.5, 65.9, 22.0],
+   "installed_envelope_mm": [47.0, 78.85, 22.0],
+   "installed_envelope_note": "case height + the same 12.95 mm output-boss/arm stack as the 2615 drawing (Rev D p.14)",
+   "mount": "2 lugs, 3.1 mm holes",
+   "torque_rated_Nm": 1.20,
+   "torque_peak_Nm": 3.00,
+   "speed_rated_deg_s": 180.0,
+   "speed_no_load_deg_s": 250.0,
+   "travel_standard_deg": 170.0,
+   "travel_extended_deg": 330.0,
+   "backlash_deg": 0.5,
+   "supply_V": 12.0,
+   "current_rated_A": 0.75,
+   "current_peak_A": 1.7,
+   "T_operating_C": [-30, 70],
+   "T_storage_C": [-35, 80],
+   "ingress": "IP 67",
+   "source": "Volz DA 22 Technical Specification Rev D (02/2016), sections 2.1, 3.1, 6: https://www.volz-servos.com/fileadmin/user_upload/Downloads/Datasheets/DA-22_Datasheet_Rev_D.pdf"
+  },
+  "actuonix_p16_50_256": {
+   "manufacturer": "Actuonix Motion Devices Inc.",
+   "model": "P16-50-256-12-P",
+   "type": "miniature linear actuator (stainless lead screw, planetary gearbox, self-locking)",
+   "mass_kg": 0.095,
+   "stroke_mm": 50.0,
+   "closed_length_hole_to_hole_mm": 97.0,
+   "force_max_lifted_N": 300.0,
+   "force_back_drive_N": 500.0,
+   "force_max_static_N": 500.0,
+   "force_peak_power_N": 250.0,
+   "speed_peak_power_mm_s": 2.5,
+   "speed_no_load_mm_s": 4.8,
+   "side_load_max_N": 20.0,
+   "backlash_mm": 0.3,
+   "duty_cycle_max": 0.20,
+   "T_operating_C": [-10, 50],
+   "ingress": "IP-54",
+   "source": "Actuonix P16 datasheet Rev B (2016), P16 Specifications table: https://s3.amazonaws.com/actuonix/Actuonix+P16+Datasheet.pdf"
+  }
+ },
+ "selection": {
+  "vigv": {
+   "part": "volz_da22_12_2615",
+   "quantity": 1,
+   "drive": "servo crank arm 5 mm driving the unison ring tangentially",
+   "rationale": "ring force 57 N x 5 mm arm = 0.285 N m = 36 % of the 0.80 N m rated torque; servo travel asin(1.57/5) = 18.3 deg, inside the standard +/-85 deg. Compressor-face static temperature ~16 C, well inside the -30..+70 C rating."
+  },
+  "bleed": {
+   "part": "volz_da22_12_2615",
+   "quantity": 1,
+   "drive": "2:1 crank pair to the band valve",
+   "rationale": "band torque 1.02 N m / 2 = 0.51 N m = 64 % of rated; servo travel 2 x 20 deg = 40 deg. TEMPERATURE NOT COMPLIANT: the stage-3 manifold is at 433 K (160 C) against a +70 C rating; a thermal standoff is required and has not been designed."
+  },
+  "nozzle": {
+   "part": "volz_da22_12_4112",
+   "quantity": 1,
+   "drive": "22.5:1 reduction (screwjack or gear stage) to the sync ring",
+   "rationale": "NOT COMPLIANT. Total flap hinge moment 27.0 N m at the closed/dash condition. Holding it on the 1.20 N m rated torque needs 22.5:1, which makes the servo travel 22.5 x 14.07 deg = 317 deg: only the optional 330 deg extended-travel version reaches it, and the 22.5:1 reduction is a screw or gear stage that is NOT in the 0.279 kg flap/ring/hinge estimate. On peak torque (3.0 N m) a 9:1 bellcrank holds it with zero margin, which is not a design. TEMPERATURE NOT COMPLIANT by a wide margin: the actuator sits beside a 937 K jet pipe against a +70 C rating.",
+   "alternative_considered": "actuonix_p16_50_256: self-locking, so it holds without power, but its 300 N lift / 500 N static is below the 729 N sync-ring load of the modelled linkage (two units would be needed, 0.190 kg) and its -10..+50 C rating is worse."
+  }
+ }
+}

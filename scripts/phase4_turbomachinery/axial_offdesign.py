@@ -76,7 +76,9 @@ class Compressor:
         p = comp["input"]
         self.p, self.comp = p, comp
         self.rpm_d, self.W_d, self.T01, self.P01, self.PR_d = p["rpm"], p["mdot"], p["T01"], p["P01"], p["PR"]
-        tm = ad.build(p, comp["eta_is"])
+        # triangles as designed: a blading sized at a set efficiency (Phase 3A-R 'eta_sizing', the fielded work) must be
+        # rebuilt at that efficiency, not at its loss-model value (Phase 3 designs have no eta_sizing: unchanged)
+        tm = ad.build(p, comp.get("eta_sizing", comp["eta_is"]))
         self.rm = float(np.ravel(tm.stages[0].rotor.flow_station.radius)[1])
         st0 = tm.stages[0]
         deg = lambda v: abs(float(np.degrees(np.ravel(v)[1])))           # TurboDesigner angles are in radians
@@ -146,7 +148,10 @@ class Compressor:
         width = eps_nom / 0.8 - eps_nom
         x = (eps - eps_d) / (width if eps >= eps_d else width * self.neg_width)
         re_f = float(np.clip(Re_ratio ** -0.2, 1.0, 1.5)) if Re_ratio < 1 else 1.0
-        Y = self.Y[k] * self.loss_mult * (1 + x * x) * re_f
+        if getattr(self, "Y_extra", None) is not None:           # fielded split (fielded()): tool-level parabola + constant extra loss
+            Y = self.Y_var[k] * self.loss_mult * (1 + x * x) * re_f + self.Y_extra[k]
+        else:
+            Y = self.Y[k] * self.loss_mult * (1 + x * x) * re_f
         if row == "r" and self.Yshock[k][0] > 0:
             Ysh_d, Mt_d, l_d = self.Yshock[k]
             Y += Ysh_d * (1 - normal_shock_pt_ratio(Mtip)) / l_d
@@ -232,6 +237,29 @@ class Compressor:
         i_stall = int(np.argmax(si >= 1.0)) if np.any(si >= 1.0) else None
         i_peak = int(np.argmax(PR))
         return dict(N=Nf, W_choke=Wch, points=pts, i_stall=i_stall, i_peak=i_peak)
+
+def fielded(comp, eta_target, **kw):
+    """Compressor whose stage losses are calibrated to the FIELDED overall efficiency (Phase 4A): every stage
+    efficiency lowered by the same amount until the design-point isentropic efficiency equals eta_target. Used for a
+    blading sized at the fielded work (eta_sizing), so that triangles, work and losses are consistent and the design
+    point lands at the cycle's PR and flow. Stall stays Howell's (deflection-based, independent of the loss level).
+    Off design, only the tool-level (Howell) part of each row loss follows the incidence parabola; the fielded debit
+    (clearance / Reynolds / finish-type loss) is a CONSTANT extra loss coefficient. Scaling the whole loss by the
+    debit instead doubled the parabola and choked every flow below 80 % speed (found in Phase 4A)."""
+    import copy
+    def make(dl):
+        cf = copy.deepcopy(comp)
+        for s in cf["stages"]: s["eta_stage"] = s["eta_stage"] - dl
+        return Compressor(comp=cf, **kw)
+    lo, hi = -0.05, 0.30
+    for _ in range(40):
+        mid = 0.5 * (lo + hi); cc = make(mid)
+        if cc.point(1.0, cc.W_d)["eta"] > eta_target: lo = mid
+        else: hi = mid
+    cc = make(0.5 * (lo + hi)); cc.stage_eta_debit = 0.5 * (lo + hi)
+    ct = Compressor(comp=comp, **kw)                                       # tool-level calibration of the same blading
+    cc.Y_var = list(ct.Y); cc.Y_extra = [yf - yt for yf, yt in zip(cc.Y, ct.Y)]
+    return cc
 
 if __name__ == "__main__":
     c = Compressor()

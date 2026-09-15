@@ -14,7 +14,8 @@ import ac_offdesign as acm, axial_map as am, axial_offdesign as ao
 import cycle_model as cm
 TAG = "val_P400-PRO-LN"; SUF = sys.argv[1] if len(sys.argv) > 1 else ""
 # Phase 3R: P3_DATA=phase3r and MAP_DIR=data/phase3r/maps re-run the benchmark on the slip-fixed P400 model; output suffix _3r
-DDIR = os.path.join(ROOT, "data", os.environ.get("P3_DATA", "phase3")); MDIR = os.path.join(ROOT, os.environ.get("MAP_DIR", os.path.join("data", "phase4")))
+_P3D = os.environ.get("P3_DATA", "phase3")
+DDIR = _P3D if os.path.isabs(_P3D) else os.path.join(ROOT, "data", _P3D); MDIR = os.path.join(ROOT, os.environ.get("MAP_DIR", os.path.join("data", "phase4")))
 OSUF = "_3r" if os.environ.get("P3_DATA") == "phase3r" else ""
 e = json.load(open(os.path.join(DDIR, f"{TAG}_engine.json"))); cyc = e["cycle"]
 c = acm.PureCC(os.path.join(MDIR, f"centrifugal_map_{TAG}{SUF}.json"))

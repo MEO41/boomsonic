@@ -20,6 +20,8 @@ Output: data/phase4_rotordynamics_damped.csv, plots/phase4_rotor_damped_AF.png  
 """
 import os, sys, time, numpy as np, pandas as pd, scipy.linalg as la
 HERE = os.path.dirname(os.path.abspath(__file__)); ROOT = os.path.abspath(os.path.join(HERE, "..", ".."))
+# shared module (cc_rotor.py imports it), but the __main__ study below is the pure-axial rotor: its results live under axial/
+AXROOT = os.path.join(ROOT, "axial")
 sys.path.insert(0, HERE)
 import rotor_model as rm, rotordynamics as rd
 
@@ -93,14 +95,14 @@ def main(trade=None):
                                     m_rotor_kg=mp["m_rotor_kg"], Ip_kgm2=mp["Ip_kgm2"]))
                     print({kk: (round(v, 4) if isinstance(v, float) else v) for kk, v in res[-1].items()}, flush=True)
         print(f"  layout {lay} done ({time.time()-t0:.0f} s)", flush=True)
-    df = pd.DataFrame(res); df.to_csv(os.path.join(ROOT, "data", "phase4_rotordynamics_damped.csv"), index=False)
+    df = pd.DataFrame(res); df.to_csv(os.path.join(AXROOT, "data", "phase4_rotordynamics_damped.csv"), index=False)
     print(f"done in {time.time()-t0:.0f} s")
 
 
 def plot(rpm=None):
     import matplotlib; matplotlib.use("Agg"); import matplotlib.pyplot as plt
     rpm = rpm or rm.geometry()["rpm"]; mcs, idle = rd.MCS_F * rpm, rd.IDLE * rpm
-    df = pd.read_csv(os.path.join(ROOT, "data", "phase4_rotordynamics_damped.csv"))
+    df = pd.read_csv(os.path.join(AXROOT, "data", "phase4_rotordynamics_damped.csv"))
     fig, axs = plt.subplots(1, 2, figsize=(12, 4.6), sharey=True)
     for ax, lay in zip(axs, "AB"):
         for (name, c_), mk in zip([(n, cc) for n in df.design.unique() for cc in (876.0, 2000.0)], ("o", "s", "^", "v", "D", "P")):
@@ -115,7 +117,7 @@ def plot(rpm=None):
         ax.set_title(f"Layout {lay}, support k = {rd.K_SOFT:.3g} N/m", fontsize=9)
     axs[0].set_ylabel("amplification factor AF = 1 / (2 zeta)"); axs[0].legend(fontsize=6.5, loc="upper left")
     fig.suptitle("Damped critical speeds with squeeze-film / O-ring damper supports (API 684 AF rules)", fontsize=10); fig.tight_layout()
-    fig.savefig(os.path.join(ROOT, "plots", "phase4_rotor_damped_AF.png"), dpi=140); plt.close(fig)
+    fig.savefig(os.path.join(AXROOT, "plots", "phase4_rotor_damped_AF.png"), dpi=140); plt.close(fig)
 
 
 if __name__ == "__main__":

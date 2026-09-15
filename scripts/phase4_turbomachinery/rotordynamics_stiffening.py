@@ -14,6 +14,8 @@ Output: data/phase4_rotordynamics_stiffening.csv, plots/phase4_rotor_stiffening.
 """
 import os, sys, time, numpy as np, pandas as pd
 HERE = os.path.dirname(os.path.abspath(__file__)); ROOT = os.path.abspath(os.path.join(HERE, "..", ".."))
+# shared module (cc_rotor.py imports it), but the __main__ study below is the pure-axial rotor: its results live under axial/
+AXROOT = os.path.join(ROOT, "axial")
 sys.path.insert(0, HERE)
 import rotor_model as rm, rotordynamics as rd
 import matplotlib; matplotlib.use("Agg"); import matplotlib.pyplot as plt
@@ -45,7 +47,7 @@ def main(trade=None):
             for od in (0.016, 0.020, 0.024, 0.028, 0.032):
                 rows.append(evaluate(geo, k, t, od))
         print(f"  k {k:.3g} done ({time.time()-t0:.0f} s)", flush=True)
-    df = pd.DataFrame(rows); df.to_csv(os.path.join(ROOT, "data", "phase4_rotordynamics_stiffening.csv"), index=False)
+    df = pd.DataFrame(rows); df.to_csv(os.path.join(AXROOT, "data", "phase4_rotordynamics_stiffening.csv"), index=False)
     pd.set_option("display.width", 250); pd.set_option("display.max_columns", 30)
     print(df[["k", "t_drum_mm", "shaft_od_mm", "crits_rpm", "bearing_energy", "first_bending_rpm", "rigid_ok", "bending_ok", "m_rotor_kg", "Ip_kgm2"]].round(4).to_string(index=False))
     rpm = geo["rpm"]
@@ -61,7 +63,7 @@ def main(trade=None):
         ax.set_title(f"support stiffness {k:.3g} N/m", fontsize=9); ax.set_xlabel("main shaft OD [mm] (journals 16 mm)"); ax.grid(alpha=0.3)
     axs[0].set_ylabel("first bending forward critical [krpm] (capped at 2 x design)"); axs[0].legend(fontsize=7)
     fig.suptitle("Layout A: first bending critical vs shaft OD and drum wall (star: all API worst-case margins met)", fontsize=10)
-    fig.tight_layout(); fig.savefig(os.path.join(ROOT, "plots", "phase4_rotor_stiffening.png"), dpi=140); plt.close(fig)
+    fig.tight_layout(); fig.savefig(os.path.join(AXROOT, "plots", "phase4_rotor_stiffening.png"), dpi=140); plt.close(fig)
     print(f"done in {time.time()-t0:.0f} s")
 
 

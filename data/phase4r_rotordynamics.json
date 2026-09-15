@@ -38,7 +38,13 @@
    "turbine_blades_here": 0.10590799975384789,
    "impeller_engine_mass": 0.9238102234212953,
    "impeller_FE": 1.131843724514192
-  }
+  },
+  "impeller_hub_stress": {
+   "vm_mech_MCS_MPa": 313.1979426964145,
+   "burst_MCS": 1.90187143788436,
+   "A_over_r2": 0.3
+  },
+  "liner_factor": 1.0
  },
  "DN_journal": 945000.0,
  "cases": {

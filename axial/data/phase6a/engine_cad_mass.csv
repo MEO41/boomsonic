@@ -1,0 +1,46 @@
+part,material,volume_cm3,mass_kg,valid,note
+shaft,steel,134.48086837026386,1.0556748167065715,True,"24 / 12 mm 4340 tube, 12 mm journals over 20 mm at both bearings"
+compressor_casing,Al,173.0994366723645,0.4777544452157261,True,2.5 mm wall stepped to the real per-stage tip line + 0.25 mm clearance
+hot_casing,SS,58.04907664459839,0.4585877054923273,True,0.6 mm AISI 321 over the hot section: this IS the 142.45 mm engine OD (engine_mass)
+liner_outer,IN625,30.80685894136422,0.260009889465114,True,outer liner at 0.90 Ro (engine_mass)
+rotor_drum,Ti,55.428642523472845,0.24554888637898473,True,2 mm Ti shell at r 26.23 mm (ax_closure / ax_rotor)
+turbine_disc,IN713,27.573538659293305,0.21810669079501008,True,"constant-stress IN-713LC disc, rim 4.09 mm"
+turbine_shroud,IN713,19.412912289484144,0.15355613620981956,True,2 mm shroud ring over 1.4 x the summed chords (engine_mass)
+shaft_tunnel,SS,18.28377054341564,0.14444178729298354,True,1 mm tunnel from the last compressor disc to the rear bearing (provisional)
+ngv_vanes,IN713,12.382991122939297,0.09794945978244984,True,33 envelope prisms (aero surfaces out of scope)
+liner_inner,IN625,10.86282854476823,0.09168227291784385,True,inner liner at 1.25 Ri (engine_mass)
+ngv_shroud_ring,IN713,10.541998741744566,0.08338721004719953,True,2.5 mm NGV shroud ring
+turbine_blades,IN713,10.20233217888693,0.08070044753499563,True,27 envelope prisms
+nozzle_outer_cone,SS,8.51100623002791,0.0672369492172205,True,"0.5 mm convergent outer cone, turbine tip -> r8 (engine_mass); the VARIABLE flaps replace its aft part"
+disc_stage6,Ti,13.465738227031974,0.05965322034575165,True,"constant-stress disc, rim 4.00 mm, at x 196.5 mm"
+disc_stage5,Ti,12.437803522300388,0.055099469603790724,True,"constant-stress disc, rim 4.00 mm, at x 174.0 mm"
+disc_stage4,Ti,11.191228314246937,0.04957714143211393,True,"constant-stress disc, rim 4.00 mm, at x 147.5 mm"
+ngv_hub_ring,IN713,5.965114614026255,0.04718405659694769,True,2.5 mm NGV hub ring (engine_mass)
+liner_dome,IN625,5.440209199578463,0.04591536564444223,True,"dome, 0.5 mm"
+rotor_blades_stage1,Ti,9.765464557540335,0.04326100798990369,True,"14 envelope prisms, chord 21.38 mm"
+disc_stage3,Ti,9.670014756023624,0.04283816536918466,True,"constant-stress disc, rim 4.00 mm, at x 115.8 mm"
+disc_stage2,Ti,7.811297176247595,0.03460404649077684,True,"constant-stress disc, rim 4.00 mm, at x 77.1 mm"
+bearing_rear,steel,4.0212385965949355,0.03156672298327025,True,12 x 28 x 8 hybrid ball bearing envelope (provisional)
+bearing_front,steel,4.0212385965949355,0.03156672298327025,True,12 x 28 x 8 hybrid ball bearing envelope (provisional)
+rotor_blades_stage2,Ti,5.76437266290012,0.025536170896647534,True,"17 envelope prisms, chord 16.81 mm"
+disc_stage1,Ti,5.5664843444556205,0.0246595256459384,True,"constant-stress disc, rim 4.00 mm, at x 28.4 mm"
+vaporisers,IN625,2.6260298573202916,0.022163691995783264,True,"8 x 4 mm OD x 0.3 mm tubes, 0.6 L_liner (engine_mass)"
+stator_vanes_stage1,Al,7.832566644955905,0.021617883940078297,True,"14 envelope prisms, chord 19.87 mm"
+rotor_blades_stage3,Ti,3.788083487283203,0.01678120984866459,True,"21 envelope prisms, chord 13.62 mm"
+tail_cone,SS,1.8433426713541559,0.014562407103697831,True,"0.5 mm inner tail cone, 0.6 r_tip over 0.9 r_tip (engine_mass)"
+stator_band_stage1,Al,5.103104593865846,0.014084568679069737,True,2 mm inner shroud band (engine_mass)
+stator_vanes_stage2,Al,5.050325559539305,0.013938898544328482,True,"18 envelope prisms, chord 15.79 mm"
+stator_band_stage2,Al,4.661841460402408,0.012866682430710645,True,2 mm inner shroud band (engine_mass)
+rotor_blades_stage4,Ti,2.6763009575927494,0.011856013242135881,True,"26 envelope prisms, chord 11.30 mm"
+stator_band_stage3,Al,4.158794741105269,0.011478273485450543,True,2 mm inner shroud band (engine_mass)
+housing_front,Al,4.0903536349739085,0.01128937603252799,True,"bearing housing / damper cartridge envelope (provisional, 3 mm wall)"
+housing_rear,Al,4.0903536349739085,0.01128937603252799,True,"bearing housing / damper cartridge envelope (provisional, 3 mm wall)"
+stator_band_stage4,Al,3.687018281381838,0.010176170456613873,True,2 mm inner shroud band (engine_mass)
+stator_vanes_stage3,Al,3.3620846130319553,0.009279353531968196,True,"22 envelope prisms, chord 12.89 mm"
+stator_band_stage5,Al,3.270973587448771,0.009027887101358609,True,2 mm inner shroud band (engine_mass)
+rotor_blades_stage5,Ti,1.8638833193685032,0.00825700310480247,True,"30 envelope prisms, chord 9.55 mm"
+stator_band_stage6,Al,2.9121587168766805,0.00803755805857964,True,2 mm inner shroud band (engine_mass)
+stator_vanes_stage4,Al,2.309565628389421,0.006374401134354802,True,"26 envelope prisms, chord 10.76 mm"
+rotor_blades_stage6,Ti,1.3741854658928185,0.006087641613905186,True,"35 envelope prisms, chord 8.20 mm"
+stator_vanes_stage5,Al,1.7412918046414576,0.004805965380810424,True,"32 envelope prisms, chord 9.14 mm"
+stator_vanes_stage6,Al,1.2530656126837052,0.003458461091007027,True,"36 envelope prisms, chord 7.87 mm"

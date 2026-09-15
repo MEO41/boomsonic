@@ -184,6 +184,27 @@ def set_design(prob, MN, alt_m, OPR, T4_K, eta_c, eta_t, Fn_N=None, W_kgps=None,
             prob.set_val(pt + '.balance.T4_target', (T4_od_K or T4_K) * K2R, units='degR')
 
 
+def seed_od_from_design(prob, pt):
+    """Phase 4A: set_design seeds every off-design point with W 2.0 lbm/s, FAR 0.018, turbine PR 2.0. That converged
+    for the Phase 3/4 cycles but not for the refreshed axial (eta_c 0.709, W 3.0 lbm/s, turbine PR 2.64): Newton
+    diverged and left every internal state (flow stations, map R-line, turbine map PR, nozzle PR) at garbage. This
+    copies every implicit state of the off-design point from its design-point counterpart (map balances from the
+    design map location) and re-solves. Call after a first run_model with the OD point at the design flight condition
+    and speed. Not used by any Phase 3 / 4 script (their results are unchanged)."""
+    import numpy as _np
+    alias = {"comp.map.map_bal.RlineMap": "comp.map.RlineMap", "comp.map.map_bal.NcMap": "comp.map.NcMap",
+             "turb.map.map_bal.NpMap": "turb.map.NpMap", "turb.map.map_bal.PRmap": "turb.map.PRmap", "nozz.PR_bal.PR": "nozz.PR",
+             "comp.map.SMW_bal.NcMap": "comp.map.NcMap", "turb.PR": "balance.turb_PR"}
+    for name, _ in prob.model.list_outputs(implicit=True, explicit=False, out_stream=None):
+        if not name.startswith(pt + "."): continue
+        rel = name[len(pt) + 1:]
+        for cand in (alias.get(rel), rel):
+            if cand is None: continue
+            try: prob[name] = _np.ravel(prob.get_val("DESIGN." + cand)).copy(); break
+            except Exception: continue
+    prob.run_model()
+
+
 def read(prob, pt, eta_b=1.0):
     g = lambda n, u=None: float(np.ravel(prob.get_val(n, units=u))[0])
     Wf = g(pt + '.burner.Wfuel', 'kg/s') / eta_b

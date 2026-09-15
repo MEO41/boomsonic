@@ -1,0 +1,28 @@
+model_item,model_raw_kg,cad_parts,cad_kg,cad_over_model,delta_g
+rotor_blades,0.115177060559447,rotor_blades_stage1+rotor_blades_stage2+rotor_blades_stage3+rotor_blades_stage4+rotor_blades_stage5+rotor_blades_stage6,0.1117790466960589,0.9704974771288397,-3.3980138633881025
+rotor_discs,0.2750117860306091,disc_stage6+disc_stage5+disc_stage4+disc_stage3+disc_stage2+disc_stage1,0.26643156888755604,0.9688005475441765,-8.580217143053071
+stators,0.12960091782995095,stator_vanes_stage1+stator_band_stage1+stator_vanes_stage2+stator_band_stage2+stator_band_stage3+stator_band_stage4+stator_vanes_stage3+stator_band_stage5+stator_band_stage6+stator_vanes_stage4+stator_vanes_stage5+stator_vanes_stage6,0.1251461038343297,0.9656266786515633,-4.4548139956212545
+compressor_casing,0.4568129611017776,compressor_casing,0.4777544452157261,1.0458425786856838,20.941484113948473
+drum_ties,0.2575862998976987,rotor_drum,0.2455488863789847,0.9532684248987826,-12.037413518714013
+ngv_vanes,0.10093145452171684,ngv_vanes,0.0979494597824498,0.9704552485308193,-2.981994739267038
+ngv_rings,0.13057126664325872,ngv_hub_ring+ngv_shroud_ring,0.1305712666441471,1.0000000000068037,8.883727087294346e-10
+turbine_blades,0.08238956043615105,turbine_blades,0.0807004475349956,0.9794984596080659,-1.6891129011554484
+turbine_disc,0.21810645167313497,turbine_disc,0.21810669079501,1.0000010963539738,0.0002391218750230628
+turbine_shroud,0.1827897106472961,turbine_shroud,0.1535561362098195,0.84006991239302,-29.233574437476594
+combustor_liners,0.4215682761309534,liner_outer+liner_inner+liner_dome+vaporisers,0.41977122002318323,0.9957372121919063,-1.7970561077701452
+outer_casing,0.4605273852506806,hot_casing,0.4585877054923273,0.9957881337343327,-1.9396797583532965
+nozzle_cones,0.09017798227759533,nozzle_outer_cone+tail_cone,0.0817993563209183,0.9070878972332175,-8.37862595667703
+shaft,0.9495301364715845,shaft,1.0556748167065717,1.1117865312094428,106.14468023498725
+shaft_tunnel_bearing_housings,0.3677424701433292,shaft_tunnel+housing_front+housing_rear,0.1670205393580393,0.45417799932910197,-200.72193078528994
+bearings_2x_hybrid,0.05,bearing_front+bearing_rear,0.0631334459665404,1.2626689193308078,13.133445966540396
+starter_motor,0.18,,,,
+fuel_manifold_igniter,0.08,,,,
+VIGV vanes + spindles + levers + unison ring,0.09008239699167503,vg_vigv_vanes+vg_vigv_spindles+vg_vigv_cranks+vg_vigv_unison_ring+vg_vigv_pushrod+vg_vigv_actuator_bracket,0.1264697492050188,1.403934102871469,36.387352213343775
+VIGV actuator (servo),0.075,vg_vigv_actuator,0.105,1.4,30.0
+bleed manifold (Al ring 25 x 1 mm) + band valve (SS 20 x 0.5 mm),0.04650389651376396,vg_bleed_manifold+vg_bleed_band_valve+vg_bleed_ports+vg_bleed_duct+vg_bleed_pushrod+vg_bleed_actuator_bracket,0.0954435527836926,2.052377541211923,48.93965626992864
+bleed valve actuator (servo),0.075,vg_bleed_actuator,0.105,1.4,30.0
+variable nozzle flaps + sync ring + hinges,0.2785319457721027,vg_nozzle_flaps_closed+vg_nozzle_hinge_ring+vg_nozzle_sync_ring+vg_nozzle_pushrods+vg_nozzle_heat_shield+vg_nozzle_reduction,0.5631739158147964,2.0219365295914393,284.64197004269363
+"variable nozzle actuator (servo, heat-shielded)",0.075,vg_nozzle_actuator,0.132,1.7600000000000002,57.00000000000001
+fasteners_seals_balancing_10pct,0.5188641958892726,,,,
+"SUBTOTAL, items drawn in the CAD",4.928641958892726,all,5.280618353650165,1.0714144784086759,351.9763947574388
+"TOTAL raw (incl. starter, manifold, 10 % fasteners)",5.707506154781998,,,,

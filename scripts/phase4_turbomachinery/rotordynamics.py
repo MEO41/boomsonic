@@ -26,6 +26,8 @@ plots/phase4_critical_speed_map.png, plots/phase4_campbell.png, plots/phase4_rot
 """
 import os, sys, json, time, numpy as np, pandas as pd, scipy.linalg as la
 HERE = os.path.dirname(os.path.abspath(__file__)); ROOT = os.path.abspath(os.path.join(HERE, "..", ".."))
+# shared module (cc_rotor.py imports it), but the __main__ study below is the pure-axial rotor: its results live under axial/
+AXROOT = os.path.join(ROOT, "axial")
 sys.path.insert(0, HERE)
 import rotor_model as rm
 import matplotlib; matplotlib.use("Agg"); import matplotlib.pyplot as plt
@@ -146,7 +148,7 @@ def main(trade=None):
                 c = forward_criticals(sp, fw)
                 rows.append(dict(layout=lay, drum=drum, k=float(k), **{f"crit{i+1}_rpm": (c[i] / RPM2RAD if i < len(c) else np.nan) for i in range(3)}))
             print(f"  crit map {lay} drum={drum} done ({time.time()-t0:.0f} s)", flush=True)
-    cm = pd.DataFrame(rows); cm.to_csv(os.path.join(ROOT, "data", "phase4_rotordynamics_critmap.csv"), index=False)
+    cm = pd.DataFrame(rows); cm.to_csv(os.path.join(AXROOT, "data", "phase4_rotordynamics_critmap.csv"), index=False)
     # --- baseline Campbell, classification, verdicts
     out["cases"] = {}
     for lay in "AB":
@@ -179,7 +181,7 @@ def main(trade=None):
                                   DN_mm_rpm=od * 1e3 * rpm, m_rotor=mp["m_rotor_kg"], Ip=mp["Ip_kgm2"]))
         print(f"  OD sweep {lay} done ({time.time()-t0:.0f} s)", flush=True)
     out["shaft_od_sweep"] = sweep
-    json.dump(out, open(os.path.join(ROOT, "data", "phase4_rotordynamics.json"), "w"), indent=1, default=lambda o: o.tolist() if hasattr(o, "tolist") else float(o))
+    json.dump(out, open(os.path.join(AXROOT, "data", "phase4_rotordynamics.json"), "w"), indent=1, default=lambda o: o.tolist() if hasattr(o, "tolist") else float(o))
     plots(out, cm, geo)
     print(f"done in {time.time()-t0:.0f} s")
 
@@ -201,7 +203,7 @@ def plots(out, cm, geo):
         ax.set_ylim(0, 1.6 * rpm / 1e3); ax.grid(alpha=0.3)
     axs[0].set_ylabel("forward synchronous critical speed [krpm]"); axs[0].legend(fontsize=7, loc="upper left")
     fig.suptitle("Phase 4 critical-speed map, pure-axial engine rotor (ROSS, undamped)", fontsize=10); fig.tight_layout()
-    fig.savefig(os.path.join(ROOT, "plots", "phase4_critical_speed_map.png"), dpi=140); plt.close(fig)
+    fig.savefig(os.path.join(AXROOT, "plots", "phase4_critical_speed_map.png"), dpi=140); plt.close(fig)
     fig, axs = plt.subplots(2, 2, figsize=(12, 8.5))
     for ax, key in zip(axs.flat, ("A_hard", "A_soft", "B_hard", "B_soft")):
         c = out["cases"][key]["campbell"]; r = np.array(c["rpm"]) / 1e3
@@ -214,7 +216,7 @@ def plots(out, cm, geo):
         ax.set_title(f"Layout {key[0]}, k = {out['cases'][key]['k']:.2g} N/m", fontsize=9); ax.set_xlabel("rotor speed [krpm]"); ax.set_ylabel("whirl frequency [krpm]")
     axs[0, 0].legend(fontsize=7)
     fig.suptitle("Campbell diagrams (red: forward synchronous critical speeds; grey: 35-105 % speed)", fontsize=10); fig.tight_layout()
-    fig.savefig(os.path.join(ROOT, "plots", "phase4_campbell.png"), dpi=140); plt.close(fig)
+    fig.savefig(os.path.join(AXROOT, "plots", "phase4_campbell.png"), dpi=140); plt.close(fig)
     # mode shapes, layout A hard
     fig, axs = plt.subplots(2, 1, figsize=(10, 6.5))
     for ax, key in zip(axs, ("A_hard", "B_hard")):
@@ -230,7 +232,7 @@ def plots(out, cm, geo):
         for xb in (info["x_front"], info["x_rear"]): ax.plot(xb * 1e3, 0, "k^", ms=10)
         ax.set_title(f"Layout {key[0]} mode shapes, k = {out['cases'][key]['k']:.2g} N/m (triangles: bearings; grey: discs)", fontsize=9)
         ax.set_xlabel("axial position from compressor front [mm]"); ax.grid(alpha=0.3); ax.legend(fontsize=7)
-    fig.tight_layout(); fig.savefig(os.path.join(ROOT, "plots", "phase4_rotor_modes.png"), dpi=140); plt.close(fig)
+    fig.tight_layout(); fig.savefig(os.path.join(AXROOT, "plots", "phase4_rotor_modes.png"), dpi=140); plt.close(fig)
 
 
 if __name__ == "__main__":

@@ -18,7 +18,9 @@ HERE = os.path.dirname(os.path.abspath(__file__)); ROOT = os.path.abspath(os.pat
 sys.path.insert(0, HERE); sys.path.insert(0, os.path.join(ROOT, "scripts", "phase2_airframe"))
 import dash_cycle as dc, cycle_model as cm, combustor_sizing as cs, engine_mass as em, axial_design as ad, axicent_design as acd
 NP1 = os.path.join(ROOT, ".venv-np1", "Scripts", "python.exe")
-OUT = os.path.join(ROOT, "data", os.environ.get("P3_DATA", "phase3"))     # Phase 3R: P3_DATA=phase3r
+_P3D = os.environ.get("P3_DATA", "phase3")     # Phase 3R: P3_DATA=phase3r
+# a bare name resolves under data/; an absolute path is taken as given, so the axial tree can keep its data in axial/
+OUT = _P3D if os.path.isabs(_P3D) else os.path.join(ROOT, "data", _P3D)
 os.makedirs(OUT, exist_ok=True)
 CC_DEFAULT = dict(beta2b_deg=-30, Z=12, tip_clearance=0.25e-3, R4R2=1.35)  # Phase 3 centrifugal options
 OPR, T4 = float(os.environ.get("P3_OPR", 4.0)), float(os.environ.get("P3_T4", 1150.0))
